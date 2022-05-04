@@ -42,7 +42,7 @@ namespace Doggy.WebApi
             {
                 options.AddPolicy("CORS", builder =>
                 {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
 

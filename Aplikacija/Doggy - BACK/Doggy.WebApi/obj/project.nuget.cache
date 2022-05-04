@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1rrpWhTOoZsQhCXY/cOeOrdZRRbNeuEABB2dotWvfm19ISrfykRcu3OExbZcrLloHnvw8MDtexEPL89jEt1qSg==",
+  "dgSpecHash": "I57kZATAQh/w1BTU31T2M6VPXWdWh5gCZjh08cbRWn2vonwHyozc68Exe3t21YU7f7ixatD02rj9grEt5BHmhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marko\\Desktop\\Doggy\\Doggy\\Doggy.WebApi\\Doggy.WebApi.csproj",
+  "projectFilePath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marko\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Marko\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
