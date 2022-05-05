@@ -9,5 +9,6 @@ namespace Doggy.DataLayer.Repository.Interfaces
 {
     public interface IAdminRepository : IRepository<Admin>
     {
+        public Admin VratiAdminaPoEmailu(string email);
     }
 }
