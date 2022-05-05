@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doggy.DataLayer
+namespace Doggy.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

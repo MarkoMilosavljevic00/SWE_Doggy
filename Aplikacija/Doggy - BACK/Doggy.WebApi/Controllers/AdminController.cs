@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doggy.DataLayer
+namespace Doggy.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,9 +22,9 @@ namespace Doggy.DataLayer
 
         [HttpGet]
         [Route("vratiSveAdmine")]
-        public IActionResult vratiSveAdmine()
+        public IActionResult VratiSveAdmine()
         {
-            return new JsonResult(adminService.VratiAdmine());
+            return new JsonResult(adminService.VratiSveAdmine());
         }
 
         [HttpPost]

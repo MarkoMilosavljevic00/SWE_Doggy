@@ -18,7 +18,7 @@ namespace Doggy.DataLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public List<Admin> VratiAdmine()
+        public List<Admin> VratiSveAdmine()
         {
             var result = unitOfWork.AdminRepository.All().ToList();
             return result;

@@ -9,5 +9,6 @@ namespace Doggy.DataLayer.Repository.Interfaces
 {
     public interface ISiterRepository : IRepository<Siter>
     {
+        public Siter VratiSiteraPoEmailu(string email);
     }
 }

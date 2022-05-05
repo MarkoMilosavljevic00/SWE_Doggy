@@ -2,7 +2,9 @@ using Doggy.DataLayer;
 using Doggy.DataLayer.Repository;
 using Doggy.DataLayer.Repository.Interfaces;
 using Doggy.DataLayer.Services;
+using Doggy.DataLayer.Services.Interfaces;
 using Doggy.DataLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,10 +14,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Doggy.WebApi
@@ -41,7 +46,7 @@ namespace Doggy.WebApi
             services.AddCors(options =>
             {
                 options.AddPolicy("CORS", builder =>
-                {
+                {        
                     builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
@@ -51,6 +56,8 @@ namespace Doggy.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doggy.WebApi", Version = "v1" });
             });
 
+
+            SetupJWTServices(services);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<AdminService>();
             services.AddScoped<PasService>();
@@ -58,6 +65,7 @@ namespace Doggy.WebApi
             services.AddScoped<SiterService>();
             services.AddScoped<UslugaService>();
             services.AddScoped<VlasnikService>();
+            services.AddScoped<AuthService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IPasRepository, PasRepository>();
             services.AddScoped<IRecenzijaRepository, RecenzijaRepository>();
@@ -87,6 +95,46 @@ namespace Doggy.WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+        }
+
+        private void SetupJWTServices(IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var authService = context.HttpContext.RequestServices.GetRequiredService<AuthService>();
+                        var email = context.Principal.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault().Value;
+                        var user = authService.VratiKorisnikaPoEmailu(email);
+                        if (user == null)
+                        {
+                            context.Fail("Unauthorized");
+                        }
+                        else
+                        {
+                            var claims = (ClaimsIdentity)context.Principal.Identity;
+
+                            //Claim role = new Claim(ClaimTypes.Role, user.Tip);
+                            //claims.AddClaim(role);
+                            //context.Success();
+                        }
+                    }
+                };
             });
         }
     }

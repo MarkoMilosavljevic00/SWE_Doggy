@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Doggy.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace Doggy.DataLayer.Services.Interfaces
 {
     public interface ISiterService
     {
+        public List<Siter> VratiSveSitere();
+
+        public Siter DodajSitera(Siter s);
     }
 }
