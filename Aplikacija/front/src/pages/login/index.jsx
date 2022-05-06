@@ -40,7 +40,7 @@ const Login = () => {
                 <Button variant="contained" onClick={()=>navigate('../')}>Log in</Button>
                 <Button variant="contained"  onClick={()=>navigate('../')}>Cancel</Button>
                 <p>Ukoliko nemate nalog, molimo Vas registrujte se</p>
-                <Button onClick={()=>navigate('/Registracija')}>Registruj se</Button>
+                <Button onClick={()=>navigate('/RegisterRoute')}>Registruj se</Button>
 
                 </div>
 
