@@ -12,6 +12,13 @@ namespace Doggy.Model
         Cuvanje
     };
 
+    public enum StatusUsluge
+    {
+        IzvrsavaSe,
+        Izvrsena,
+        NaCekanju
+    };
+
     public class Usluga
     {
         public int Id { get; set; }
@@ -29,5 +36,7 @@ namespace Doggy.Model
         public DateTime Pocetak { get; set; }
 
         public DateTime Kraj { get; set; }
+
+        public StatusUsluge Status { get; set; }
     }
 }

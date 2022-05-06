@@ -46,8 +46,8 @@ namespace Doggy.WebApi
             services.AddCors(options =>
             {
                 options.AddPolicy("CORS", builder =>
-                {        
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                {
+                    builder.AllowAnyHeader().AllowAnyMethod().SetIsOriginAllowed((host) => true).AllowCredentials();
                 });
             });
 
@@ -90,6 +90,8 @@ namespace Doggy.WebApi
 
             app.UseCors("CORS");
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -128,10 +130,10 @@ namespace Doggy.WebApi
                         else
                         {
                             var claims = (ClaimsIdentity)context.Principal.Identity;
-
-                            //Claim role = new Claim(ClaimTypes.Role, user.Tip);
-                            //claims.AddClaim(role);
-                            //context.Success();
+                            var userType = nameof(user);
+                            Claim role = new Claim(ClaimTypes.Role, userType);
+                            claims.AddClaim(role);
+                            context.Success();
                         }
                     }
                 };

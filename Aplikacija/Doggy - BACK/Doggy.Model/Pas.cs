@@ -8,6 +8,13 @@ namespace Doggy.Model
 {
     public class Pas
     {
+
+        public Pas()
+        {
+            Recenzije = new List<Recenzija>();
+        }
+
+
         public int Id { get; set; }
 
         public string Ime { get; set; }
@@ -27,5 +34,7 @@ namespace Doggy.Model
         public Vlasnik Vlasnik { get; set; }
 
         public int VlasnikId { get; set; }
+
+        public List<Recenzija> Recenzije { get; set; }
     }
 }

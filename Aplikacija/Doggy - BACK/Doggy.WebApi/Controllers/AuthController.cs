@@ -24,7 +24,7 @@ namespace Doggy.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("authenticate")]
+        [Route("Login")]
         public IActionResult Login([FromBody] Login data)
         {
             IActionResult response = Unauthorized();

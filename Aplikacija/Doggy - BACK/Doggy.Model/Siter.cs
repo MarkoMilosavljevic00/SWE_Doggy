@@ -17,6 +17,12 @@ namespace Doggy.Model
 
         public string Slika { get; set; }
 
+        public bool Dostupan { get; set; }
+
+        public int ObavljeneUsluge { get; set; }
+
+        public double CenaPoSatu { get; set; }
+
         public List<Recenzija> Recenzije { get; set; }
     }
 }

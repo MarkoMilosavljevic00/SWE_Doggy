@@ -34,3 +34,15 @@ C:\Users\Marko\Desktop\Doggy - BACK\Doggy.Model\obj\Debug\net5.0\Doggy.Model.csp
 C:\Users\Marko\Desktop\Doggy - BACK\Doggy.Model\obj\Debug\net5.0\Doggy.Model.dll
 C:\Users\Marko\Desktop\Doggy - BACK\Doggy.Model\obj\Debug\net5.0\ref\Doggy.Model.dll
 C:\Users\Marko\Desktop\Doggy - BACK\Doggy.Model\obj\Debug\net5.0\Doggy.Model.pdb
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\bin\Debug\net5.0\Doggy.Model.deps.json
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\bin\Debug\net5.0\Doggy.Model.dll
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\bin\Debug\net5.0\ref\Doggy.Model.dll
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\bin\Debug\net5.0\Doggy.Model.pdb
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.csproj.AssemblyReference.cache
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.AssemblyInfoInputs.cache
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.AssemblyInfo.cs
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.csproj.CoreCompileInputs.cache
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.dll
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\ref\Doggy.Model.dll
+C:\Users\Marko\Desktop\Doggy - LOKALNO\Doggy.Model\obj\Debug\net5.0\Doggy.Model.pdb

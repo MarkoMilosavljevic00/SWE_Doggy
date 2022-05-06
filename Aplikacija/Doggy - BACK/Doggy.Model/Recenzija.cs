@@ -15,5 +15,13 @@ namespace Doggy.Model
         public string Komentar { get; set; }
 
         public double Ocena { get; set; }
+
+        public Siter Siter { get; set; }
+
+        public int SiterId { get; set; }
+
+        public Pas Pas { get; set; }
+
+        public int PasId { get; set; }
     }
 }
