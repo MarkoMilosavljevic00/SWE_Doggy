@@ -37,29 +37,26 @@ export default function Header(){
 
       <nav id="navbar" className="navbar">
         <ul>
-          <li><a className="nav-link scrollto active" href="#hero">Početna</a></li>
+          {/* <li><a className="nav-link scrollto active" href="#hero">Početna</a></li> */}
           <li><a className="nav-link scrollto" href="#about">O sajtu</a></li>
-          <li><i class="fa-solid fa-shield-dog"></i></li>
-          <li><a className="nav-link scrollto" href="#vlasnik">Nadji sittera</a></li>
-          <li><i class="fa-solid fa-bowl-food"></i></li>
-          <li><a className="nav-link scrollto " href="#sitter">Postani sitter</a></li>
-          <li><a className="nav-link scrollto" href="#dogs">Galerija pasa</a></li>
+          <li><a className="nav-link scrollto" href="/registerRoute"><i class="fa-solid fa-magnifying-glass"></i>  Nadji sittera</a></li>
+          <li><a className="nav-link scrollto " href="/RegisterRoute"><i class="fa-solid fa-heart"></i>Postani sitter</a></li>
+          {/* <li><a className="nav-link scrollto" href="#dogs">Galerija pasa</a></li> */}
           
           <li className="dropdown"><a href="/#"><span>Usluge</span> <i className="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/#">Drop Down 1</a></li>
-              <li className="dropdown"><a href="/#"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
+              {/* <li className="dropdown"><a href="#services"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="/#">Deep Drop Down 1</a></li>
+                  <li><a className="nav-link scrollto" href="#about">Deep Drop Down 1</a></li>
                   <li><a href="/#">Deep Drop Down 2</a></li>
                   <li><a href="/#">Deep Drop Down 3</a></li>
                   <li><a href="/#">Deep Drop Down 4</a></li>
                   <li><a href="/#">Deep Drop Down 5</a></li>
                 </ul>
-              </li>
-              <li><a href="/#">Drop Down 2</a></li>
-              <li><a href="/#">Drop Down 3</a></li>
-              <li><a href="/#">Drop Down 4</a></li>
+              </li> */}
+              <li><a href="#services">Šetanje pasa</a></li>
+              <li><a href="#services">Čuvanje pasa</a></li>
+              <li><a href="#services">Dresura pasa</a></li>
             </ul>
           </li>
           <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
