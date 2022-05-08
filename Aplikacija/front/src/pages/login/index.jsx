@@ -1,32 +1,46 @@
-import React from 'react'
+import React from "react";
+import classStyles from './styles';
+
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Checkbox from "@mui/material/Checkbox"
-import { useNavigate } from "react-router-dom";
-import classStyles from './styles';
+import HeaderLogin from "../../components/HeaderLogin"
 
 const Login = () => {
     const navigate=useNavigate();
-    const classes = classStyles();
-
-
+    const classes=classStyles();
+    
     return (
-            <div>
-                <button className={classes.dugme}>TEST</button>
-                <div>
-                <label >Korisničko ime: </label>
-                <input
-                    type="text"
-                    required
-                />
+        <div className={classes.container}>
+            <HeaderLogin />
+            <div className={classes.glavni}>
+            <div className={classes.divLogIn}>
+                <div className={classes.labela}>
+                    <label className= {classes.lbl}>Korisničko ime: </label>
+                    <label className= {classes.lbl}>Lozinka: </label>
                 </div>
-                <div >
 
-                <label > Lozinka:</label>
-                <input 
-                    type="password"
-                
-                    required
-                />
+                <div className={classes.divInput}>
+                <input className={classes.inputKorisnickoIme} placeholder="Korisničko ime" type="text" required/>
+                <input className={classes.inputLozinka} placeholder="Lozinka" type="text" required/>
+                <Checkbox
+                    value="checkedA"
+                    inputProps={{
+                        'aria-label': 'Checkbox A',
+                    }}
+                    /> 
+                </div> 
+            
+            </div>
+            {/* <div className={classes.divLogIn}>
+                <div className={classes.divKorisnickoIme}>
+                <label className= {classes.lbl}>Korisničko ime: </label>
+                <input className={classes.inputKorisnickoIme} placeholder="Korisničko ime" type="text" required/>
+                </div>
+
+                <div className={classes.divLozinka}>
+                <label className= {classes.lbl}>Lozinka: </label>
+                    <input className={classes.inputLozinka} placeholder="Lozinka" type="text" required/> 
 
                 <Checkbox
                 value="checkedA"
@@ -34,20 +48,20 @@ const Login = () => {
                     'aria-label': 'Checkbox A',
                 }}
                 />
+                
+                
 
-                </div>
-                <div >
-                <Button variant="contained" onClick={()=>navigate('../')}>Log in</Button>
-                <Button variant="contained"  onClick={()=>navigate('../')}>Cancel</Button>
-                <p>Ukoliko nemate nalog, molimo Vas registrujte se</p>
-                <Button onClick={()=>navigate('/RegisterRoute')}>Registruj se</Button>
-
-                </div>
+            </div> */}
+            <div className= {classes.divButton}>
+            <Button style={{backgroundColor: "#00FA9A"}} variant="contained">Log in</Button>
+            <Button style={{backgroundColor: "#00FA9A"}} variant="contained">Cancel</Button>
 
             </div>
-
-                
+            </div>  
+          
+            
+        </div>
     )
 }
 
-export default Login
+export default Login;

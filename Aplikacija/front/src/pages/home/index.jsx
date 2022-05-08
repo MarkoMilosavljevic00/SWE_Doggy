@@ -15,7 +15,7 @@ export const home = (props) => {
 
 <div className='wrapper'>
 <Header />
-         <section id="hero">
+  <section id="hero">
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>
       <h2>Pravo mesto za vas i vašeg najboljeg prijatelja</h2>
@@ -30,30 +30,11 @@ export const home = (props) => {
 <PostaniSitter/>
 <Recenzije/>
 <Usluge/>
-   
-
-
-          
-  
-
-          
-          
-
-          
-
-
-         
-
-         
-
-          
-
     
     <section id="contact">
       <div className="container">
         <div className="section-header">
-          <h3 className="section-title">Contact</h3>
-          <p className="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+          <h3 className="section-title">Kontakt</h3>
         </div>
       </div>
 

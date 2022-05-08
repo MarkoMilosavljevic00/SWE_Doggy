@@ -13,10 +13,7 @@ export default function Footer(){
     
         <div className="container">
           <div className="copyright">
-            &copy; Copyright <strong>Regna</strong>
-          </div>
-          <div className="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            &copy;<strong>Doggy organisation</strong>
           </div>
         </div>
       </footer>
