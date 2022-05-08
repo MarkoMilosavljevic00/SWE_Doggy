@@ -59,7 +59,7 @@ export default function Header(){
               <li><a href="#services">Dresura pasa</a></li>
             </ul>
           </li>
-          <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a className="nav-link scrollto" href="#contact">Kontakt</a></li>
           <li><a className="nav-link scrollto" href="#help">Pomoć</a></li>
         </ul>
         <i className="bi bi-list mobile-nav-toggle"></i>
