@@ -1,18 +1,28 @@
 import React from "react";
-//import classStyles from './styles';
+
+import { alpha, styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import Stack from '@mui/material/Stack';
+import classStyles from './styles';
 
 import { useNavigate } from "react-router-dom";
-//import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 //import Checkbox from "@mui/material/Checkbox"
-//import HeaderLogin from "../../components/HeaderLogin"
+import HeaderLogin from "../../components/HeaderLogin"
 import { useRef, useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import axios from '../../api/axios';
 const LOGIN_URL = './auth';
 
+
+
 const Login = () => {
-    //const navigate=useNavigate();
-    //const classes=classStyles();
+    const navigate=useNavigate();
+    const classes=classStyles();
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -64,7 +74,29 @@ const Login = () => {
        
     }
 
+        
+    const ValidationTextField = styled(TextField)({
+        '& input:valid + fieldset': {
+        borderColor: 'yellow',
+        borderWidth: 2,
+        },
+        '& input:invalid + fieldset': {
+        borderColor: 'green',
+        borderWidth: 2,
+        },
+        '& input:valid:focus + fieldset': {
+        borderLeftWidth: 6,
+        padding: '4px !important', // override inline-style
+        },
+
+    
+    });
+
+
+
     return (
+
+        
         <>
              {success ? (
                  <section>
@@ -73,27 +105,43 @@ const Login = () => {
              ) : (
        <section>
            <p ref={errRef} className={errMsg? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-           <h1>Logovanje</h1> 
-           <form onSubmit={handleSubmit}>
-               <label htmlFor="korisnicko_ime">Korisničko ime:</label>
-               <input 
+           <h1 className={classes.naslov}>Logovanje</h1> 
+            
+           <form  className={classes.container}onSubmit={handleSubmit}>
+             {/* <img src={slika} alt="Ucitavanje"/>
+              */}
+              {/* <div style = {{backgroundImage: `url(../../slike/slika6.jpg")`}}></div> */}
+               <div className={classes.glavni}>
+               <ValidationTextField
+                    label="Korisnicko ime"
                     type="text"
-                    id="korisnicko_ime"
+                    id="validation-outlined-input"
+                    variant="outlined"
                     ref={userRef}
                     autoComplete="off"
                     onChange={(e) => setUser(e.target.value)}
                     value={user}
                     required
                 />
-               <label htmlFor="lozinka">Lozinka:</label>
-               <input 
+               <ValidationTextField
+                    label="Lozinka"
                     type="password"
-                    id="lozinka"
+                    id="validation-outlined-input"
+                    variant="outlined"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     required
                 />
-                <button>Uloguj se</button>
+              </div>
+                <div className={classes.divButton}>
+                <Button style= {{ backgroundColor: 'green'}}variant="contained" color="success"  >
+                    Uloguj se
+                </Button>
+
+                <Button style= {{ backgroundColor: 'green'}}variant="contained" color="success" onClick={()=>navigate('../')}  >
+                  Nazad
+                </Button>
+            </div>                
            </form>
        </section>
              )}

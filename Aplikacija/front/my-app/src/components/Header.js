@@ -1,7 +1,7 @@
 import React from 'react'; 
 import Button from '@mui/material/Button';
 
-import { loginRoute, registerRoute } from "../router/routes";
+import { loginRoute, registerRoute, sitterRoute } from "../router/routes";
 import { useNavigate } from "react-router-dom";
 
 export default function Header(){
@@ -41,6 +41,8 @@ export default function Header(){
           <li><a className="nav-link scrollto" href="#about">O sajtu</a></li>
           <li><a className="nav-link scrollto" href="/registerRoute"><i class="fa-solid fa-magnifying-glass"></i>  Nadji sittera</a></li>
           <li><a className="nav-link scrollto " href="/RegisterRoute"><i class="fa-solid fa-heart"></i>Postani sitter</a></li>
+          <li><a className="nav-link scrollto " href="/SitterRoute">Sitter</a></li>
+
           {/* <li><a className="nav-link scrollto" href="#dogs">Galerija pasa</a></li> */}
           
           <li className="dropdown"><a href="/#"><span>Usluge</span> <i className="bi bi-chevron-down"></i></a>

@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
+import slika from "../../slike/slika6.jpg"
 
 const classStyles = makeStyles({
   
@@ -6,13 +7,25 @@ const classStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: 150,
-       
+        // justifyContent: "space-evenly",
+        // flexDirection: 'column',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // height: '100%',
+        backgroundImage: `url(${slika})`,
+        // backgroundImage: "../../slike/slika6.jpg",
+        backgroundSize: 'cover' ,
+        height: '450px',
+        
     },
+    
+    
     glavni:{
         display: "flex",
         flexDirection: "column",
-        flex: 1
+        flex: 1,
+        marginTop: "100px",
+
     },
 
     divLogIn: {
@@ -30,6 +43,12 @@ const classStyles = makeStyles({
       display: "flex",
       flexDirection: "column",
       flex: 0.5
+    },
+    
+    naslov: {
+
+        textAlign: "center",
+        color:"green"
     },
 
   /*  divKorisnickoIme: {

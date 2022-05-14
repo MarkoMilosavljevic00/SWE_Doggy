@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import classStyles from './styles';
 
+
 export const home = (props) => {
   const classes = classStyles();
   
