@@ -17,6 +17,10 @@ const classStyles= makeStyles({
         marginLeft:"100px",
         alignItems: "center",
         marginTop: "100px",
+    },
+
+    buttonPotvrdi: {
+        display: "flex"
     }
 
     // html: {
