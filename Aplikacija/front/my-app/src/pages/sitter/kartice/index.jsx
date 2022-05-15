@@ -14,9 +14,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import slika from "../../../slike/s2.jpg"
 import Ocene from "../ocene/index.jsx"
 import classStyles from "./styles";
+import Opis from "../../sitter/opis"
+import slika from "../../../slike/s1.jpg" 
 
 
 const ExpandMore = styled((props) => {
@@ -43,11 +44,9 @@ export default function RecipeReviewCard(props) {
 
   const classes= classStyles();
 
-  const {ime} = props;
-  const {opis} = props;
+  const {ime, opis} = props;
 
   return (
-    
     <Card sx={{ maxWidth: 200 }}>
       <CardHeader
         avatar={
@@ -63,8 +62,9 @@ export default function RecipeReviewCard(props) {
         title= {ime}
         
         // subheader="September 14, 2016"
-      />
+        />
         <CardMedia
+
           component="img"
           height="130"
           image= {slika} 
@@ -74,8 +74,7 @@ export default function RecipeReviewCard(props) {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-      
-            {opis}
+              <Opis opis={opis}/>
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
