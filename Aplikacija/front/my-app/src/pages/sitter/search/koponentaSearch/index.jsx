@@ -1,41 +1,33 @@
 // import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import React , {useEffect, useState} from "react";
-
-
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import React, { useEffect, useState } from "react";
 
 export default function ComboBox(props) {
-
-  const {ime, prezime}=props;
+  const { ime, prezime } = props;
 
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={ime}
-
+      options={top100Films}
       sx={{ width: 1000 }}
       renderInput={(params) => <TextField {...params} label="Ljudi" />}
-
     />
-
   );
 }
 
-const imenaIPrezimena = [
-  
-]
+const imenaIPrezimena = [];
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-// const top100Films = [
-  // { label: 'Nikola Nikolic', year: 1994 },
-  // { label: 'Petar Petrovic', year: 1972 },
-  // { label: 'Milos Nikolic', year: 1974 },
-  // { label: 'Pera Peric', year: 2008 },
-  // { label: 'Mika Mikic', year: 1957 },
-  // { label: "Aleksandar Petrovic", year: 1993 },
-  // { label: 'Stefan Stefic', year: 1994 },
+const top100Films = [
+  { label: "Nikola Nikolic", year: 1994 },
+  { label: "Petar Petrovic", year: 1972 },
+  { label: "Milos Nikolic", year: 1974 },
+  { label: "Pera Peric", year: 2008 },
+  { label: "Mika Mikic", year: 1957 },
+  { label: "Aleksandar Petrovic", year: 1993 },
+  { label: "Stefan Stefic", year: 1994 },
   // { label: 'The Good, the Bad and the Ugly', year: 1966 },
   // { label: 'Fight Club', year: 1999 },
   // {
@@ -149,4 +141,4 @@ const imenaIPrezimena = [
   // { label: 'Snatch', year: 2000 },
   // { label: '3 Idiots', year: 2009 },
   // { label: 'Monty Python and the Holy Grail', year: 1975 },
-// ];
+];

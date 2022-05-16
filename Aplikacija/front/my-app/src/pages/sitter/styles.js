@@ -1,38 +1,41 @@
-import { makeStyles } from '@material-ui/styles';
-const classStyles= makeStyles({
+import { makeStyles } from "@material-ui/styles";
+const classStyles = makeStyles({
+  container: {
+    backgroundColor: "#95e36e61",
+  },
 
-    
-    container: {
+  miniContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+  },
 
-    },
-    
-    miniContainer: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly"
-    },
+  //   html: {
+  //     backgroundColor: "#95e36e61",
+  //   },
 
-    divSearch: {
-        display: "flex",
-        marginLeft:"100px",
-        alignItems: "center",
-        marginTop: "100px",
-    },
+  divSearch: {
+    display: "flex",
+    marginLeft: "100px",
+    alignItems: "center",
+    // marginTop: "100px",
+  },
 
-    buttonPotvrdi: {
-        display: "flex"
-    }
+  buttonPotvrdi: {
+    display: "flex",
+    margin: "15px",
+  },
 
-    // html: {
+  // html: {
 
-    //     height: "100%"
-    // },
+  //     height: "100%"
+  // },
 
-    // body: {
-    //     margin: 0,
-    //     display: "flex",
-    //     // flexDirection: "column",
-    //     height: "100%"
-    // }
+  // body: {
+  //     margin: 0,
+  //     display: "flex",
+  //     // flexDirection: "column",
+  //     height: "100%"
+  // }
 });
-export default classStyles
+export default classStyles;

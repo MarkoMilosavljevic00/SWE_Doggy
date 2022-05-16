@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import classStyles from "./styles";
-import Component from "./kartice/index.jsx"
-import Search from "./search/koponentaSearch/index.jsx"
-import Ocene from "../sitter/ocene/index.jsx"
-import Button from '@mui/material/Button';
+import Component from "./kartice/index.jsx";
+import Search from "./search/koponentaSearch/index.jsx";
+import Ocene from "../sitter/ocene/index.jsx";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import HeaderLogin from "../../components/HeaderLogin"
-import IkonicaHome from "../sitter/ikonicaHome"
-import slika from "../../slike/s1.jpg"
+import HeaderLogin from "../../components/HeaderLogin";
+import IkonicaHome from "../sitter/ikonicaHome";
+import slika from "../../slike/s1.jpg";
 import curentPage from "../sitter/curentPage/index.jsx";
 // const users = [
 //   {
@@ -28,53 +28,55 @@ import curentPage from "../sitter/curentPage/index.jsx";
 //   }
 // ]
 
-
-const Sitter= () => {
-  const navigate=useNavigate(); 
-  const classes= classStyles();
+const Sitter = () => {
+  const navigate = useNavigate();
+  const classes = classStyles();
   const [siteri, postaviSitere] = useState([]);
-  const [podaci, postaviPodatke] = useState([])
-
+  // const [podaci, postaviPodatke] = useState([]);
 
   useEffect(() => {
-    fetch("https://localhost:44308/Siter/vratiSveSitere")
-    .then(async res => {
-      const results = await res.json()
+    fetch("https://localhost:44308/Siter/vratiSveSitere").then(async (res) => {
+      const results = await res.json();
       // siteri = results;
-      postaviSitere(results)
-      postaviPodatke(results)
-      console.log(results) 
-    })
-  }, [])
+      postaviSitere(results);
+      // postaviPodatke(results);
+      console.log(results);
+    });
+  }, []);
 
   return (
-
     <div className={classes.container}>
-              <HeaderLogin/>
+      <HeaderLogin />
 
-            <div className={classes.divSearch}>
-                 < Search ime= {podaci.ime}/>
+      <div className={classes.divSearch}>
+        <Search />
+        <Button
+          className={classes.buttonPotvrdi}
+          style={{ backgroundColor: "#2ac94d", margin: 15 }}
+          variant="contained"
+          color="success"
+          onClick={() => navigate("../")}
+        >
+          Potvrdi
+        </Button>
 
+        <IkonicaHome style={{ backgroundColor: "#2ac94d" }} />
+      </div>
+      <div className={classes.miniContainer}>
+        {/* {users.map((user, index) => <Component ime={user.ime} opis={user.opis} key={index } />)}   */}
+        {siteri.map((siter, index) => (
+          <Component
+            ime={siter.ime}
+            opis={siter.bio}
+            brojTelefona={siter.brojTelefona}
+            key={index}
+          />
+        ))}
+      </div>
 
-                 <Button  className= {classes.buttonPotvrdi}style= {{ backgroundColor: 'green'}}variant="contained" color="success" onClick={()=>navigate('../')}  >
-                      Potvrdi
-                </Button>
-
-                <IkonicaHome/>
-            
-            </div>
-            <div className={classes.miniContainer}>
-              {/* {users.map((user, index) => <Component ime={user.ime} opis={user.opis} key={index } />)}   */}
-              {siteri.map((siter, index) => 
-              <Component ime={siter.ime} prezime={siter.prezime} opis={siter.bio} key={index }
-              />)
-            }  
-            </div>
-
-            {/* <CurentPage/> */}
-
+      {/* <CurentPage/> */}
     </div>
-  )
-}
+  );
+};
 
 export default Sitter;
