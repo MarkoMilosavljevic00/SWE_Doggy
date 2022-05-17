@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "df4bd92a-6202-4950-9fc8-047ddc0b6e90": {
+      "ProjectGuid": "df4bd92a-6202-4950-9fc8-047ddc0b6e90",
+      "DisplayName": "Doggy.WebApi",
+      "ColorIndex": 0
+    },
+    "10d0aa36-8369-4b30-9fc5-2d03ce22e80e": {
+      "ProjectGuid": "10d0aa36-8369-4b30-9fc5-2d03ce22e80e",
+      "DisplayName": "Doggy.Model",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

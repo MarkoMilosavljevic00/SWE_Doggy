@@ -8,26 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import HeaderLogin from '../../components/HeaderLogin';
 import IkonicaHome from '../sitter/ikonicaHome';
 import slika from '../../slike/s1.jpg';
-import curentPage from '../sitter/curentPage/index.jsx';
 import { vratiSveSitereUrl } from '../../backendAddress';
-// const users = [
-//   {
-//     ime: "Milan Mikic",
-//     opis: "Ja se zovem Milan",
-//   },
-//   {
-//     ime: "Pera Peric",
-//     opis: "Ja se zovem Pera"
-//   },
-//   {
-//     ime: "Zika Zikic",
-//     opis: "Ja se zovem Zika",
-//   },
-//   {
-//     ime: "Stefan Stefanovic",
-//     opis: "Ja se zovem Stefan"
-//   }
-// ]
+import Gradovi from '../sitter/gradovi';
+import CenaPoSatu from '../sitter/cenaPoSatu';
+import ProsecnaOcena from '../sitter/prosecnaOcena';
+import Broj from '../sitter/broj';
 
 const Sitter = () => {
   const navigate = useNavigate();
@@ -50,9 +35,13 @@ const Sitter = () => {
   return (
     <div className={classes.container}>
       <HeaderLogin />
-
       <div className={classes.divSearch}>
         {/* <Search /> */}
+        <Gradovi />
+        <CenaPoSatu naziv="Cena od" />
+        <CenaPoSatu naziv="Cena do" />
+        <ProsecnaOcena />
+
         <Button
           className={classes.buttonPotvrdi}
           style={{ backgroundColor: '#2ac94d', margin: 15 }}
@@ -62,7 +51,6 @@ const Sitter = () => {
         >
           Potvrdi
         </Button>
-
         <IkonicaHome style={{ backgroundColor: '#2ac94d' }} />
       </div>
       <div className={classes.miniContainer}>
@@ -78,6 +66,7 @@ const Sitter = () => {
             />
           );
         })}
+        <Broj />
       </div>
 
       {/* <CurentPage/> */}
