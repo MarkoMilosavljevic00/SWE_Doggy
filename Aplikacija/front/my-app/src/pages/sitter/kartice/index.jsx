@@ -58,8 +58,6 @@ export default function RecipeReviewCard(props) {
           </IconButton>
         }
         title={ime}
-
-        // subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
@@ -70,18 +68,9 @@ export default function RecipeReviewCard(props) {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <Opis opis={opis} brojTelefona={brojTelefona} />
-        </Typography>
+        <Opis opis={opis} brojTelefona={brojTelefona} />
       </CardContent>
       <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton> */}
-        {/* <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton> */}
-        {/* <IconButton ></IconButton> */}
         <Ocene />
       </CardActions>
     </Card>
