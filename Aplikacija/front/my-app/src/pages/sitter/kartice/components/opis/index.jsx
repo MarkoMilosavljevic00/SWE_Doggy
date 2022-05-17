@@ -59,8 +59,6 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  console.log(brojTelefona);
-
   return (
     <div>
       <Button

@@ -9,6 +9,7 @@ import HeaderLogin from '../../components/HeaderLogin';
 import IkonicaHome from '../sitter/ikonicaHome';
 import slika from '../../slike/s1.jpg';
 import curentPage from '../sitter/curentPage/index.jsx';
+import { vratiSveSitereUrl } from '../../backendAddress';
 // const users = [
 //   {
 //     ime: "Milan Mikic",
@@ -34,15 +35,15 @@ const Sitter = () => {
   const [siteri, postaviSitere] = useState([]);
   // const [podaci, postaviPodatke] = useState([]);
 
-  console.log(siteri);
+  // console.log(siteri);
 
   useEffect(() => {
-    fetch('https://localhost:44308/Siter/vratiSveSitere').then(async res => {
+    fetch(vratiSveSitereUrl).then(async res => {
       const results = await res.json();
       // siteri = results;
       postaviSitere(results);
       // postaviPodatke(results);
-      console.log(results);
+      // console.log(results);
     });
   }, []);
 
@@ -67,7 +68,6 @@ const Sitter = () => {
       <div className={classes.miniContainer}>
         {/* {users.map((user, index) => <Kartica ime={user.ime} opis={user.opis} key={index } />)}   */}
         {siteri.map((siter, index) => {
-          console.log(siter);
           return (
             <Kartica
               ime={siter.ime}

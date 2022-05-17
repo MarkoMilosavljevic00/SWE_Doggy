@@ -8,6 +8,7 @@ import PhoneNumber from './components/phoneNumber';
 import Email from './components/email';
 import Username from './components/username';
 import Password from './components/password';
+import { dodajSiteraUrl } from '../../backendAddress';
 
 const Registracija = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Registracija = () => {
       cenaPoSatu: 0,
     };
 
-    fetch('https://localhost:44308/Siter/dodajSitera', {
+    fetch(dodajSiteraUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const Registracija = () => {
     })
       .then(async res => {
         const result = await res.json();
-        console.log(result);
+        // console.log(result);
       })
       .catch(err => {
         console.log(err);

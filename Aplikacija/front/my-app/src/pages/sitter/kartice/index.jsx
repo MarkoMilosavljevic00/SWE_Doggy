@@ -17,6 +17,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Ocene from '../ocene/index.jsx';
 import classStyles from './styles';
 import Opis from './components/opis';
+import { slikeUrl } from '../../../backendAddress';
 // import slika2 from '../../../slike/s1.jpg';
 
 const ExpandMore = styled(props => {
@@ -65,7 +66,7 @@ export default function RecipeReviewCard(props) {
         height="130"
         // image={slika2}                           //OVA DVA NACINA SU ISTA
         // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
-        src={'https://localhost:44308/staticfiles/' + slika}
+        src={slikeUrl + slika}
         alt="Paella dish"
       />
       <CardContent>
