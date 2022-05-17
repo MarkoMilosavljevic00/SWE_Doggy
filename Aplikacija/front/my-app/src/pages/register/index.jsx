@@ -28,7 +28,7 @@ const Registracija = () => {
     let DTO = {
       ime: firstName,
       prezime: lastName,
-      email: 'string',
+      email: email,
       korisnickoIme: 'string',
       sifra: 'string',
       brojTelefona: 'string',

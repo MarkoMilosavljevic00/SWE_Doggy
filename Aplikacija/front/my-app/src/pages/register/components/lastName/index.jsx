@@ -16,7 +16,7 @@ const LastName = props => {
   return (
     <form noValidate className={classes.container}>
       <ValidationTextField
-        label="Ime"
+        label="Prezime"
         type="text"
         id="validation-outlined-input"
         autoComplete="off"
@@ -25,7 +25,7 @@ const LastName = props => {
         variant="outlined"
         aria-invalid={validLastName ? 'false' : 'true'}
         aria-describedly="uidnote"
-        helperText="Unesite ime"
+        helperText="Unesite prezime"
       />
     </form>
   );
