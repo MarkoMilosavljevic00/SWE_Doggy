@@ -1,403 +1,115 @@
-// import React from 'react'
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import classStyles from './styles';
+import FirstName from './components/firstName';
+import LastName from './components/lastName';
+import PhoneNumber from './components/phoneNumber';
+import Email from './components/email';
+import Username from './components/username';
+import Password from './components/password';
 
-// import { alpha, styled } from '@mui/material/styles';
-// import InputBase from '@mui/material/InputBase';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import TextField from '@mui/material/TextField';
-// import FormControl from '@mui/material/FormControl';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
-
-// import { useNavigate } from "react-router-dom";
-// //import Checkbox from "@mui/material/Checkbox"
-// import classStyles from './styles';
-// //import HeaderLogin from "../../components/HeaderLogin"
-// import { useRef, useState, useEffect } from 'react'
-// import axios from '../../api/axios';
-// import { green } from '@mui/material/colors';
-// const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
-// const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
-// // const BROJ_REGIX = /
-
-// const REGISTER_URL = '/registracija';
-
-// const Registracija = () => {
-//    const navigate=useNavigate();
-//    const classes = classStyles();
-
-//    const userRef = useRef();
-//    const errRef = useRef();
-
-//    const [firstName, setFirstName] = useState('');
-//    const [validFirstName, setValidFirstName] = useState(false);
-//    const [firstNameFocus, setFirstNameFocus] = useState(false);
-
-//    const [lastName, setLastName] = useState('');
-//    const [validLastName, setValidLastName] = useState(false);
-//    const [lastNameFocus, setLastNameFocus] = useState(false);
-
-//    const [brojTelefona , setBrojTelefona] = useState('');
-
-//    const [email, setEmail] = useState('');
-// //    const [validEmail, setValidEmail] = useState(false);
-// //    const [emailFocus, setEmailFocus] = useState(false);
-
-//    const [user, setUser] = useState('');
-//    const [validName, setValidName] = useState(false);
-//    const [userFocus, setUserFocus] = useState(false);
-
-//    const [pwd, setPwd] = useState('');
-//    const [validPwd, setValidPwd] = useState(false);
-//    const [pwdFocus, setPwdFocus] = useState(false);
-
-//    const [matchPwd, setMatchPwd] = useState('');
-//    const [validMatch, setValidMatch] = useState(false);
-//    const [matchFocus, setMatchFocus] = useState(false);
-
-//    const[errMsg, setErrMsg] = useState('');
-//    const[success, setSuccess] = useState(false);
-
-//    useEffect(() => {
-//     userRef.current.focus();
-//    }, [])
-
-//    useEffect(()=>{
-//        const result = NAME_REGEX.test(firstName);
-//        console.log(result);
-//        console.log(firstName);
-//        setValidFirstName(true);
-//    },[firstName])
-
-//    useEffect(()=>{
-//     const result = NAME_REGEX.test(lastName);
-//     console.log(result);
-//     console.log(lastName);
-//     setValidLastName(true);
-//    },[lastName])
-
-//     useEffect(()=>{
-//     const result = PWD_REGEX.test(pwd);
-//     console.log(result);
-//     console.log(pwd);
-//     setValidPwd(true);
-//     const match = pwd === matchPwd;
-//     setValidMatch(match);
-//    },[pwd, matchPwd])
-
-//    useEffect(()=>{
-//     const result = USER_REGEX.test(user);
-//     console.log(result);
-//     console.log(user);
-//     setValidName(true);
-//    },[user])
-
-//    useEffect(()=>{
-//     setErrMsg('');
-//    }, [firstName, lastName, email, user, brojTelefona, pwd])
-
-//    const handleSubmit = (e) =>{
-//        e.preventDefault();
-//     //    const v1 = USER_REGEX.test(user);
-//     //    const v2 = PWD_REGEX.test(pwd);
-//     //    if(!v1 || !v2){
-//     //        setErrMsg("Pogresan unos");
-//     //        return;
-//     //    }
-//     //    try
-//     //    {
-//     //        const response = await axios.post(REGISTER_URL,
-//     //         JSON.stringify({ user, pwd}),
-//     //         {
-//     //             headers : {'Content-Type' : 'application/json'},
-//     //             withCredentials : true
-//     //         });
-//     //         console.log(response.data);
-//     //        // console.log(accessToken);
-//     //         console.log(JSON.stringify(response));
-//     //         setSuccess(true);
-
-//     //    } catch(err) {
-//     //     if(!err?.response)
-//     //     {
-//     //         setErrMsg('No Server Response');
-//     //     }else if(err.response?.status === 409)
-//     //     {
-//     //         setErrMsg('Username Taken');
-//     //     }
-//     //     else setErrMsg('Registration Failed');
-//     //     errRef.current.focus();
-//     //    }
-//     setSuccess(true);
-//    }
-
-// const ValidationTextField = styled(TextField)({
-//     '& input:valid + fieldset': {
-//       borderColor: 'yellow',
-//       borderWidth: 2,
-//     },
-//     '& input:invalid + fieldset': {
-//       borderColor: 'green',
-//       borderWidth: 2,
-//     },
-//     '& input:valid:focus + fieldset': {
-//       borderLeftWidth: 6,
-//       padding: '4px !important', // override inline-style
-//     },
-
-//   });
-
-//    return (
-//        <>
-//            {success ? (
-//                <section>
-//                    <h1> Uspesno ste registrovani</h1>
-//                </section>
-//            ) : (
-//      <section >
-//          <p ref={errRef} className={errMsg? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-//          <h1 className= {classes.naslov}>Registracija</h1>
-
-//          <form className= {classes.container} onSubmit={handleSubmit}>
-//             <div className={classes.divContainer}>
-//                 <div className={classes.divIme}>
-//              <ValidationTextField className={classes.inputIme}
-//                 label="Ime"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={(e) => setFirstName(e.target.value)}
-//                 required
-//                 variant="outlined"
-
-//                 aria-invalid={validFirstName ? "false" : "true"}
-//                 aria-describedly = "uidnote"
-//                 // onFocus={() => setFirstNameFocus(true)}
-//                 // onBlur={() => setFirstNameFocus(false)}
-//                 // helperText="Unesite ime"
-//              />
-
-//             <ValidationTextField className={classes.inputPrezime}
-//                 label="Prezime"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={(e) => setLastName(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 aria-invalid={validLastName ? "false" : "true"}
-//                 aria-describedly = "uidnote"
-//                 onFocus={() => setLastNameFocus(true)}
-//                 onBlur={() => setLastNameFocus(false)}
-//                 />
-
-//                 </div>
-
-//             <ValidationTextField
-//                 label="Broj telefona"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={(e) => setBrojTelefona(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 value={brojTelefona}
-//                 // helperText="Unesite samo brojeve, bez teksta"
-
-//              />
-
-//             <ValidationTextField
-//                  label="Email"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={(e) => setEmail(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 value={email}
-//                 // aria-invalid={validEmail? "false" : "true"}
-//                 // aria-describedly = "uidnote"
-//                 // onFocus={() => setEmailFocus(true)}
-//                 // onBlur={() => setEmailFocus(false)}
-//              />
-
-//             <ValidationTextField
-//                 label="Korisnicko ime"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={(e) => setUser(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 aria-invalid={validName ? "false" : "true"}
-//                 // aria-describedly = "uidnote"
-//                 // onFocus={() => setUserFocus(true)}
-//                 // onBlur={() => setUserFocus(false)}
-//                 helperText="Morate uneti od 4 do 24 karaktera"
-//              />
-
-//              <ValidationTextField
-//                 label="Lozinka"
-//                 type="password"
-//                 id="validation-outlined-input"
-//                 onChange={(e) => setPwd(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 aria-invalid={validPwd ? "false" : "true"}
-//                 aria-describedly = "pwdnote"
-//                 onFocus={() => setPwdFocus(true)}
-//                 onBlur={() => setPwdFocus(false)}
-//                 helperText=
-//                     "Mora da sadrzi velika i mala slova, karaktere i brojeve"
-//                 />
-
-//              <ValidationTextField
-//                 label="Potvrdite lozinku"
-//                 type="password"
-//                 id="validation-outlined-input"
-//                 onChange={(e) => setMatchPwd(e.target.value)}
-//                 required
-//                 variant="outlined"
-//                 aria-invalid={validMatch ? "false" : "true"}
-//                 // aria-describedly = "confrimnote"
-//                 // onFocus={() => setMatchFocus(true)}
-//                 // onBlur={() => setMatchFocus(false)}
-
-//                 helperText=
-//                 "Unesite prvo lozinku"
-//             />
-
-//          </div>
-
-//          <div className={classes.divButton}>
-//              <Button style= {{ backgroundColor: 'green'}}variant="contained" color="success"  disabled={!validFirstName || !validLastName  ? true : false}>
-//               Registruj se
-//             </Button>
-
-//             <Button style= {{ backgroundColor: 'green'}}variant="contained" color="success" onClick={()=>navigate('../')}  >
-//               Nazad
-//             </Button>
-//         </div>
-//         </form>
-//     </section>
-//         )}
-//          </>
-//   )
-// }
-
-// export default Registracija
-
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import { Link } from "react-router-dom";
-// import Sitter from "../../model/Sitter";
 const Registracija = () => {
-  const [ime, setIme] = useState("");
-  const [prezime, setPrezime] = useState("");
-  const [korisnicko_ime, setKIme] = useState("");
-  const [adresa, setAdresa] = useState("");
-  const [mejl, setMejl] = useState("");
-  const [grad, setGrad] = useState("");
-  const [sifra, setSifra] = useState("");
+  const navigate = useNavigate();
+  const classes = classStyles();
 
-  const postData = (e) => {
-    e.preventDefault();
-    Axios.post("https://localhost:5001/Siter/dodajSitera", {
-      ime,
-      prezime,
-      korisnicko_ime,
-      adresa,
-      mejl,
-      grad,
-      sifra,
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [brojTelefona, setBrojTelefona] = useState('');
+  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [matchPwd, setMatchPwd] = useState('');
+
+  const [success, setSuccess] = useState(false);
+
+  const registracija = () => {
+    let DTO = {
+      ime: firstName,
+      prezime: lastName,
+      email: 'string',
+      korisnickoIme: 'string',
+      sifra: 'string',
+      brojTelefona: 'string',
+      drzava: 'string',
+      grad: 'string',
+      adresa: 'string',
+      bio: 'string',
+      slika: 'string',
+      dostupan: true,
+      obavljeneUsluge: 0,
+      cenaPoSatu: 0,
+    };
+
+    fetch('https://localhost:44308/Siter/dodajSitera', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(DTO),
     })
-      .then((res) => console.log("Posting", res))
-      .catch((err) => console.log(err));
+      .then(async res => {
+        const result = await res.json();
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
-  //const[ime,setIme]=useState('');
-  //const { dodajKorisnika } = useActions();
-  // const[userRegistrastion,setUserRegistration]=useState(
-  //     {
-  //         ime: '',
-  //         prezime: '',
-  //         korisnicko_ime: '',
-  //         adresa: '',
-  //         mejl:'',
-  //         broj_telefona:'',
-  //         grad: '',
-  //         sifra:''
-  //     }
-  // )
-  // const handle  =( e) =>
-  // {
-  //     const data =
-  //     {
-  //         ime:"ivca",
-  //         prezime:"marko"
-  //     }
-  //    fetch('https://localhost:5001/Siter/dodajSitera',
-  //    {
-  //        method:'POST',
-  //        body:JSON.stringify(data)})
-  //    .then(response=>response.json()).then(json =>
-  //     {
-  //         console.log("jsonn",json)
-
-  //     }
-  //    ).catch(
-  //        console.log("mjau")
-  //    )
-  // }
 
   return (
-    <div className="App">
-      <h1>mrk</h1>
-      <form>
-        <input
-          type="text"
-          value={ime}
-          onChange={(e) => setIme(e.target.value)}
-        />
-        <input
-          type="text"
-          value={prezime}
-          onChange={(e) => setPrezime(e.target.value)}
-        />
-        <input
-          type="text"
-          value={korisnicko_ime}
-          onChange={(e) => setKIme(e.target.value)}
-        />
-        <input
-          type="text"
-          value={adresa}
-          onChange={(e) => setAdresa(e.target.value)}
-        />
-        <input
-          type="text"
-          value={mejl}
-          onChange={(e) => setMejl(e.target.value)}
-        />
-        <input
-          type="text"
-          value={grad}
-          onChange={(e) => setGrad(e.target.value)}
-        />
-        <input
-          type="text"
-          value={sifra}
-          onChange={(e) => setSifra(e.target.value)}
-        />
-        <button onClick={postData}>post</button>
-      </form>
-    </div>
+    <>
+      {success ? (
+        <section>
+          <h1> Uspesno ste registrovani</h1>
+        </section>
+      ) : (
+        <section>
+          <h1 className={classes.naslov}>Registracija</h1>
+
+          <div className={classes.container}>
+            <div className={classes.divContainer}>
+              <div className={classes.divIme}>
+                <FirstName firstName={firstName} setFirstName={setFirstName} />
+                <LastName lastName={lastName} setLastName={setLastName} />
+              </div>
+              <PhoneNumber
+                brojTelefona={brojTelefona}
+                setBrojTelefona={setBrojTelefona}
+              />
+              <Email email={email} setEmail={setEmail} />
+              <Username user={user} setUser={setUser} />
+              <Password
+                pwd={pwd}
+                setPwd={setPwd}
+                matchPwd={matchPwd}
+                setMatchPwd={setMatchPwd}
+              />
+            </div>
+
+            <div className={classes.divButton}>
+              <Button
+                style={{ backgroundColor: 'green' }}
+                variant="contained"
+                onClick={registracija}
+                // onClick={() => registracija()}
+              >
+                Registruj se
+              </Button>
+
+              <Button
+                style={{ backgroundColor: 'green' }}
+                variant="contained"
+                onClick={() => navigate('../')}
+              >
+                Nazad
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 };
+
 export default Registracija;

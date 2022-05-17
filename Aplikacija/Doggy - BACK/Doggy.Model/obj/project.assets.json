@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\projekat\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
+      "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
       "projectName": "Doggy.Model",
-      "projectPath": "C:\\Users\\Vaio\\Desktop\\projekat\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
+      "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
       "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vaio\\Desktop\\projekat\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\obj\\",
+      "outputPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

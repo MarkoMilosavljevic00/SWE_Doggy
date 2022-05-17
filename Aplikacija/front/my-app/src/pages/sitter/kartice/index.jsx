@@ -1,31 +1,31 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Ocene from "../ocene/index.jsx";
-import classStyles from "./styles";
-import Opis from "../../sitter/opis";
-import slika from "../../../slike/s1.jpg";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Ocene from '../ocene/index.jsx';
+import classStyles from './styles';
+import Opis from './components/opis';
+// import slika2 from '../../../slike/s1.jpg';
 
-const ExpandMore = styled((props) => {
+const ExpandMore = styled(props => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
 }));
@@ -40,10 +40,11 @@ export default function RecipeReviewCard(props) {
 
   const classes = classStyles();
 
-  const { ime, opis } = props;
+  const { ime, opis, slika, brojTelefona } = props;
 
+  // console.log('../../../slike/s1.jpg');
   return (
-    <Card sx={{ maxWidth: 200 }}>
+    <Card sx={{ maxWidth: 200, maxHeigh: 100 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -59,10 +60,17 @@ export default function RecipeReviewCard(props) {
 
         // subheader="September 14, 2016"
       />
-      <CardMedia component="img" height="130" image={slika} alt="Paella dish" />
+      <CardMedia
+        component="img"
+        height="130"
+        // image={slika2}                           //OVA DVA NACINA SU ISTA
+        // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
+        src={'https://localhost:44308/staticfiles/' + slika}
+        alt="Paella dish"
+      />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          <Opis opis={opis} />
+          <Opis opis={opis} brojTelefona={brojTelefona} />
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
