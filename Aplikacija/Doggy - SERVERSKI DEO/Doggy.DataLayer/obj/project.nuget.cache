@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hP2BOx/zdrchu4uwDUzQCWf1bQk43tfOLpZOTFNlE8Kf63Tdsf4rZdHCtIDXMMVWhAbQGpFlUV0IjZgH65ZINg==",
+  "dgSpecHash": "W2ulcbd5A7KVlPlHSzlDBUvqFbkk4RREe5zNiJDxMjOstiJXmJe9zLJlhsTRA2lVzAEZSziC2u34Fr36BCCDfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+  "projectFilePath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vaio\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Vaio\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

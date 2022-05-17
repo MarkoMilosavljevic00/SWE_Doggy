@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fSqz8vhBqLWzgFo5PVHHZ3VQRzuwO/pfzO2M0PUVqujq20w/GVV5MCTxssRsTXtxP54ircVbcetEx4LvNMPH1Q==",
+  "dgSpecHash": "30fwORQTTTlEkL1arTZPzV6lRCEkMB+rp8rmSLXxSIZ1eax/zL4rEgNmsERfR3VsqW5CEix1L3MSFfYIT+DlOA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
+  "projectFilePath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vaio\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Vaio\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

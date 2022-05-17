@@ -6227,11 +6227,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
       "projectName": "Doggy.WebApi",
-      "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
+      "projectPath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
       "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6252,11 +6252,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
-              "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj"
+            "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
+              "projectPath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj"
             },
-            "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
-              "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
+            "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
+              "projectPath": "C:\\Users\\Vaio\\Desktop\\SOFTVERSKO NOVO\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
             }
           }
         }
