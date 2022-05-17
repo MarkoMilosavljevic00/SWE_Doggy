@@ -1,0 +1,16 @@
+------------------Pre svega pullovati projekat:
+
+Uci u lokalno klonirani folder "si.22.06.doggy" pomocu konzole i kucati git pull
+
+------------------Ukoliko je promenjen MODEL:
+
+Udje se u Visual Studio > Tools > NuGet Packet Manager > Package Manager Console i tu se OBAVEZNO
+izabere za Default Project "Doggy.DataLayer" a zatim kuca:
+
+Add-Migration m[broj migracije] // ja uglavnom ovo vec uradim, vi kucate samo ovu komandu ispod
+Update-Database
+
+------------------Pokretanje serverskog dela aplikacije:
+
+U konzoli se dodje do foldera: "si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi" a zatim kuca:
+dotnet watch run
