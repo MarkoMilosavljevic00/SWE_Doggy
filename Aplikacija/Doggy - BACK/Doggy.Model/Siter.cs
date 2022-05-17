@@ -11,8 +11,9 @@ namespace Doggy.Model
         public Siter()
         {
             Recenzije = new List<Recenzija>();
-            Usluge = new List<Usluga>();
         }
+
+        public bool Validan { get; set; }
 
         public string Bio { get; set; }
 
@@ -20,13 +21,11 @@ namespace Doggy.Model
 
         public bool Dostupan { get; set; }
 
-        public int ObavljeneUsluge { get; set; }
+        public int BrObavljenihUsluga { get; set; }
 
         public double ProsecnaOcena { get; set; }
 
         public double CenaPoSatu { get; set; }
-
-        public List<Usluga> Usluge { get; set; }
 
         public List<Recenzija> Recenzije { get; set; }
     }

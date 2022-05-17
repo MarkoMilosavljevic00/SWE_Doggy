@@ -39,6 +39,7 @@ namespace Doggy.DataLayer.Services
 
         public Korisnik AuthenticateUser(Login data)
         {
+
             Korisnik result = VratiKorisnikaPoEmailu(data.Email);
 
             if (result != null && result.Sifra == data.Password)
@@ -49,6 +50,7 @@ namespace Doggy.DataLayer.Services
 
         public Korisnik VratiKorisnikaPoEmailu(string email)
         {
+
             Korisnik result = unitOfWork.AdminRepository.VratiAdminaPoEmailu(email);
             if (result == null)
                 result = unitOfWork.SiterRepository.VratiSiteraPoEmailu(email);
@@ -58,6 +60,14 @@ namespace Doggy.DataLayer.Services
             if (result != null)
                 return result;
             else return null;
+        }
+
+
+        public bool ProveriValidnostSitera(int idSitera)
+        {
+            Siter s = unitOfWork.SiterRepository.Find(k => k.Id == idSitera).FirstOrDefault();
+            return s.Validan;
+
         }
     }
 }

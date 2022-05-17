@@ -15,5 +15,7 @@ namespace Doggy.DataLayer.Services.Interfaces
         public Korisnik AuthenticateUser(Login data);
 
         public Korisnik VratiKorisnikaPoEmailu(string email);
+
+        public bool ProveriValidnostSitera(int idSitera);
     }
 }

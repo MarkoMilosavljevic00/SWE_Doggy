@@ -31,7 +31,14 @@ namespace Doggy.WebAPI.Controllers
         [Route("dodajVlasnika")]
         public IActionResult DodajVlasnika([FromBody] Vlasnik v)
         {
-            return new JsonResult(vlasnikService.DodajVlasnika(v));
-        }
+            StatusDodavanja status;
+            var result = vlasnikService.DodajVlasnika(v, out status);
+            if (status == StatusDodavanja.PostojiEmail)
+                return StatusCode(501, "U bazi vec postoji neko sa tim email-om!");
+            if (status == StatusDodavanja.PostojiKorisnickoIme)
+                return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
+
+            return new JsonResult(result);
+        }       
     }
 }

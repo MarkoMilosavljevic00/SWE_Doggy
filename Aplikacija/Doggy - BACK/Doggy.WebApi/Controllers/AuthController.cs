@@ -31,6 +31,10 @@ namespace Doggy.WebAPI.Controllers
             var user = this.authService.AuthenticateUser(data);
             if (user != null)
             {
+                if(user.GetType().Name == "Siter" && this.authService.ProveriValidnostSitera(user.Id) == false)
+                {
+                    return StatusCode(501, "Ovaj siter nije prihvacen od strane admina!");
+                }
                 var tokenString = this.authService.GenerateJWT(config, user);
                 response = Ok(new { token = tokenString, korisnik = user });
             }

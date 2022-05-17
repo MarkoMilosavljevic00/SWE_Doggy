@@ -26,7 +26,7 @@ namespace Doggy.WebAPI.Controllers
         {
             return new JsonResult(siterService.VratiSveSitere());
         }
-
+                                
         [HttpGet]
         [Route("filterSiteri")]
         public IActionResult FilterSiteri([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? brUsluga, double? cena, double? ocena)
@@ -38,7 +38,14 @@ namespace Doggy.WebAPI.Controllers
         [Route("dodajSitera")]
         public IActionResult DodajSitera([FromBody] Siter s)
         {
-            return new JsonResult(siterService.DodajSitera(s));
+            StatusDodavanja status;
+            var result = siterService.DodajSitera(s, out status);
+            if (status == StatusDodavanja.PostojiEmail)
+                return StatusCode(501, "U bazi vec postoji neko sa tim email-om!");
+            if (status == StatusDodavanja.PostojiKorisnickoIme)
+                return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
+
+            return new JsonResult(result);
         }
     }
 }

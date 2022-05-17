@@ -16,7 +16,7 @@ namespace Doggy.Model
     {
         ZahtevaSe,
         Prihvacena,
-        Gotova
+        Obavljena
     };
 
     public class Usluga
@@ -30,6 +30,8 @@ namespace Doggy.Model
         public Siter Siter { get; set; }
 
         public int SiterId { get; set; }
+        
+        //public Pas Pas { get; set; }
 
         public int PasId { get; set; }
 

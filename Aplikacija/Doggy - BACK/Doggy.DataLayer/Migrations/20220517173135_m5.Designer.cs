@@ -4,14 +4,16 @@ using Doggy.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Doggy.DataLayer.Migrations
 {
     [DbContext(typeof(DoggyContext))]
-    partial class DoggyContextModelSnapshot : ModelSnapshot
+    [Migration("20220517173135_m5")]
+    partial class m5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +85,7 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<double>("Visina")
                         .HasColumnType("float");
 
-                    b.Property<int>("VlasnikId")
+                    b.Property<int?>("VlasnikId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -214,6 +216,8 @@ namespace Doggy.DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PasId");
+
                     b.HasIndex("SiterId");
 
                     b.HasIndex("VlasnikId");
@@ -259,13 +263,9 @@ namespace Doggy.DataLayer.Migrations
 
             modelBuilder.Entity("Doggy.Model.Pas", b =>
                 {
-                    b.HasOne("Doggy.Model.Vlasnik", "Vlasnik")
+                    b.HasOne("Doggy.Model.Vlasnik", null)
                         .WithMany("Psi")
-                        .HasForeignKey("VlasnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vlasnik");
+                        .HasForeignKey("VlasnikId");
                 });
 
             modelBuilder.Entity("Doggy.Model.Recenzija", b =>
@@ -289,6 +289,12 @@ namespace Doggy.DataLayer.Migrations
 
             modelBuilder.Entity("Doggy.Model.Usluga", b =>
                 {
+                    b.HasOne("Doggy.Model.Pas", "Pas")
+                        .WithMany()
+                        .HasForeignKey("PasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Doggy.Model.Siter", "Siter")
                         .WithMany()
                         .HasForeignKey("SiterId")
@@ -300,6 +306,8 @@ namespace Doggy.DataLayer.Migrations
                         .HasForeignKey("VlasnikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Pas");
 
                     b.Navigation("Siter");
 

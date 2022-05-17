@@ -30,17 +30,68 @@ namespace Doggy.DataLayer.Services
                                                     && k.Prezime.StartsWith(prezime ?? k.Prezime)
                                                     && k.Grad.StartsWith(grad ?? k.Grad)
                                                     && k.Dostupan == (dostupan ?? k.Dostupan)
-                                                    && k.ObavljeneUsluge >= (brUsluga ?? k.ObavljeneUsluge)
+                                                    && k.BrObavljenihUsluga >= (brUsluga ?? k.BrObavljenihUsluga)
                                                     && k.CenaPoSatu <= (cena ?? k.CenaPoSatu)
                                                     && k.ProsecnaOcena >= (ocena ?? k.ProsecnaOcena)
                                                     ).ToList();
         }
 
-        public Siter DodajSitera(Siter s)
+        public Siter DodajSitera(Siter s, out StatusDodavanja status)
         {
-            var siter = unitOfWork.SiterRepository.Add(s);
-            unitOfWork.SaveChanges();
-            return siter;
+            if(ValidacijaDodavanja(s, out status))
+            {
+                var siter = unitOfWork.SiterRepository.Add(s);
+                unitOfWork.SaveChanges();
+                return siter;
+            }
+            return null;
+
+        }
+
+        public bool ValidacijaDodavanja(Siter s, out StatusDodavanja status)
+        {
+            
+            var postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.Email == s.Email).FirstOrDefault();
+            if (postojiVecAdmin != null)
+            {
+                status = StatusDodavanja.PostojiEmail;
+                return false;
+            }
+            postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
+            if (postojiVecAdmin != null)
+            {
+                status = StatusDodavanja.PostojiKorisnickoIme;
+                return false;
+            }
+
+            var postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.Email == s.Email).FirstOrDefault();
+            if (postojiVecSiter != null)
+            {
+                status = StatusDodavanja.PostojiEmail;
+                return false;
+            }
+            postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
+            if (postojiVecSiter != null)
+            {
+                status = StatusDodavanja.PostojiKorisnickoIme;
+                return false;
+            }
+
+            var postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.Email == s.Email).FirstOrDefault();
+            if (postojiVecVlasnik != null)
+            {
+                status = StatusDodavanja.PostojiEmail;
+                return false;
+            }
+            postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
+            if (postojiVecVlasnik != null)
+            {
+                status = StatusDodavanja.PostojiKorisnickoIme;
+                return false;
+            }
+
+            status = StatusDodavanja.Uspesno;
+            return true;
         }
     }
 }

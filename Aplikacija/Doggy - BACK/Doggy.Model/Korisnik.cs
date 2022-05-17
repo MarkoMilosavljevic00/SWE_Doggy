@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Doggy.Model
 {
+    public enum StatusDodavanja
+    {
+        Uspesno,
+        PostojiEmail,
+        PostojiKorisnickoIme
+    };
     public class Korisnik
     {
         public int Id { get; set; }
