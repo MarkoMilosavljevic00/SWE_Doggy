@@ -85,13 +85,13 @@ namespace Doggy.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doggy.WebApi v1"));
             }
-            app.UseFileServer(new FileServerOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
-                RequestPath = "/StaticFiles",
-                EnableDefaultFiles = true
-            });
+            //app.UseFileServer(new FileServerOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+            //    RequestPath = "/StaticFiles",
+            //    EnableDefaultFiles = true
+            //});
             app.UseHttpsRedirection();
 
             app.UseRouting();
