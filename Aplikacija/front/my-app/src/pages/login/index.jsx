@@ -39,7 +39,7 @@ const Login = () => {
   }, [user, pwd]);
 
   const handleSubmit = async e => {
-    e.preventDefault();
+    //e.preventDefault();
 
     try {
       const response = await axios.post(
@@ -132,6 +132,7 @@ const Login = () => {
                 style={{ backgroundColor: 'green' }}
                 variant="contained"
                 color="success"
+                onClick={() => handleSubmit()}
               >
                 Uloguj se
               </Button>
