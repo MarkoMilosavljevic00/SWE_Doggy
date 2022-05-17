@@ -1,37 +1,23 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
-    "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj": {}
+    "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
+    "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
         "projectName": "Doggy.DataLayer",
-        "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+        "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
         "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\obj\\",
-=======
-    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
-        "projectName": "Doggy.DataLayer",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
-        "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\obj\\",
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
+        "outputPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Marko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vaio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -46,13 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
-              "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj": {
-                "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj"
-=======
-              "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
-                "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
+              "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
+                "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
               }
             }
           }
@@ -107,35 +88,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     },
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
-    "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj": {
+    "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
+        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj",
         "projectName": "Doggy.Model",
-        "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
+        "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj",
         "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\obj\\",
-=======
-    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj",
-        "projectName": "Doggy.Model",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj",
-        "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\obj\\",
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
+        "outputPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Marko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vaio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -176,35 +146,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     },
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
-    "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj": {
+    "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
         "projectName": "Doggy.WebApi",
-        "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj",
+        "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
         "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\obj\\",
-=======
-    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
-        "projectName": "Doggy.WebApi",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\Doggy.WebApi.csproj",
-        "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\obj\\",
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
+        "outputPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Marko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vaio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -219,19 +178,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
-              "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj"
+              "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
+                "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj"
               },
-              "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj": {
-                "projectPath": "C:\\Users\\Vaio\\Desktop\\projekatNew\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj"
-=======
-              "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.DataLayer\\Doggy.DataLayer.csproj"
-              },
-              "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
-                "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Doggy.WebApi.csproj.nuget.dgspec.json
+              "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj": {
+                "projectPath": "C:\\Users\\Vaio\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - SERVERSKI DEO\\Doggy.Model\\Doggy.Model.csproj"
               }
             }
           }
@@ -297,7 +248,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     }

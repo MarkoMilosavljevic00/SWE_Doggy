@@ -7,8 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Doggy.WebApi
-<<<<<<< HEAD:Aplikacija/Doggy - BACK/Doggy.WebApi/obj/Debug/net5.0/Doggy.WebApi.GeneratedMSBuildEditorConfig.editorconfig
-build_property.ProjectDir = C:\Users\Vaio\Desktop\projekatNew\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\
-=======
-build_property.ProjectDir = C:\Users\Marko\Desktop\si.22.06.doggy\Aplikacija\Doggy - SERVERSKI DEO\Doggy.WebApi\
->>>>>>> 12cb81fbe2e5912838a99b581ec76142ee4f0d79:Aplikacija/Doggy - SERVERSKI DEO/Doggy.WebApi/obj/Debug/net5.0/Doggy.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+build_property.ProjectDir = c:\Users\Vaio\Desktop\si.22.06.doggy\Aplikacija\Doggy - SERVERSKI DEO\Doggy.WebApi\
