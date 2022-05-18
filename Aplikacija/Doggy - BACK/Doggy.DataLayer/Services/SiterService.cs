@@ -28,6 +28,11 @@ namespace Doggy.DataLayer.Services
         {
             return unitOfWork.SiterRepository.Get(idSiter);
         }
+      
+        public List<String> VratiSveGradoveSvihSitera()
+        {
+            return unitOfWork.SiterRepository.All().Select(k => k.Grad).Distinct().ToList();
+        }
 
         public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena,double? maxCena, double? minOcena)
         {
@@ -42,6 +47,7 @@ namespace Doggy.DataLayer.Services
                                                     && k.ProsecnaOcena >= (minOcena ?? k.ProsecnaOcena)
                                                     ).ToList();
         }
+
 
         public Siter DodajSitera(Siter s, out StatusDodavanja status)
         {
