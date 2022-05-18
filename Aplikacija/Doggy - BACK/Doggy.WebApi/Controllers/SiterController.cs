@@ -29,9 +29,9 @@ namespace Doggy.WebAPI.Controllers
                                 
         [HttpGet]
         [Route("filterSiteri")]
-        public IActionResult FilterSiteri([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? brUsluga, double? cena, double? ocena)
+        public IActionResult VratiSitereFilter([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga,double? minCena, double? maxCena, double? minOcena)
         {
-            return new JsonResult(siterService.FilterSiteri(ime, prezime, grad,dostupan, brUsluga,cena, ocena));
+            return new JsonResult(siterService.FilterSiteri(ime, prezime, grad,dostupan, minBrUsluga,minCena, maxCena, minOcena));
         }
 
         [HttpPost]
@@ -46,6 +46,28 @@ namespace Doggy.WebAPI.Controllers
                 return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
 
             return new JsonResult(result);
+        }
+
+
+        [HttpPut]
+        [Route("azurirajSitera")]
+        public IActionResult AzurirajSitera([FromBody] Siter s)
+        {
+            return new JsonResult(this.siterService.AzurirajSitera(s));
+        }
+
+        [HttpPut]
+        [Route("prihvatiSitera")]
+        public IActionResult AzurirajSiteraValidan(int idSiter)
+        {
+            return new JsonResult(this.siterService.AzurirajSiteraValidan(idSiter));
+        }
+
+        [HttpPut]
+        [Route("dostupan")]
+        public IActionResult AzurirajSiteraDostupan(int idSiter)
+        {
+            return new JsonResult(this.siterService.AzurirajSiteraDostupan(idSiter));
         }
     }
 }

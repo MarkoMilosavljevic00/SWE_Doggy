@@ -20,5 +20,10 @@ namespace Doggy.DataLayer.Repository
         {
             return Find(k => k.Email == email).AsNoTracking().FirstOrDefault();
         }
+
+        public List<Vlasnik> VratiSveVlasnike()
+        {
+            return GetAllWithIncludes(x => x.Psi).ToList();
+        }
     }
 }

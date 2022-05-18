@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Doggy.Model
@@ -31,6 +32,7 @@ namespace Doggy.Model
 
         public string Slika { get; set; }
 
+        [JsonIgnore]
         public Vlasnik Vlasnik { get; set; }
 
         public int VlasnikId { get; set; }

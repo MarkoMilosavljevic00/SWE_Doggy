@@ -10,5 +10,7 @@ namespace Doggy.DataLayer.Repository.Interfaces
     public interface IVlasnikRepository : IRepository<Vlasnik>
     {
         public Vlasnik VratiVlasnikaPoEmailu(string email);
+
+        public List<Vlasnik> VratiSveVlasnike();
     }
 }

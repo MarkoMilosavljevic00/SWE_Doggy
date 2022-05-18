@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LxYR2WPhFrqnxpw6PvGoMPeByUQ7LwKtBbwNyP+kD8YrzOJ2STu9loks03hoPX+O5BJx4lQT60lL8pCYKBNqMQ==",
+  "dgSpecHash": "gM333OPfHeC+feKj2O0PoATP0huj1xmbtQiACIdjXb+CyboXW0O/udaKO2pIz7y7PvaaXclUTHSDsX3dztyReA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+  "projectFilePath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marko\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Marko\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

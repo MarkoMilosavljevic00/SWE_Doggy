@@ -20,26 +20,9 @@ namespace Doggy.DataLayer.Services
 
         public List<Vlasnik> VratiSveVlasnike()
         {
-            var result = unitOfWork.VlasnikRepository.All().ToList();
+            var result = unitOfWork.VlasnikRepository.VratiSveVlasnike();
             return result;
         }
-
-        //public Vlasnik DodajVlasnika(Vlasnik v)
-        //{
-        //    var postojiVec = unitOfWork.AdminRepository.Find(k => k.Email == v.Email || k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
-        //    if (postojiVec != null)
-        //        return null;
-        //    var postojiVec1 = unitOfWork.VlasnikRepository.Find(k => k.Email == v.Email || k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
-        //    if (postojiVec1!=null)
-        //        return null;
-        //    var postojiVec2 = unitOfWork.SiterRepository.Find(k => k.Email == v.Email || k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
-        //    if (postojiVec2 != null)
-        //        return null;
-
-        //    var vlasnik = unitOfWork.VlasnikRepository.Add(v);
-        //    unitOfWork.SaveChanges();
-        //    return vlasnik;
-        //}
 
         public Vlasnik DodajVlasnika(Vlasnik v, out StatusDodavanja status)
         {

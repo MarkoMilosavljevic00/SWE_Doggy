@@ -24,15 +24,22 @@ namespace Doggy.DataLayer.Services
             return result;
         }
 
-        public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? brUsluga, double? cena, double? ocena)
+        public Siter VratiSiteraPoId(int idSiter)
         {
-            return unitOfWork.SiterRepository.Find(k => k.Ime.StartsWith(ime ?? k.Ime)
+            return unitOfWork.SiterRepository.Get(idSiter);
+        }
+
+        public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena,double? maxCena, double? minOcena)
+        {
+            return unitOfWork.SiterRepository.Find(k=> k.Validan == true
+                                                    && k.Ime.StartsWith(ime ?? k.Ime)
                                                     && k.Prezime.StartsWith(prezime ?? k.Prezime)
                                                     && k.Grad.StartsWith(grad ?? k.Grad)
                                                     && k.Dostupan == (dostupan ?? k.Dostupan)
-                                                    && k.BrObavljenihUsluga >= (brUsluga ?? k.BrObavljenihUsluga)
-                                                    && k.CenaPoSatu <= (cena ?? k.CenaPoSatu)
-                                                    && k.ProsecnaOcena >= (ocena ?? k.ProsecnaOcena)
+                                                    && k.BrObavljenihUsluga >= (minBrUsluga ?? k.BrObavljenihUsluga)
+                                                    && k.CenaPoSatu >= (minCena ?? k.CenaPoSatu)
+                                                    && k.CenaPoSatu <= (maxCena ?? k.CenaPoSatu)
+                                                    && k.ProsecnaOcena >= (minOcena ?? k.ProsecnaOcena)
                                                     ).ToList();
         }
 
@@ -46,6 +53,47 @@ namespace Doggy.DataLayer.Services
             }
             return null;
 
+        }
+
+        public Siter AzurirajSitera(Siter s)
+        {
+            Siter siter = unitOfWork.SiterRepository.Get(s.Id);
+            if (siter != null)
+            {
+                unitOfWork.SiterRepository.Update(s);
+                unitOfWork.SaveChanges();
+                return s;
+            }
+            return null;
+        }
+
+        public Siter AzurirajSiteraValidan(int idSiter)
+        {
+            Siter s = VratiSiteraPoId(idSiter);
+
+            if (s == null)
+                return null;
+
+            if (s.Validan == false)
+                s.Validan = true;
+            else
+                s.Validan = false;
+            return s;
+        }
+
+        public Siter AzurirajSiteraDostupan(int idSiter)
+        {
+            Siter s = VratiSiteraPoId(idSiter);
+
+            if (s == null)
+                return null;
+
+            if (s.Dostupan == false)
+                s.Dostupan = true;
+            else
+                s.Dostupan = false;
+
+            return s;
         }
 
         public bool ValidacijaDodavanja(Siter s, out StatusDodavanja status)

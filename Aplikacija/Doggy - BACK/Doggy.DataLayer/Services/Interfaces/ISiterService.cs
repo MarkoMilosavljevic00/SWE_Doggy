@@ -11,9 +11,15 @@ namespace Doggy.DataLayer.Services.Interfaces
     {
         public List<Siter> VratiSveSitere();
 
-        public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? brUsluga, double? cena, double? ocena);
+        public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena, double? maxCena, double? minOcena);
 
         public Siter DodajSitera(Siter s, out StatusDodavanja status);
+
+        public Siter AzurirajSitera(Siter s);
+        
+        public Siter AzurirajSiteraValidan(int idSiter);
+
+        public Siter AzurirajSiteraDostupan(int idSiter);
 
         public bool ValidacijaDodavanja(Siter s, out StatusDodavanja status);
     }
