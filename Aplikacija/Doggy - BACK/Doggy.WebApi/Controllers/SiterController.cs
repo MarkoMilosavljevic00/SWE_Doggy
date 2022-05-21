@@ -55,6 +55,14 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(result);
         }
 
+        [HttpDelete]
+        [Route("obrisiSitera")]
+        public IActionResult ObrisiSitera(int id)
+        {
+            Siter s = this.siterService.ObrisiSitera(id);
+            return new JsonResult(s);
+        }
+
 
         [HttpPut]
         [Route("azurirajSitera")]

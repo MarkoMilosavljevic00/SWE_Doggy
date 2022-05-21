@@ -36,6 +36,39 @@ namespace Doggy.DataLayer.Services
 
         }
 
+        public Vlasnik AzurirajVlasnika(Vlasnik v)
+        {
+            Vlasnik vlasnik = unitOfWork.VlasnikRepository.Get(v.Id);
+            if (vlasnik != null)
+            {
+                vlasnik.Ime = v.Ime ?? vlasnik.Ime;
+                vlasnik.Prezime = v.Prezime ?? vlasnik.Prezime;
+                vlasnik.KorisnickoIme = v.KorisnickoIme ?? vlasnik.KorisnickoIme;
+                vlasnik.Email = v.Email ?? vlasnik.Email;
+                vlasnik.Sifra = v.Sifra ?? vlasnik.Sifra;
+                vlasnik.BrojTelefona = v.BrojTelefona ?? vlasnik.BrojTelefona;
+                vlasnik.Grad = v.Grad ?? vlasnik.Grad;
+                vlasnik.Adresa = v.Adresa ?? vlasnik.Adresa;
+
+                unitOfWork.VlasnikRepository.Update(vlasnik);
+                unitOfWork.SaveChanges();
+                return vlasnik;
+            }
+            return null;
+        }
+
+        public Vlasnik ObrisiVlasnika(int id)
+        {
+            Vlasnik v = unitOfWork.VlasnikRepository.Get(id);
+            if (v != null)
+            {
+                unitOfWork.VlasnikRepository.Delete(v);
+                unitOfWork.SaveChanges();
+                return v;
+            }
+            return null;
+        }
+
         public bool ValidacijaDodavanja(Vlasnik v, out StatusDodavanja status)
         {
 
@@ -81,5 +114,6 @@ namespace Doggy.DataLayer.Services
             status = StatusDodavanja.Uspesno;
             return true;
         }
+
     }
 }

@@ -39,6 +39,22 @@ namespace Doggy.WebAPI.Controllers
                 return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
 
             return new JsonResult(result);
-        }       
+        }
+
+        [HttpDelete]
+        [Route("obrisiVlasnika")]
+        public IActionResult ObrisiVlasnika(int id)
+        {
+            Vlasnik v = this.vlasnikService.ObrisiVlasnika(id);
+            return new JsonResult(v);
+        }
+
+        [HttpPut]
+        [Route("azurirajVlasnika")]
+        public IActionResult AzurirajVlasnika([FromBody] Vlasnik v)
+        {
+            return new JsonResult(this.vlasnikService.AzurirajVlasnika(v));
+        }
+
     }
 }

@@ -15,6 +15,8 @@ namespace Doggy.DataLayer.Services.Interfaces
 
         public Siter DodajSitera(Siter s, out StatusDodavanja status);
 
+        public Siter ObrisiSitera(int id);
+        
         public Siter AzurirajSitera(Siter s);
         
         public Siter AzurirajSiteraValidan(int idSiter);

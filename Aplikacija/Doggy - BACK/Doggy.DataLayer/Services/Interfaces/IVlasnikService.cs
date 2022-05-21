@@ -12,6 +12,10 @@ namespace Doggy.DataLayer.Services.Interfaces
         public List<Vlasnik> VratiSveVlasnike();
         
         public Vlasnik DodajVlasnika(Vlasnik s, out StatusDodavanja status);
+        
+        public Vlasnik ObrisiVlasnika(int id);
+
+        public Vlasnik AzurirajVlasnika(Vlasnik v);
 
         public bool ValidacijaDodavanja(Vlasnik v, out StatusDodavanja status);
     }

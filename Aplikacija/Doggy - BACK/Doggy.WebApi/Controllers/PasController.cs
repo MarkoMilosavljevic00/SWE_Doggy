@@ -44,5 +44,20 @@ namespace Doggy.WebAPI.Controllers
 
             return new JsonResult(pas);
         }
+
+        [HttpDelete]
+        [Route("obrisiPsa")]
+        public IActionResult ObrisiPsa(int id)
+        {
+            Pas p = this.pasService.ObrisiPsa(id);
+            return new JsonResult(p);
+        }
+
+        [HttpPut]
+        [Route("azurirajPsa")]
+        public IActionResult AzurirajPsa([FromBody] Pas p)
+        {
+            return new JsonResult(this.pasService.AzurirajPsa(p));
+        }
     }
 }

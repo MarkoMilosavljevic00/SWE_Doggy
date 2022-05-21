@@ -61,14 +61,40 @@ namespace Doggy.DataLayer.Services
 
         }
 
+        public Siter ObrisiSitera(int id)
+        {
+            Siter s = unitOfWork.SiterRepository.Get(id);
+            if (s != null)
+            {
+                unitOfWork.SiterRepository.Delete(s);
+                unitOfWork.SaveChanges();
+                return s;
+            }
+            return null;
+        }
+
         public Siter AzurirajSitera(Siter s)
         {
             Siter siter = unitOfWork.SiterRepository.Get(s.Id);
             if (siter != null)
             {
-                unitOfWork.SiterRepository.Update(s);
+                siter.Ime = s.Ime ?? siter.Ime;
+                siter.Prezime = s.Prezime ?? siter.Prezime;
+                siter.KorisnickoIme = s.KorisnickoIme ?? siter.KorisnickoIme;
+                siter.Email = s.Email ?? siter.Email;
+                siter.Sifra = s.Sifra ?? siter.Sifra;
+                siter.BrojTelefona = s.BrojTelefona ?? siter.BrojTelefona;
+                siter.Grad = s.Grad ?? siter.Grad;
+                siter.Adresa = s.Adresa ?? siter.Adresa;
+
+                siter.Bio = s.Bio ?? siter.Bio;
+                siter.Slika = s.Slika ?? siter.Slika;
+                if (s.CenaPoSatu != 0)
+                    siter.CenaPoSatu = s.CenaPoSatu;
+
+                unitOfWork.SiterRepository.Update(siter);
                 unitOfWork.SaveChanges();
-                return s;
+                return siter;
             }
             return null;
         }
@@ -84,6 +110,9 @@ namespace Doggy.DataLayer.Services
                 s.Validan = true;
             else
                 s.Validan = false;
+
+            unitOfWork.SiterRepository.Update(s);
+            unitOfWork.SaveChanges();
             return s;
         }
 
@@ -99,6 +128,8 @@ namespace Doggy.DataLayer.Services
             else
                 s.Dostupan = false;
 
+            unitOfWork.SiterRepository.Update(s);
+            unitOfWork.SaveChanges();
             return s;
         }
 
