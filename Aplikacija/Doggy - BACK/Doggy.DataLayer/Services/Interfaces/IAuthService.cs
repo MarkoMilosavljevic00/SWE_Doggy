@@ -11,11 +11,8 @@ namespace Doggy.DataLayer.Services.Interfaces
     public interface IAuthService
     {
         public string GenerateJWT(IConfiguration config, Korisnik user);
-
         public Korisnik AuthenticateUser(Login data);
-
         public Korisnik VratiKorisnikaPoEmailu(string email);
-
         public bool ProveriValidnostSitera(int idSitera);
     }
 }

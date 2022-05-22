@@ -36,7 +36,7 @@ namespace Doggy.DataLayer.Services
 
         public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena,double? maxCena, double? minOcena)
         {
-            return unitOfWork.SiterRepository.Find(k=> k.Validan == true
+            return unitOfWork.SiterRepository.FindWithIncludes(k=> k.Validan == true
                                                     && k.Ime.StartsWith(ime ?? k.Ime)
                                                     && k.Prezime.StartsWith(prezime ?? k.Prezime)
                                                     && k.Grad.StartsWith(grad ?? k.Grad)
@@ -45,11 +45,12 @@ namespace Doggy.DataLayer.Services
                                                     && k.CenaPoSatu >= (minCena ?? k.CenaPoSatu)
                                                     && k.CenaPoSatu <= (maxCena ?? k.CenaPoSatu)
                                                     && k.ProsecnaOcena >= (minOcena ?? k.ProsecnaOcena)
+                                                    , k => k.Recenzije
                                                     ).ToList();
         }
 
 
-        public Siter DodajSitera(Siter s, out StatusDodavanja status)
+        public Siter DodajSitera(Siter s, out StatusDodavanjaKorisnika status)
         {
             if(ValidacijaDodavanja(s, out status))
             {
@@ -133,49 +134,49 @@ namespace Doggy.DataLayer.Services
             return s;
         }
 
-        public bool ValidacijaDodavanja(Siter s, out StatusDodavanja status)
+        public bool ValidacijaDodavanja(Siter s, out StatusDodavanjaKorisnika status)
         {
             
             var postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.Email == s.Email).FirstOrDefault();
             if (postojiVecAdmin != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
             if (postojiVecAdmin != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
             var postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.Email == s.Email).FirstOrDefault();
             if (postojiVecSiter != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
             if (postojiVecSiter != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
             var postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.Email == s.Email).FirstOrDefault();
             if (postojiVecVlasnik != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.KorisnickoIme == s.KorisnickoIme).FirstOrDefault();
             if (postojiVecVlasnik != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
-            status = StatusDodavanja.Uspesno;
+            status = StatusDodavanjaKorisnika.Uspesno;
             return true;
         }
     }

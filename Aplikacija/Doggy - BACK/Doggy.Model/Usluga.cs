@@ -14,8 +14,9 @@ namespace Doggy.Model
 
     public enum StatusUsluge
     {
-        ZahtevaSe,
+        Zahtev,
         Prihvacena,
+        Odbijena,
         Obavljena
     };
 
@@ -42,6 +43,8 @@ namespace Doggy.Model
         public DateTime Kraj { get; set; }
 
         public string AdresaPreuzimanjaPsa { get; set; }
+
+        //public string Napomena { get; set; }
 
         public StatusUsluge Status { get; set; }
     }

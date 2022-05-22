@@ -34,9 +34,16 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiPseZaVlasnika(idVlasnika));
         }
 
+        [HttpGet]
+        [Route("vratiPsaPoId")]
+        public IActionResult VratiPsaPoId(int idPas)
+        {
+            return new JsonResult(pasService.VratiPsaPoId(idPas));
+        }
+
         [HttpPost]
         [Route("dodajPsa")]
-        public IActionResult DodajVlasnika([FromBody] Pas p)
+        public IActionResult DodajPsa([FromBody] Pas p)
         {
             Pas pas = pasService.DodajPsa(p);
             if (pas == null)

@@ -32,11 +32,14 @@ namespace Doggy.Model
 
         public string Slika { get; set; }
 
+        //public double ProsecnaOcena { get; set; }
+
         [JsonIgnore]
         public Vlasnik Vlasnik { get; set; }
 
         public int VlasnikId { get; set; }
 
+        [JsonIgnore]
         public List<Recenzija> Recenzije { get; set; }
     }
 }

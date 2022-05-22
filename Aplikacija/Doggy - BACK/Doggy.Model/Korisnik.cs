@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Doggy.Model
 {
-    public enum StatusDodavanja
+    public enum StatusDodavanjaKorisnika
     {
         Uspesno,
         PostojiEmail,

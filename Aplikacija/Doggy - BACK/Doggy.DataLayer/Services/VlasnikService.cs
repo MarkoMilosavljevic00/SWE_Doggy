@@ -24,7 +24,7 @@ namespace Doggy.DataLayer.Services
             return result;
         }
 
-        public Vlasnik DodajVlasnika(Vlasnik v, out StatusDodavanja status)
+        public Vlasnik DodajVlasnika(Vlasnik v, out StatusDodavanjaKorisnika status)
         {
             if (ValidacijaDodavanja(v, out status))
             {
@@ -69,49 +69,49 @@ namespace Doggy.DataLayer.Services
             return null;
         }
 
-        public bool ValidacijaDodavanja(Vlasnik v, out StatusDodavanja status)
+        public bool ValidacijaDodavanja(Vlasnik v, out StatusDodavanjaKorisnika status)
         {
 
             var postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.Email == v.Email).FirstOrDefault();
             if (postojiVecAdmin != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecAdmin = unitOfWork.AdminRepository.Find(k => k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
             if (postojiVecAdmin != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
             var postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.Email == v.Email).FirstOrDefault();
             if (postojiVecSiter != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecSiter = unitOfWork.SiterRepository.Find(k => k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
             if (postojiVecSiter != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
             var postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.Email == v.Email).FirstOrDefault();
             if (postojiVecVlasnik != null)
             {
-                status = StatusDodavanja.PostojiEmail;
+                status = StatusDodavanjaKorisnika.PostojiEmail;
                 return false;
             }
             postojiVecVlasnik = unitOfWork.VlasnikRepository.Find(k => k.KorisnickoIme == v.KorisnickoIme).FirstOrDefault();
             if (postojiVecVlasnik != null)
             {
-                status = StatusDodavanja.PostojiKorisnickoIme;
+                status = StatusDodavanjaKorisnika.PostojiKorisnickoIme;
                 return false;
             }
 
-            status = StatusDodavanja.Uspesno;
+            status = StatusDodavanjaKorisnika.Uspesno;
             return true;
         }
 

@@ -20,7 +20,7 @@ namespace Doggy.Model
 
         public int SiterId { get; set; }
 
-        public Pas Pas { get; set; }
+        public Pas Pas { get; set; } // ja msm ne treba
 
         public int PasId { get; set; }
     }

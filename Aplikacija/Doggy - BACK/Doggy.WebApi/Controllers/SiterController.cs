@@ -45,11 +45,11 @@ namespace Doggy.WebAPI.Controllers
         [Route("dodajSitera")]
         public IActionResult DodajSitera([FromBody] Siter s)
         {
-            StatusDodavanja status;
+            StatusDodavanjaKorisnika status;
             var result = siterService.DodajSitera(s, out status);
-            if (status == StatusDodavanja.PostojiEmail)
+            if (status == StatusDodavanjaKorisnika.PostojiEmail)
                 return StatusCode(501, "U bazi vec postoji neko sa tim email-om!");
-            if (status == StatusDodavanja.PostojiKorisnickoIme)
+            if (status == StatusDodavanjaKorisnika.PostojiKorisnickoIme)
                 return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
 
             return new JsonResult(result);
