@@ -1,8 +1,9 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import React from 'react';
+import Button from '@mui/material/Button';
+import IkonicaHome from './ikonicaHome';
 
-import { loginRoute, registerRoute } from "../router/routes";
-import { useNavigate } from "react-router-dom";
+import { loginRoute, registerRoute } from '../router/routes';
+import { useNavigate } from 'react-router-dom';
 export default function HeaderLogin() {
   const navigate = useNavigate();
   return (
@@ -25,16 +26,17 @@ export default function HeaderLogin() {
             <li>
               <a className="nav-link scrollto" href="/">
                 Home
+                <IkonicaHome style={{ color: 'white' }} />
               </a>
             </li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
-          <Button color="inherit" onClick={() => navigate(loginRoute)}>
+          {/* <Button color="inherit" onClick={() => navigate(loginRoute)}>
             Log In
           </Button>
           <Button color="inherit" onClick={() => navigate(registerRoute)}>
             Registruj se
-          </Button>
+          </Button> */}
         </nav>
       </div>
     </header>

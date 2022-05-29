@@ -2,8 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { pink } from '@mui/material/colors';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 function HomeIcon(props) {
   return (
@@ -14,7 +13,7 @@ function HomeIcon(props) {
 }
 
 export default function SvgIconsColor() {
-  const navigate=useNavigate(); 
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -24,7 +23,7 @@ export default function SvgIconsColor() {
         },
       }}
     >
-      <HomeIcon color="success" onClick={()=>navigate('../')}  />
+      <HomeIcon color="white" onClick={() => navigate('../')} />
     </Box>
   );
 }

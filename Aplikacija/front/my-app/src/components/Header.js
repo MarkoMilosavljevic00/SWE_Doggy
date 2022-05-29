@@ -1,8 +1,13 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import React from 'react';
+import Button from '@mui/material/Button';
 
-import { loginRoute, registerRoute, sitterRoute } from "../router/routes";
-import { useNavigate } from "react-router-dom";
+import {
+  loginRoute,
+  registerRoute,
+  sitterRoute,
+  komentarisanjeIOcenjivanjeRoute,
+} from '../router/routes';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -107,6 +112,13 @@ export default function Header() {
           </Button>
           <Button color="inherit" onClick={() => navigate(registerRoute)}>
             Registruj se
+          </Button>
+
+          <Button
+            color="inherit"
+            onClick={() => navigate(komentarisanjeIOcenjivanjeRoute)}
+          >
+            KomentarisiIOceni
           </Button>
         </nav>
       </div>

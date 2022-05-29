@@ -18,6 +18,8 @@ import Ocene from '../ocene/index.jsx';
 import classStyles from './styles';
 import Opis from './components/opis';
 import { slikeUrl } from '../../../backendAddress';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import PetsIcon from '@mui/icons-material/Pets';
 // import slika2 from '../../../slike/s1.jpg';
 
 const ExpandMore = styled(props => {
@@ -41,22 +43,29 @@ export default function RecipeReviewCard(props) {
 
   const classes = classStyles();
 
-  const { ime, opis, slika, brojTelefona } = props;
+  const {
+    ime,
+    opis,
+    slika,
+    brojTelefona,
+    grad,
+    adresa,
+    cenaPoSatu,
+    dostupan,
+    prosecnaOcena,
+    id,
+  } = props;
 
   // console.log('../../../slike/s1.jpg');
   return (
-    <Card sx={{ maxWidth: 200, maxHeigh: 100 }}>
+    <Card sx={{ width: 200, maxHeigh: 10 }} className={classes.kartica}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {ime[0]}
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        action={<PetsIcon style={{ color: 'green' }} />}
         title={ime}
       />
       <CardMedia
@@ -68,11 +77,26 @@ export default function RecipeReviewCard(props) {
         alt="Paella dish"
       />
       <CardContent>
-        <Opis opis={opis} brojTelefona={brojTelefona} />
+        <Opis
+          opis={opis}
+          brojTelefona={brojTelefona}
+          grad={grad}
+          adresa={adresa}
+          cenaPoSatu={cenaPoSatu}
+          dostupan={dostupan}
+          prosecnaOcena={prosecnaOcena}
+          id={id}
+        />
+        {/* <ThumbUpIcon style={{ color: 'green' }} /> */}
+        Prosecna ocena : {prosecnaOcena}
+        <br />
+        Cena : {cenaPoSatu}
+        <br />
+        Grad: {grad}
       </CardContent>
-      <CardActions disableSpacing>
+      {/* <CardActions disableSpacing>
         <Ocene />
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

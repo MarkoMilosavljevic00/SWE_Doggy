@@ -7,22 +7,13 @@ import Select from '@mui/material/Select';
 import { useState, useEffect } from 'react';
 import { vratiSveSitereUrl } from '../../../backendAddress';
 
-export default function BasicSelect() {
-  const [age, setAge] = React.useState('');
-  const ocene = [1, 2, 3, 4, 5];
+export default function BasicSelect(props) {
+  const { Ocena, postaviOcenu } = props;
   const handleChange = event => {
-    console.log('aaaaaaaaaaaaa');
-    setAge(event.target.value);
+    postaviOcenu(event.target.value);
   };
 
-  const [siteri, postaviSitere] = useState([]);
-
-  useEffect(() => {
-    fetch(vratiSveSitereUrl).then(async res => {
-      const results = await res.json();
-      postaviSitere(results);
-    });
-  }, []);
+  const [prosecnaOcena, postaviProsecnuOcenu] = useState([1, 2, 3, 4, 5]);
 
   return (
     <Box sx={{ minWidth: 170 }}>
@@ -31,11 +22,11 @@ export default function BasicSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={Ocena}
           label="Prosecna ocena"
           onChange={handleChange}
         >
-          {ocene.map((ocena, index) => {
+          {prosecnaOcena.map((ocena, index) => {
             return (
               <MenuItem key={index} value={ocena}>
                 {ocena}

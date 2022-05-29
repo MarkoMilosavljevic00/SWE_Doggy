@@ -1,55 +1,13 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import MobileStepper from '@mui/material/MobileStepper';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { useNavigate } from 'react-router-dom';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
-export default function DotsMobileStepper() {
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+export default function BasicPagination(props) {
+  const { ukupanBrojStranica, postaviStranicu } = props;
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  const handlePageChange = (event, value) => {
+    postaviStranicu(value);
   };
 
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
-  const navigate = useNavigate();
-  return (
-    <MobileStepper
-      variant="dots"
-      steps={6}
-      position="static"
-      activeStep={activeStep}
-      sx={{ maxWidth: 400, flexGrow: 1 }}
-      nextButton={
-        <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-          Next
-          {theme.direction === 'rtl' ? (
-            <KeyboardArrowLeft />
-          ) : (
-            <KeyboardArrowRight />
-          )}
-        </Button>
-      }
-      backButton={
-        <Button
-          size="small"
-          onClick={() => navigate('../')}
-          disabled={activeStep === 0}
-        >
-          {theme.direction === 'rtl' ? (
-            <KeyboardArrowRight />
-          ) : (
-            <KeyboardArrowLeft />
-          )}
-          Back
-        </Button>
-      }
-    />
-  );
+  return <Pagination count={ukupanBrojStranica} onChange={handlePageChange} />;
 }

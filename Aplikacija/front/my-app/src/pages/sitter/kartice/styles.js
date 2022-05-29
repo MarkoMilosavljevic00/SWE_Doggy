@@ -9,9 +9,7 @@ const classStyles = makeStyles({
   },
 
   kartica: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    maxHeight: 330,
   },
 });
 export default classStyles;

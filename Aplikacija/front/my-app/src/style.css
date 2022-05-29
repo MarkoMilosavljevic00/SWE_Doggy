@@ -117,9 +117,11 @@ h6 {
   margin: 0;
 }
 #header.header-transparent {
-  background: transparent;
-  background-color: #a9fdac;
+  background-color: #5de064;
+  position: sticky;
 
+  /* background: transparent; */
+  /* background-color: #a9fdac; */
   /* background-color: #18d26e; */
 }
 #header.header-scrolled {

@@ -9,6 +9,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import classStyles from './style';
+import { useNavigate } from 'react-router-dom';
+import { komentarisanjeIOcenjivanjeRoute } from '../../../../../router/routes';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -33,7 +36,8 @@ const BootstrapDialogTitle = props => {
             position: 'absolute',
             right: 8,
             top: 8,
-            color: theme => theme.palette.grey[500],
+            // color: theme => theme.palette.grey[500],
+            color: 'green',
           }}
         >
           <CloseIcon />
@@ -49,8 +53,9 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs(props) {
+  const classes = classStyles();
   const [open, setOpen] = React.useState(false);
-  const { opis, brojTelefona } = props;
+  const { opis, brojTelefona, grad, adresa, cenaPoSatu, dostupan, id } = props;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,9 +63,9 @@ export default function CustomizedDialogs(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const navigate = useNavigate();
   return (
-    <div>
+    <div className={classes.container}>
       <Button
         variant="contained"
         color="success"
@@ -83,14 +88,38 @@ export default function CustomizedDialogs(props) {
           Opis sitter-a
         </BootstrapDialogTitle>
         <DialogContent dividers>
+          <Typography gutterBottom>{opis}</Typography>
+          <Typography gutterBottom>Broj telefona : {brojTelefona}</Typography>
+          <Typography gutterBottom>Grad : {grad}</Typography>
+          <Typography gutterBottom>Adresa : {adresa}</Typography>
+          <Typography gutterBottom>Cena po satu: {cenaPoSatu}</Typography>
           <Typography gutterBottom>
-            {opis}
-            <br />
-            Broj telefona : {brojTelefona}
+            Dostupan : {dostupan ? 'da' : 'ne'}
           </Typography>
+          <div className={classes.divButton}>
+            <Button
+              style={{
+                backgroundColor: 'green',
+                color: 'white',
+              }}
+              onClick={() => {
+                localStorage.setItem('idSitera', id);
+                navigate(komentarisanjeIOcenjivanjeRoute);
+
+                // navigate(komentarisanjeIOcenjivanjeRoute, {
+                //   state: {
+                //     idSitera: id,
+                //   },
+                // });
+              }}
+            >
+              Komentarisi i oceni sitera
+            </Button>
+          </div>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          {/* style={{ backgroundColor: '#2ac94d', margin: 15 }} */}
+          <Button autoFocus onClick={handleClose} style={{ color: 'green' }}>
             Zatvori
           </Button>
         </DialogActions>
