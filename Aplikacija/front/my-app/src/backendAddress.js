@@ -11,3 +11,5 @@ export const dodajSiteraUrl = baseUrl + 'Siter/dodajSitera';
 export const filtrirajSitere = baseUrl + 'Siter/filterSiteri';
 
 export const recenzije = baseUrl + 'Recenzija/vratiSveRecenzije';
+ export const vratiSvePse = baseUrl + 'Pas/vratiSvePse';
+ export const dodajPsa=baseUrl + 'Pas/dodajPsa';

@@ -53,7 +53,7 @@ export default function Header() {
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/registerRoute">
+              <a className="nav-link scrollto" href="/vlasnikRoute">
                 <i class="fa-solid fa-magnifying-glass"></i> Nadji sittera
               </a>
             </li>
