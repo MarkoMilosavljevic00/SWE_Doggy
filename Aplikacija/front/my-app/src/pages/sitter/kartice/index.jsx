@@ -14,7 +14,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Ocene from '../ocene/index.jsx';
 import classStyles from './styles';
 import Opis from './components/opis';
 import { slikeUrl } from '../../../backendAddress';

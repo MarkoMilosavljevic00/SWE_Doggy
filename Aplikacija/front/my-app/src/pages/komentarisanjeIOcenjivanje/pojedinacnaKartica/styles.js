@@ -1,14 +1,19 @@
 import { makeStyles } from '@material-ui/styles';
 const classStyles = makeStyles({
-  divKartica: {
+  divSacuvaj: {
     display: 'flex',
-    margin: 5,
+    flexDirection: 'column',
     flex: 1,
   },
-
-  divVreme: {
+  divOcena: {
     display: 'flex',
+
     justifyContent: 'end',
+  },
+
+  divKomentar: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 });
 export default classStyles;
