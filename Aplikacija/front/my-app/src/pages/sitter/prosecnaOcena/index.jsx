@@ -33,16 +33,6 @@ export default function BasicSelect(props) {
               </MenuItem>
             );
           })}
-
-          {/* {ocene.map(ocena => {
-            return (<MenuItem>{ocena}</MenuItem>);
-          })} */}
-
-          {/* {ocene.map(ocena => (
-            <MenuItem>{ocena}</MenuItem>
-          ))} */}
-
-          {/* {ocene.map(ocena => <MenuItem>{ocena}</MenuItem> )} */}
         </Select>
       </FormControl>
     </Box>

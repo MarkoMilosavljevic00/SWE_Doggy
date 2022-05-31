@@ -1,12 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
-const classStyles = makeStyles({
-  divKartica: {
-    display: 'flex',
-    margin: 5,
-    flex: 1,
-  },
 
-  divVreme: {
+const classStyles = makeStyles({
+  divOcena: {
     display: 'flex',
     justifyContent: 'end',
   },
