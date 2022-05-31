@@ -27,6 +27,13 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(vlasnikService.VratiSveVlasnike());
         }
 
+        [HttpGet]
+        [Route("vratiVlasnikaPoId")]
+        public IActionResult VratiVlasnikaPoId(int id)
+        {
+            return new JsonResult(vlasnikService.VratiVlasnikaPoId(id));
+        }
+
         [HttpPost]
         [Route("dodajVlasnika")]
         public IActionResult DodajVlasnika([FromBody] Vlasnik v)

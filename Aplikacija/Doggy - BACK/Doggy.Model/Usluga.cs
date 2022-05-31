@@ -44,8 +44,9 @@ namespace Doggy.Model
 
         public string AdresaPreuzimanjaPsa { get; set; }
 
-        //public string Napomena { get; set; }
+        public string Napomena { get; set; }
 
         public StatusUsluge Status { get; set; }
+
     }
 }
