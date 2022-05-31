@@ -71,6 +71,9 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<string>("Pol")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("ProsecnaOcena")
+                        .HasColumnType("float");
+
                     b.Property<string>("Rasa")
                         .HasColumnType("nvarchar(max)");
 
@@ -110,6 +113,12 @@ namespace Doggy.DataLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SiterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tip")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VlasnikId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Vreme")
@@ -194,6 +203,9 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<DateTime>("Kraj")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Napomena")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PasId")
                         .HasColumnType("int");
 
@@ -270,21 +282,17 @@ namespace Doggy.DataLayer.Migrations
 
             modelBuilder.Entity("Doggy.Model.Recenzija", b =>
                 {
-                    b.HasOne("Doggy.Model.Pas", "Pas")
+                    b.HasOne("Doggy.Model.Pas", null)
                         .WithMany("Recenzije")
                         .HasForeignKey("PasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Doggy.Model.Siter", "Siter")
+                    b.HasOne("Doggy.Model.Siter", null)
                         .WithMany("Recenzije")
                         .HasForeignKey("SiterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Pas");
-
-                    b.Navigation("Siter");
                 });
 
             modelBuilder.Entity("Doggy.Model.Usluga", b =>

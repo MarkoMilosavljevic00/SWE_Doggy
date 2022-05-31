@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {}
+    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
+    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
         "projectName": "Doggy.DataLayer",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
+        "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\Doggy.DataLayer.csproj",
         "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.DataLayer\\obj\\",
+        "outputPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\Doggy.Model.csproj": {
-                "projectPath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\Doggy.Model.csproj"
+              "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj": {
+                "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\Doggy.Model.csproj": {
+    "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\Doggy.Model.csproj",
+        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
         "projectName": "Doggy.Model",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\Doggy.Model.csproj",
+        "projectPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\Doggy.Model.csproj",
         "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\Doggy - LOKALNO\\Doggy.Model\\obj\\",
+        "outputPath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

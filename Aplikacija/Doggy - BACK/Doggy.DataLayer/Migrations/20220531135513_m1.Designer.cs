@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doggy.DataLayer.Migrations
 {
     [DbContext(typeof(DoggyContext))]
-    [Migration("20220506164446_m3")]
-    partial class m3
+    [Migration("20220531135513_m1")]
+    partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,6 @@ namespace Doggy.DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BrojTelefona")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Drzava")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -75,6 +72,9 @@ namespace Doggy.DataLayer.Migrations
 
                     b.Property<string>("Pol")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ProsecnaOcena")
+                        .HasColumnType("float");
 
                     b.Property<string>("Rasa")
                         .HasColumnType("nvarchar(max)");
@@ -117,6 +117,12 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<int>("SiterId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Tip")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VlasnikId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Vreme")
                         .HasColumnType("datetime2");
 
@@ -142,6 +148,9 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BrObavljenihUsluga")
+                        .HasColumnType("int");
+
                     b.Property<string>("BrojTelefona")
                         .HasColumnType("nvarchar(max)");
 
@@ -150,9 +159,6 @@ namespace Doggy.DataLayer.Migrations
 
                     b.Property<bool>("Dostupan")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Drzava")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -166,17 +172,20 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<string>("KorisnickoIme")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ObavljeneUsluge")
-                        .HasColumnType("int");
-
                     b.Property<string>("Prezime")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ProsecnaOcena")
+                        .HasColumnType("float");
 
                     b.Property<string>("Sifra")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slika")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Validan")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -190,8 +199,17 @@ namespace Doggy.DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AdresaPreuzimanjaPsa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Kraj")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Napomena")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PasId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Pocetak")
                         .HasColumnType("datetime2");
@@ -230,9 +248,6 @@ namespace Doggy.DataLayer.Migrations
                     b.Property<string>("BrojTelefona")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Drzava")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -269,21 +284,17 @@ namespace Doggy.DataLayer.Migrations
 
             modelBuilder.Entity("Doggy.Model.Recenzija", b =>
                 {
-                    b.HasOne("Doggy.Model.Pas", "Pas")
+                    b.HasOne("Doggy.Model.Pas", null)
                         .WithMany("Recenzije")
                         .HasForeignKey("PasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Doggy.Model.Siter", "Siter")
+                    b.HasOne("Doggy.Model.Siter", null)
                         .WithMany("Recenzije")
                         .HasForeignKey("SiterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Pas");
-
-                    b.Navigation("Siter");
                 });
 
             modelBuilder.Entity("Doggy.Model.Usluga", b =>

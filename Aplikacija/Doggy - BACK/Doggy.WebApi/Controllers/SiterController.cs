@@ -35,6 +35,13 @@ namespace Doggy.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("vratiSiteraPoId")]
+        public IActionResult VratiSiteraPoId(int id)
+        {
+            return new JsonResult(siterService.VratiSiteraPoId(id));
+        }
+
+        [HttpGet]
         [Route("filterSiteri")]
         public IActionResult VratiSitereFilter([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga,double? minCena, double? maxCena, double? minOcena)
         {

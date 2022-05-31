@@ -19,7 +19,7 @@ namespace Doggy.DataLayer.Services
         }
         public List<Pas> VratiSvePse()
         {
-            return unitOfWork.PasRepository.All().ToList();
+            return unitOfWork.PasRepository.FindWithIncludes(k=>k.Id != 0 , k=> k.Recenzije).ToList();
         }
 
         public Pas VratiPsaPoId(int idPas)

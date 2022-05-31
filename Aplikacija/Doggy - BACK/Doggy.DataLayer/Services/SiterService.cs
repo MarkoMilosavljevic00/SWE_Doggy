@@ -36,7 +36,7 @@ namespace Doggy.DataLayer.Services
 
         public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena,double? maxCena, double? minOcena)
         {
-            return unitOfWork.SiterRepository.FindWithIncludes(k=> k.Validan == true
+            return unitOfWork.SiterRepository.Find/*WithIncludes*/(k=> k.Validan == true
                                                     && k.Ime.StartsWith(ime ?? k.Ime)
                                                     && k.Prezime.StartsWith(prezime ?? k.Prezime)
                                                     && k.Grad.StartsWith(grad ?? k.Grad)
@@ -45,7 +45,7 @@ namespace Doggy.DataLayer.Services
                                                     && k.CenaPoSatu >= (minCena ?? k.CenaPoSatu)
                                                     && k.CenaPoSatu <= (maxCena ?? k.CenaPoSatu)
                                                     && k.ProsecnaOcena >= (minOcena ?? k.ProsecnaOcena)
-                                                    , k => k.Recenzije
+                                                    //, k => k.Recenzije
                                                     ).ToList();
         }
 

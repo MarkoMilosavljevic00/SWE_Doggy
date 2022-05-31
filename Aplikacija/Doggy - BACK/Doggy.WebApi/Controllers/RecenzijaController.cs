@@ -27,35 +27,62 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzijaService.VratiSveRecenzije());
         }
 
+        [HttpGet]
+        [Route("vratiRecenzijuPoId")]
+        public IActionResult VratiRecenzijuPoId(int id)
+        {
+            return new JsonResult(recenzijaService.VratiRecenzijuPoId(id));
+        }
+
+        [HttpGet]
+        [Route("vratiRecenzijeZaSitera")]
+        public IActionResult VratiRecenzijeZaSitera(int id)
+        {
+            return new JsonResult(recenzijaService.VratiRecenzijeZaSitera(id));
+        }
+
+        [HttpGet]
+        [Route("vratiRecenzijeZaPsa")]
+        public IActionResult VratiRecenzijeZaPsa(int id)
+        {
+            return new JsonResult(recenzijaService.VratiRecenzijeZaPsa(id));
+        }
 
         [HttpPost]
         [Route("dodajRecenzijuSiteru")]
-        public IActionResult DodajRecenzijuSiteru(int idSiter, [FromBody] Recenzija r)
+        public IActionResult DodajRecenzijuSiteru([FromBody] Recenzija r)
         {
-            Siter siterSaNovomRecenzijom = recenzijaService.DodajRecenzijuSiteru(idSiter, r);
-            if (siterSaNovomRecenzijom == null)
-                return BadRequest("Vec ste pisali recenziju za ovog sitera, molimo izbrisite staru ako zelite ponovo da ocenite ovog sitera!");
+            Recenzija recenzija = recenzijaService.DodajRecenzijuSiteru(r);
+            if (recenzija == null)
+                return BadRequest("Vec ste pisali recenziju za ovog sitera za setanje ovog psa!");
 
-            return new JsonResult(siterSaNovomRecenzijom);
+            return new JsonResult(recenzija);
         }
 
         [HttpPost]
         [Route("dodajRecenzijuPsu")]
-        public IActionResult DodajRecenzijuPsu(int idPas, [FromBody] Recenzija r)
+        public IActionResult DodajRecenzijuPsu([FromBody] Recenzija r)
         {
-            Pas pasSaNovomRecenzijom = recenzijaService.DodajRecenzijuPsu(idPas, r);
-            if (pasSaNovomRecenzijom == null)
-                return BadRequest("Vec ste pisali recenziju za ovog psa, molimo izbrisite staru ako zelite ponovo da ocenite ovog psa!");
+            Recenzija recenzija = recenzijaService.DodajRecenzijuPsu(r);
+            if (recenzija == null)
+                return BadRequest("Vec ste pisali recenziju za ovog psa!");
 
-            return new JsonResult(pasSaNovomRecenzijom);
+            return new JsonResult(recenzija);
         }
 
         [HttpDelete]
         [Route("obrisiRecenziju")]
-        public IActionResult ObrisiRecenziju(int idRecenzije)
+        public IActionResult ObrisiRecenziju(int idRecenzija)
         {
-            Recenzija r = this.recenzijaService.ObrisiRecenziju(idRecenzije);
+            Recenzija r = this.recenzijaService.ObrisiRecenziju(idRecenzija);
             return new JsonResult(r);
+        }
+
+        [HttpDelete]
+        [Route("azurirajRecenziju")]
+        public IActionResult AzurirajRecenziju(Recenzija r)
+        {
+            return new JsonResult(this.recenzijaService.AzurirajRecenziju(r));
         }
 
     }

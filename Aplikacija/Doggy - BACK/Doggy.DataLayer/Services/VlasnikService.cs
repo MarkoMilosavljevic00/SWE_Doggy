@@ -23,6 +23,10 @@ namespace Doggy.DataLayer.Services
             var result = unitOfWork.VlasnikRepository.VratiSveVlasnike();
             return result;
         }
+        public Vlasnik VratiVlasnikaPoId(int id)
+        {
+            return unitOfWork.VlasnikRepository.Get(id);
+        }
 
         public Vlasnik DodajVlasnika(Vlasnik v, out StatusDodavanjaKorisnika status)
         {
@@ -35,6 +39,7 @@ namespace Doggy.DataLayer.Services
             return null;
 
         }
+
 
         public Vlasnik AzurirajVlasnika(Vlasnik v)
         {
