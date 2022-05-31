@@ -35,12 +35,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import Axios from 'axios'
 import Header from '../../components/Header';
+import { SwapVertSharp } from '@mui/icons-material';
 
 
 
-const Vlasnik=()=> {
+const Vlasnik=(props)=> {
   const[value,setValue]=useState('')
   const[valuee,setValue1]=useState('')
   const inputProps = {
@@ -93,7 +94,8 @@ const Vlasnik=()=> {
       //   const [value, setValue] = React.useState([20, 37]);
       // }
       const handleChange = (event, newValue) => {
-        setValue(newValue);
+        // setValue(newValue);
+        console.log('1')
     };
     const buttons = [
       <Button key="one">Jedan</Button>,
@@ -105,8 +107,62 @@ const Vlasnik=()=> {
       <Button key="two">10 - 20</Button>,
       <Button key="three">20+</Button>,
     ];
+    const[vrsta,setSelect]=useState('');
+    const[pocetak,setTajmerOd]=useState('');
+    const[kraj,setTajmerDo]=useState('');
+    const[adresaPreuzimanjaPsa,setAddr]=useState('');
+    const[napomena,setNapomena]=useState('');
+const usluge=()=>
+{
+console.log(vrsta)//radi :D
+}   
+const Od=()=>
+{
+  console.log(pocetak)
+}
+const Do =()=>
+{
+  console.log(kraj)
+}
+const funkcija_adresa=()=>
+{
+  console.log(adresaPreuzimanjaPsa)
+}
+const siterId=localStorage.getItem('idSitera');
+const pasId=localStorage.getItem('idPsa');
+const vlasnikId=localStorage.getItem('idVlasnika')
+const funkcija_napomena=()=>
+{
+  console.log(siterId)
+  console.log(pasId)
+  console.log(vlasnikId)
+}
+const posalji_zahtev=()=>
+{
+  const podaci={
+  vlasnikId,
+  siterId,
+  pasId,
+  vrsta,
+  pocetak,
+  kraj,
+  adresaPreuzimanjaPsa
+}
+  Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
 
+    }
+  ).then(res=>
+    {
+
+      console.log(res)
+    }).catch(err=>
+    {
     
+      
+          console.log(err.response)
+        
+    })
+}
     return (
       
     <div className={klase.bos}>
@@ -118,17 +174,20 @@ const Vlasnik=()=> {
      <Box sx={{ minWidth: 120 }}>
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">Odaberite vrstu usluge</InputLabel>
+      <h3>{vrsta}</h3>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={1}
+        value={vrsta}
         label="Age"
-        onChange={handleChange}
+        onChange={(e)=>setSelect(e.target.value)}
+        onClick={usluge}
+        // onChange={handleChange}
       >
-        <MenuItem value={10}><i class="fa-solid fa-dog"><h2>    Setanje psa</h2><h4>Po gradu</h4></i></MenuItem>
-        <MenuItem value={20}><i class="fa-solid fa-paw"><h2>Cuvanje psa</h2><h4>U vasoj kuci</h4></i></MenuItem>
-        <MenuItem value={10}><i class="fa-solid fa-dog"><h2>    Cuvanje psa </h2><h4>U kuci sittera</h4></i></MenuItem>
-        <MenuItem value={20}><i class="fa-solid fa-paw"><h2>  Poseta sittera</h2></i></MenuItem>
+        <MenuItem   value={1}><i class="fa-solid fa-dog"><h2>    Setanje psa</h2><h4>Po gradu</h4></i></MenuItem>
+        <MenuItem value={2}><i class="fa-solid fa-paw"><h2>Cuvanje psa</h2><h4>U vasoj kuci</h4></i></MenuItem>
+        <MenuItem  value={3}><i class="fa-solid fa-dog"><h2>    Cuvanje psa </h2><h4>U kuci sittera</h4></i></MenuItem>
+        <MenuItem  value={4}><i class="fa-solid fa-paw"><h2>  Poseta sittera</h2></i></MenuItem>
       </Select>
     </FormControl>
     <Button color='inherit' onClick={()=>navigate('/')}>Nazad na pocetnu</Button>
@@ -137,6 +196,8 @@ const Vlasnik=()=> {
 
     <div className={klase.datepicker}>
       <h2>Odaberite vreme koje Vam odgovara</h2>
+      <h3>{pocetak} do {kraj}</h3>
+
       <div className={klase.pikeri}>
     <form  noValidate>
       <TextField
@@ -144,7 +205,9 @@ const Vlasnik=()=> {
         label="Pocetak usluge"
         type="datetime-local"
         defaultValue="2017-05-24T10:30"
-        
+        onChange={e=>setTajmerOd(e.target.value)}
+        value={pocetak}
+        onClick={Od}
         InputLabelProps={{
           shrink: true,
         }}
@@ -157,7 +220,9 @@ const Vlasnik=()=> {
         label="Kraj usluge"
         type="datetime-local"
         defaultValue="2017-05-24T10:30"
-        
+        onChange={e=>setTajmerDo(e.target.value)}
+        onClick={Do}
+        value={kraj}
         InputLabelProps={{
           shrink: true,
         }}
@@ -188,6 +253,7 @@ const Vlasnik=()=> {
 
     <div className={klase.adresa}>
     <p>Adresa</p>
+    <h3>{adresaPreuzimanjaPsa}</h3>
      <Box
       component="form"
       sx={{
@@ -198,11 +264,13 @@ const Vlasnik=()=> {
     >
       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
       {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
-      <TextField id="standard-basic" label="Adresa" variant="standard" />
+      <TextField id="standard-basic" label="Adresa" variant="standard" value={adresaPreuzimanjaPsa} onChange={e=>setAddr(e.target.value)} />
+      <Button color='primary' onClick={funkcija_adresa}>Klik</Button>
     </Box>
     </div>
     <div className={klase.napomena}>
       <h3>Napomena</h3>
+      <h3>{napomena}</h3>
      <Box
       component="form"
       sx={{
@@ -213,11 +281,12 @@ const Vlasnik=()=> {
     >
       {/* {<TextField id="outlined-basic" label="Outlined" variant="outlined" /> } */}
       {/* { <TextField id="filled-basic" label="Napomena" variant="filled" required/> } */}
-      <TextField  required variant='filled'type="text" multiline maxRows={50} inputProps={inputProps} />;
+      <TextField  required variant='filled'type="text" multiline maxRows={50} inputProps={inputProps} value={napomena} onChange={e=>setNapomena(e.target.value)}/>;
      </Box>
+     <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button>
      <div className={klase.dugme}>
-     <Button variant="contained" onClick={'/'} endIcon={<SendIcon />}>
-      Nadji sittere
+     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />}>
+      Prosledi zahtev sitteru
      </Button>
      </div>
    </div>

@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import classStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar'
@@ -11,13 +11,16 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import NavBar from '../headerVlasnik';
 import CardSlika from './card';
-
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import Axios from 'axios';
 import axios from '../../api/axios';
+import { Typography } from '@mui/material';
 const ProfilVlasnik =()=>{
     console.log(1)
 
-    
+    const[ch,setCh]=useState(true)
     
       //const navigate = useNavigate();
       const classes = classStyles();
@@ -27,7 +30,8 @@ const ProfilVlasnik =()=>{
            <div className={classes.container}>
              <div className={classes.glavni}>
     
-                
+             {/* <input  type='text' id='opis' disabled={ch} onChange={ (e) => handle(e) } /> */}
+             {/* <button onClick = {() => { setCh(!ch) }} > Izmeni podatke </button> */}
              <CardSlika/>
              <Paper className={classes.paper} elevation={8}>
              <h4 className={classes.naslov2}>Opšti podaci</h4>
@@ -37,66 +41,72 @@ const ProfilVlasnik =()=>{
                 <label>Ime:</label>
              </Grid>
              <Grid item xs={6}>
-                <input></input>
+                <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Prezime:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Email:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Korisničko Ime:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Sifra:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Broj telefona:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid> 
              <Grid item xs={6}>
                    <label>Email:</label>
              </Grid>
              <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
              <Grid item xs={6}>
                    <label>Drzava :</label>
             </Grid>
             <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid> 
              <Grid item xs={6}>
                    <label>Grad:</label>
             </Grid>
             <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid> 
              <Grid item xs={6}>
                    <label>Adresa:</label>
             </Grid>
             <Grid item xs={6}>
-             <input></input>
+             <input type='text' id='opis' disabled={ch}></input>
              </Grid>
          </Grid>
              </div>
+             <div className='izmeniVlasnika' style={{display:'flex',marginTop:'20px',alignSelf:'flex-start'}}>
+             <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch) }} >
+        <EditIcon />
+      </Fab>
+      <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography>
+      </div>
              </Paper>
-             <Paper className={classes.paper} elevation={8}>
+             {/* <Paper className={classes.paper} elevation={8}>
              <h4 className={classes.naslov2}>Izmeni pristupne parametre</h4>
              <div>
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
@@ -144,7 +154,7 @@ const ProfilVlasnik =()=>{
                 </Grid>
              </Grid>
              </div>                                          
-             </Paper>
+             </Paper> */}
              </div>
               
            </div>

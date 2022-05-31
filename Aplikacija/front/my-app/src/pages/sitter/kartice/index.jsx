@@ -17,10 +17,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Ocene from '../ocene/index.jsx';
 import classStyles from './styles';
 import Opis from './components/opis';
+import { useNavigate } from 'react-router-dom';
 import { slikeUrl } from '../../../backendAddress';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PetsIcon from '@mui/icons-material/Pets';
 // import slika2 from '../../../slike/s1.jpg';
+import { Button } from '@mui/material';
 
 const ExpandMore = styled(props => {
   const { expand, ...other } = props;
@@ -42,6 +44,7 @@ export default function RecipeReviewCard(props) {
   };
 
   const classes = classStyles();
+  const navigate=useNavigate();
 
   const {
     ime,
@@ -55,9 +58,13 @@ export default function RecipeReviewCard(props) {
     prosecnaOcena,
     id,
   } = props;
-
+const posalji_id_sittera=()=>
+{
+  console.log(id)
+}
   // console.log('../../../slike/s1.jpg');
   return (
+    <div className='kartica'>
     <Card sx={{ width: 200, maxHeigh: 10 }} className={classes.kartica}>
       <CardHeader
         avatar={
@@ -98,5 +105,10 @@ export default function RecipeReviewCard(props) {
         <Ocene />
       </CardActions> */}
     </Card>
+        <Button color='success' value={id} onChange={e=>e.target.value}  onClick={() => {
+                localStorage.setItem('idSitera', id);
+                navigate('/vlasnikRoute');}}>Odaberi ovog sitter-a</Button>
+        <h3>{id}</h3>
+        </div>
   );
 }

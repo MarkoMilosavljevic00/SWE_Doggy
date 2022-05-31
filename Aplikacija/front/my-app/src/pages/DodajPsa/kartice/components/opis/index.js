@@ -16,6 +16,7 @@ import { komentarisanjeIOcenjivanjeRoute } from '../../../../../router/routes';
 import { Restaurant } from '@mui/icons-material';
 import { display } from '@mui/system';
 import { useState } from 'react';
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -138,6 +139,7 @@ const izmeniPsa =()=>
   const navigate = useNavigate();
   return (
     <div className={classes.container}>
+      <div className='dugmici' style={{display:'grid'}}>
       <Button
         variant="contained"
         color="success"
@@ -147,7 +149,8 @@ const izmeniPsa =()=>
         Informacije o psu
       </Button>
       <Button variant='contained' color='error' size='small' onClick={obrisiPsa} >Obrisi psa</Button>
-      <Button variant='contained' color='warning' size='small' onClick={izmeniPsa}>Izmeni psa</Button>
+      {/* <Button variant='contained' color='warning' size='small' onClick={izmeniPsa}>Izmeni psa</Button> */}
+      </div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
       </Button> */}
       <BootstrapDialog
@@ -162,9 +165,11 @@ const izmeniPsa =()=>
           Informacije o psu
         </BootstrapDialogTitle>
         <DialogContent dividers>
-         
+          <div className='dugmeizmena' style={{display:'grid',marginBottom:'20px'}}>
+        <button onClick = {() => { setIzmena(!izmena) }} > Izmeni podatke </button>
+         </div>
           <Typography gutterBottom>Ime  </Typography>
-        <input  type='text' id='ime' value={data.ime} disabled={izmena} onChange={ (e) =>  handle(e) }/>
+        <input  type='text' id='ime' value={ime} disabled={izmena} onChange={ (e) =>  handle(e) }/>
 
          
           
@@ -183,10 +188,10 @@ const izmeniPsa =()=>
           <Typography gutterBottom>Tezina </Typography>
           <input  type='text' id='tezina'value={data.tezina} disabled={izmena} onChange={ (e) =>  handle(e) } />
         
-        <button onClick = {() => { setIzmena(!izmena) }} > Izmeni ime </button>
-          <Button variant='contained' onClick={izmeniPsa}>Azuriraj ime</Button>
-          
           <div className={classes.divButton}>
+          <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
+          <Button variant='contained'  style={{marginBottom:'20px'}}onClick={izmeniPsa}>Azuriraj ime</Button>
+          
             <Button
               style={{
                 backgroundColor: 'green',
@@ -205,6 +210,7 @@ const izmeniPsa =()=>
             >
               Komentari o psu
             </Button>
+            </div>
           </div>
         </DialogContent>
         <DialogActions>

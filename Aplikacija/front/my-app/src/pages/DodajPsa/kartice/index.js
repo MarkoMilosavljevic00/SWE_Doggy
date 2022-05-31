@@ -40,7 +40,7 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+ 
   const classes = classStyles();
 
   const {

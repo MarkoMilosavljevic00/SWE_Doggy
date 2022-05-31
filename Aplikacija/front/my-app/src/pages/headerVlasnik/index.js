@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import './styles'
+import IkonicaHome from '../../components/ikonicaHome';
 import { profilVlasnikRoute,DodajPsaRoute } from "../../router/routes";
 import { useNavigate } from "react-router-dom";
 
@@ -161,7 +162,7 @@ const NavBar=()=> {
   return (
       <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
-        <Toolbar backgroundColor='#00FA9A'>
+        <Toolbar  style={{backgroundColor:'#5de064'}}>
           <IconButton
             size="large"
             edge="start"
@@ -190,6 +191,12 @@ const NavBar=()=> {
           </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton size="large" color="inherit">
+              
+            <IkonicaHome style={{ color: 'white' }}/>
+              
+          
+            </IconButton>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MailIcon />

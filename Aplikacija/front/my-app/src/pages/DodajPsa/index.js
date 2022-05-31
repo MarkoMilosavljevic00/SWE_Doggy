@@ -139,12 +139,16 @@ import React, { useEffect, useState } from 'react';
 import classStyles from './styles';
 import Kartica from './kartice/index.js';
 import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import HeaderLogin from '../../components/HeaderLogin';
 import IkonicaHome from '../../components/ikonicaHome';
 import { vratiSveSitereUrl, filtrirajSitere, vratiSvePse } from '../../backendAddress';
 import Gradovi from '../sitter/gradovi';
 import CenaPoSatu from '../sitter/cenaPoSatu';
+
 import ProsecnaOcena from '../sitter/prosecnaOcena';
 import BrojeviStranica from '../sitter/broj';
 import { formHelperTextClasses, InputLabel } from '@mui/material';
@@ -154,6 +158,8 @@ import { FormControl } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Paper } from '@mui/material';
 import Axios from 'axios'
+import NavBar from '../headerVlasnik';
+
 const Sitter = () => {
   const navigate = useNavigate();
   const classes = classStyles();
@@ -209,9 +215,9 @@ const Sitter = () => {
     }
     postaviSitereKojiSePrikazuju(objave);
   }, [stranica]);
-
+  const [dozvoli,setdozvoli ] = useState(true)
 const dodajPsa=()=>
-{
+{const AJDI = localStorage.getItem('idVlasnika')
 
   Axios.post('https://localhost:5001/Pas/dodajPsa',
     {
@@ -222,12 +228,14 @@ const dodajPsa=()=>
       visina:data.visina,
       tezina:data.tezina,
       slika:data.slika,
-      vlasnikid:data.vlasnikid
+      vlasnikid:AJDI
 
     }).then(
       res=>
       {
         console.log(res)
+        console.log(res.data.id)
+        localStorage.setItem('idPsa',res.data.id);
       }
     )
 }
@@ -251,14 +259,24 @@ const handle=(e)=>
 }
   return (
     <div className={classes.container}>
-      <HeaderLogin />
+      <NavBar />
     <div className='dodajPsa'>
     <Paper className={classes.paper} elevation={8}>
-             <h4 className={classes.naslov2}>Opšti podaci</h4>
+      <div className='umetni' style={{display:'flex'}}>
+             <h4 className={classes.naslov2}>Dodaj novog psa:</h4>
+             {/* <Button color='inherit' onClick = {() => { setdozvoli(!dozvoli) }}>+</Button> */}
+             <Fab color="secondary" aria-label="edit">
+        <EditIcon />
+      </Fab>
+             <Fab color="primary" aria-label="add" onClick = {() => { setdozvoli(!dozvoli) }}>
+                       <AddIcon />
+                        </Fab>
+                        </div>
              <div>
+               <div className='unosPsa' hidden={dozvoli}>
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
              <Grid item xs={6}>
-                <label>Ime:</label>
+                <label >Ime:</label>
              </Grid>
              <Grid item xs={6}>
                 <input id='ime'placeholder='ime' onChange={(e)=>handle(e)} value={data.ime} type="text"></input>
@@ -291,7 +309,7 @@ const handle=(e)=>
                    <label>Tezina:</label>
              </Grid>
              <Grid item xs={6}>
-             <input placeholder='tezina' onChange={(e)=>handle(e)} id='tezina' value={data.tezina} type="number"></input>
+             <input placeholder='tezina' onChange={(e)=>handle(e)}  id='tezina' value={data.tezina} type="number"></input>
              </Grid> 
              <Grid item xs={6}>
                    <label>Dodaj sliku:</label>
@@ -299,18 +317,22 @@ const handle=(e)=>
              {/* <Grid item xs={6}>
              <Button variant="contained">Dodaj sliku</Button>
              </Grid> */}
-              <Grid item xs={6}>
+               <Grid item xs={6}>
              <input placeholder='slika' onChange={(e)=>handle(e)} id='slika'value={data.slika} type="text"></input>
              </Grid> 
-             <Grid item xs={6}>
+             {/* <Grid item xs={6}>
                    <label>Vas id:</label>
              </Grid>
              <Grid item xs={6}>
              <input placeholder='vlasnikid'onChange={(e)=>handle(e)} id='vlasnikid'value={data.vlasnikid}  type="number"></input>
              </Grid> 
-             
+              */} 
          </Grid>
-      <Button variant='text'onClick={dodajPsa}>Dodaj</Button>
+      <Button variant='text'onClick={
+        
+          dodajPsa
+        }>Dodaj</Button>
+             </div>
              </div>
              </Paper>
              </div>
