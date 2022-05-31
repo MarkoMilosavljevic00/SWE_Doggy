@@ -6,6 +6,8 @@ const classStyles = makeStyles({
       container: {
          displey:'flex',
          flexDirection: 'row',
+         // backgroundImage:'linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%)'
+         backgroundColor:'cornsilk'
       },
       naslov: {
          textAlign: 'center',

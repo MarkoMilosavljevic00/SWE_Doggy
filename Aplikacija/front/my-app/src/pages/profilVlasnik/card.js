@@ -53,7 +53,7 @@ const CardSlika=() =>{
   //      </div>
   //   </div>
   return(
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} style={{backgroundColor:'mediumspringgreen',display:'grid',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
       <CardHeader
        
       />
@@ -68,7 +68,7 @@ const CardSlika=() =>{
       </CardContent>
       <CardActions className={classes.divButtonCard}> 
         <Button
-         style={{ backgroundColor: 'green' }}
+         style={{ backgroundColor: 'cornsilk', color:"black",width:'250px',height:'50px',borderRadius:'20px'}}
          variant="contained"
          color="success"
          >

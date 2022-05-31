@@ -260,7 +260,7 @@ const handle=(e)=>
   return (
     <div className={classes.container}>
       <NavBar />
-    <div className='dodajPsa'>
+    <div className={classes.dodajPsa}>
     <Paper className={classes.paper} elevation={8}>
       <div className='umetni' style={{display:'flex'}}>
              <h4 className={classes.naslov2}>Dodaj novog psa:</h4>

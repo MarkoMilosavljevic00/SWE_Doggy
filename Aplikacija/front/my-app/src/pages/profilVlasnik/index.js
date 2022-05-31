@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import NavBar from '../headerVlasnik';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CardSlika from './card';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -17,8 +18,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import Axios from 'axios';
 import axios from '../../api/axios';
 import { Typography } from '@mui/material';
+import AppFooter from '../../components/futer';
+import Footer from '../../components/Footer'
 const ProfilVlasnik =()=>{
-    console.log(1)
+console.log(1)
 
     const[ch,setCh]=useState(true)
     
@@ -26,14 +29,15 @@ const ProfilVlasnik =()=>{
       const classes = classStyles();
           return(
            <>
-           <NavBar />
+           
            <div className={classes.container}>
+           <NavBar />
              <div className={classes.glavni}>
     
              {/* <input  type='text' id='opis' disabled={ch} onChange={ (e) => handle(e) } /> */}
              {/* <button onClick = {() => { setCh(!ch) }} > Izmeni podatke </button> */}
              <CardSlika/>
-             <Paper className={classes.paper} elevation={8}>
+             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'mediumspringgreen',height:'610px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
              <h4 className={classes.naslov2}>Opšti podaci</h4>
              <div>
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
@@ -100,10 +104,13 @@ const ProfilVlasnik =()=>{
          </Grid>
              </div>
              <div className='izmeniVlasnika' style={{display:'flex',marginTop:'20px',alignSelf:'flex-start'}}>
-             <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch) }} >
+             <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch) }} style={{backgroundColor:'cornsilk',color:'black'}}>
         <EditIcon />
       </Fab>
       <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography>
+      <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'cornsilk',color:'black',borderRadius:'25px',marginLeft:'65px'}}>
+  Obrisi svoj profil
+</Button>
       </div>
              </Paper>
              {/* <Paper className={classes.paper} elevation={8}>
@@ -167,7 +174,7 @@ const ProfilVlasnik =()=>{
              Sačuvaj
                 </Button>*/}
           </div>
-
+<Footer />
        </>
           );
     }

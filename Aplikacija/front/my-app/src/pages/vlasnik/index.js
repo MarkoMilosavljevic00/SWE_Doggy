@@ -37,6 +37,7 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios'
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import { SwapVertSharp } from '@mui/icons-material';
 
 
@@ -169,19 +170,21 @@ const posalji_zahtev=()=>
 <NavBar />
 <div className={klase.main}>
    <div className={klase.usluga}> 
-     <p classname={klase.naslov}>Molimo Vas odaberite vrstu usluge </p>
+   <div className={klase.selectbox}>
+     <h3 style={{alignSelf:'center'}}>Odaberite vrstu usluge:   </h3>
      <div className={klase.vrsta}>
      <Box sx={{ minWidth: 120 }}>
     <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Odaberite vrstu usluge</InputLabel>
+      <InputLabel id="demo-simple-select-label" >Odaberite vrstu usluge</InputLabel>
       <h3>{vrsta}</h3>
-      <Select
+      <Select style={{width:'250px'}}
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={vrsta}
         label="Age"
         onChange={(e)=>setSelect(e.target.value)}
         onClick={usluge}
+
         // onChange={handleChange}
       >
         <MenuItem   value={1}><i class="fa-solid fa-dog"><h2>    Setanje psa</h2><h4>Po gradu</h4></i></MenuItem>
@@ -190,8 +193,9 @@ const posalji_zahtev=()=>
         <MenuItem  value={4}><i class="fa-solid fa-paw"><h2>  Poseta sittera</h2></i></MenuItem>
       </Select>
     </FormControl>
-    <Button color='inherit' onClick={()=>navigate('/')}>Nazad na pocetnu</Button>
+   
    </Box>
+</div>
 </div>
 
     <div className={klase.datepicker}>
@@ -252,7 +256,7 @@ const posalji_zahtev=()=>
    
 
     <div className={klase.adresa}>
-    <p>Adresa</p>
+    <h3 style={{alignSelf:'flex-end'}}>Adresa</h3>
     <h3>{adresaPreuzimanjaPsa}</h3>
      <Box
       component="form"
@@ -265,7 +269,7 @@ const posalji_zahtev=()=>
       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
       {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
       <TextField id="standard-basic" label="Adresa" variant="standard" value={adresaPreuzimanjaPsa} onChange={e=>setAddr(e.target.value)} />
-      <Button color='primary' onClick={funkcija_adresa}>Klik</Button>
+      {/* <Button color='primary' onClick={funkcija_adresa}>Klik</Button> */}
     </Box>
     </div>
     <div className={klase.napomena}>
@@ -283,15 +287,18 @@ const posalji_zahtev=()=>
       {/* { <TextField id="filled-basic" label="Napomena" variant="filled" required/> } */}
       <TextField  required variant='filled'type="text" multiline maxRows={50} inputProps={inputProps} value={napomena} onChange={e=>setNapomena(e.target.value)}/>;
      </Box>
-     <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button>
+     </div>
+     {/* <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button> */}
      <div className={klase.dugme}>
-     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />}>
+     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'cornsilk',color:'black'}}>
       Prosledi zahtev sitteru
      </Button>
+   
      </div>
-   </div>
+  
     </div>
     </div>
+    <Footer />
      </div>
  
 

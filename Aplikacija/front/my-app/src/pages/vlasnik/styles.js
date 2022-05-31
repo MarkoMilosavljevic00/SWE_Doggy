@@ -7,7 +7,8 @@ const classStyles = makeStyles(
     {
         datepicker:
         {
-           marginTop: '10px'
+           marginTop: '20px',
+           marginBottom:'20px'
         },
         naslov:
         {
@@ -23,16 +24,22 @@ backgroundColor:'blue'
         },
         adresa:
         {
-            borderRadius:'1px'
+            display:'flex',
+            width:'inherit',
+            justifyContent:'space-evenly',
+            marginTop: '20px',
+           marginBottom:'20px'
         },
         usluga:
         {   display:'flex',
             flexDirection:'column',
             borderRadius:'30px',
             backgroundColor:'rgb(0,250,154)',
-            width:'750px',
+            width:'650px',
              justifyContent:'center',
-             alignItems:'center'
+             alignItems:'center',
+             marginBottom:'20px',
+             marginTop:'20px'
             
 
         },
@@ -48,14 +55,34 @@ backgroundColor:'blue'
         main:
         {
             // backgroundColor:'	rgb(32,178,170)',
-            backgroundColor: '#4dccc6',
-backgroundImage: 'linear-gradient(315deg, #4dccc6 0%, #96e4df 74%)',
+            backgroundColor: 'cornsilk',
+
             justifyContent:'center',
             display:'flex'
         },
         dugme:
         {
-            display:'flex'
+            display:'flex',
+            marginTop: '20px',
+           marginBottom:'20px',
+           height:'70px',
+          
+        },
+        selectbox:
+        {
+            display:'flex',
+            marginTop: '20px',
+            marginBottom:'20px',
+            width:'inherit',
+            justifyContent:'space-evenly'
+        },
+        napomena:
+        {
+            display:'flex',
+            width:'inherit',
+            justifyContent:'space-evenly',
+            marginTop: '20px',
+           marginBottom:'20px'
         }
         
        
