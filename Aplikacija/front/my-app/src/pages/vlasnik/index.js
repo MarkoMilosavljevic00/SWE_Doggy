@@ -18,7 +18,8 @@ import NavBar from '../headerVlasnik';
 // import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -168,16 +169,18 @@ const posalji_zahtev=()=>
       
     <div className={klase.bos}>
 <NavBar />
+
 <div className={klase.main}>
-   <div className={klase.usluga}> 
+   <Paper className={klase.usluga} elevation={8} style={{backgroundColor:'white',height:'610px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+   <h1 className={klase.naslov}>Pošaljite zahtev sitteru:</h1>
    <div className={klase.selectbox}>
-     <h3 style={{alignSelf:'center'}}>Odaberite vrstu usluge:   </h3>
      <div className={klase.vrsta}>
-     <Box sx={{ minWidth: 120 }}>
+  
+     <Box sx={{ minWidth: 150 }}>
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label" >Odaberite vrstu usluge</InputLabel>
       <h3>{vrsta}</h3>
-      <Select style={{width:'250px'}}
+      <Select style={{width:'300px'}}
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={vrsta}
@@ -187,10 +190,10 @@ const posalji_zahtev=()=>
 
         // onChange={handleChange}
       >
-        <MenuItem   value={1}><i class="fa-solid fa-dog"><h2>    Setanje psa</h2><h4>Po gradu</h4></i></MenuItem>
-        <MenuItem value={2}><i class="fa-solid fa-paw"><h2>Cuvanje psa</h2><h4>U vasoj kuci</h4></i></MenuItem>
-        <MenuItem  value={3}><i class="fa-solid fa-dog"><h2>    Cuvanje psa </h2><h4>U kuci sittera</h4></i></MenuItem>
-        <MenuItem  value={4}><i class="fa-solid fa-paw"><h2>  Poseta sittera</h2></i></MenuItem>
+        <MenuItem   value={1}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
+        <MenuItem value={2}><i class="fa-solid fa-paw"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
+        <MenuItem  value={3}><i class="fa-solid fa-dog"><h5>Čuvanje psa u kući sittera</h5></i></MenuItem>
+        <MenuItem  value={4}><i class="fa-solid fa-paw"><h5>Poseta sittera</h5></i></MenuItem>
       </Select>
     </FormControl>
    
@@ -199,27 +202,25 @@ const posalji_zahtev=()=>
 </div>
 
     <div className={klase.datepicker}>
-      <h2>Odaberite vreme koje Vam odgovara</h2>
-      <h3>{pocetak} do {kraj}</h3>
-
       <div className={klase.pikeri}>
-    <form  noValidate>
-      <TextField
-        id="datetime-local"
-        label="Pocetak usluge"
-        type="datetime-local"
-        defaultValue="2017-05-24T10:30"
-        onChange={e=>setTajmerOd(e.target.value)}
-        value={pocetak}
-        onClick={Od}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-       </form>
-
-      <form  noValidate>
-      <TextField
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+       <Grid item xs={6}>
+        <TextField 
+          id="datetime-local"
+          label="Pocetak usluge"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          onChange={e=>setTajmerOd(e.target.value)}
+          value={pocetak}
+          onClick={Od}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+       </Grid>
+       
+      <Grid item xs={6}>
+      <TextField 
         id="datetime-local"
         label="Kraj usluge"
         type="datetime-local"
@@ -231,7 +232,8 @@ const posalji_zahtev=()=>
           shrink: true,
         }}
       />
-    </form>
+      </Grid> 
+    </Grid>
     </div>
      </div>
     
@@ -256,8 +258,6 @@ const posalji_zahtev=()=>
    
 
     <div className={klase.adresa}>
-    <h3 style={{alignSelf:'flex-end'}}>Adresa</h3>
-    <h3>{adresaPreuzimanjaPsa}</h3>
      <Box
       component="form"
       sx={{
@@ -266,15 +266,11 @@ const posalji_zahtev=()=>
       noValidate
       autoComplete="off"
     >
-      {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-      {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
-      <TextField id="standard-basic" label="Adresa" variant="standard" value={adresaPreuzimanjaPsa} onChange={e=>setAddr(e.target.value)} />
+      <TextField style={{width:'300px'}} id="outlined-size-small" label="Adresa" value={adresaPreuzimanjaPsa} onChange={e=>setAddr(e.target.value)} />
       {/* <Button color='primary' onClick={funkcija_adresa}>Klik</Button> */}
     </Box>
     </div>
     <div className={klase.napomena}>
-      <h3>Napomena</h3>
-      <h3>{napomena}</h3>
      <Box
       component="form"
       sx={{
@@ -285,24 +281,21 @@ const posalji_zahtev=()=>
     >
       {/* {<TextField id="outlined-basic" label="Outlined" variant="outlined" /> } */}
       {/* { <TextField id="filled-basic" label="Napomena" variant="filled" required/> } */}
-      <TextField  required variant='filled'type="text" multiline maxRows={50} inputProps={inputProps} value={napomena} onChange={e=>setNapomena(e.target.value)}/>;
+      <TextField style={{width:'300px'}} id='outlined-multiline-static'label='Napomena' type="text" multiline maxRows={4} inputProps={inputProps} value={napomena} onChange={e=>setNapomena(e.target.value)}/>
      </Box>
      </div>
      {/* <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button> */}
      <div className={klase.dugme}>
-     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'cornsilk',color:'black'}}>
+     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'rgb(93,224,100)',color:'black'}}>
       Prosledi zahtev sitteru
      </Button>
    
      </div>
-  
-    </div>
+    </Paper>
     </div>
     <Footer />
      </div>
  
-
-     
   );
 }
 

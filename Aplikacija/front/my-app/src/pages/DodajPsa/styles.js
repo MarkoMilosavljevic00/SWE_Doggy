@@ -48,9 +48,10 @@
 
 // export default classStyles;
 import { makeStyles } from '@material-ui/styles';
+import slika from '../../slike/dog.jpg';
 const classStyles = makeStyles({
   container: {
-    backgroundColor: '#95e36e61',
+    backgroundColor: 'cornsilk',
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
@@ -79,9 +80,23 @@ const classStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
   },
-  dodajPsa:
-  {
-    backgroundColor:'black'
-  },
+  glavni:{
+    display: 'flex',
+    flexDirection: 'row', 
+    justifyContent:'space-evenly' ,
+    flex:1          
+},
+grid:{
+   display: 'flex',
+   flexDirection: 'column' ,
+   flex: 0.4 , 
+   padding: 30    
+}, 
+dodajPsa:{
+  displey:'flex',
+  flexDirection:'row',
+  alignItems:'center',
+  flex:1
+}
 });
 export default classStyles;

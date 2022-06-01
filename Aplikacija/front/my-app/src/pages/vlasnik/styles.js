@@ -1,18 +1,19 @@
 
 import { makeStyles } from '@material-ui/styles';
 import { AlignHorizontalCenterTwoTone, AlignVerticalCenterSharp } from '@mui/icons-material';
-
+import { styled } from '@mui/material/styles';
 
 const classStyles = makeStyles(
     {
         datepicker:
         {
-           marginTop: '20px',
-           marginBottom:'20px'
+           marginTop: '10px',
+           marginBottom:'10px'
         },
         naslov:
         {
-            justifyContent:'center'
+            justifyContent:'center',
+            color:'rgb(93,224,100)'
         },
         saman:
         {
@@ -27,19 +28,19 @@ backgroundColor:'blue'
             display:'flex',
             width:'inherit',
             justifyContent:'space-evenly',
-            marginTop: '20px',
-           marginBottom:'20px'
+            marginTop: '10px',
+           marginBottom:'10px'
         },
         usluga:
         {   display:'flex',
             flexDirection:'column',
             borderRadius:'30px',
-            backgroundColor:'rgb(0,250,154)',
+           // backgroundColor:'rgb(93,224,100)',
             width:'650px',
              justifyContent:'center',
              alignItems:'center',
-             marginBottom:'20px',
-             marginTop:'20px'
+             marginBottom:'10px',
+             marginTop:'10px'
             
 
         },
@@ -50,12 +51,13 @@ backgroundColor:'blue'
         pikeri:
         {
             display:'flex',
-            justifyContent: 'space-evenly'
+            flexDirection: 'column',
+
         },
         main:
         {
             // backgroundColor:'	rgb(32,178,170)',
-            backgroundColor: 'cornsilk',
+            backgroundColor: 'rgb(234, 252, 220)',
 
             justifyContent:'center',
             display:'flex'
@@ -63,16 +65,16 @@ backgroundColor:'blue'
         dugme:
         {
             display:'flex',
-            marginTop: '20px',
-           marginBottom:'20px',
+            marginTop: '10px',
+           marginBottom:'10px',
            height:'70px',
           
         },
         selectbox:
         {
             display:'flex',
-            marginTop: '20px',
-            marginBottom:'20px',
+            marginTop: '10px',
+            marginBottom:'10px',
             width:'inherit',
             justifyContent:'space-evenly'
         },
@@ -81,8 +83,8 @@ backgroundColor:'blue'
             display:'flex',
             width:'inherit',
             justifyContent:'space-evenly',
-            marginTop: '20px',
-           marginBottom:'20px'
+            marginTop: '10px',
+           marginBottom:'10px'
         }
         
        
