@@ -60,7 +60,13 @@ namespace Doggy.WebAPI.Controllers
         [Route("azurirajVlasnika")]
         public IActionResult AzurirajVlasnika([FromBody] Vlasnik v)
         {
-            return new JsonResult(this.vlasnikService.AzurirajVlasnika(v));
+            StatusDodavanjaKorisnika status;
+            Vlasnik vlasnik = this. vlasnikService.AzurirajVlasnika(v, out status);
+            if (status == StatusDodavanjaKorisnika.PostojiEmail)
+                return StatusCode(401, "U bazi vec postoji neko sa tim email-om!");
+            if (status == StatusDodavanjaKorisnika.PostojiKorisnickoIme)
+                return StatusCode(402, "U bazi vec postoji neko sa tim korisnickim imenom!");
+            return new JsonResult(vlasnik);
         }
 
     }

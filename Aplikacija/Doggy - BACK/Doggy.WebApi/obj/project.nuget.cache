@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UzGMspiFK42cPpHQnbjA77iRO/mHKPjoLTEN40cnjRdaU0O6eBcf5t2uzDDCTgoaObP1XiLReTUHoENSqupsng==",
+  "dgSpecHash": "VH9I0zLBHpj7dw8/c10HVNCeSPhN/NPiwOfSiSFxfT9L1VjqNQXbXCEEviGovab7uBEyp8habQ6dxYse4k6GbQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marko\\Desktop\\si.22.06.doggy\\Aplikacija\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj",
+  "projectFilePath": "C:\\Users\\Marko\\Desktop\\Doggy - BACK\\Doggy.WebApi\\Doggy.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marko\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Marko\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

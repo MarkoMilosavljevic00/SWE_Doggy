@@ -43,6 +43,20 @@ namespace Doggy.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("vratiUslugeVlasnikuZaPsa")]
+        public IActionResult vratiUslugeVlasnikuZaPsa(int idVlasnika, int idPsa)
+        {
+            return new JsonResult(uslugaService.vratiUslugeVlasnikuZaPsa(idVlasnika, idPsa));
+        }
+
+        [HttpGet]
+        [Route("vratiUslugeSiteruZaPsa")]
+        public IActionResult vratiUslugeSiteruZaPsa(int idSitera, int idPsa)
+        {
+            return new JsonResult(uslugaService.vratiUslugeSiteruZaPsa(idSitera, idPsa));
+        }
+
+        [HttpGet]
         [Route("vratiUslugeVlasnikuPoStatusu")]
         public IActionResult VratiUslugeZaVlasnikaPoStatusu(int idVlasnika, StatusUsluge status)
         {

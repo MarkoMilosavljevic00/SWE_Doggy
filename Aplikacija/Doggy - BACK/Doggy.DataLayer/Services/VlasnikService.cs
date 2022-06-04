@@ -32,6 +32,7 @@ namespace Doggy.DataLayer.Services
         {
             if (ValidacijaDodavanja(v, out status))
             {
+                v.Tip = TipKorisnika.Vlasnik;
                 var vlasnik = unitOfWork.VlasnikRepository.Add(v);
                 unitOfWork.SaveChanges();
                 return vlasnik;
@@ -41,15 +42,24 @@ namespace Doggy.DataLayer.Services
         }
 
 
-        public Vlasnik AzurirajVlasnika(Vlasnik v)
+        public Vlasnik AzurirajVlasnika(Vlasnik v, out StatusDodavanjaKorisnika status)
         {
+            status = StatusDodavanjaKorisnika.Uspesno;
             Vlasnik vlasnik = unitOfWork.VlasnikRepository.Get(v.Id);
             if (vlasnik != null)
             {
                 vlasnik.Ime = v.Ime ?? vlasnik.Ime;
                 vlasnik.Prezime = v.Prezime ?? vlasnik.Prezime;
-                vlasnik.KorisnickoIme = v.KorisnickoIme ?? vlasnik.KorisnickoIme;
-                vlasnik.Email = v.Email ?? vlasnik.Email;
+                if (v.Email != null)
+                {
+                    if (ValidacijaDodavanja(v, out status))
+                        vlasnik.Email = v.Email;
+                }
+                if (v.KorisnickoIme != null)
+                {
+                    if (ValidacijaDodavanja(v, out status))
+                        vlasnik.KorisnickoIme = v.KorisnickoIme;
+                }
                 vlasnik.Sifra = v.Sifra ?? vlasnik.Sifra;
                 vlasnik.BrojTelefona = v.BrojTelefona ?? vlasnik.BrojTelefona;
                 vlasnik.Grad = v.Grad ?? vlasnik.Grad;

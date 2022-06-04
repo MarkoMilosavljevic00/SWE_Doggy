@@ -23,6 +23,11 @@ namespace Doggy.DataLayer.Services
             var result = unitOfWork.SiterRepository.All().ToList();
             return result;
         }
+        public List<Siter> VratiNevalidneSitere()
+        {
+            var result = unitOfWork.SiterRepository.All().Where(k => k.Validan == false).ToList();
+            return result;
+        }
 
         public Siter VratiSiteraPoId(int idSiter)
         {
@@ -33,6 +38,7 @@ namespace Doggy.DataLayer.Services
         {
             return unitOfWork.SiterRepository.All().Select(k => k.Grad).Distinct().ToList();
         }
+
 
         public List<Siter> FilterSiteri(string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga, double? minCena,double? maxCena, double? minOcena)
         {
@@ -54,6 +60,7 @@ namespace Doggy.DataLayer.Services
         {
             if(ValidacijaDodavanja(s, out status))
             {
+                s.Tip = TipKorisnika.Siter;
                 var siter = unitOfWork.SiterRepository.Add(s);
                 unitOfWork.SaveChanges();
                 return siter;
@@ -74,19 +81,30 @@ namespace Doggy.DataLayer.Services
             return null;
         }
 
-        public Siter AzurirajSitera(Siter s)
+        public Siter AzurirajSitera(Siter s, out StatusDodavanjaKorisnika status)
         {
             Siter siter = unitOfWork.SiterRepository.Get(s.Id);
+            status = StatusDodavanjaKorisnika.Uspesno;
             if (siter != null)
             {
+                
                 siter.Ime = s.Ime ?? siter.Ime;
                 siter.Prezime = s.Prezime ?? siter.Prezime;
-                siter.KorisnickoIme = s.KorisnickoIme ?? siter.KorisnickoIme;
-                siter.Email = s.Email ?? siter.Email;
+                if(s.Email != null)
+                {
+                    if (ValidacijaDodavanja(s, out status))
+                        siter.Email = s.Email;
+                }
+                if (s.KorisnickoIme != null)
+                {
+                    if (ValidacijaDodavanja(s, out status))
+                        siter.KorisnickoIme = s.KorisnickoIme;
+                }
                 siter.Sifra = s.Sifra ?? siter.Sifra;
                 siter.BrojTelefona = s.BrojTelefona ?? siter.BrojTelefona;
                 siter.Grad = s.Grad ?? siter.Grad;
                 siter.Adresa = s.Adresa ?? siter.Adresa;
+
 
                 siter.Bio = s.Bio ?? siter.Bio;
                 siter.Slika = s.Slika ?? siter.Slika;
@@ -179,5 +197,6 @@ namespace Doggy.DataLayer.Services
             status = StatusDodavanjaKorisnika.Uspesno;
             return true;
         }
+
     }
 }

@@ -12,9 +12,19 @@ namespace Doggy.Model
         PostojiEmail,
         PostojiKorisnickoIme
     };
+
+    public enum TipKorisnika
+    {
+        Vlasnik,
+        Siter,
+        Admin
+    };
+
     public class Korisnik
     {
         public int Id { get; set; }
+
+        public TipKorisnika Tip { get; set; }
 
         public string Ime { get; set; }
 

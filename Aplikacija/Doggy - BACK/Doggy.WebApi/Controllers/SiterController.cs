@@ -28,6 +28,13 @@ namespace Doggy.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("vratiNevalidneSitere")]
+        public IActionResult VratiNevalidneSitere()
+        {
+            return new JsonResult(siterService.VratiNevalidneSitere());
+        }
+
+        [HttpGet]
         [Route("vratiSveGradoveSvihSitera")]
         public IActionResult VratiSveGradoveSvihSitera()
         {
@@ -55,9 +62,9 @@ namespace Doggy.WebAPI.Controllers
             StatusDodavanjaKorisnika status;
             var result = siterService.DodajSitera(s, out status);
             if (status == StatusDodavanjaKorisnika.PostojiEmail)
-                return StatusCode(501, "U bazi vec postoji neko sa tim email-om!");
+                return StatusCode(401, "U bazi vec postoji neko sa tim email-om!");
             if (status == StatusDodavanjaKorisnika.PostojiKorisnickoIme)
-                return StatusCode(502, "U bazi vec postoji neko sa tim korisnickim imenom!");
+                return StatusCode(402, "U bazi vec postoji neko sa tim korisnickim imenom!");
 
             return new JsonResult(result);
         }
@@ -75,7 +82,13 @@ namespace Doggy.WebAPI.Controllers
         [Route("azurirajSitera")]
         public IActionResult AzurirajSitera([FromBody] Siter s)
         {
-            return new JsonResult(this.siterService.AzurirajSitera(s));
+            StatusDodavanjaKorisnika status;
+            Siter siter = this.siterService.AzurirajSitera(s, out status);
+            if (status == StatusDodavanjaKorisnika.PostojiEmail)
+                return StatusCode(401, "U bazi vec postoji neko sa tim email-om!");
+            if (status == StatusDodavanjaKorisnika.PostojiKorisnickoIme)
+                return StatusCode(402, "U bazi vec postoji neko sa tim korisnickim imenom!");
+            return new JsonResult(siter);
         }
 
         [HttpPut]

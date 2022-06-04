@@ -10,6 +10,9 @@ namespace Doggy.DataLayer.Services.Interfaces
     public interface IAdminService
     {
         public List<Admin> VratiSveAdmine();
-        public Admin DodajAdmina(Admin a);
+        public Admin DodajAdmina(Admin a, out StatusDodavanjaKorisnika status);
+        public Admin ObrisiAdmina(int id);
+        public Admin AzurirajAdmina(Admin a);
+        public bool ValidacijaDodavanja(Admin v, out StatusDodavanjaKorisnika status);
     }
 }

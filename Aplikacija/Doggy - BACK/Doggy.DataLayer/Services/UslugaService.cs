@@ -35,10 +35,21 @@ namespace Doggy.DataLayer.Services
             return unitOfWork.UslugaRepository.FindWithIncludes(k => k.SiterId == idSitera && k.Status != StatusUsluge.Odbijena, k => k.Vlasnik).ToList();
         }
 
+        public List<Usluga> vratiUslugeSiteruZaPsa(int idSitera, int idPsa)
+        {
+            return unitOfWork.UslugaRepository.FindWithIncludes(k => k.SiterId == idSitera && k.PasId == idPsa && k.Status != StatusUsluge.Odbijena, k => k.Vlasnik).ToList();
+        } 
+
+        public object vratiUslugeVlasnikuZaPsa(int idVlasnika, int idPsa)
+        {
+            return unitOfWork.UslugaRepository.FindWithIncludes(k => k.VlasnikId == idVlasnika && k.PasId == idPsa, k => k.Siter).ToList();
+        }
+
         public List<Usluga> VratiUslugeVlasnikuPoStatusu(int idVlasnika, StatusUsluge status)
         {
             return unitOfWork.UslugaRepository.FindWithIncludes(k => k.VlasnikId == idVlasnika && k.Status == status, k => k.Siter).ToList();
         }
+
 
         public List<Usluga> VratiUslugeSiteruPoStatusu(int idSitera, StatusUsluge status)
         {
@@ -58,6 +69,7 @@ namespace Doggy.DataLayer.Services
             unitOfWork.SaveChanges();
             return usluga;
         }
+
 
         public Usluga ObrisiUslugu(int id)
         {
