@@ -8,6 +8,7 @@ export default function HeaderLogin() {
   const navigate = useNavigate();
   return (
     <header
+      style={{ display: 'flex', width: '100%' }}
       id="header"
       className="fixed-top d-flex align-items-center header-transparent"
     >
@@ -17,7 +18,7 @@ export default function HeaderLogin() {
             <img src="assets/img/logo.png" alt="" />
           </a>
           <h1>
-            <a href="index.html">Doggy</a>
+            <a href="/">Doggy</a>
           </h1>
         </div>
 

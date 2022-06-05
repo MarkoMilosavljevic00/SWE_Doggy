@@ -1,115 +1,146 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import classStyles from './styles';
-import FirstName from './components/firstName';
-import LastName from './components/lastName';
-import PhoneNumber from './components/phoneNumber';
-import Email from './components/email';
-import Username from './components/username';
-import Password from './components/password';
-import { dodajSiteraUrl } from '../../backendAddress';
+import Header from '../../components/HeaderLogin';
+import FormaTipKorisnika from './components/formaTipKorisnika';
+import FormaImePrezBrTelefona from './components/formaImePrezBrTel';
+import FormaUsernameEmailSifra from './components/formaUsernameEmailSIfra';
+// import FormaGradAdresa from './components/formaGradAdresa';
+import FormaAdresaGradBioCena from './components/formaAdresaGradBioCena';
+import FormaZavrsiRegistraciju from './components/formaZavrsiRegistraciju';
+import { useNavigate } from 'react-router-dom';
 
 const Registracija = () => {
-  const navigate = useNavigate();
   const classes = classStyles();
+  const navigate = useNavigate();
+  const [formNumber, setFormNumber] = useState(0);
 
+  //FormaTipKorisnika
+  const [siter, setSiter] = useState(true); //true siter, false vlasnik
+
+  //FormaImePrezBrTel
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [brojTelefona, setBrojTelefona] = useState('');
-  const [email, setEmail] = useState('');
-  const [user, setUser] = useState('');
+
+  //FormaUsernameEmailSifra
+  const [userName, setUserName] = useState('');
   const [pwd, setPwd] = useState('');
   const [matchPwd, setMatchPwd] = useState('');
+  const [email, setEmail] = useState('');
 
-  const [success, setSuccess] = useState(false);
+  //FormaAdresaGradBioCena
+  const [adresa, setAdresa] = useState('');
+  const [grad, setGrad] = useState('');
+  const [bio, setBio] = useState('');
+  const [cenaPoSatu, setCenaPoSatu] = useState(0);
 
-  const registracija = () => {
-    let DTO = {
-      ime: firstName,
-      prezime: lastName,
-      email: email,
-      korisnickoIme: 'string',
-      sifra: 'string',
-      brojTelefona: 'string',
-      drzava: 'string',
-      grad: 'string',
-      adresa: 'string',
-      bio: 'string',
-      slika: 'string',
-      dostupan: true,
-      obavljeneUsluge: 0,
-      cenaPoSatu: 0,
-    };
+  const [zavrsiRegistraciju, setZavrsiRegistraciju] = useState(false);
 
-    fetch(dodajSiteraUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(DTO),
-    })
-      .then(async res => {
-        const result = await res.json();
-        // console.log(result);
-      })
-      .catch(err => {
-        console.log(err);
+  useEffect(() => {
+    if (zavrsiRegistraciju) {
+      let DTO = {
+        ime: firstName,
+        prezime: lastName,
+        email: email,
+        korisnickoIme: userName,
+        sifra: pwd,
+        brojTelefona: brojTelefona,
+        grad: grad,
+        adresa: adresa,
+      };
+
+      if (siter) {
+        DTO = {
+          ...DTO,
+          bio: bio,
+          cenaPoSatu: cenaPoSatu,
+        };
+      }
+
+      const urlSiter = 'https://localhost:5001/Siter/dodajSitera';
+      const urlVlasnik = 'https://localhost:5001/Vlasnik/dodajVlasnika';
+      fetch(siter ? urlSiter : urlVlasnik, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(DTO),
+      }).then(async response => {
+        if (response.ok) {
+          const res = await response.json();
+          navigate('/');
+        } else {
+          const res = await response.text();
+          setZavrsiRegistraciju(false);
+          alert(res);
+        }
       });
-  };
+    }
+  }, [zavrsiRegistraciju]);
 
   return (
-    <>
-      {success ? (
-        <section>
-          <h1> Uspesno ste registrovani</h1>
-        </section>
-      ) : (
-        <section>
-          <h1 className={classes.naslov}>Registracija</h1>
-
-          <div className={classes.container}>
-            <div className={classes.divContainer}>
-              <div className={classes.divIme}>
-                <FirstName firstName={firstName} setFirstName={setFirstName} />
-                <LastName lastName={lastName} setLastName={setLastName} />
-              </div>
-              <PhoneNumber
-                brojTelefona={brojTelefona}
-                setBrojTelefona={setBrojTelefona}
-              />
-              <Email email={email} setEmail={setEmail} />
-              <Username user={user} setUser={setUser} />
-              <Password
-                pwd={pwd}
-                setPwd={setPwd}
-                matchPwd={matchPwd}
-                setMatchPwd={setMatchPwd}
-              />
-            </div>
-
-            <div className={classes.divButton}>
-              <Button
-                style={{ backgroundColor: 'green' }}
-                variant="contained"
-                onClick={registracija}
-                // onClick={() => registracija()}
-              >
-                Registruj se
-              </Button>
-
-              <Button
-                style={{ backgroundColor: 'green' }}
-                variant="contained"
-                onClick={() => navigate('../')}
-              >
-                Nazad
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
-    </>
+    <div className={classes.container}>
+      <Header />
+      <div className={classes.divRegistracija}>
+        <h1 style={{ color: '#000000c2', marginTop: 20 }}>Registracija</h1>
+        {formNumber == 0 ? (
+          <FormaTipKorisnika
+            setFormNumber={setFormNumber}
+            formNumber={formNumber}
+            setSiter={setSiter}
+          />
+        ) : null}
+        {formNumber == 1 ? (
+          <FormaImePrezBrTelefona
+            formNumber={formNumber}
+            setFormNumber={setFormNumber}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            brojTelefona={brojTelefona}
+            setBrojTelefona={setBrojTelefona}
+          />
+        ) : null}
+        {formNumber == 2 ? (
+          <FormaUsernameEmailSifra
+            formNumber={formNumber}
+            setFormNumber={setFormNumber}
+            userName={userName}
+            setUserName={setUserName}
+            pwd={pwd}
+            setPwd={setPwd}
+            matchPwd={matchPwd}
+            setMatchPwd={setMatchPwd}
+            email={email}
+            setEmail={setEmail}
+          />
+        ) : null}
+        {formNumber == 3 ? (
+          <FormaAdresaGradBioCena
+            formNumber={formNumber}
+            setFormNumber={setFormNumber}
+            bio={bio}
+            setBio={setBio}
+            cenaPoSatu={cenaPoSatu}
+            setCenaPoSatu={setCenaPoSatu}
+            adresa={adresa}
+            setAdresa={setAdresa}
+            grad={grad}
+            setGrad={setGrad}
+            siter={siter}
+          />
+        ) : null}
+        {formNumber == 4 ? (
+          <FormaZavrsiRegistraciju
+            setFormNumber={setFormNumber}
+            formNumber={formNumber}
+            setZavrsiRegistraciju={setZavrsiRegistraciju}
+            zavrsiRegistraciju={zavrsiRegistraciju}
+          />
+        ) : null}
+      </div>
+    </div>
   );
 };
 

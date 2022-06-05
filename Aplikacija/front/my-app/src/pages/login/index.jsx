@@ -1,342 +1,181 @@
-// import React from 'react';
-
-// import { alpha, styled } from '@mui/material/styles';
-// import InputBase from '@mui/material/InputBase';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import TextField from '@mui/material/TextField';
-// import FormControl from '@mui/material/FormControl';
-// import Stack from '@mui/material/Stack';
-// import classStyles from './styles';
-
-// import { useNavigate } from 'react-router-dom';
-// import Button from '@mui/material/Button';
-// //import Checkbox from "@mui/material/Checkbox"
-// import HeaderLogin from '../../components/HeaderLogin';
-// import { useRef, useState, useEffect, useContext } from 'react';
-// import AuthContext from '../context/AuthProvider';
-// import axios from '../../api/axios';
-// const LOGIN_URL = './auth';
-
-// const Login = () => {
-//   const navigate = useNavigate();
-//   const classes = classStyles();
-//   const { setAuth } = useContext(AuthContext);
-//   const userRef = useRef();
-//   const errRef = useRef();
-
-//   const [user, setUser] = useState();
-//   const [pwd, setPwd] = useState();
-//   const [errMsg, setErrMsg] = useState();
-//   const [success, setSuccess] = useState(false);
-
-//   useEffect(() => {
-//     userRef.current.focus();
-//   }, []);
-
-//   useEffect(() => {
-//     setErrMsg('');
-//   }, [user, pwd]);
-
-//   const handleSubmit = async e => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await axios.post(
-//         LOGIN_URL,
-//         JSON.stringify({ user, pwd }),
-//         {
-//           headers: { 'Content-Type': 'application/json' },
-//           withCredentials: true,
-//         }
-//       );
-
-//       const accessToken = response?.data?.accessToken;
-//       const roles = response?.data?.roles;
-//       setAuth({ user, pwd, roles, accessToken });
-//       setUser('');
-//       setPwd('');
-//       setSuccess(true);
-//     } catch (err) {
-//       if (!err?.response) {
-//         setErrMsg('No Server Response');
-//       } else if (err.response?.status === 400) {
-//         setErrMsg('Missing Username or Password');
-//       } else if (err.response?.status === 401) {
-//         setErrMsg('Unauthorized');
-//       } else setErrMsg('Login Failed');
-//       errRef.current.focus();
-//     }
-//   };
-
-//   const ValidationTextField = styled(TextField)({
-//     '& input:valid + fieldset': {
-//       borderColor: 'yellow',
-//       borderWidth: 2,
-//     },
-//     '& input:invalid + fieldset': {
-//       borderColor: 'green',
-//       borderWidth: 2,
-//     },
-//     '& input:valid:focus + fieldset': {
-//       borderLeftWidth: 6,
-//       padding: '4px !important', // override inline-style
-//     },
-//   });
-
-//   return (
-//     <>
-//       {success ? (
-//         <section>
-//           <h1>Uspesno ste ulogovani</h1>
-//         </section>
-//       ) : (
-//         <section>
-//           <p
-//             ref={errRef}
-//             className={errMsg ? 'errmsg' : 'offscreen'}
-//             aria-live="assertive"
-//           >
-//             {errMsg}
-//           </p>
-//           <h1 className={classes.naslov}>Logovanje</h1>
-
-//           <form className={classes.container} onSubmit={handleSubmit}>
-//             {/* <img src={slika} alt="Ucitavanje"/>
-//              */}
-//             {/* <div style = {{backgroundImage: `url(../../slike/slika6.jpg")`}}></div> */}
-//             <div className={classes.glavni}>
-//               <ValidationTextField
-//                 label="Korisnicko ime"
-//                 type="text"
-//                 id="validation-outlined-input"
-//                 variant="outlined"
-//                 ref={userRef}
-//                 autoComplete="off"
-//                 onChange={e => setUser(e.target.value)}
-//                 value={user}
-//                 required
-//               />
-//               <ValidationTextField
-//                 label="Lozinka"
-//                 type="password"
-//                 id="validation-outlined-input"
-//                 variant="outlined"
-//                 onChange={e => setPwd(e.target.value)}
-//                 value={pwd}
-//                 required
-//               />
-//             </div>
-//             <div className={classes.divButton}>
-//               <Button
-//                 style={{ backgroundColor: 'green' }}
-//                 variant="contained"
-//                 color="success"
-//               >
-//                 Uloguj se
-//               </Button>
-
-//               <Button
-//                 style={{ backgroundColor: 'green' }}
-//                 variant="contained"
-//                 color="success"
-//                 onClick={() => navigate('../')}
-//               >
-//                 Nazad
-//               </Button>
-//             </div>
-//           </form>
-//         </section>
-//       )}
-//     </>
-//   );
-// };
-// export default Login;
-import * as React from 'react';
-import { useEffect,useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
+import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios, * as others from 'axios';
-import { Co2Sharp } from '@mui/icons-material';
+import classStyles from './styles';
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import HeaderLogin from '../../components/HeaderLogin';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+const Login = () => {
+  const navigate = useNavigate();
+  const classes = classStyles();
 
-const Login = () =>
-{
-const Copyright=(props)=> {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
 
-const theme = createTheme();
-const accessToken='pintusharmaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqweqwefsadgsgfdgd'
-const[email,setMejl]=useState('');
-const[password,setSifra]=useState('');
+  const validateEmail = email => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
 
-// const token = localStorage.getItem('token') // Replace token with the right key
-// if (!token) {
-//   // handle no token case
-//   return
-// }
+  const validatePwd = pass => {
+    return pass.match(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
+    );
+  };
 
-// axios.get(`${process.env.API_BASE_URL}/getquestions`, {
-//   headers: {
-//     'Content-Type': 'application/json',
-//     Accept: 'application/json',
-//     Authorization: `Bearer ${token}`,
-//   },
-// })
-const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJpLkBnbWFpbC5jb20iLCJleHAiOjE2NTM5NTUzNjUsImlzcyI6IkRvZ2d5LmNvbSIsImF1ZCI6IkRvZ2d5LmNvbSJ9.2EEi7b-affIlLP1DR5EXXXyipfXLkXJLRpMGU54_VCI'
-  const handleSubmit = (event) => {
-    event.preventDefault();
-//     const data =
-//     {
-//         email,
-//         sifra
-//     }
-//     axios.post('https://localhost:5001/Auth/Login',data,
-//     {
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': 'Bearer '+token
-//         }
-//   })
-//     .then(res=>console.log('Posting',res)).catch(err=>console.log(err))
-const data =
-{
-    email,
-    password
-}
+  const handleLogin = () => {
+    console.log('darjanaanannana');
 
-  axios.post('https://localhost:5001/Auth/Login',data,
- { 
+    if (!validateEmail(email)) {
+      alert('Niste uneli validan email');
+      return;
+    }
+
+    if (!validatePwd(pwd)) {
+      alert(
+        'Niste uneli validnu sifru. Sifra mora da sadrzi: 1 malo slovo, 1 veliko slovo, 1 broj i mora da bude najmanje duzine 8'
+      );
+      return;
+    }
+
+    const DTO = {
+      email: email,
+      password: pwd,
+    };
+
+    fetch('https://localhost:5001/Auth/Login', {
+      method: 'POST',
       headers: {
-        'Accept' : 'application/json',
-          
-       // 'Authorization': 'Bearer ' +  token
-            }      
-     }
- )
-  .then(res=>
-     {
-       console.log(res)
-       localStorage.setItem('idVlasnika',res.data.korisnik.id)
-    })     .catch(err=>
-    { 
-         console.log(err.response)
-     })
-}
- 
-const handleSubmit1=(e)=>
-{
-  e.preventDefault();
-  console.log(email)
-  console.log(password)
-}
-    
-  
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(DTO),
+    })
+      .then(async res => {
+        if (res.ok) {
+          res = await res.json();
+          localStorage.setItem('korisnik', JSON.stringify(res.korisnik));
+          localStorage.setItem('token', res.token);
+
+          if (res.korisnik.tip == 0) {
+            localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
+            alert('Uspesno ste se ulogovali kao Vlasnik');
+          } else if (res.korisnik.tip == 1) {
+            localStorage.setItem('idSittera', JSON.stringify(res.korisnik.id));
+            alert('Uspesno ste se ulogovali kao Siter');
+          } else {
+            localStorage.setItem('Admin', JSON.stringify(res.korisnik.id));
+          }
+
+          // localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
+        }
+      })
+      .catch(err => {
+        alert(err);
+      });
+  };
+  const [values, setValues] = React.useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
+
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
 
   return (
-//     <ThemeProvider theme={theme}>
-//       <Container component="main" maxWidth="xs">
-//         <CssBaseline />
-//         <Box
-//           sx={{
-//             marginTop: 8,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <LockOutlinedIcon />
-//           </Avatar>
-//           <Typography component="h1" variant="h5">
-//             Sign in
-//           </Typography>
-//           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-//             <TextField
-//             value={email}
-//             onChange={(e)=>setMejl(e.target.value)}
-//               margin="normal"
-//               required
-//               fullWidth
-//               id="email"
-              
-//               label="Email Address"
-//               name="email"
-//               autoComplete="email"
-//               autoFocus
-//             />
-//             <TextField
-//             value={sifra}
-//             onChange={(e)=>setSifra(e.target.value)}
-//               margin="normal"
-//               required
-//               fullWidth
-//               name="password"
-//               label="Password"
-              
-//               type="password"
-//               id="password"
-//               autoComplete="current-password"
-//             />
-//             <FormControlLabel
-//               control={<Checkbox value="remember" color="primary" />}
-//               label="Remember me"
-//             />
-//             <Button
-//               type="submit"
-//               fullWidth
-//               variant="contained"
-//               sx={{ mt: 3, mb: 2 }}
-//             >
-//               Sign In
-//             </Button>
-//             <Grid container>
-//               <Grid item xs>
-//                 <Link href="#" variant="body2">
-//                   Forgot password?
-//                 </Link>
-//               </Grid>
-//               <Grid item>
-//                 <Link href="#" variant="body2">
-//                   {"Don't have an account? Sign Up"}
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-//         <Copyright sx={{ mt: 8, mb: 4 }} />
-//       </Container>
-//     </ThemeProvider>
-//   );
-<div className="App">
-<h1>mrk</h1>
-<form>
-    <input type="text" value={email} onChange={(e)=>setMejl(e.target.value)}/>
-    <input type="text" value={password} onChange={(e)=>setSifra(e.target.value)}/>
-    
-<button onClick={handleSubmit}>post</button>
-</form>
-</div>   
-        )}
-export default Login
+    <div className={classes.container}>
+      <HeaderLogin />
+      <div style={{ displey: 'flex', flexDirection: 'column' }}>
+        <h1 style={{ color: '#000000c2' }} className={classes.naslov}>
+          Logovanje
+        </h1>
+        <div>
+          <div className={classes.glavni}>
+            <TextField
+              label="Email"
+              type="text"
+              variant="outlined"
+              autoComplete="off"
+              onChange={e => setEmail(e.target.value)}
+              value={email}
+              required
+              style={{ marginBottom: '20px', backgroundColor: 'white' }}
+            />
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Potvrdite lozinku
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                style={{ marginBottom: '20px', backgroundColor: 'white' }}
+                label="Lozinka"
+                type={values.showPassword ? 'text' : 'password'}
+                variant="outlined"
+                onChange={e => setPwd(e.target.value)}
+                value={pwd}
+                required
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </div>
+
+          <div className={classes.divButton}>
+            <Button
+              style={{ backgroundColor: 'green' }}
+              variant="contained"
+              color="success"
+              onClick={handleLogin}
+            >
+              Uloguj se
+            </Button>
+
+            <Button
+              style={{ backgroundColor: 'green' }}
+              variant="contained"
+              color="success"
+              onClick={() => navigate('../')}
+            >
+              Nazad
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Login;

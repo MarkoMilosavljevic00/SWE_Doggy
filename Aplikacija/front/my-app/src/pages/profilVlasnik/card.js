@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -20,24 +19,22 @@ import Button from '@mui/material/Button';
 import classStyles from './styles';
 import { useState } from 'react';
 
-const CardSlika=() =>{
-// const [state,setState]=useState('')
-// state:{profileImg="https://image.shutterstock.com/image-illustration/photo-silhouette-male-profile-white-260nw-1018631086.jpg"}
-// const imageHandler = (e) =>
-// {
-//   const reader = new FileReader()
-//   reader.onload = () =>
-//   {
-//     if(reader.readyState===2){
-//     this.setState({state:reader.result})
-//     }
-//   }
-//   reader.readAsDataURL(e.target.files[0])
-// }
+const CardSlika = () => {
+  // const [state,setState]=useState('')
+  // state:{profileImg="https://image.shutterstock.com/image-illustration/photo-silhouette-male-profile-white-260nw-1018631086.jpg"}
+  // const imageHandler = (e) =>
+  // {
+  //   const reader = new FileReader()
+  //   reader.onload = () =>
+  //   {
+  //     if(reader.readyState===2){
+  //     this.setState({state:reader.result})
+  //     }
+  //   }
+  //   reader.readAsDataURL(e.target.files[0])
+  // }
 
-
-
-   const classes = classStyles();
+  const classes = classStyles();
   // return (
   //   <div className='page'>
   //     <div className='container'>
@@ -52,30 +49,42 @@ const CardSlika=() =>{
   //     </div>
   //      </div>
   //   </div>
-  return(
-    <Card sx={{ maxWidth: 345 }} style={{backgroundColor:'mediumspringgreen',display:'grid',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-      <CardHeader
-       
-      />
+  return (
+    <Card
+      sx={{ maxWidth: 345 }}
+      style={{
+        display: 'grid',
+        marginBottom: '40px',
+        marginTop: '40px',
+        borderRadius: '50px',
+      }}
+    >
+      <CardHeader />
       <CardMedia
         component="img"
         height="194"
-        image= {'https://img.freepik.com/free-photo/portrait-good-looking-cheerful-afro-american-woman-holds-small-puppy-near-face-smiles-pleasantly-enjoys-spare-time-with-favorite-dog-wears-stereo-headphones-isolated-blue-wall_273609-49782.jpg?w=2000'}
+        image={
+          'https://img.freepik.com/free-photo/portrait-good-looking-cheerful-afro-american-woman-holds-small-puppy-near-face-smiles-pleasantly-enjoys-spare-time-with-favorite-dog-wears-stereo-headphones-isolated-blue-wall_273609-49782.jpg?w=2000'
+        }
         alt="Paella dish"
       />
-      <CardContent>
-     
-      </CardContent>
-      <CardActions className={classes.divButtonCard}> 
+      <CardContent></CardContent>
+      <CardActions className={classes.divButtonCard}>
         <Button
-         style={{ backgroundColor: 'cornsilk', color:"black",width:'250px',height:'50px',borderRadius:'20px'}}
-         variant="contained"
-         color="success"
-         >
-         Dodaj sliku
-      </Button>
+          style={{
+            backgroundColor: 'cornsilk',
+            color: 'black',
+            width: '250px',
+            height: '50px',
+            borderRadius: '20px',
+          }}
+          variant="contained"
+          color="success"
+        >
+          Dodaj sliku
+        </Button>
       </CardActions>
     </Card>
   );
-}
-export default CardSlika
+};
+export default CardSlika;

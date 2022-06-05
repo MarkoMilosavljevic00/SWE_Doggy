@@ -5,6 +5,8 @@ import {
   loginRoute,
   registerRoute,
   sitterRoute,
+  helpRoute,
+  adminRoute,
   komentarisanjeIOcenjivanjeRoute,
 } from '../router/routes';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +42,7 @@ export default function Header() {
             <img src="assets/img/logo.png" alt="" />
           </a>
           <h1>
-            <a href="index.html">Doggy</a>
+            <a href="/">Doggy</a>
           </h1>
         </div>
 
@@ -85,13 +87,16 @@ export default function Header() {
                 </ul>
               </li> */}
                 <li>
-                  <a href="#services">Šetanje pasa</a>
+                  <a href="#services">Šetanje psa po gradu</a>
                 </li>
                 <li>
-                  <a href="#services">Čuvanje pasa</a>
+                  <a href="#services">Čuvanje psa u vašoj kući</a>
                 </li>
                 <li>
-                  <a href="#services">Dresura pasa</a>
+                  <a href="#services">Poseta sittera</a>
+                </li>
+                <li>
+                  <a href="#services">Čuvanje psa u kući sittera</a>
                 </li>
               </ul>
             </li>
@@ -101,7 +106,7 @@ export default function Header() {
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="#help">
+              <a className="nav-link scrollto" href="/helpRoute">
                 Pomoć
               </a>
             </li>
@@ -119,6 +124,10 @@ export default function Header() {
             onClick={() => navigate(komentarisanjeIOcenjivanjeRoute)}
           >
             KomentarisiIOceni
+          </Button>
+
+          <Button color="inherit" onClick={() => navigate(adminRoute)}>
+            Admin
           </Button>
         </nav>
       </div>
