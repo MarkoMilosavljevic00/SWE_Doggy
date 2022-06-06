@@ -68,6 +68,7 @@ namespace Doggy.WebApi
             services.AddScoped<UslugaService>();
             services.AddScoped<VlasnikService>();
             services.AddScoped<AuthService>();
+            services.AddScoped<ImageService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IPasRepository, PasRepository>();
             services.AddScoped<IRecenzijaRepository, RecenzijaRepository>();

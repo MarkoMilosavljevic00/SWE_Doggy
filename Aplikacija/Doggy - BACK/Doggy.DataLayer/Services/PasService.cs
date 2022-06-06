@@ -31,6 +31,11 @@ namespace Doggy.DataLayer.Services
         {
             return unitOfWork.PasRepository.Find(k => k.VlasnikId == idVlasnika).ToList();
         }
+        public string VratiSlikuPsa(int id)
+        {
+            Pas p = unitOfWork.PasRepository.Get(id);
+            return p.Slika;
+        }
 
         public Pas DodajPsa(Pas p)
         {
@@ -41,6 +46,14 @@ namespace Doggy.DataLayer.Services
             var pas = unitOfWork.PasRepository.Add(p);
             unitOfWork.SaveChanges();
             return pas;
+        }
+
+        public void dodajSlikuPsu(int idPas, string filename)
+        {
+            Pas p = unitOfWork.PasRepository.Get(idPas);
+            p.Slika = filename;
+            unitOfWork.PasRepository.Update(p);
+            unitOfWork.SaveChanges();
         }
 
 

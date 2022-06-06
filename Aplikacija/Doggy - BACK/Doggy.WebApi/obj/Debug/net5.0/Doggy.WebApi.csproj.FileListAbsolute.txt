@@ -574,3 +574,6 @@ C:\Users\Vaio\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\obj\De
 C:\Users\Vaio\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\obj\Debug\net5.0\ref\Doggy.WebApi.dll
 C:\Users\Vaio\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\obj\Debug\net5.0\Doggy.WebApi.pdb
 C:\Users\Vaio\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\obj\Debug\net5.0\Doggy.WebApi.genruntimeconfig.cache
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\System.IO.Pipelines.dll

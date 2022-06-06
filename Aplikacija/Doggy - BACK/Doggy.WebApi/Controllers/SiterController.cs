@@ -1,9 +1,12 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +17,12 @@ namespace Doggy.WebAPI.Controllers
     public class SiterController : ControllerBase
     {
         private readonly SiterService siterService;
+        private readonly ImageService imageService;
 
-        public SiterController(SiterService siterService)
+        public SiterController(SiterService siterService, ImageService imageService)
         {
             this.siterService = siterService;
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -49,6 +54,22 @@ namespace Doggy.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("vratiSlikuSitera")]
+        public IActionResult VratiSlikuSitera(int id)
+        {
+            try
+            {
+                String filename = this.siterService.VratiSlikuSitera(id);
+                var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename));
+                return File(image, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Greska! " + e.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("filterSiteri")]
         public IActionResult VratiSitereFilter([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga,double? minCena, double? maxCena, double? minOcena)
         {
@@ -67,6 +88,25 @@ namespace Doggy.WebAPI.Controllers
                 return StatusCode(402, "U bazi vec postoji neko sa tim korisnickim imenom!");
 
             return new JsonResult(result);
+        }
+
+        [HttpPost]
+        [Route("dodajSlikuSiteru")]
+        public async Task<ActionResult> dodajSlikuSiteru(int idSiter, IFormFile file)
+        {
+            try
+            {
+                String username = this.siterService.VratiSiteraPoId(idSiter).KorisnickoIme;
+                String filename = await imageService.SaveFile(file, username);
+                this.siterService.dodajSlikuSiteru(idSiter, filename);
+                var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename));
+                return File(image, "image/jpeg");
+                //return Ok(new { url = msg });
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Greska! " + e.Message);
+            }
         }
 
         [HttpDelete]

@@ -55,6 +55,11 @@ namespace Doggy.DataLayer.Services
                                                     ).ToList();
         }
 
+        public string VratiSlikuSitera(int id)
+        {
+            Siter s = unitOfWork.SiterRepository.Get(id);
+            return s.Slika;
+        }
 
         public Siter DodajSitera(Siter s, out StatusDodavanjaKorisnika status)
         {
@@ -68,6 +73,13 @@ namespace Doggy.DataLayer.Services
             return null;
 
         }
+        public void dodajSlikuSiteru(int idSiter, string filename)
+        {
+            Siter s = unitOfWork.SiterRepository.Get(idSiter);
+            s.Slika = filename;
+            unitOfWork.SiterRepository.Update(s);
+            unitOfWork.SaveChanges();
+        }
 
         public Siter ObrisiSitera(int id)
         {
@@ -80,6 +92,7 @@ namespace Doggy.DataLayer.Services
             }
             return null;
         }
+
 
         public Siter AzurirajSitera(Siter s, out StatusDodavanjaKorisnika status)
         {
