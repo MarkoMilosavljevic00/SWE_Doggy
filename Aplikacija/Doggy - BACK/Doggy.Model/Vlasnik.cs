@@ -16,5 +16,7 @@ namespace Doggy.Model
 
         //[JsonIgnore]
         public List<Pas> Psi { get; set; }
+
+        public String Slika { get; set; }
     }
 }

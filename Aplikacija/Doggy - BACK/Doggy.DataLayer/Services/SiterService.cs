@@ -73,7 +73,7 @@ namespace Doggy.DataLayer.Services
             return null;
 
         }
-        public void dodajSlikuSiteru(int idSiter, string filename)
+        public void DodajSlikuSiteru(int idSiter, string filename)
         {
             Siter s = unitOfWork.SiterRepository.Get(idSiter);
             s.Slika = filename;

@@ -1,8 +1,10 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +16,12 @@ namespace Doggy.WebAPI.Controllers
     public class VlasnikController : ControllerBase
     {
         private readonly VlasnikService vlasnikService;
+        private readonly ImageService imageService;
 
-        public VlasnikController(VlasnikService vlasnikService)
+        public VlasnikController(VlasnikService vlasnikService, ImageService imageService)
         {
             this.vlasnikService = vlasnikService;
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -32,6 +36,40 @@ namespace Doggy.WebAPI.Controllers
         public IActionResult VratiVlasnikaPoId(int id)
         {
             return new JsonResult(vlasnikService.VratiVlasnikaPoId(id));
+        }
+
+        [HttpGet]
+        [Route("vratiSlikuVlasnika")]
+        public IActionResult VratiSlikuVlasnika(int id)
+        {
+            try
+            {
+                String filename = this.vlasnikService.VratiSlikuVlasnika(id);
+                var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename));
+                return File(image, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Greska! " + e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("dodajSlikuVlasniku")]
+        public async Task<ActionResult> DodajSlikuVlasniku(int idVlasnik, IFormFile file)
+        {
+            try
+            {
+                String username = this.vlasnikService.VratiVlasnikaPoId(idVlasnik).KorisnickoIme;
+                String filename = await imageService.SaveFile(file, username);
+                this.vlasnikService.DodajSlikuVlasniku(idVlasnik, filename);
+                var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename));
+                return File(image, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Greska! " + e.Message);
+            }
         }
 
         [HttpPost]
