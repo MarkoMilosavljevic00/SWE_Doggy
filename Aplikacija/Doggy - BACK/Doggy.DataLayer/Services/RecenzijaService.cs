@@ -94,10 +94,17 @@ namespace Doggy.DataLayer.Services
                     Siter siter = unitOfWork.SiterRepository.FindWithIncludes(k => k.Id == r.SiterId, k => k.Recenzije).FirstOrDefault();
                     List<Recenzija> recenzije = siter.Recenzije.Where(k => k.Tip == TipRecenzije.Siter).ToList();
 
-                    double suma = 0;
-                    recenzije.ForEach(k => suma += k.Ocena);
-                    suma -= r.Ocena;
-                    siter.ProsecnaOcena = suma / (recenzije.Count - 1);
+                    if (recenzije.Count != 1)
+                    {
+                        double suma = 0;
+                        recenzije.ForEach(k => suma += k.Ocena);
+                        suma -= r.Ocena;
+                        siter.ProsecnaOcena = suma / (recenzije.Count - 1);
+                    }
+                    else
+                    {
+                        siter.ProsecnaOcena = 0;
+                    }
 
                     unitOfWork.SiterRepository.Update(siter);
                     unitOfWork.SaveChanges();
@@ -107,10 +114,17 @@ namespace Doggy.DataLayer.Services
                     Pas pas = unitOfWork.PasRepository.FindWithIncludes(k => k.Id == r.PasId, k => k.Recenzije).FirstOrDefault();
                     List<Recenzija> recenzije = pas.Recenzije.Where(k => k.Tip == TipRecenzije.Pas).ToList();
 
-                    double suma = 0;
-                    recenzije.ForEach(k => suma += k.Ocena);
-                    suma -= r.Ocena;
-                    pas.ProsecnaOcena = suma / (recenzije.Count - 1);
+                    if (recenzije.Count != 1)
+                    {
+                        double suma = 0;
+                        recenzije.ForEach(k => suma += k.Ocena);
+                        suma -= r.Ocena;
+                        pas.ProsecnaOcena = suma / (recenzije.Count - 1);
+                    }
+                    else
+                    {
+                        pas.ProsecnaOcena = 0;
+                    }
 
                     unitOfWork.PasRepository.Update(pas);
                     unitOfWork.SaveChanges();
@@ -130,9 +144,9 @@ namespace Doggy.DataLayer.Services
             {
                 recenzija.Komentar = r.Komentar ?? recenzija.Komentar;
                 if (r.Ocena != 0)
-                { 
+                {
                     recenzija.Ocena = r.Ocena;
-                    if(recenzija.Tip == TipRecenzije.Siter)
+                    if (recenzija.Tip == TipRecenzije.Siter)
                     {
                         Siter siter = unitOfWork.SiterRepository.FindWithIncludes(k => k.Id == recenzija.SiterId, k => k.Recenzije).FirstOrDefault();
                         List<Recenzija> recenzije = siter.Recenzije.Where(k => k.Tip == TipRecenzije.Siter).ToList();

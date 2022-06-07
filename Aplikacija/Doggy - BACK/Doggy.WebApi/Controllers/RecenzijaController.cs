@@ -78,7 +78,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(r);
         }
 
-        [HttpDelete]
+        [HttpPut]
         [Route("azurirajRecenziju")]
         public IActionResult AzurirajRecenziju(Recenzija r)
         {
