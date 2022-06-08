@@ -72,6 +72,20 @@ namespace Doggy.DataLayer.Services
             return null;
         }
 
+        public string VratiSlikuVlasnika(int id)
+        {
+            Vlasnik v = unitOfWork.VlasnikRepository.Get(id);
+            return v.Slika;
+        }
+
+        public void DodajSlikuVlasniku(int idVlasnik, string filename)
+        {
+            Vlasnik v = unitOfWork.VlasnikRepository.Get(idVlasnik);
+            v.Slika = filename;
+            unitOfWork.VlasnikRepository.Update(v);
+            unitOfWork.SaveChanges();
+        }
+
         public Vlasnik ObrisiVlasnika(int id)
         {
             Vlasnik v = unitOfWork.VlasnikRepository.Get(id);

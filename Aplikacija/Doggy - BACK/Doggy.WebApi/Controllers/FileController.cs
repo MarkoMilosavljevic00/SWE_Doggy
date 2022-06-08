@@ -27,7 +27,7 @@ namespace Doggy.WebAPI.Controllers
         private ImageService _imageService;
         private IConfiguration config;
 
-        public FileController(ImageService imgSevice)
+        public FileController(ImageService imgSevice, IConfiguration config)
         {
             this._imageService = imgSevice;
             this.config = config;

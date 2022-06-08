@@ -92,13 +92,13 @@ namespace Doggy.WebAPI.Controllers
 
         [HttpPost]
         [Route("dodajSlikuSiteru")]
-        public async Task<ActionResult> dodajSlikuSiteru(int idSiter, IFormFile file)
+        public async Task<ActionResult> DodajSlikuSiteru(int idSiter, IFormFile file)
         {
             try
             {
                 String username = this.siterService.VratiSiteraPoId(idSiter).KorisnickoIme;
                 String filename = await imageService.SaveFile(file, username);
-                this.siterService.dodajSlikuSiteru(idSiter, filename);
+                this.siterService.DodajSlikuSiteru(idSiter, filename);
                 var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename));
                 return File(image, "image/jpeg");
                 //return Ok(new { url = msg });
