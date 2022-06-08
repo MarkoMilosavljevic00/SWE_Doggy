@@ -10,12 +10,23 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import classStyles from './style.js';
+import Popper from '@mui/material/Popper';
+import CardDialog from '../../card.js';
 import Axios from 'axios';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import { komentarisanjeIOcenjivanjeRoute } from '../../../../../router/routes';
 import { Restaurant } from '@mui/icons-material';
 import { display } from '@mui/system';
-import { useState } from 'react';
+import { Box } from '@mui/material';
+import Fade from '@mui/material/Fade';
+import Paper from '@mui/material/Paper';
+import { useState,useEffect } from 'react';
+import { Popover } from '@mui/material';
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -83,7 +94,28 @@ export default function CustomizedDialogs(props) {
       console.log(res);
     })
 }
+
+const [izmena,setIzmena ] = useState(true)
+// const [ime,setIme] = useState("")
+// const [rasa,setrace] = useState("")
+// const [pol,setsex] = useState("")
+// const [opis,setdescription] = useState("")
+// const [visina,setheight] = useState("")
+// const [tezina,setweight] = useState("")
+const handle=(e)=>
+{
+    const newData={...data}
+  newData[e.target.id]=e.target.value;
+  setData(newData)
+  console.log(newData)
+  
+  
+
+}
+const[input,setInput]=useState(false);
+const[profil,setProfil]=useState('')
 const [data,setData]=useState({
+  id:id,
     ime:ime,
     rasa:rasa,
     pol:pol,
@@ -94,52 +126,72 @@ const [data,setData]=useState({
     vlasnikId:vlasnikId
   
   })
-
-  const [izmena,setIzmena ] = useState(true)
-  // const [ime,setIme] = useState("")
-// const [rasa,setrace] = useState("")
-// const [pol,setsex] = useState("")
-// const [opis,setdescription] = useState("")
-// const [visina,setheight] = useState("")
-// const [tezina,setweight] = useState("")
-  const handle=(e)=>
-  {
-      const newData={...data}
-    newData[e.target.id]=e.target.value;
-    setData(newData)
-    console.log(newData)
-    
-    
+  const izmeniPsa =()=>
+  {console.log(data)
+    const i=localStorage.getItem('idVlasnika')
+      Axios.put('https://localhost:5001/Pas/azurirajPsa',
+      {  id:data.id,
+         ime:data.ime,
+         rasa:data.rasa,
+         pol:data.pol,
+         opis:data.opis,
+         visina:data.visina,
+         tezina:data.tezina,
+         slika:data.slika,
+         vlasnikId:i
+      })
+         .then(response=>
+          {
+              if(response.status==200)
+              {   
+                  console.log('Uspesna promena podataka')
+                 console.log(response)
+                 setData(response.data)
+              }
   
-}
-const[input,setInput]=useState(false);
-const izmeniPsa =()=>
-{
-    Axios.put('https://localhost:5001/Pas/azurirajPsa',
-    {
-       ime:data.ime,
-       rasa:data.rasa,
-       pol:data.pol,
-       opis:data.opis,
-       visina:data.visina,
-       tezina:data.tezina,
-       slika:data.slika,
-       vlasnikId:data.vlasnikId
-    })
-       .then(response=>
-        {
-            if(response.status==200)
-            {
-                console.log('Uspesna promena podataka')
-            }
+          })
+         
+  }
+const idVlasnika=localStorage.getItem('idVlasnika')
+const[usluga,setUsluga]=useState([])
+ useEffect(()=>{
 
-        })
-       
-}
+  console.log('id psa je:' + id)
+  console.log('id vlasnika je:' + idVlasnika)
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + idVlasnika).then(
+    res=>
+    {
+      console.log(res)
+      setUsluga(res.data)
+    }
+  )
+},[])
+
   const navigate = useNavigate();
+
+ const[otkriven,setOtkriven]=useState(false)
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick1= (event) => {
+    setAnchorEl(1);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEl(null);
+  };
+
+  const open1 = Boolean(anchorEl);
+  const id1 = open ? 'simple-popover' : undefined;
+const handleIzmena=()=>
+{
+  setIzmena(!izmena)
+}
+
   return (
     <div className={classes.container}>
       <div className='dugmici' style={{display:'grid'}}>
+    
       <Button
         variant="contained"
         color="success"
@@ -149,10 +201,47 @@ const izmeniPsa =()=>
         Informacije o psu
       </Button>
       <Button variant='contained' color='error' size='small' onClick={obrisiPsa} >Obrisi psa</Button>
-      {/* <Button variant='contained' color='warning' size='small' onClick={izmeniPsa}>Izmeni psa</Button> */}
+      {/* <Button variant='contained' color='warning' size='small' onClick={()=>{status_usluge();poper();}} >Proverite status usluge</Button> */}
+    {usluga.map(x=>
+    (
+    
+      
+      <CardDialog  imesitera={x.siter.ime} />
+      
+      
+     ) )}
+      <div>
+        {/* <Button aria-describedby={id1} variant="contained" onClick={()=>{handleClick1();status_usluge();}}> */}
+          
+        {/* Open Popover */}
+      {/* </Button> */}
+      <Popover
+      id={id1}
+      open={open1}
+      anchorEl={anchorEl}
+      onClose={handleClose1}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+      >
+        {usluga.map(p=>(
+          
+          <h3>{p.siter.ime} je prihvatio vasu uslugu</h3>
+          
+          
+        )
+        )
+        }
+  
+      </Popover>
+    </div>
+    
+      
+
+  
       </div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-      </Button> */}
+      
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -169,7 +258,7 @@ const izmeniPsa =()=>
         <button onClick = {() => { setIzmena(!izmena) }} > Izmeni podatke </button>
          </div>
           <Typography gutterBottom>Ime  </Typography>
-        <input  type='text' id='ime' value={ime} disabled={izmena} onChange={ (e) =>  handle(e) }/>
+        <input  type='text' id='ime' value={data.ime} disabled={izmena} onChange={ (e) =>  handle(e) }/>
 
          
           
@@ -190,7 +279,7 @@ const izmeniPsa =()=>
         
           <div className={classes.divButton}>
           <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
-          <Button variant='contained'  style={{marginBottom:'20px'}}onClick={izmeniPsa}>Azuriraj ime</Button>
+          <Button variant='contained'  style={{marginBottom:'20px'}}onClick={()=>{handleIzmena();izmeniPsa();}}>Azuriraj ime</Button>
           
             <Button
               style={{

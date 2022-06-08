@@ -11,6 +11,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import classStyles from './style';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Axios from 'axios'
 import { komentarisanjeIOcenjivanjeRoute } from '../../../../../router/routes';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -25,12 +27,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 const BootstrapDialogTitle = props => {
   const { children, onClose, ...other } = props;
   const { brojTelefona } = props;
+  
+  
+  
+  
+  
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
-          aria-label="close"
+        aria-label="close"
           onClick={onClose}
           sx={{
             position: 'absolute',
@@ -39,7 +46,7 @@ const BootstrapDialogTitle = props => {
             // color: theme => theme.palette.grey[500],
             color: 'green',
           }}
-        >
+          >
           <CloseIcon />
         </IconButton>
       ) : null}
@@ -55,8 +62,19 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs(props) {
   const classes = classStyles();
   const [open, setOpen] = React.useState(false);
-  const { opis, brojTelefona, grad, adresa, cenaPoSatu, dostupan, id } = props;
-
+  const { opis, brojTelefona, grad, prosecnaOcena,adresa, cenaPoSatu, dostupan, id } = props;
+  
+  const[com,setCom]=useState('')
+  const komentari=(props)=>
+  {
+  Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + props).then(
+    res=>
+    {
+      console.log(res.data)
+      setCom(res.data)
+    }
+  )
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -69,8 +87,9 @@ export default function CustomizedDialogs(props) {
       <Button
         variant="contained"
         color="success"
-        onClick={handleClickOpen}
+        onClick={()=>{handleClickOpen();komentari(id);}}
         size="small"
+       
       >
         Pogledaj sittera
       </Button>
@@ -93,6 +112,13 @@ export default function CustomizedDialogs(props) {
           <Typography gutterBottom>Grad : {grad}</Typography>
           <Typography gutterBottom>Adresa : {adresa}</Typography>
           <Typography gutterBottom>Cena po satu: {cenaPoSatu}</Typography>
+          <Typography gutterBottom>Prosecna ocena: {prosecnaOcena}</Typography>
+          <Typography gutterBottom>Komentari: </Typography>
+
+          {com && com.map(x=>
+            (
+              <Typography gutterBottom>{x.komentar}</Typography>
+            ))}
           <Typography gutterBottom>
             Dostupan : {dostupan ? 'da' : 'ne'}
           </Typography>

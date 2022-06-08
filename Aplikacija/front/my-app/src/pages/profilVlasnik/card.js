@@ -15,40 +15,60 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
-
+import Axios from 'axios';
 import classStyles from './styles';
 import { useState } from 'react';
-
+import { ExpandMore } from '@mui/icons-material';
 const CardSlika = () => {
-  // const [state,setState]=useState('')
-  // state:{profileImg="https://image.shutterstock.com/image-illustration/photo-silhouette-male-profile-white-260nw-1018631086.jpg"}
-  // const imageHandler = (e) =>
-  // {
-  //   const reader = new FileReader()
-  //   reader.onload = () =>
-  //   {
-  //     if(reader.readyState===2){
-  //     this.setState({state:reader.result})
-  //     }
-  //   }
-  //   reader.readAsDataURL(e.target.files[0])
-  // }
+ 
 
   const classes = classStyles();
-  // return (
-  //   <div className='page'>
-  //     <div className='container'>
-  //       <h1 className='h1'>Dodaj slickcu</h1>
-  //       <div className='img-holder'>
-  //         <img src={profileImg} alt='' id='img' className='img' />
-
-  //       </div>
-  //        <input type='file' name='image-upload' id='input' accept='image/*' onChange={imageHandler}/>
-  //     <div className='label'>
-  //       <label htmlFor='input' className='image-upload'>choose </label>
-  //     </div>
-  //      </div>
-  //   </div>
+  const[expanded,setExpanded]=useState('')
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+};
+  const ajdi=localStorage.getItem('idVlasnika')
+  console.log(ajdi + 'jajkas')
+  const[slika,setSlika]=useState('')
+  const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  const picture = ()=>
+  {
+    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(
+      res=>
+      {
+        console.log(res.data.slika)
+        setSlika(res.data.slika)
+      }
+    )
+  }
+  const [file, setFile] = useState()
+function handleChange(event) {
+  setFile(event.target.files[0])
+}
+  function handleSubmit(event) {
+  
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        'responseType': 'blob' 
+      },
+    };
+    Axios.post('https://localhost:5001/Siter/dodajSlikuSiteru?idSiter=' + ajdi, formData, config).then((response) => {
+     
+    //    base64ImageString = Buffer.from(response.data, 'binary').toString('base64')
+    // srcValue = "data:image/png;base64,"+base64ImageString
+    console.log(response);
+    // const blob1= response.data.blob();
+      
+      setFile(response.data)
+      
+    });
+  }
   return (
     <Card
       sx={{ maxWidth: 345 }}
@@ -59,17 +79,37 @@ const CardSlika = () => {
         borderRadius: '50px',
       }}
     >
-      <CardHeader />
+        <CardHeader
+          avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
+            
+          </Avatar>}
+          // action={<IconButton aria-label="settings">
+          //   <MoreVertIcon />
+          // </IconButton>}
+          title={' ajaj'}
+          subheader={date}
+          />
       <CardMedia
         component="img"
         height="194"
         image={
-          'https://img.freepik.com/free-photo/portrait-good-looking-cheerful-afro-american-woman-holds-small-puppy-near-face-smiles-pleasantly-enjoys-spare-time-with-favorite-dog-wears-stereo-headphones-isolated-blue-wall_273609-49782.jpg?w=2000'
+          'https://localhost:5001/StaticFiles/' + slika
         }
         alt="Paella dish"
       />
-      <CardContent></CardContent>
       <CardActions className={classes.divButtonCard}>
+    <Typography paragraph>Ubacite novu sliku</Typography>
+    <input type="file" onChange={handleChange} />
+    <ExpandMore
+expand={expanded}
+
+onClick={() => { handleExpandClick(); handleSubmit(); } }
+aria-expanded={expanded}
+aria-label="show more"
+
+>
+</ExpandMore>
+<CardContent>
         <Button
           style={{
             backgroundColor: 'cornsilk',
@@ -80,9 +120,11 @@ const CardSlika = () => {
           }}
           variant="contained"
           color="success"
+          onClick={picture}
         >
           Dodaj sliku
         </Button>
+        </CardContent>
       </CardActions>
     </Card>
   );

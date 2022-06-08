@@ -10,7 +10,9 @@ import Gradovi from '../sitter/gradovi';
 import CenaPoSatu from '../sitter/cenaPoSatu';
 import ProsecnaOcena from '../sitter/prosecnaOcena';
 import BrojeviStranica from '../sitter/broj';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { IconButton } from '@mui/material';
+import NavBarVlasnik from '../headerVlasnik';
 const Sitter = () => {
   const navigate = useNavigate();
   const classes = classStyles();
@@ -107,14 +109,14 @@ const Sitter = () => {
 
   return (
     <div className={classes.container}>
-      <HeaderLogin />
+      <NavBarVlasnik />
       <div className={classes.divSearch}>
         {/* <Search /> */}
         <Gradovi grad={grad} postaviGrad={postaviGrad} />
         <CenaPoSatu naziv="Cena od" setValues={postaviCenuOd} />
         <CenaPoSatu naziv="Cena do" setValues={postaviCenuDo} />
         <ProsecnaOcena Ocena={Ocena} postaviOcenu={postaviOcenu} />
-
+        
         <Button
           className={classes.buttonPotvrdi}
           style={{ backgroundColor: '#2ac94d', margin: 15 }}
@@ -125,6 +127,9 @@ const Sitter = () => {
         >
           Potvrdi
         </Button>
+        <IconButton color='primary' href='vlasnikRoute'>
+          <ArrowForwardIosIcon/>
+        </IconButton>
       </div>
       <div className={classes.miniContainer}>
         {/* {users.map((user, index) => <Kartica ime={user.ime} opis={user.opis} key={index } />)}   */}

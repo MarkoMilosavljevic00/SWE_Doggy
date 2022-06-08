@@ -20,6 +20,7 @@ import axios from '../../api/axios';
 import { Typography } from '@mui/material';
 import AppFooter from '../../components/futer';
 import Footer from '../../components/Footer'
+import NavBarSiter from '../headerSiter';
 const SitterProfil =()=>
 {
 // console.log('1')
@@ -114,7 +115,7 @@ const azuriraj=()=>
            <>
          
            <div className={classes.container}>
-           <NavBar />
+           <NavBarSiter />
              <div className={classes.glavni}>
     
              {/* <input  type='text' id='opis' disabled={ch} onChange={ (e) => handle(e) } /> */}
@@ -186,7 +187,7 @@ const azuriraj=()=>
              </Grid>
              <TextField 
           id="outlined-multiline-static"
-          label="Biografija"
+         //  label="Biografija"
           multiline
           rows={4}
           value={profil.bio}

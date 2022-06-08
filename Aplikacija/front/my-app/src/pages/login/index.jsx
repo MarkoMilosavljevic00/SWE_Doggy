@@ -71,7 +71,7 @@ const Login = () => {
             localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
             alert('Uspesno ste se ulogovali kao Vlasnik');
           } else if (res.korisnik.tip == 1) {
-            localStorage.setItem('idSittera', JSON.stringify(res.korisnik.id));
+            localStorage.setItem('idSitera', JSON.stringify(res.korisnik.id));
             alert('Uspesno ste se ulogovali kao Siter');
           } else {
             localStorage.setItem('Admin', JSON.stringify(res.korisnik.id));
@@ -82,6 +82,7 @@ const Login = () => {
       })
       .catch(err => {
         alert(err);
+        alert('Losa sifra')
       });
   };
   const [values, setValues] = React.useState({

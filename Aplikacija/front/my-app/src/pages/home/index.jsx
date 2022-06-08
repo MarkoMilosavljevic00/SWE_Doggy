@@ -7,15 +7,20 @@ import PostaniSitter from '../komponente/postanisitter';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import classStyles from './styles';
-
+import NavbarVlasnik from '../headerVlasnik';
+import NavBarSiter from '../headerSiter';
+import NavBarVlasnik from '../headerVlasnik';
 
 export const home = (props) => {
   const classes = classStyles();
-  
+  const proveraSiter=localStorage.getItem('idSitera')
+  const proveraVlasnik=localStorage.getItem('idVlasnika')
+  console.log(proveraSiter + 'ahahha')
   return (
 
 <div className='wrapper'>
-<Header />
+{/* { proveraVlasnik  ? <NavbarVlasnik/> :<Header />} */}
+{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)} 
   <section id="hero">
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>

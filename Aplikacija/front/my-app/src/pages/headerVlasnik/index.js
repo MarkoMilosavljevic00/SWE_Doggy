@@ -59,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const NavBar=()=> {
+const NavBarVlasnik=()=> {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     
@@ -82,7 +82,16 @@ const NavBar=()=> {
   const handleMobileMenuOpen = (event) => {
       setMobileMoreAnchorEl(event.currentTarget);
     };
+  const log_out=()=>
+  {
+          const idVlasnika=localStorage.removeItem('idVlasnika')
+          const token=localStorage.removeItem('token')
+          const korisnik=localStorage.removeItem('korisnik')
+          const idSitera=localStorage.removeItem('idSitera')
+          console.log('Uspesno ste se log autovali')
+          alert('Successful log out')
 
+  }
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
     <Menu
@@ -102,7 +111,7 @@ const NavBar=()=> {
       >
       <MenuItem onClick={() => navigate(profilVlasnikRoute)}>Profil</MenuItem>
       <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+      <MenuItem onClick={()=>{handleMenuClose();log_out();navigate('/')}}>Log Out</MenuItem>
     </Menu>
   );
 
@@ -124,15 +133,15 @@ const NavBar=()=> {
     onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+        <IconButton size="large" color="inherit">
+          <Badge >
+            <SearchIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Nadji sitera</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
+        {/* <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
@@ -141,7 +150,7 @@ const NavBar=()=> {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Notifications</p> */}
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -172,14 +181,20 @@ const NavBar=()=> {
             >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            DOGGY
-          </Typography>
+          <header
+      id="header"
+      className="fixed-top d-flex align-items-center header-transparent"
+    >
+    
+        <div id="logo">
+          <a href="index.html">
+            <img src="assets/img/logo.png" alt="" />
+          </a>
+          <h1>
+            <a href="index.html">Doggy</a>
+          </h1>
+        </div>
+        </header>
           {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -197,20 +212,27 @@ const NavBar=()=> {
               
           
             </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+            <IconButton size="large" href="/sitterRoute" color="inherit">
+              <Badge >
+                <SearchIcon />
               </Badge>
+              
             </IconButton>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              href='/vlasnikZahteviRoute'
             >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
+            {/* <IconButton>
+              <a className="nav-link scrollto" href="/vlasnikRoute">
+                <i class="fa-solid fa-magnifying-glass"></i> Nadji sittera
+              </a>
+              </IconButton> */}
             <IconButton
               size="large"
               edge="end"
@@ -242,4 +264,4 @@ const NavBar=()=> {
     </Box>
   );
 }
-export default NavBar
+export default NavBarVlasnik

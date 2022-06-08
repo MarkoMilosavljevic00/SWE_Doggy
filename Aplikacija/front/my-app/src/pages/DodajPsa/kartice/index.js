@@ -44,16 +44,6 @@ export default function RecipeReviewCard(props) {
   const classes = classStyles();
 
   const {
-    // ime,
-    // opis,
-    // slika,
-    // brojTelefona,
-    // grad,
-    // adresa,
-    // cenaPoSatu,
-    // dostupan,
-    // prosecnaOcena,
-    // id,
     id,
     ime,
     rasa,
@@ -67,7 +57,7 @@ export default function RecipeReviewCard(props) {
 
   // console.log('../../../slike/s1.jpg');
   return (
-    <Card sx={{ width: 200,  }} className={classes.kartica}>
+    <Card sx={{ width: 200, height:600 }} className={classes.kartica}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

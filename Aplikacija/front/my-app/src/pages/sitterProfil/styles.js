@@ -44,6 +44,10 @@ const classStyles = makeStyles({
          display: 'flex',
          flexDirection: 'column' ,
          alignItems:'center'
+      },
+      cardWidth:
+      {
+         width:'450px'
       }
                                                   
 });
