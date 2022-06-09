@@ -20,6 +20,8 @@ import Opis from './components/opis';
 import { slikeUrl } from '../../../backendAddress';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PetsIcon from '@mui/icons-material/Pets';
+import { useState,useEffect } from 'react';
+import Axios from 'axios';
 // import slika2 from '../../../slike/s1.jpg';
 
 const ExpandMore = styled(props => {
@@ -54,13 +56,23 @@ export default function RecipeReviewCard(props) {
     slika,
     vlasnikId
   } = props;
-
+  const[pic,setPic]=useState('')
+useEffect(()=>
+{
+  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+    res=>
+    {
+      console.log(res.data.slika)
+      setPic(res.data.slika)
+    }
+  )
+})
   // console.log('../../../slike/s1.jpg');
   return (
     <Card sx={{ width: 200, height:600 }} className={classes.kartica}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/' + pic}>
             {ime[0]}
           </Avatar>
         }
@@ -73,7 +85,7 @@ export default function RecipeReviewCard(props) {
         // image={slika2}                           //OVA DVA NACINA SU ISTA
         // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
         // src={slikeUrl + slika}
-        src={props.slika}
+        src={'https://localhost:5001/StaticFiles/' + pic}
         alt="Paella dish"
       />
       <CardContent>

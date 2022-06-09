@@ -6,6 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import classStyles from './styles';
+import CardSlika from '../card';
 import { useNavigate } from 'react-router-dom';
  
 const CardDialog = props => {
@@ -37,9 +38,9 @@ const CardDialog = props => {
  
   return (
     <div>
-      <Button style={{ color: 'green' }} onClick={handleClickOpen('paper')}>
+      {/* <Button style={{ color: 'green' }} onClick={handleClickOpen('paper')}>
        klikni me
-      </Button>
+      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}

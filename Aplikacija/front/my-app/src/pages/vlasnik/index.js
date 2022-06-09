@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import classStyles from './styles';
 import { IconButton } from '@mui/material';
@@ -44,6 +44,17 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 const Vlasnik=(props)=> {
+  const[psi,setPsi]=useState('')
+  const psici=()=>
+  {
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnikId).then(
+      res=>
+      {
+        console.log(res.data + 'svi psi')
+        setPsi(res.data)
+      }
+    )
+  }
   const[value,setValue]=useState('')
   const[valuee,setValue1]=useState('')
   const inputProps = {
@@ -114,6 +125,7 @@ const Vlasnik=(props)=> {
     const[kraj,setTajmerDo]=useState('');
     const[adresaPreuzimanjaPsa,setAddr]=useState('');
     const[napomena,setNapomena]=useState('');
+    const[pasId,setPasId]=useState('');
 const usluge=()=>
 {
 console.log(vrsta)//radi :D
@@ -126,12 +138,23 @@ const Do =()=>
 {
   console.log(kraj)
 }
+const dogs = (props)=>
+{
+  setPasId(props)
+  console.log(pasId)
+}
+const dogs1 = ()=>
+{
+ 
+  console.log(pasId)
+}
 const funkcija_adresa=()=>
 {
   console.log(adresaPreuzimanjaPsa)
 }
 const siterId=localStorage.getItem('idSitera');
-const pasId=localStorage.getItem('idPsa');
+// const pasId=localStorage.getItem('idPsa');
+
 const vlasnikId=localStorage.getItem('idVlasnika')
 const funkcija_napomena=()=>
 {
@@ -157,6 +180,7 @@ const posalji_zahtev=()=>
     {
 
       console.log(res)
+      localStorage.removeItem('idSitera')
     }).catch(err=>
     {
     
@@ -165,6 +189,8 @@ const posalji_zahtev=()=>
         
     })
 }
+{console.log(vlasnikId + 'vlasikje')}
+
     return (
       
     <div className={klase.bos}>
@@ -197,6 +223,36 @@ const posalji_zahtev=()=>
         <MenuItem value={2}><i class="fa-solid fa-paw"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
         <MenuItem  value={3}><i class="fa-solid fa-dog"><h5>Čuvanje psa u kući sittera</h5></i></MenuItem>
         <MenuItem  value={4}><i class="fa-solid fa-paw"><h5>Poseta sittera</h5></i></MenuItem>
+      </Select>
+    </FormControl>
+   
+   </Box>
+</div>
+</div>
+<div className={klase.selectboxpsi}>
+     <div className={klase.vrstapsi}>
+  
+     <Box sx={{ minWidth: 150 }}>
+       <Button color='primary' onClick={()=>{psici();}}>klikni me</Button>
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label1" >Odaberite vaseg psa</InputLabel>
+      {/* <h3>{}</h3> */}
+      <Select style={{width:'300px'}}
+        labelId="demo-simple-select-label1"
+        id="demo-simple-select1"
+        value={pasId}
+        label="Age"
+        onChange={(e)=>setPasId(e.target.value)}
+       onClick={dogs1}
+        // onChange={handleChange}
+      >
+        {psi && psi.map(x=>
+          (
+
+        <MenuItem   onClick={()=>{dogs(x.id)}} value={x.id}><i class="fa-solid fa-dog"><h5>{x.ime} </h5></i></MenuItem>
+
+          ))}
+          {console.log(pasId + 'pas id je')}
       </Select>
     </FormControl>
    

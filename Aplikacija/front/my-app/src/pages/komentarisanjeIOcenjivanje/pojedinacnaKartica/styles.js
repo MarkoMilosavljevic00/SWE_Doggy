@@ -7,13 +7,23 @@ const classStyles = makeStyles({
   },
   divOcena: {
     display: 'flex',
-
-    justifyContent: 'end',
+    flex: 1,
+    justifyContent: 'space-around',
   },
 
   divKomentar: {
     display: 'flex',
     justifyContent: 'center',
+  },
+
+  lbl: {
+    display: 'flex',
+    flex: 1,
+  },
+  ocena: {
+    display: 'flex',
+    flex: '1',
+    justifyContent: 'end',
   },
 });
 export default classStyles;

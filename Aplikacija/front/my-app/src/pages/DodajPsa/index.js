@@ -357,7 +357,7 @@ const [open, setOpen] = React.useState(false);
             */}     
         </Grid>
         </div>
-        <CardSlika/>
+        {/* <CardSlika/> */}
         </div>
       </DialogContentText>
         </DialogContent>

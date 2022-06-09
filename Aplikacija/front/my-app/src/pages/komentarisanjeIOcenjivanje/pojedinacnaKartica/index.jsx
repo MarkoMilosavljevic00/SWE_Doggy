@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -17,9 +17,19 @@ export default function BasicCard() {
   const classes = classStyles();
   const [komentar, setKomentar] = useState('');
   const [ocena, setOcena] = useState(null);
+  const idVlasnika = localStorage.getItem('idVlasnika');
+  // const [pas, postaviPsa] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(
+  //     'https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika
+  //   ).then(async res => {
+  //     const rez = await res.json();
+  //     postaviPsa(rez);
+  //   });
+  // }, []);
 
   const sacuvajOnClick = () => {
-    const idVlasnika = 2; //id (token) vlasnika se dobija kada se uloguje
     const idSitera = localStorage.getItem('idSitera');
     const vreme = '2022-05-30T20:21:58.311Z';
 
@@ -27,8 +37,8 @@ export default function BasicCard() {
       vreme: vreme,
       komentar: komentar,
       siterId: idSitera,
-      pasId: 2, //ovo ne treba, jer vlasnik ne ocenjuje svog psa, vec sitera!
-      //idVlasnika: 1, //ovo fali, treba da se zna koji vlasnik ocenjuje kog sitera
+      pasId: 4, //ovo ne treba, jer vlasnik ne ocenjuje svog psa, vec sitera!
+      vlasnikId: idVlasnika, //ovo fali, treba da se zna koji vlasnik ocenjuje kog sitera
       ocena: ocena,
     };
 
@@ -52,6 +62,15 @@ export default function BasicCard() {
   const textareaOnChange = ev => {
     setKomentar(ev.target.value);
   };
+  const [vlasnik, setVlasnici] = useState([]);
+  useEffect(() => {
+    fetch(
+      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + idVlasnika
+    ).then(async res => {
+      const rez = await res.json();
+      setVlasnici(rez);
+    });
+  }, []);
 
   return (
     <Card sx={{ minWidth: 275 }} style={{ margin: 5 }}>
@@ -60,13 +79,21 @@ export default function BasicCard() {
       >
         <div className={classes.divSacuvaj}>
           <div className={classes.divOcena}>
-            <PostavljanjeOcene setOcena={setOcena} />
+            <div className={classes.lbl}>
+              <Typography variant="h5" component="div">
+                {vlasnik.ime} {vlasnik.prezime}
+              </Typography>
+            </div>
+            <div className={classes.ocena}>
+              <PostavljanjeOcene setOcena={setOcena} />
+            </div>
           </div>
+
           <TextareaAutosize
             // placeholder="Unesi komentar..."
             placeholder={'Unesi komentar...'}
             onChange={textareaOnChange}
-            style={{ width: '100%', height: 50 }}
+            style={{ width: '100%', height: 50, marginTop: ' 10px' }}
           />
           <Typography variant="h5" component="div"></Typography>
           <div className={classes.divKomentar}>

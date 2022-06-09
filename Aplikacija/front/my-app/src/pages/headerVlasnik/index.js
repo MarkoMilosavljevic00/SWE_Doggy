@@ -19,7 +19,11 @@ import './styles'
 import IkonicaHome from '../../components/ikonicaHome';
 import { profilVlasnikRoute,DodajPsaRoute } from "../../router/routes";
 import { useNavigate } from "react-router-dom";
-
+import { useState,useEffect } from 'react'
+import Axios from 'axios'
+import { red } from '@mui/material/colors';
+import { Avatar } from '@mui/material';
+import { CardHeader } from '@mui/material';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -60,6 +64,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const NavBarVlasnik=()=> {
+  const[slika,setSlika]=useState('')
+  const ajdi=localStorage.getItem('idVlasnika')
+  useEffect(()=>
+  {
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(res=>
+    {
+      console.log(res.data.slika + 'slik je')
+      setSlika(res.data.slika)
+    })
+  })
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     
@@ -160,7 +174,8 @@ const NavBarVlasnik=()=> {
           aria-haspopup="true"
           color="inherit"
           >
-          <AccountCircle />
+      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
+      </Avatar>
         </IconButton>
         <p>Profil</p>
       </MenuItem>
@@ -242,7 +257,8 @@ const NavBarVlasnik=()=> {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
+              </Avatar>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

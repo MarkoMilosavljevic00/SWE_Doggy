@@ -11,6 +11,7 @@ const classStyles = makeStyles({
     display: 'flex',
     marginLeft: '800px',
     marginTop: ' 10px',
+    flex: 1,
   },
 
   divNazad: {

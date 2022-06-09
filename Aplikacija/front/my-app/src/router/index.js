@@ -17,6 +17,7 @@ import React from 'react';
 import PristigliZahtevi from '../pages/sitterPristigliZahtevi/index.js';
 import VlasnikZahtevi from '../pages/vlasnikZahtevi/index.js';
 import SitterProfil from '../pages/sitterProfil/index.js';
+import AdminVlasnici from '../pages/adminVlasnici/index.jsx';
 
 import * as routes from './routes';
 
@@ -30,7 +31,11 @@ const Router = () => {
         <Route exact path={routes.sitterRoute} element={<Sitter />} />
         <Route exact path={routes.helpRoute} element={<Help />} />
         <Route exact path={routes.adminRoute} element={<Admin />} />
-
+        <Route
+          exact
+          path={routes.adminVlasniciRoute}
+          element={<AdminVlasnici />}
+        />
         <Route
           exact
           path={routes.komentarisanjeIOcenjivanjeRoute}

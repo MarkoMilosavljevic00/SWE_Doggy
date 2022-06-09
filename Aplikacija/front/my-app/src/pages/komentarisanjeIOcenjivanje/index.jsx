@@ -90,6 +90,7 @@ const KomentariasnjeIOcenjivanje = props => {
               komentar={k.komentar}
               ocena={k.ocena}
               key={index}
+              vlasnikId={k.vlasnikId}
             />
           );
         })}

@@ -17,7 +17,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import Axios from 'axios';
 import classStyles from './styles';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { ExpandMore } from '@mui/icons-material';
 const CardSlika = () => {
  
@@ -27,6 +27,18 @@ const CardSlika = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
 };
+
+useEffect(()=>
+{
+  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
+    res=>
+    {
+      console.log(res.data.slika)
+      setSlika(res.data.slika)
+    }
+  )
+},[]
+)
   const ajdi=localStorage.getItem('idVlasnika')
   console.log(ajdi + 'jajkas')
   const[slika,setSlika]=useState('')
@@ -34,7 +46,7 @@ const CardSlika = () => {
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   const picture = ()=>
   {
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
       res=>
       {
         console.log(res.data.slika)
@@ -42,6 +54,17 @@ const CardSlika = () => {
       }
     )
   }
+  const[namino,setNamino]=useState('')
+useEffect(()=>
+  {
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
+      res=>
+      {
+        console.log(res.data)
+        setNamino(res.data)
+      }
+    )
+  },[])
   const [file, setFile] = useState()
 function handleChange(event) {
   setFile(event.target.files[0])
@@ -58,7 +81,7 @@ function handleChange(event) {
         'responseType': 'blob' 
       },
     };
-    Axios.post('https://localhost:5001/Siter/dodajSlikuSiteru?idSiter=' + ajdi, formData, config).then((response) => {
+    Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + ajdi, formData, config).then((response) => {
      
     //    base64ImageString = Buffer.from(response.data, 'binary').toString('base64')
     // srcValue = "data:image/png;base64,"+base64ImageString
@@ -86,7 +109,7 @@ function handleChange(event) {
           // action={<IconButton aria-label="settings">
           //   <MoreVertIcon />
           // </IconButton>}
-          title={' ajaj'}
+          title={namino.ime + ' ' + namino.prezime}
           subheader={date}
           />
       <CardMedia
@@ -108,8 +131,9 @@ aria-expanded={expanded}
 aria-label="show more"
 
 >
-</ExpandMore>
-<CardContent>
+    </ExpandMore>
+<Collapse in={expanded} timeout="auto" unmountOnExit>
+  <CardContent>
         <Button
           style={{
             backgroundColor: 'cornsilk',
@@ -125,6 +149,7 @@ aria-label="show more"
           Dodaj sliku
         </Button>
         </CardContent>
+  </Collapse>
       </CardActions>
     </Card>
   );

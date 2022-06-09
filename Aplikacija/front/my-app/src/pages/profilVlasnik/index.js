@@ -22,6 +22,7 @@ import axios from '../../api/axios';
 import { Typography } from '@mui/material';
 import AppFooter from '../../components/futer';
 import Footer from '../../components/Footer'
+import { Refresh } from '@mui/icons-material';
 const ProfilVlasnik =()=>{
 console.log(1)
 
@@ -120,9 +121,9 @@ const pending_zahtevi=()=>
             }
         )
 }
-const gotovi_zahtevi=()=>
+const gotovi_zahtevi=async()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=3').then(
+ await  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=3').then(
             res=>
 
             {
@@ -216,18 +217,37 @@ const [data,setData]=useState(
            setData(res.data)
           })
         }
-   useEffect(()=>
+        const[refresh,setRefresh]=useState(false)
+useEffect(()=>
 {
    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId).then(
       res=>
       {
-         console.log(res )
+         console.log(res)
          setProfil(res.data)
          setData(res.data)
       }
    )
 },[])
-
+const[stanje,setStanje]=useState(-1)
+const[skrij,setSkrij]=useState(false)
+const handleklik=()=>
+{
+  setSkrij(!skrij)
+}
+const brisi_uslugu=(props)=>
+{ console.log('miloca' + props)
+  Axios.delete('https://localhost:5001/Usluga/obrisiUslugu?idUsluge=' + props).then(
+    res=>
+    { 
+      console.log(res.data + 'AHAHHAAH BRISANO')
+     }
+  )
+}
+const handleRefresh=()=>
+{
+  setRefresh(!refresh);
+}
       return(
            <>
            
@@ -296,35 +316,44 @@ const [data,setData]=useState(
   ))
 
 }
-{gotovi && gotovi.map(g=>
-(  <div className='gotovi' hidden={otvoriGotovi} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'500px'}}>
+{gotovi && gotovi.map((g,index)=>
+(  <div key={g.id} className='gotovi' hidden={otvoriGotovi} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'500px'}}>
       <h6 hidden={true}>{pasId=g.pasId} {}  {}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa {ker}, je uspesno zavrsena!</Typography>
+      <Typography paragraph onClick={()=>{setGotovi(index);vrati_psa(pasId);}}> Vasa usluga za psa {ker}, je uspesno zavrsena!</Typography>
       <Typography paragraph onClick={()=>vrati_psa(pasId)}>Molimo Vas ocenite sitera:{g.siter.ime} {g.siter.prezime}</Typography>
-     
+     <div className='sakrij' hidden={skrij}>
       <TextField
+     
           required
           id="outlined-required"
           label="Komentari"
           multiline
-          value={komentar}
+          value={stanje===index ? komentar: ' '}
           defaultValue="Hello World"
-          onChange={ (e) =>  setKomentar((e.target.value))}
+          onClick={(e)=>{setKomentar('');setOcena(0);setStanje(index);}}
+          onChange={ (e) => { setKomentar(e.target.value)}}
+          
         />
          <TextField
+         
           id="outlined-number"
           label="Ocena"
           type="number"
-          value={ocena}
+          value={stanje===index ? ocena: 0}
           InputLabelProps={{
             shrink: true,
           }}
           InputProps={{ inputProps: { min: 0, max: 5} }}
-          onChange={ (e) =>  setOcena((e.target.value))}
+          onClick={(e)=>{setOcena(0);setStanje(index);}}
+          //u on click stanje
+          onChange={ (e) =>  { setOcena(e.target.value)}}
            
           
         />
-  <Button color='primary' onClick={()=>{oceni(g.siterId,g.pasId,komentar,ocena)}}>Posalji ocenu siteru</Button>
+  <Button color='primary' onClick={()=>{oceni(g.siterId,g.pasId,komentar,ocena);brisi_uslugu(g.id);handleRefresh();gotovi_zahtevi();}}>Posalji ocenu siteru</Button>
+  {/* <Button color='success' onClick={obrisi_uslugu}></Button> */}
+  {console.log(g.id + 'mjauuu')}
+  </div>
 </div>
   ))
   

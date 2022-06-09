@@ -11,3 +11,4 @@ export const adminRoute = '/adminRoute';
 export const profilSitterRoute='/sitterProfilRoute'
   export const pristigliZahteviRoute='/sitterZahteviRoute'
   export const pristigliZahteviVlasnikRoute='/vlasnikZahteviRoute'
+  export const adminVlasniciRoute = '/adminVlasniciRoute';

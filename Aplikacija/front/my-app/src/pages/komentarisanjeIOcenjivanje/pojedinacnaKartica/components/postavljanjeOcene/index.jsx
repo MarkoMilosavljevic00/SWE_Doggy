@@ -16,8 +16,14 @@ export default function BasicRating(props) {
       sx={{
         '& > legend': { mt: 2 },
       }}
+      style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        width: '200px',
+        webkitBoxAlign: 'center',
+      }}
     >
-      <Typography component="legend">Oceni: </Typography>
+      <label component="legend">Oceni: </label>
       <Rating
         name="simple-controlled"
         value={value}

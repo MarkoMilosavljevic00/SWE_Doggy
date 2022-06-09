@@ -12,13 +12,26 @@ import Ocene from '../ocene/index.jsx';
 import { Label } from '@mui/icons-material';
 
 export default function BasicCard(props) {
-  const { vreme, komentar, ocena } = props;
+  const { vreme, komentar, ocena, vlasnikId } = props;
+
+  const [vlasnik, setVlasnici] = useState([]);
+  useEffect(() => {
+    fetch(
+      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId
+    ).then(async res => {
+      const rez = await res.json();
+      setVlasnici(rez);
+    });
+  }, []);
+
   const classes = classStyles();
   return (
     <div className={classes.divKartica}>
       <Card style={{ border: '1px solid black', flex: 1 }}>
         <Ocene style={{}} ocena={ocena} />
-        <label style={{ margin: 10 }}>Jaja Turku</label>
+        <Typography variant="h5" component="div" style={{ marginLeft: '15px' }}>
+          {vlasnik.ime} {vlasnik.prezime}
+        </Typography>
 
         <CardContent>
           <Typography
@@ -30,11 +43,8 @@ export default function BasicCard(props) {
             color="text.secondary"
             gutterBottom
           ></Typography>
-          <Typography variant="h5" component="div">
-            {/* be{bull}nev{bull}o{bull}lent */}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
-          <Typography variant="body2">{komentar}</Typography>
+
+          <Typography variant="body1">{komentar}</Typography>
           <div className={classes.divVreme}>{vreme}</div>
         </CardContent>
       </Card>

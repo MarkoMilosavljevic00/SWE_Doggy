@@ -17,10 +17,11 @@
  import Button from '@mui/material/Button';
  import slika from '../../slike/dog.jpg';
  import classStyles from './styles';
- 
- import { useState } from 'react';
+ import Axios from 'axios'
+ import { ExpandMore } from '@mui/icons-material';
+ import { useState,useEffect } from 'react';
 
- const CardSlika=() =>{
+ const CardSlika=(props) =>{
  {/*const [state,setState]=useState('')
  state:{profileImg="https://image.shutterstock.com/image-illustration/photo-silhouette-male-profile-white-260nw-1018631086.jpg"}
  const imageHandler = (e) =>
@@ -34,24 +35,56 @@
    }
    reader.readAsDataURL(e.target.files[0])
  }*/}
-
-
-
+const { id }=props
+const [file, setFile] = useState()
+function handleChange(event) {
+  setFile(event.target.files[0])
+}
+const[expanded,setExpanded]=useState('')
+const handleExpandClick = () => {
+  setExpanded(!expanded);
+};
+function handleSubmit(event) {
+  
+  // const url = 'http://localhost:3000/uploadFile';
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('fileName', file.name);
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      'responseType': 'blob' 
+    },
+  };
+  Axios.post('https://localhost:5001/Pas/dodajSlikuPsu?idPas=' + id, formData, config).then((response) => {
+  console.log(response);
+    setFile(response.data)
+    
+  });
+}
+const [pic,setPic]=useState('')
+// const picture = ()=>
+// {
+//   Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+//     res=>
+//     {
+//       console.log(res.data.slika + 'ahahahaaahha')
+//       setPic(res.data.slika)
+//     }
+//   )
+// }
+useEffect(()=>
+{
+  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+    res=>
+    {
+      console.log(res.data.slika)
+      setPic(res.data.slika)
+    }
+  )
+})
     const classes = classStyles();
- {/*return (
-   <div className='page'>
-     <div className='container'>
-       <h1 className='h1'>Dodaj slickcu</h1>
-        <div className='img-holder'>
-         <img src={profileImg} alt='' id='img' className='img' />
-
-    </div>
-        <input type='file' name='image-upload' id='input' accept='image/*' onChange={imageHandler}/>
-        <div className='label'>
-       <label htmlFor='input' className='image-upload'>choose </label>
-     </div>
-   </div>
- </div>*/}
+ 
    return(
      <Card sx={{ maxWidth: 200 }}>
        <CardHeader
@@ -60,20 +93,36 @@
        <CardMedia
          component="img"
          height="194"
-         image={slika}
+         image={'https://localhost:5001/StaticFiles/' + pic}
          alt="Paella dish"
        />
        <CardContent>
      
        </CardContent>
        <CardActions className={classes.divButtonCard}> 
+       <Typography paragraph>Ubacite novu sliku</Typography>
+        <input type="file" onChange={handleChange} />
+        <ExpandMore
+          expand={expanded}
+
+          onClick={() => { handleExpandClick();  } }
+          aria-expanded={expanded}
+          aria-label="show more"
+
+        >
+        </ExpandMore>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
          <Button
           style={{ backgroundColor: 'green' }}
           variant="contained"
           color="success"
+          onClick={handleSubmit}
           >
-          Dodaj sliku
+          Dodaj sliku 
        </Button>
+       </CardContent>
+        </Collapse>
        </CardActions>
      </Card>
    );

@@ -27,7 +27,7 @@ import Paper from '@mui/material/Paper';
 import { useState,useEffect } from 'react';
 import { Popover } from '@mui/material';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
-
+import CardSlika from '../../../card.js';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -166,6 +166,17 @@ const[usluga,setUsluga]=useState([])
     }
   )
 },[])
+// const[pic,setPic]=useState('')
+// useEffect(()=>
+// {
+//   Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+//     res=>
+//     {
+//       console.log(res.data.slika)
+//       setPic(res.data.slika)
+//     }
+//   )
+// })
 
   const navigate = useNavigate();
 
@@ -246,6 +257,7 @@ const handleIzmena=()=>
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        // onClick={}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
@@ -254,6 +266,8 @@ const handleIzmena=()=>
           Informacije o psu
         </BootstrapDialogTitle>
         <DialogContent dividers>
+          <div className='izmena'style={{display:'flex'}}>
+            <div className='prvideoizmena'>
           <div className='dugmeizmena' style={{display:'grid',marginBottom:'20px'}}>
         <button onClick = {() => { setIzmena(!izmena) }} > Izmeni podatke </button>
          </div>
@@ -276,7 +290,11 @@ const handleIzmena=()=>
     
           <Typography gutterBottom>Tezina </Typography>
           <input  type='text' id='tezina'value={data.tezina} disabled={izmena} onChange={ (e) =>  handle(e) } />
-        
+          </div>
+          <div className='cardslika'>
+        <CardSlika id={id}/>
+        </div>
+        </div>
           <div className={classes.divButton}>
           <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
           <Button variant='contained'  style={{marginBottom:'20px'}}onClick={()=>{handleIzmena();izmeniPsa();}}>Azuriraj ime</Button>
