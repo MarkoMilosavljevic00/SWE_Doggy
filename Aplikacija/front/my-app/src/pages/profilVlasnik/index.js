@@ -21,6 +21,7 @@ import { ButtonGroup } from '@mui/material';
 import axios from '../../api/axios';
 import { Typography } from '@mui/material';
 import AppFooter from '../../components/futer';
+import DoneIcon from '@mui/icons-material/Done';
 import Footer from '../../components/Footer'
 import { Refresh } from '@mui/icons-material';
 const ProfilVlasnik =()=>{
@@ -258,7 +259,7 @@ const handleRefresh=()=>
              <CardSlika/>
             
             
-             <Paper elevation={8} style={{display:'grid',backgroundColor:'mediumspringgreen',minWidth:'50px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+             <Paper elevation={8} style={{display:'grid',backgroundColor:'khaki',minWidth:'50px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
             <div className='jedan'> 
      <div className='glavno_dugme'>
      </div>
@@ -368,69 +369,91 @@ const handleRefresh=()=>
 
 
 
-             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'mediumspringgreen',display:'grid',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'khaki',display:'flex',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
              <h4 className={classes.naslov2}>Opšti podaci</h4>
-             <div>
-             <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button>
+             <div className='inputi'>
+             {/* <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button> */}
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+              <div className='prviinput'style={{display:'contents'}}>
              <Grid item xs={6}>
-                <label>Ime:</label>
+                <label style={{margin:'10px',marginLeft:'40px'}}>Ime:</label>
              </Grid>
              <Grid item xs={6}>
-                <input type='text' id='opis' style={{display:'flex'}} value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }disabled={ch}></input>
+                <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}} value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }disabled={ch}></input>
+             </Grid>
+             </div>
+             <div className='drugiinput'style={{display:'contents'}}>
+             <Grid item xs={6}>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Prezime:</label>
              </Grid>
              <Grid item xs={6}>
-                   <label>Prezime:</label>
+             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}} value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
+             </Grid>
+             </div>
+             <div className='treciinput'style={{display:'contents'}}>
+             <Grid item xs={6}>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Email:</label>
              </Grid>
              <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex'}} value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
+             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
+             </Grid>
+             </div>
+             <div className='cetvrtiinput'style={{display:'contents'}}>
+             <Grid item xs={6}>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Korisničko Ime:</label>
              </Grid>
              <Grid item xs={6}>
-                   <label>Email:</label>
+             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}}  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
+             </Grid>
+             </div>
+             <div className='petiinput'style={{display:'contents'}}>
+             <Grid item xs={6}>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Sifra:</label>
              </Grid>
              <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex'}}value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
+             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}}  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
+             </Grid>
+             </div>
+             <div className='sestiinput'style={{display:'contents'}}>
+             <Grid item xs={6}>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Broj telefona:</label>
              </Grid>
              <Grid item xs={6}>
-                   <label>Korisničko Ime:</label>
-             </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex'}}  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
-             </Grid>
-             <Grid item xs={6}>
-                   <label>Sifra:</label>
-             </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex'}}  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
-             </Grid>
-             <Grid item xs={6}>
-                   <label>Broj telefona:</label>
-             </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex'}} value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
+             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}} value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
              </Grid> 
+             </div>
             
-            
+             <div className='sedmiinput'style={{display:'contents'}}>
              <Grid item xs={6}>
-                   <label>Grad:</label>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Grad:</label>
             </Grid>
             <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex'}}value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
+             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
              </Grid> 
+             </div>
+             <div className='osmiinput'style={{display:'contents'}}>
              <Grid item xs={6}>
-                   <label>Adresa:</label>
+                   <label style={{margin:'10px',marginLeft:'40px'}}>Adresa:</label>
             </Grid>
             <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex'}}value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
+             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
              </Grid>
+             </div>
          </Grid>
              </div>
-             <div className='izmeniVlasnika' style={{display:'flex',marginTop:'20px',alignSelf:'flex-start'}}>
-             <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'cornsilk',color:'black'}}>
+             <div className='izmeniVlasnika' style={{display:'flex'}} >
+             {/* <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
         <EditIcon />
       </Fab>
-      <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography>
-      <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'cornsilk',color:'black',borderRadius:'25px',marginLeft:'65px'}}>
+
+      <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography> */}
+       <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+  Edituj podatke
+</Button>
+      <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+  Potvrdi izmene
+</Button>
+      <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Obrisi svoj profil
 </Button>
       </div>

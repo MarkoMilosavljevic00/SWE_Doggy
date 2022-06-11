@@ -14,8 +14,13 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Header from '../../components/HeaderPomoc';
+import Footer from '../../components/Footer';
 
+import NavbarVlasnik from '../headerVlasnik';
+import NavBarSiter from '../headerSiter';
 const Login = () => {
+  const [milica,setMilica]=useState(false)
   const navigate = useNavigate();
   const classes = classStyles();
 
@@ -66,7 +71,7 @@ const Login = () => {
           res = await res.json();
           localStorage.setItem('korisnik', JSON.stringify(res.korisnik));
           localStorage.setItem('token', res.token);
-
+          setMilica(true)
           if (res.korisnik.tip == 0) {
             localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
             alert('Uspesno ste se ulogovali kao Vlasnik');
@@ -78,12 +83,14 @@ const Login = () => {
           }
 
           // localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
+
         }
       })
       .catch(err => {
         alert(err);
         alert('Losa sifra')
       });
+ 
   };
   const [values, setValues] = React.useState({
     amount: '',
@@ -106,11 +113,18 @@ const Login = () => {
       showPassword: !values.showPassword,
     });
   };
-
+  const proveraSiter=localStorage.getItem('idSitera')
+  const proveraVlasnik=localStorage.getItem('idVlasnika')
   return (
+    <>
+    {milica? navigate('/'): 
+
+    (
+    <div className='jedan'>
+      { proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)} 
     <div className={classes.container}>
-      <HeaderLogin />
-      <div style={{ displey: 'flex', flexDirection: 'column' }}>
+      
+      <div className='dva' style={{ displey: 'flex', flexDirection: 'column',minHeight:'675px' }}>
         <h1 style={{ color: '#000000c2' }} className={classes.naslov}>
           Logovanje
         </h1>
@@ -169,7 +183,7 @@ const Login = () => {
               style={{ backgroundColor: 'green' }}
               variant="contained"
               color="success"
-              onClick={() => navigate('../')}
+              onClick={()=>{navigate('/')}}
             >
               Nazad
             </Button>
@@ -177,6 +191,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </div>)}
+    </>
   );
 };
 export default Login;

@@ -20,6 +20,7 @@
  import Axios from 'axios'
  import { ExpandMore } from '@mui/icons-material';
  import { useState,useEffect } from 'react';
+import { MenuItem } from '@mui/material';
 
  const CardSlika=(props) =>{
  {/*const [state,setState]=useState('')
@@ -84,46 +85,59 @@ useEffect(()=>
   )
 })
     const classes = classStyles();
- 
+    const[hide,setHide]=useState(false)
+
+    const handleHide=()=>
+    {
+      setHide(!hide)
+    }
    return(
-     <Card sx={{ maxWidth: 200 }}>
+     <Card sx={{ maxWidth: 200 }}style={{display:'initial'}}>
        <CardHeader
        
        />
        <CardMedia
+       style={{}}
          component="img"
          height="194"
          image={'https://localhost:5001/StaticFiles/' + pic}
          alt="Paella dish"
        />
-       <CardContent>
-     
-       </CardContent>
+      
+        <div className='asd' style={{textAlign:'center'}}>
+       <Button paragraph onClick={()=>{handleHide();}} style={{maxWidth:'200px',backgroundColor:'rgb(93, 224, 100)',marginBottom:'20px',marginTop:'20px',color:'white'}}>Izaberite novu sliku</Button>
+        </div>
        <CardActions className={classes.divButtonCard}> 
-       <Typography paragraph>Ubacite novu sliku</Typography>
-        <input type="file" onChange={handleChange} />
+       <div className='dodajslikupas' style={{display:'grid'}}>
+        <input hidden={!hide} style={{marginLeft:'100px'}} type="file" onChange={handleChange} />
+        <IconButton onClick={() => { handleExpandClick();  } }>
         <ExpandMore
           expand={expanded}
-
+          hidden={!hide}
           onClick={() => { handleExpandClick();  } }
           aria-expanded={expanded}
           aria-label="show more"
-
-        >
-        </ExpandMore>
+          style={{textAlign:'center'}}
+          
+          >
+          Informacije o psu
+          <ExpandMoreIcon />
+        </ExpandMore >
+        </IconButton>
+          </div>
+            </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent    style={{ textAlign:'center' }}>
          <Button
-          style={{ backgroundColor: 'green' }}
+          style={{ backgroundColor: 'rgb(93, 224, 100)',textAlign:'center' }}
           variant="contained"
           color="success"
           onClick={handleSubmit}
           >
-          Dodaj sliku 
+          Potvrdi
        </Button>
        </CardContent>
         </Collapse>
-       </CardActions>
      </Card>
    );
  }

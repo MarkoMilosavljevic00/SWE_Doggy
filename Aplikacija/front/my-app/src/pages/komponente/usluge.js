@@ -1,4 +1,5 @@
 const Usluge = () => {
+  const idVlasnika=localStorage.getItem('idVlasnika')
   return (
     <section id="services">
       <div className="container" data-aos="fade-up">
@@ -12,9 +13,10 @@ const Usluge = () => {
           className="row"
           style={{ dispey: 'flex', justifyContent: 'center' }}
         >
+       
           <div className="col-lg-4 col-md-6" data-aos="zoom-in">
             <div className="box">
-              <div className="icon">
+              <div className="icon"  href='registerRoute'>
                 <i class="fa-solid fa-dog"></i>
               </div>
               <h4 className="title">Šetanje psa po gradu</h4>
@@ -23,10 +25,12 @@ const Usluge = () => {
               </p>
             </div>
           </div>
+
+
           <div className="col-lg-4 col-md-6" data-aos="zoom-in">
             <div className="box">
               <div className="icon">
-                <i class="fa-solid fa-paw"></i>
+              <i class="fa-solid fa-house"></i>
               </div>
               <h4 className="title">Čuvanje psa u vašoj kući</h4>
               <p className="description">
@@ -44,13 +48,13 @@ const Usluge = () => {
           <div className="col-lg-4 col-md-6" data-aos="zoom-in">
             <div className="box">
               <div className="icon">
-                <i class="fa-solid fa-bone"></i>
+              <i class="fa-solid fa-bone"></i>
               </div>
               <h4 className="title">Poseta sittera</h4>
               <p className="description">
-                Ukoliko je Vaš pas nevaljao i želite da ostanete sa jastukom
-                više na kraju meseca, ne tražite dalje, ovaj sajt je pravo mesto
-                za dresuru Vašeg nevaljalca.
+                Ukoliko je Vas pas nabacio malo vise kilograma, a ne zelite da ga vodite na setnje,ovo je prava vrsta usluge za Vas.
+                Nasi siteri ce doci na vasu kucnu adresu sa razlicitim igrackama i lopticama za Vaseg psa i naterace malog nevaljalca na
+                malo fizicke aktivnosti u Vasem dvoristu.
               </p>
             </div>
           </div>
@@ -58,13 +62,12 @@ const Usluge = () => {
           <div className="col-lg-4 col-md-6" data-aos="zoom-in">
             <div className="box">
               <div className="icon">
-                <i class="fa-solid fa-bone"></i>
+              <i class="fa-solid fa-bowl-food"></i>
               </div>
               <h4 className="title">Čuvanje psa u kući sittera</h4>
               <p className="description">
-                Ukoliko je Vaš pas nevaljao i želite da ostanete sa jastukom
-                više na kraju meseca, ne tražite dalje, ovaj sajt je pravo mesto
-                za dresuru Vašeg nevaljalca.
+                Ukoliko Vam je potreban Vas kucni prostor za neki dogadjaj, a pritom ce Vam pas praviti probleme,odaberite kada Vam odgovara
+                da nas siter pokupi vaseg psa i odvede ga kod svoje kuce na cuvanje.
               </p>
             </div>
           </div>

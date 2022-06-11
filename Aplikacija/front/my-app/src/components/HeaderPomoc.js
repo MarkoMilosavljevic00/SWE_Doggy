@@ -536,8 +536,8 @@ const NavBarSiter=()=> {
   const navigate=useNavigate();
   return (
       <Box sx={{ flexGrow: 1 }}>
-      <AppBar  position='fixed' style={{display:'flex'}}>
-        <Toolbar  position='fixed'style={{backgroundColor:'#5de064',display:'flex'}}>
+      <AppBar  position='sticky' >
+        <Toolbar  position='sticky'style={{backgroundColor:'#5de064'}}>
           <IconButton
             size="large"
             edge="start"
@@ -559,20 +559,28 @@ const NavBarSiter=()=> {
           </h1>
         </div>
         </header>
-          
-          <Box sx={{ flexGrow: 1,flexShrink:1 }} />
+          {/* <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search> */}
+          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <div className="container d-flex justify-content-between align-items-center">
        
 
-        <nav xs={12} md={6} id="navbar" className="navbar">
-          <ul style={{display:'flex'}} xs={12} md={6}>
-          
-            <li  style={{display:'flex'}}>
+        <nav xs={12} md={6}id="navbar" className="navbar">
+          <ul>
+            {/* <li><a className="nav-link scrollto active" href="#hero">Početna</a></li> */}
+            <li>
               
-              <IconButton  href="#about"  style={{display:'flex'}}>
+              <IconButton  href="./#about">
             
-              <Typography style={{color:'white',display:'flex'}} className="nav-link scrollto">
+              <Typography style={{color:'white'}} className="nav-link scrollto">
                 O sajtu
               </Typography>
               
@@ -581,9 +589,9 @@ const NavBarSiter=()=> {
 
             <li>
               
-              <IconButton  href="/registerRoute"  style={{display:'flex'}}>
+              <IconButton  onClick={()=>{navigate('/registerRoute')}}>
             <PlayCircleFilledWhiteIcon/>
-              <Typography fontSize={14} style={{color:'white',display:'flex'}} className="nav-link scrollto">
+              <Typography fontSize={14} style={{color:'white'}} className="nav-link scrollto">
                 Zapocni 
               </Typography>
               
@@ -594,17 +602,17 @@ const NavBarSiter=()=> {
 
              
             <li>
-            <IconButton href="#contact"  style={{display:'flex'}}>
+            <IconButton href="./#contact">
               <AddLocationAltIcon/>
-              <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white',display:'flex'}}>
+              <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white'}}>
                 Kontakt
               </Typography>
               </IconButton>
             </li>
             <li>
-            <IconButton  href="/helpRoute"  style={{display:'flex'}}>
+            <IconButton  onClick={()=>{navigate('/helpRoute')}}>
               <HelpOutlineIcon />
-              <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{color:'white',display:'flex'}}>
+              <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{color:'white'}}>
                 Pomoć
               </Typography>
               </IconButton>
@@ -615,9 +623,9 @@ const NavBarSiter=()=> {
               </a>
             </li>
              <li> */}
-            <li className="dropdown"  style={{display:'flex'}} >
+            <li className="dropdown" >
             <IconButton>
-              <Typography style={{color:'white',display:'flex'}}href="/#">
+              <Typography style={{color:'white'}}href="./">
                 <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
               </Typography>
               </IconButton>
@@ -632,30 +640,29 @@ const NavBarSiter=()=> {
                 </ul>
               </li> */}
                 <li>
-                  <a href="#services" >Šetanje psa po gradu</a>
+                  <a href="./#services" >Šetanje psa po gradu</a>
                 </li>
                 <li>
-                  <a href="#services" >Čuvanje psa u vašoj kući</a>
+                  <a href="./services#" >Čuvanje psa u vašoj kući</a>
                 </li>
                 <li>
-                  <a href="#services">Poseta sittera</a>
+                  <a href="./#services">Poseta sittera</a>
                 </li>
                 <li>
-                  <a href="#services" >Čuvanje psa u kući sittera</a>
+                  <a href="./#services" >Čuvanje psa u kući sittera</a>
                 </li>
               </ul>
             </li>
             <div className='upadaj' style={{display:'flex'}}>
              <li>
-             <IconButton href="/loginRoute"  style={{display:'flex'}}>
+             <IconButton onClick={()=>{navigate('/loginRoute')}}>
               <Typography className="nav-link scrollto" href="/loginRoute" style={{color:'white',fontWeight:'bolder'}}>
                 Log In
               </Typography>
               </IconButton>
             </li>
             <li>
-              
-            <IconButton href="/registerRoute"  style={{display:'flex'}}>
+            <IconButton onClick={()=>{navigate('/registerRoute')}}>
               <Typography className="nav-link scrollto" href="/registerRoute"style={{color:'white',fontWeight:'bolder'}}>
                 Registruj se
               </Typography>

@@ -5,14 +5,27 @@ import PetsIcon from '@mui/icons-material/Pets';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import CardDialog from './cardDialog';
+import Header from '../../components/HeaderPomoc';
+import Footer from '../../components/Footer';
+
+import NavbarVlasnik from '../headerVlasnik';
+import NavBarSiter from '../headerSiter';
+import NavBarVlasnik from '../headerVlasnik';
+
 
 const Help = () => {
   const classes = classStyles();
   const navigate = useNavigate();
+  const proveraSiter=localStorage.getItem('idSitera')
+  const proveraVlasnik=localStorage.getItem('idVlasnika')
+  
+
+
 
   return (
     <div className={classes.container}>
-      <HeaderLogin />
+{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)} 
+      
 
       <div className={classes.divSlikaVelika}>
         <div className={classes.divSlika}></div>
@@ -31,27 +44,27 @@ const Help = () => {
               <CardDialog
                 tekstButton={'Kako da postanem sitter ili vlasnik psa?'}
                 opis={
-                  'Da bi na Doggy sajtu postali sitter ili vlasnik psa potrebno je da se registrujete, na taj način ste kreirali svoj nalog. Zatim, čekate da Vas administrator prihvati.'
+                  'Da bi na Doggy sajtu postali sitter ili vlasnik psa potrebno je da se registrujete, na taj način ste kreirali svoj nalog. Zatim, ukoliko ste sitter čekate da Vas administrator prihvati, a ukoliko ste vlasnik mozete odmah krenuti sa nalazenjem sittera.'
                 }
               />
             </div>
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />
               <CardDialog
-                tekstButton={'Kako da znam da li je moj nalog odobren?'}
-                opis={'Kako da postanem siter ili vlasnik psa?'}
+                tekstButton={'Kako da znam da li je moj nalog odobren,ukoliko se registrujem kao sitter?'}
+                opis={'Ukoliko ne mozete da se loginujete onda niste prihvaceni od strane sittera, a ukoliko mozete onda ste spremni za rad?'}
               />
             </div>
-          </Grid>
+          </Grid> */}
           <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />
               <CardDialog
-                tekstButton={'Zašto bi trebao da postanem sitter?'}
+                tekstButton={'Zašto bih trebao da postanem sitter?'}
                 opis={
-                  'Ukoliko si osoba koja voli pse i koja želi da bude u njihovom prisustvu, a da pritom nemaš stalni odnos možeš zaraditi novac.'
+                  'Ukoliko ste osoba koja voli pse i želi da bude u njihovom prisustvu, a da pritom nemate stalni odnos možeš zaraditi novac.'
                 }
               />
             </div>
@@ -61,15 +74,15 @@ const Help = () => {
               <PetsIcon />
               <CardDialog
                 tekstButton={
-                  'Kako da pošaljem zahtev sitteru ili vlasniku psa?'
+                  'Kako da pošaljem zahtev sitteru?'
                 }
                 opis={
-                  'Ukoliko si vlasnik koji želi da ti sitter čuva tvog psa potrebno je da odabereš sitter-a po želji, nakon toga je potrebno da se zahtev pošalje.'
+                  'Ukoliko ste vlasnik i zelite da Vam sitter čuva psa potrebno je odabrati sitter-a po želji,a nakon toga je potrebno popuniti formu za zahteve i poslati je sitter-u.'
                 }
               />
             </div>
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />
               <CardDialog
@@ -81,7 +94,7 @@ const Help = () => {
                 }
               />
             </div>
-          </Grid>
+          </Grid> */}
           <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />
@@ -99,7 +112,7 @@ const Help = () => {
               <CardDialog
                 tekstButton={'Kako da izmenim sliku na svom profilu?'}
                 opis={
-                  'Kada se nalazite na stranici svog profila, klikom na dugme Promeni sliku možete da odaberete sliku iz Vašeg računara.'
+                  'Kada se nalazite na stranici svog profila, klikom na dugme Dodaj sliku možete da odaberete sliku iz Vašeg računara.'
                 }
               />
             </div>

@@ -129,10 +129,15 @@ const darkTheme = createTheme({
   const handleExpandClick = () => {
     setExpanded(!expanded);
 };
+const[klik,setKlik]=useState(false)
+const handleClick=()=>
+{
+  setKlik(!klik)
+}
 const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return(
-    <><Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'mediumspringgreen', display: 'grid', marginBottom: '40px', marginTop: '40px', borderRadius: '50px' }}>
+    <><Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'khaki', display: 'grid', marginBottom: '40px', marginTop: '40px', borderRadius: '50px' }}>
     {/* <ThemeProvider theme={darkTheme}>
       <main>This app is using the dark mode</main>
     </ThemeProvider> */}
@@ -153,8 +158,10 @@ const current = new Date();
        alt='paela'
        />
       <CardActions className={classes.divButtonCard}>
-     <Typography paragraph>Ubacite novu sliku</Typography>
-        <input type="file" onChange={handleChange} />
+      <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button>
+       <div className='sagfd'style={{justifyContent:'center'}}>
+        <input hidden={!klik} type="file" onChange={handleChange} />
+       </div>
         {/* <Button color='success' onClick={handleSubmit}>klik</Button> */}
         <ExpandMore
           expand={expanded}
@@ -163,13 +170,14 @@ const current = new Date();
           aria-expanded={expanded}
           aria-label="show more"
 
+            hidden={!klik}
         >
         </ExpandMore>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
 
             <Button
-              style={{ backgroundColor: 'cornsilk', color: "black", width: '250px', height: '50px', borderRadius: '20px' }}
+              style={{ backgroundColor: 'rgb(93, 224, 100)', color: "black", width: '250px', height: '50px', borderRadius: '20px' }}
               variant="contained"
               color="success"
               type="submit"
@@ -214,6 +222,7 @@ const current = new Date();
           </IconButton>
           <ExpandMore
             expand={expanded}
+            hidden={!klik}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"

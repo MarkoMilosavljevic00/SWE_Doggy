@@ -92,11 +92,12 @@ grid:{
    flex: 0.4 , 
    padding: 30    
 }, 
+fab:{
+  
+},
 dodajPsa:{
-  displey:'flex',
-  flexDirection:'row',
-  alignItems:'center',
-  flex:1
+  display:'grid',
+  justifyContent:'center'
 }
 });
 export default classStyles;

@@ -107,7 +107,7 @@ const posalji_id_sittera=()=>
         <Button color='success' value={id} onChange={e=>e.target.value}  onClick={() => {
                 localStorage.setItem('idSitera', id);
                 navigate('/vlasnikRoute');}}>Odaberi ovog sitter-a</Button>
-        <h3>{id}</h3>
+        {/* <h3>{id}</h3> */}
         </div>
   );
 }

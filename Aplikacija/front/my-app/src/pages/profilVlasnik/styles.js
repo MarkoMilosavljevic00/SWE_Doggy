@@ -25,7 +25,7 @@ const classStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     flex: 1,
-    backgroundColor: ' #d5f8d4',
+    backgroundColor: 'initial',
   },
 
   paper: {

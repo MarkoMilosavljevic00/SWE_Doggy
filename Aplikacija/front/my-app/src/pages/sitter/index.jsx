@@ -13,6 +13,7 @@ import BrojeviStranica from '../sitter/broj';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IconButton } from '@mui/material';
 import NavBarVlasnik from '../headerVlasnik';
+import Typography from '../../components/Typography';
 const Sitter = () => {
   const navigate = useNavigate();
   const classes = classStyles();
@@ -111,7 +112,6 @@ const Sitter = () => {
     <div className={classes.container}>
       <NavBarVlasnik />
       <div className={classes.divSearch}>
-        {/* <Search /> */}
         <Gradovi grad={grad} postaviGrad={postaviGrad} />
         <CenaPoSatu naziv="Cena od" setValues={postaviCenuOd} />
         <CenaPoSatu naziv="Cena do" setValues={postaviCenuDo} />
@@ -128,6 +128,7 @@ const Sitter = () => {
           Potvrdi
         </Button>
         <IconButton color='primary' href='vlasnikRoute'>
+          <Typography color='black'>Vidi usluge</Typography>
           <ArrowForwardIosIcon/>
         </IconButton>
       </div>

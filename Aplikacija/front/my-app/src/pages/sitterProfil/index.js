@@ -16,6 +16,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Axios from 'axios';
+import DoneIcon from '@mui/icons-material/Done';
 import axios from '../../api/axios';
 import { Typography } from '@mui/material';
 import AppFooter from '../../components/futer';
@@ -121,10 +122,12 @@ const azuriraj=()=>
              {/* <input  type='text' id='opis' disabled={ch} onChange={ (e) => handle(e) } /> */}
              {/* <button onClick = {() => { setCh(!ch) }} > Izmeni podatke </button> */}
              <CardSlika/>
-             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'mediumspringgreen',height:'750px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-             <h4 className={classes.naslov2}>Opšti podaci</h4>
-                <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button>
-                <Button color='success'  onClick = {() => { setCh(!ch); }} >Otkazi izmenu</Button>
+             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'khaki',height:'750px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+            <div className='prvomajski'style={{textAlign:'center'}}>
+             <h1 className={classes.naslov2}>Opšti podaci</h1>
+             </div>
+                {/* <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button> */}
+                {/* <Button color='success'  onClick = {() => { setCh(!ch); }} >Otkazi izmenu</Button> */}
              <div>
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
              <Grid item xs={6}>
@@ -195,13 +198,13 @@ const azuriraj=()=>
           onChange={ (e) =>  setProfil((profil)=>({...profil,bio:e.target.value})) }
         />
              </div>
-             <div className='izmeniVlasnika' style={{display:'flex',marginTop:'20px',alignSelf:'flex-start'}}>
-             <Fab color="secondary" aria-label="edit" onClick={azuriraj} style={{backgroundColor:'cornsilk',color:'black'}}>
-        <EditIcon />
-      </Fab>
-      <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography>
-      <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'cornsilk',color:'black',borderRadius:'25px',marginLeft:'65px'}}>
-  Obrisi svoj profil
+             <div className='izmeniVlasnika' style={{display:'flex',marginTop:'20px',justifyContent:'center'}}>
+             
+      <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+  Edituj podatke
+</Button>
+      <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { ;azuriraj(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+  Potvrdi izmene
 </Button>
       </div>
              </Paper>

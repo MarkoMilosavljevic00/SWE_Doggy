@@ -158,9 +158,10 @@ import ProsecnaOcena from '../sitter/prosecnaOcena';
 import BrojeviStranica from '../sitter/broj';
 import { Grid } from '@mui/material';
 import Axios from 'axios'
+
 import NavBar from '../headerVlasnik';
 
-const Sitter = () => {
+const Sitter = (props) => {
   const navigate = useNavigate();
   const classes = classStyles();
   const [siteri, postaviSitere] = useState([]);
@@ -172,9 +173,11 @@ const Sitter = () => {
   const [Ocena, postaviOcenu] = useState('');
   const [cenaOd, postaviCenuOd] = useState('');
   const [cenaDo, postaviCenuDo] = useState('');
-
+  const{brisi}=props
+const idVlasnika=localStorage.getItem('idVlasnika')
+const [refresh,setRefresh]=useState('')
   useEffect(() => {
-    fetch(vratiSvePse).then(async res => {
+    fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika).then(async res => {
       const results = await res.json();
       postaviSitere(results);
 
@@ -199,7 +202,7 @@ const Sitter = () => {
         postaviUkupanBrojStranica(results.length / brojObjavaPoStrani);
       }
     });
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const objave = [];
@@ -216,6 +219,11 @@ const Sitter = () => {
     postaviSitereKojiSePrikazuju(objave);
   }, [stranica]);
   const [dozvoli,setdozvoli ] = useState(true)
+  const [milica,setMilica]=useState(false)
+ const handleRefresh=()=>
+  {
+    setRefresh(!refresh)
+  }
 const dodajPsa=()=>
 {const AJDI = localStorage.getItem('idVlasnika')
 
@@ -236,6 +244,7 @@ const dodajPsa=()=>
         console.log(res)
         console.log(res.data.id)
         localStorage.setItem('idPsa',res.data.id);
+        handleRefresh()
       }
     )
 }
@@ -279,13 +288,17 @@ const [open, setOpen] = React.useState(false);
   }, [open]);
 
   return (
+    <>
+    
     <div className={classes.container}>
     <NavBar />
     <div className={classes.dodajPsa}>
-       <h4>Dodajte vašeg novog psa:</h4>
-       <Fab style={{backgroundColor:'rgb(93,224,100)', marginLeft:100}} aria-label="add" onClick={handleClickOpen('paper')}>
+       <h1>Dodajte vašeg novog psa:</h1>
+       <div className='asdasd' style={{textAlign:'center'}}>
+       <Fab className={classes.fab}style={{backgroundColor:'rgb(93,224,100)'}} size='large' aria-label="add" onClick={handleClickOpen('paper')}>
             <AddIcon />
         </Fab>           
+        </div>
     <div>
     <div className='unosPsa' hidden={dozvoli}>
     <Dialog
@@ -304,19 +317,27 @@ const [open, setOpen] = React.useState(false);
           >
             <div className={classes.glavni}>
               <div className={classes.grid}>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+            <Grid container rowSpacing={1} style={{width:'400px',justifyContent:'center'}}columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+              <div className='asdas'>
+              <h4>Informacije o Vasem psu</h4>
+              </div>
+              <div>
             <Grid item xs={6}>
               <label >Ime:</label>
             </Grid>
             <Grid item xs={8}>
               <input id='ime'onChange={(e)=>handle(e)} value={data.ime} type="text"></input>
             </Grid>
+            </div>
+            <div>
             <Grid item xs={6}>
                   <label>Rasa:</label>
             </Grid>
             <Grid item xs={8}>
             <input id='rasa' onChange={(e)=>handle(e)} value={data.rasa} type="text"></input>
             </Grid>
+            </div>
+            <div>
             <Grid item xs={6}>
                   <label>Pol:</label>
             </Grid>
@@ -326,6 +347,8 @@ const [open, setOpen] = React.useState(false);
             <Grid item xs={6}>
                   <label>Opis:</label>
             </Grid>
+            </div>
+            <div>
             <Grid item xs={8}>
             <input onChange={(e)=>handle(e)} id='opis' value={data.opis} type="text"></input>
             </Grid>
@@ -335,12 +358,15 @@ const [open, setOpen] = React.useState(false);
             <Grid item xs={8}>
             <input onChange={(e)=>handle(e)} id='visina' value={data.visina} type="number"></input>
             </Grid>
+            </div>
+            <div>
             <Grid item xs={6}>
                   <label>Tezina:</label>
             </Grid>
             <Grid item xs={8}>
             <input onChange={(e)=>handle(e)}  id='tezina' value={data.tezina} type="number"></input>
             </Grid> 
+            </div>
             {/* <iframe title='myfeame' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameBorder="0" value={}style={{border:0}} allowFullScreen></iframe> */}
             {/* <Grid item xs={6}>
             <Button variant="contained">Dodaj sliku</Button>
@@ -363,7 +389,7 @@ const [open, setOpen] = React.useState(false);
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant='text'onClick={dodajPsa}>Dodaj</Button>
+          <Button variant='text'onClick={()=>{dodajPsa();handleClose();}}>Dodaj</Button>
         </DialogActions>
       </Dialog>
             </div>
@@ -398,6 +424,7 @@ const [open, setOpen] = React.useState(false);
         />
       </div>
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
+import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,6 +17,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+
 import { useState, useEffect, useContext } from 'react'
 import IkonicaHome from '../../components/ikonicaHome';
 import { profilVlasnikRoute,profilSitterRoute,DodajPsaRoute } from "../../router/routes";
@@ -23,6 +26,7 @@ import Axios from 'axios'
 import { red } from '@mui/material/colors';
 import { Avatar } from '@mui/material';
 import { CardHeader } from '@mui/material';
+import { Home } from '@mui/icons-material';
 const Search = styled('div')(({ theme }) => ({
  
   position: 'relative',
@@ -109,7 +113,7 @@ const NavBarSiter=()=> {
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
     <Menu
-    anchorEl={anchorEl}
+    anchorEl={mobileMoreAnchorEl}
     anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -122,10 +126,11 @@ const NavBarSiter=()=> {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      onClick={handleMobileMenuOpen}
       >
       <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
       {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
-      <MenuItem onClick={()=>{handleMenuClose();log_out()}}>Log Out</MenuItem>
+      <MenuItem onClick={()=>{handleMenuClose();log_out();navigate('/')}}>Log Out</MenuItem>
     </Menu>
   );
 
@@ -147,27 +152,9 @@ const NavBarSiter=()=> {
     }}
     open={isMobileMenuOpen}
     onClose={handleMobileMenuClose}
+    
     >
-      {/* <MenuItem>
-        <IconButton size="large" >
-          <Badge >
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem> */}
-      <MenuItem>
-        <IconButton
-          size="large"
-         
-          color="inherit"
-        >
-          <Badge color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+    
       <MenuItem src={'https://localhost:5001/StaticFiles/' + slika}onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -184,7 +171,43 @@ const NavBarSiter=()=> {
             
           </Avatar>
         </IconButton>
-        <p>Profil</p>
+        {/* <p>Profil</p> */}
+      </MenuItem>
+      <MenuItem onClick={() => navigate(profilSitterRoute)}>
+        <IconButton
+          size="large"
+         
+          color="inherit"
+        >
+          <Badge color="success">
+            <AccountCircle />
+       <Typography > Profil </Typography>
+          </Badge>
+        </IconButton>
+      </MenuItem>
+      <MenuItem onClick={()=>{navigate('/sitterZahteviRoute')}} >
+        <IconButton
+          size="large"
+         
+          color="inherit"
+        >
+          <Badge color="error">
+            <NotificationsIcon />
+       <Typography > Obavestenja </Typography>
+          </Badge>
+        </IconButton>
+      </MenuItem>
+      <MenuItem href='./'onClick={()=>{handleMobileMenuClose();log_out();navigate('/')}}>
+        <IconButton
+          size="large"
+         
+          color="inherit"
+        >
+          <Badge color="error">
+            <LogoutIcon />
+       <Typography > Log out </Typography>
+          </Badge>
+        </IconButton>
       </MenuItem>
     </Menu>
   );
@@ -200,17 +223,21 @@ const NavBarSiter=()=> {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            
             >
-            <MenuIcon />
+            {/* <HomeIcon /> */}
           </IconButton>
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            DOGGY
-          </Typography>
+          <header
+      id="header"
+      className="fixed-top d-flex align-items-center header-transparent"
+    >
+    
+        <div id="logo">
+          <h1>
+            <a href="./">Doggy</a>
+          </h1>
+        </div>
+        </header>
           {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -222,10 +249,11 @@ const NavBarSiter=()=> {
           </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" color="inherit">
-              
-            <IkonicaHome style={{ color: 'white' }}/>
-              
+            <IconButton size="large" color="inherit" href='/'>
+              <Badge>
+            <HomeIcon />
+            </Badge>
+            <Typography>Kuci</Typography>
           
              </IconButton>
             {/* <IconButton size="large" href='/sitterZahteviRoute' color="inherit">
@@ -241,6 +269,7 @@ const NavBarSiter=()=> {
               <Badge >
                 <NotificationsIcon />
               </Badge>
+              <Typography>Obavestenja</Typography>
             </IconButton>
             <IconButton
               size="large"
@@ -272,7 +301,7 @@ const NavBarSiter=()=> {
               color="inherit"
               // src={'https://localhost:5001/StaticFiles/' + slika}
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
           </Box>
         </Toolbar>
@@ -283,3 +312,165 @@ const NavBarSiter=()=> {
   );
 }
 export default NavBarSiter
+// import * as React from 'react';
+// import AppBar from '@mui/material/AppBar';
+// import Box from '@mui/material/Box';
+// import Toolbar from '@mui/material/Toolbar';
+// import IconButton from '@mui/material/IconButton';
+// import Typography from '@mui/material/Typography';
+// import Menu from '@mui/material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import Container from '@mui/material/Container';
+// import Avatar from '@mui/material/Avatar';
+// import Button from '@mui/material/Button';
+// import Tooltip from '@mui/material/Tooltip';
+// import MenuItem from '@mui/material/MenuItem';
+// import AdbIcon from '@mui/icons-material/Adb';
+
+// const pages = ['Products', 'Pricing', 'Blog'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+// const ResponsiveAppBar = () => {
+//   const [anchorElNav, setAnchorElNav] = React.useState(null);
+//   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+//   const handleOpenNavMenu = (event) => {
+//     setAnchorElNav(event.currentTarget);
+//   };
+//   const handleOpenUserMenu = (event) => {
+//     setAnchorElUser(event.currentTarget);
+//   };
+
+//   const handleCloseNavMenu = () => {
+//     setAnchorElNav(null);
+//   };
+
+//   const handleCloseUserMenu = () => {
+//     setAnchorElUser(null);
+//   };
+
+//   return (
+//     <AppBar position="static">
+//       <Container maxWidth="xl">
+//         <Toolbar disableGutters>
+//           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+//           <Typography
+//             variant="h6"
+//             noWrap
+//             component="a"
+//             href="/"
+//             sx={{
+//               mr: 2,
+//               display: { xs: 'none', md: 'flex' },
+//               fontFamily: 'monospace',
+//               fontWeight: 700,
+//               letterSpacing: '.3rem',
+//               color: 'inherit',
+//               textDecoration: 'none',
+//             }}
+//           >
+//             LOGO
+//           </Typography>
+
+//           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+//             <IconButton
+//               size="large"
+//               aria-label="account of current user"
+//               aria-controls="menu-appbar"
+//               aria-haspopup="true"
+//               onClick={handleOpenNavMenu}
+//               color="inherit"
+//             >
+//               <MenuIcon />
+//             </IconButton>
+//             <Menu
+//               id="menu-appbar"
+//               anchorEl={anchorElNav}
+//               anchorOrigin={{
+//                 vertical: 'bottom',
+//                 horizontal: 'left',
+//               }}
+//               keepMounted
+//               transformOrigin={{
+//                 vertical: 'top',
+//                 horizontal: 'left',
+//               }}
+//               open={Boolean(anchorElNav)}
+//               onClose={handleCloseNavMenu}
+//               sx={{
+//                 display: { xs: 'block', md: 'none' },
+//               }}
+//             >
+//               {pages.map((page) => (
+//                 <MenuItem key={page} onClick={handleCloseNavMenu}>
+//                   <Typography textAlign="center">{page}</Typography>
+//                 </MenuItem>
+//               ))}
+//             </Menu>
+//           </Box>
+//           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+//           <Typography
+//             variant="h5"
+//             noWrap
+//             component="a"
+//             href=""
+//             sx={{
+//               mr: 2,
+//               display: { xs: 'flex', md: 'none' },
+//               flexGrow: 1,
+//               fontFamily: 'monospace',
+//               fontWeight: 700,
+//               letterSpacing: '.3rem',
+//               color: 'inherit',
+//               textDecoration: 'none',
+//             }}
+//           >
+//             LOGO
+//           </Typography>
+//           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+//             {pages.map((page) => (
+//               <Button
+//                 key={page}
+//                 onClick={handleCloseNavMenu}
+//                 sx={{ my: 2, color: 'white', display: 'block' }}
+//               >
+//                 {page}
+//               </Button>
+//             ))}
+//           </Box>
+
+//           <Box sx={{ flexGrow: 0 }}>
+//             <Tooltip title="Open settings">
+//               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+//                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+//               </IconButton>
+//             </Tooltip>
+//             <Menu
+//               sx={{ mt: '45px' }}
+//               id="menu-appbar"
+//               anchorEl={anchorElUser}
+//               anchorOrigin={{
+//                 vertical: 'top',
+//                 horizontal: 'right',
+//               }}
+//               keepMounted
+//               transformOrigin={{
+//                 vertical: 'top',
+//                 horizontal: 'right',
+//               }}
+//               open={Boolean(anchorElUser)}
+//               onClose={handleCloseUserMenu}
+//             >
+//               {settings.map((setting) => (
+//                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
+//                   <Typography textAlign="center">{setting}</Typography>
+//                 </MenuItem>
+//               ))}
+//             </Menu>
+//           </Box>
+//         </Toolbar>
+//       </Container>
+//     </AppBar>
+//   );
+// };
+// export default ResponsiveAppBar;

@@ -11,6 +11,7 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -92,6 +93,11 @@ function handleChange(event) {
       
     });
   }
+  const[klik,setKlik]=useState(false)
+  const handleClick=()=>
+  {
+    setKlik(!klik)
+  }
   return (
     <Card
       sx={{ maxWidth: 345 }}
@@ -100,18 +106,23 @@ function handleChange(event) {
         marginBottom: '40px',
         marginTop: '40px',
         borderRadius: '50px',
+        backgroundColor:'khaki'
+        // rgb(93, 224, 100)
       }}
-    >
+    >   <div className='spoj' style={{display:'flex',justifyContent:'flex-start'}}>
         <CardHeader
-          avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
+          avatar={<Avatar style={{marginRight:'0px'}}sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
             
           </Avatar>}
           // action={<IconButton aria-label="settings">
           //   <MoreVertIcon />
           // </IconButton>}
-          title={namino.ime + ' ' + namino.prezime}
-          subheader={date}
-          />
+          title={'Ime i prezime:' + namino.ime + ' ' + namino.prezime}
+          subheader={'Danasnji datum:' + date}
+          >
+          </CardHeader>
+          {/* <AccountBoxIcon/> */}
+          </div>
       <CardMedia
         component="img"
         height="194"
@@ -121,11 +132,11 @@ function handleChange(event) {
         alt="Paella dish"
       />
       <CardActions className={classes.divButtonCard}>
-    <Typography paragraph>Ubacite novu sliku</Typography>
-    <input type="file" onChange={handleChange} />
+    <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button>
+    <input className='inputic' style={{display:'flex',textAlignLast:'center'}}type="file" hidden={!klik} onChange={handleChange} />
     <ExpandMore
 expand={expanded}
-
+hidden={!klik}
 onClick={() => { handleExpandClick(); handleSubmit(); } }
 aria-expanded={expanded}
 aria-label="show more"
@@ -136,11 +147,12 @@ aria-label="show more"
   <CardContent>
         <Button
           style={{
-            backgroundColor: 'cornsilk',
+            backgroundColor: 'rgb(93, 224, 100)',
             color: 'black',
             width: '250px',
             height: '50px',
             borderRadius: '20px',
+            color:'black'
           }}
           variant="contained"
           color="success"

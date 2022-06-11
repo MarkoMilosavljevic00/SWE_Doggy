@@ -28,6 +28,7 @@ import { useState,useEffect } from 'react';
 import { Popover } from '@mui/material';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import CardSlika from '../../../card.js';
+import Sitter from '../../../index.js';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -79,20 +80,40 @@ export default function CustomizedDialogs(props) {
     tezina,
     slika,
     vlasnikId} = props;
-
+const idVlasnika1=localStorage.getItem('idVlasnika')
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  const [milica,setMilica]=useState('')
+  const[brisi,setBrisi]=useState(false)
+  const handleBrisi=()=>
+  {
+    setBrisi(!brisi);
+    
+  }
+  useEffect(()=>
+  {
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika1).then(
+      res=>
+      {
+      console.log(res.data + 'ahah')
+      
+      }
+    )
+  },[brisi])
+
   
-  const obrisiPsa =()=>
+  const obrisiPsa = ()=>
   {
       Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id).then(res=>
-      {   display='none'
+      {   
       console.log(res);
     })
+    window.location.reload(false)
+   
 }
 
 const [izmena,setIzmena ] = useState(true)
@@ -200,6 +221,9 @@ const handleIzmena=()=>
 }
 
   return (
+    <>
+ 
+ 
     <div className={classes.container}>
       <div className='dugmici' style={{display:'grid'}}>
     
@@ -266,42 +290,51 @@ const handleIzmena=()=>
           Informacije o psu
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <div className='izmena'style={{display:'flex'}}>
+          <div className='izmena'style={{display:'inital',maxWidth:'425px'}}>
             <div className='prvideoizmena'>
           <div className='dugmeizmena' style={{display:'grid',marginBottom:'20px'}}>
-        <button onClick = {() => { setIzmena(!izmena) }} > Izmeni podatke </button>
+        <button onClick = {() => { setIzmena(!izmena) }} style={{maxWidth:'377px',minWidth:'377px',marginLeft:'25px'}}> Izmeni podatke </button>
          </div>
-          <Typography gutterBottom>Ime  </Typography>
-        <input  type='text' id='ime' value={data.ime} disabled={izmena} onChange={ (e) =>  handle(e) }/>
-
+         <div className='1p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Ime:  </Typography>
+        <input  type='text' id='ime' value={data.ime} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) }/>
+        </div>
          
-          
-          <Typography gutterBottom>Rasa </Typography>
-          <input  type='text' id='rasa'value={data.rasa} disabled={izmena} onChange={ (e) =>  handle(e) }/>
-        
-          <Typography gutterBottom>Pol </Typography>
-          <input  type='text'id='pol' value={data.pol} disabled={izmena} onChange={ (e) => handle(e) }/>
-   
-          <Typography gutterBottom>Opis</Typography>
-          <input  type='text' id='opis'value={data.opis} disabled={izmena} onChange={ (e) => handle(e) } />
-  
-          <Typography gutterBottom>Visina</Typography>
-          <input  type='text'id='visina' value={data.visina  } disabled={izmena} onChange={ (e) =>  handle(e) } />
-    
-          <Typography gutterBottom>Tezina </Typography>
-          <input  type='text' id='tezina'value={data.tezina} disabled={izmena} onChange={ (e) =>  handle(e) } />
+        <div className='2p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Rasa: </Typography>
+          <input  type='text' id='rasa'value={data.rasa} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) }/>
+          </div>
+          <div className='3p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Pol: </Typography>
+          <input  type='text'id='pol' value={data.pol} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) => handle(e) }/>
+          </div>
+          <div className='4p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Opis:</Typography>
+          <input  type='text' id='opis'value={data.opis} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) => handle(e) } />
+          </div>
+          <div className='5p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Visina:</Typography>
+          <input  type='text'id='visina' value={data.visina  } style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
+          </div>
+          <div className='6p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
+          <Typography gutterBottom>Tezina: </Typography>
+          <input  type='text' id='tezina'value={data.tezina} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
+          </div>
           </div>
           <div className='cardslika'>
+            <div className='azurirajj' style={{textAlign:'center'}}>
+          <Button variant='contained'  style={{marginBottom:'20px',backgroundColor:'rgb(93, 224, 100)'}}onClick={()=>{handleIzmena();izmeniPsa();}}>Azuriraj podatke</Button>
+          </div>
         <CardSlika id={id}/>
+        {/* <Sitter brisi={brisi}/> */}
         </div>
         </div>
           <div className={classes.divButton}>
           <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
-          <Button variant='contained'  style={{marginBottom:'20px'}}onClick={()=>{handleIzmena();izmeniPsa();}}>Azuriraj ime</Button>
           
             <Button
               style={{
-                backgroundColor: 'green',
+                backgroundColor: 'rgb(93, 224, 100)',
                 color: 'white',
               }}
               onClick={() => {
@@ -328,5 +361,6 @@ const handleIzmena=()=>
         </DialogActions>
       </BootstrapDialog>
     </div>
+    </>
   );
 }

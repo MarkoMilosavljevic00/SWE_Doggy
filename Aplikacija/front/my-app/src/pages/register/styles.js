@@ -10,7 +10,7 @@ const classStyles = makeStyles({
     backgroundImage: `url(${slika})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundColor: '#D5F4C8',
+    // backgroundColor: '#D5F4C8',
     flex: 1,
     alignItems: 'center',
   },

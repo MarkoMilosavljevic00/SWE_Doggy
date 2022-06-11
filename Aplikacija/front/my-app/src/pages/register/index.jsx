@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
 import classStyles from './styles';
-import Header from '../../components/HeaderLogin';
+
 import FormaTipKorisnika from './components/formaTipKorisnika';
 import FormaImePrezBrTelefona from './components/formaImePrezBrTel';
 import FormaUsernameEmailSifra from './components/formaUsernameEmailSIfra';
@@ -8,7 +9,11 @@ import FormaUsernameEmailSifra from './components/formaUsernameEmailSIfra';
 import FormaAdresaGradBioCena from './components/formaAdresaGradBioCena';
 import FormaZavrsiRegistraciju from './components/formaZavrsiRegistraciju';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../components/HeaderPomoc';
+import Footer from '../../components/Footer';
 
+import NavbarVlasnik from '../headerVlasnik';
+import NavBarSiter from '../headerSiter';
 const Registracija = () => {
   const classes = classStyles();
   const navigate = useNavigate();
@@ -77,11 +82,13 @@ const Registracija = () => {
       });
     }
   }, [zavrsiRegistraciju]);
-
+  const proveraSiter=localStorage.getItem('idSitera')
+  const proveraVlasnik=localStorage.getItem('idVlasnika')
   return (
+    <div className='jedanregister'>
+    { proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)}
     <div className={classes.container}>
-      <Header />
-      <div className={classes.divRegistracija}>
+      <div style={{minHeight:'675px'}} className={classes.divRegistracija}>
         <h1 style={{ color: '#000000c2', marginTop: 20 }}>Registracija</h1>
         {formNumber == 0 ? (
           <FormaTipKorisnika
@@ -140,6 +147,7 @@ const Registracija = () => {
           />
         ) : null}
       </div>
+    </div>
     </div>
   );
 };

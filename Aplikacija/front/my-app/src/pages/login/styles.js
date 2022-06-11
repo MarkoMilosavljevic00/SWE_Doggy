@@ -7,7 +7,7 @@ const classStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundImage: `url(${slika})`,
-    backgroundSize: 'cover',
+    // backgroundSize: 'cover',
     backgroundPosition: 'center',
     flex: 1,
   },
@@ -25,7 +25,7 @@ const classStyles = makeStyles({
 
   naslov: {
     textAlign: 'center',
-    color: 'green',
+    // color: 'green',
   },
 
   divButton: {

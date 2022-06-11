@@ -111,7 +111,7 @@
   }
 
   /**
-   * Mobile nav toggle
+   * Mobile nav togglebi bi-list mobile-nav-toggle
    */
   on('click', '.mobile-nav-toggle', function(e) {
     select('#navbar').classList.toggle('navbar-mobile')

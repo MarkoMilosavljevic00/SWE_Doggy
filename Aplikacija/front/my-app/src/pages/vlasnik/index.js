@@ -41,6 +41,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { SwapVertSharp } from '@mui/icons-material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Typography from '../../components/Typography';
 
 
 const Vlasnik=(props)=> {
@@ -171,7 +172,8 @@ const posalji_zahtev=()=>
   vrsta,
   pocetak,
   kraj,
-  adresaPreuzimanjaPsa
+  adresaPreuzimanjaPsa,
+  napomena
 }
   Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
 
@@ -197,25 +199,26 @@ const posalji_zahtev=()=>
 <NavBar />
 
 <div className={klase.main}>
-   <Paper className={klase.usluga} elevation={8} style={{backgroundColor:'white',height:'610px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+   <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'610px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
        <IconButton color='primary' href='/sitterRoute'>
-       <ArrowBackIosNewIcon  ></ArrowBackIosNewIcon>
+       <ArrowBackIosNewIcon/>
+       <Typography variant='h6'color='black'>Nazad</Typography>
        </IconButton>
-   <h1 className={klase.naslov}>Pošaljite zahtev sitteru:</h1>
+   <h1 className={klase.naslov}>Kreirajte zahtev</h1>
    <div className={klase.selectbox}>
      <div className={klase.vrsta}>
   
      <Box sx={{ minWidth: 150 }}>
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label" >Odaberite vrstu usluge</InputLabel>
-      <h3>{vrsta}</h3>
+      {/* <h3>{vrsta}</h3> */}
       <Select style={{width:'300px'}}
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={vrsta}
         label="Age"
         onChange={(e)=>setSelect(e.target.value)}
-        onClick={usluge}
+        onClick={()=>{usluge();psici();}}
 
         // onChange={handleChange}
       >
@@ -233,7 +236,7 @@ const posalji_zahtev=()=>
      <div className={klase.vrstapsi}>
   
      <Box sx={{ minWidth: 150 }}>
-       <Button color='primary' onClick={()=>{psici();}}>klikni me</Button>
+       {/* <Button color='primary' onClick={()=>{psici();}}>klikni me</Button> */}
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label1" >Odaberite vaseg psa</InputLabel>
       {/* <h3>{}</h3> */}
@@ -345,7 +348,7 @@ const posalji_zahtev=()=>
      </div>
      {/* <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button> */}
      <div className={klase.dugme}>
-     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'rgb(93,224,100)',color:'black'}}>
+     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
       Prosledi zahtev sitteru
      </Button>
    

@@ -93,8 +93,6 @@ export default function CustomizedDialogs(props) {
       >
         Pogledaj sittera
       </Button>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-      </Button> */}
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -104,9 +102,10 @@ export default function CustomizedDialogs(props) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Opis sitter-a
+          Informacije o siteru
         </BootstrapDialogTitle>
         <DialogContent dividers>
+          <Typography gutterBottom>Opis sitera:</Typography>
           <Typography gutterBottom>{opis}</Typography>
           <Typography gutterBottom>Broj telefona : {brojTelefona}</Typography>
           <Typography gutterBottom>Grad : {grad}</Typography>
@@ -115,13 +114,11 @@ export default function CustomizedDialogs(props) {
           <Typography gutterBottom>Prosecna ocena: {prosecnaOcena}</Typography>
           <Typography gutterBottom>Komentari: </Typography>
 
-          {com && com.map(x=>
+          {com && com.map((x,index)=>
             (
-              <Typography gutterBottom>{x.komentar}</Typography>
+              <Typography gutterBottom>{index+1 + ":" + x.komentar}</Typography>
             ))}
-          <Typography gutterBottom>
-            Dostupan : {dostupan ? 'da' : 'ne'}
-          </Typography>
+          
           <div className={classes.divButton}>
             <Button
               style={{
