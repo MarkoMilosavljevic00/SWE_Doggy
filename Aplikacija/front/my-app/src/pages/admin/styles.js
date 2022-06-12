@@ -10,7 +10,7 @@ const classStyles = makeStyles({
   divNevalidni: {
     display: 'flex',
     marginLeft: '800px',
-    marginTop: ' 10px',
+    marginTop: ' 100px',
     flex: 1,
   },
 

@@ -71,9 +71,11 @@ const Sitter = () => {
   }, [stranica]);
 
   const buttonPotvrdiOnCLick = () => {
+    const city = grad != 'sve' ? grad : ' ';
+    console.log(city);
     fetch(
       'https://localhost:5001/Siter/filterSiteri?grad=' +
-        grad +
+        city +
         '&minCena=' +
         cenaOd +
         '&maxCena=' +
@@ -116,10 +118,10 @@ const Sitter = () => {
         <CenaPoSatu naziv="Cena od" setValues={postaviCenuOd} />
         <CenaPoSatu naziv="Cena do" setValues={postaviCenuDo} />
         <ProsecnaOcena Ocena={Ocena} postaviOcenu={postaviOcenu} />
-        
+
         <Button
           className={classes.buttonPotvrdi}
-          style={{ backgroundColor: '#2ac94d', margin: 15 }}
+          style={{ backgroundColor: 'rgb(93, 224, 100)', margin: 15 }}
           variant="contained"
           color="success"
           onClick={buttonPotvrdiOnCLick}
@@ -127,9 +129,9 @@ const Sitter = () => {
         >
           Potvrdi
         </Button>
-        <IconButton color='primary' href='vlasnikRoute'>
-          <Typography color='black'>Vidi usluge</Typography>
-          <ArrowForwardIosIcon/>
+        <IconButton color="primary" href="vlasnikRoute">
+          <Typography color="black">Vidi usluge</Typography>
+          <ArrowForwardIosIcon />
         </IconButton>
       </div>
       <div className={classes.miniContainer}>

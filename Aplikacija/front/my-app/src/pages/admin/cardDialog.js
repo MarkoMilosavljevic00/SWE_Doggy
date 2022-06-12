@@ -21,7 +21,7 @@ const CardDialog = props => {
 
   useEffect(() => {
     fetch(
-      'https://localhost:5001/Recenzija/vratiSveRecenzije?siterId=' + idSitera
+      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera
     ).then(async res => {
       const recenzijeSvihSitera = await res.json();
 

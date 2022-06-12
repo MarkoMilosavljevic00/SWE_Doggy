@@ -21,14 +21,16 @@ import classStyles from './styles';
 import { useState,useEffect } from 'react';
 import { ExpandMore } from '@mui/icons-material';
 const CardSlika = () => {
- 
-
+  
+  
   const classes = classStyles();
   const[expanded,setExpanded]=useState('')
   const handleExpandClick = () => {
     setExpanded(!expanded);
-};
-
+  };
+  
+  const[slika,setSlika]=useState('')
+const ajdi=localStorage.getItem('idVlasnika')
 useEffect(()=>
 {
   Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
@@ -38,11 +40,8 @@ useEffect(()=>
       setSlika(res.data.slika)
     }
   )
-},[]
-)
-  const ajdi=localStorage.getItem('idVlasnika')
+},[])
   console.log(ajdi + 'jajkas')
-  const[slika,setSlika]=useState('')
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   const picture = ()=>

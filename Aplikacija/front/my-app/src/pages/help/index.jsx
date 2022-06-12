@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import CardDialog from './cardDialog';
 import Header from '../../components/HeaderPomoc';
 import Footer from '../../components/Footer';
-
+import HeaderAdmin from '../../components/HeaderAdmin';
 import NavbarVlasnik from '../headerVlasnik';
 import NavBarSiter from '../headerSiter';
 import NavBarVlasnik from '../headerVlasnik';
@@ -18,13 +18,14 @@ const Help = () => {
   const navigate = useNavigate();
   const proveraSiter=localStorage.getItem('idSitera')
   const proveraVlasnik=localStorage.getItem('idVlasnika')
-  
+  const proveraAdmin=localStorage.getItem('idAdmina')
 
 
 
   return (
     <div className={classes.container}>
-{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)} 
+{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/>  :(proveraAdmin ? <HeaderAdmin/> : <Header/>))} 
+
       
 
       <div className={classes.divSlikaVelika}>
@@ -64,7 +65,7 @@ const Help = () => {
               <CardDialog
                 tekstButton={'Zašto bih trebao da postanem sitter?'}
                 opis={
-                  'Ukoliko ste osoba koja voli pse i želi da bude u njihovom prisustvu, a da pritom nemate stalni odnos možeš zaraditi novac.'
+                  'Ukoliko ste osoba koja voli pse i želi da bude u njihovom prisustvu, a da pritom nemate stalni radni odnos,na ovom sajtu možete zaraditi neki novac.'
                 }
               />
             </div>
@@ -101,7 +102,7 @@ const Help = () => {
               <CardDialog
                 tekstButton={'Kako mogu da komentarišem vlasnika ili sittera?'}
                 opis={
-                  'Potrebno je da na sajtu nadjete sitter-a koji Vam je čuvao psa, zatim klikom na dugme Komentariši i oceni, možeš da vidiš sve komentare i ocene tog sitter-a i da dodaš svoj. '
+                  'Posle (ne)uspesno zavrsene usluge sitter ce obeleziti da je odredjena usluga gotova, kada siter obelezi da je zavrsio sa uslugom, sitter moze komentarisati i ocenjivati psa, a takodje vlasnik moze komentarisati i ocenjivati sitter-a. '
                 }
               />
             </div>

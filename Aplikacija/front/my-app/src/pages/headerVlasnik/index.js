@@ -78,7 +78,7 @@ const NavBarVlasnik=()=> {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)
     })
-  })
+  },[])
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     
@@ -150,7 +150,7 @@ const NavBarVlasnik=()=> {
     }}
     open={isMobileMenuOpen}
     onClose={handleMobileMenuClose}
-    onClick={handleMobileMenuOpen}
+    // onClick={handleMobileMenuOpen}
     >
       {/* <MenuItem href="/">
       <IconButton size="large" href="/" color="inherit">

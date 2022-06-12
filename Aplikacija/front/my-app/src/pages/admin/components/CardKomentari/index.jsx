@@ -27,6 +27,7 @@ export default function CardKomentari(props) {
         const res = await response.json();
         console.log(res);
         setObrisiKomentar(res);
+        window.location.reload(false)
       } else {
         alert('greska');
       }
@@ -54,10 +55,10 @@ export default function CardKomentari(props) {
             gutterBottom
           ></Typography>
 
-          <Typography sx={{ fontSize: 18 }}>Vreme: {vreme}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Vreme ocenjivanja: {vreme}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Ocena: {ocena}</Typography>
           <Typography sx={{ fontSize: 18 }}>Komentar: {komentar}</Typography>
 
-          <Typography sx={{ fontSize: 18 }}>Ocena: {ocena}</Typography>
         </CardContent>
 
         <div
@@ -68,7 +69,7 @@ export default function CardKomentari(props) {
           }}
         >
           <Button
-            onClick={obrisi}
+            onClick={()=>{obrisi();}}
             style={{
               color: 'white',
               backgroundColor: 'green',

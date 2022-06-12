@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import BrojeviStranica from '../admin/components/brojevi/index.jsx';
 import { adminVlasniciRoute } from '../../router/routes';
 import { useNavigate } from 'react-router-dom';
+import HeaderAdmin from '../../components/HeaderAdmin'
 const Admin = () => {
   const [siteri, postaviSitere] = useState([]);
   const [dugme, setDugme] = useState([]);
@@ -33,6 +34,7 @@ const Admin = () => {
     fetch(vratiSveSitereUrl).then(async res => {
       const rezultat = await res.json();
       postaviSitere(rezultat);
+      console.log(rezultat)
       setSucess(false);
       setDugme(true);
 
@@ -85,7 +87,7 @@ const Admin = () => {
     <>
       {success ? (
         <div className={classes.container}>
-          <HeaderLogin />
+      <HeaderAdmin/>
 
           <div className={classes.divNazad}>
             <Button
@@ -103,6 +105,7 @@ const Admin = () => {
                   prezime={nevalidan.prezime}
                   telefon={nevalidan.brojTelefona}
                   grad={nevalidan.grad}
+                  adresa={nevalidan.adresa}
                   cenaPoSatu={nevalidan.cenaPoSatu}
                   bio={nevalidan.bio}
                   validan={nevalidan.validan}
@@ -115,7 +118,7 @@ const Admin = () => {
         </div>
       ) : (
         <div className={classes.container}>
-          <HeaderLogin />
+         <HeaderAdmin/>
 
           <div className={classes.divNevalidni}>
             <Button
@@ -146,8 +149,10 @@ const Admin = () => {
               <Card
                 ime={siter.ime}
                 prezime={siter.prezime}
+                korisnicko_ime={siter.korisnickoIme}
                 telefon={siter.brojTelefona}
                 grad={siter.grad}
+                adresa={siter.adresa}
                 cenaPoSatu={siter.cenaPoSatu}
                 bio={siter.bio}
                 dugme={dugme}

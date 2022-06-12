@@ -77,7 +77,7 @@ const NavBarSiter=()=> {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)
     })
-  })
+  },[])
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     
@@ -126,7 +126,7 @@ const NavBarSiter=()=> {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      onClick={handleMobileMenuOpen}
+      // onClick={handleMobileMenuOpen}
       >
       <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
       {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
@@ -154,8 +154,8 @@ const NavBarSiter=()=> {
     onClose={handleMobileMenuClose}
     
     >
-    
-      <MenuItem src={'https://localhost:5001/StaticFiles/' + slika}onClick={handleProfileMenuOpen}>
+    {/* onClick={handleProfileMenuOpen} -- stavi to posle +slika */}
+      <MenuItem src={'https://localhost:5001/StaticFiles/' + slika}>
         <IconButton
           size="large"
           aria-label="account of current user"

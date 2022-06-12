@@ -60,7 +60,7 @@ function handleSubmit(event) {
   Axios.post('https://localhost:5001/Pas/dodajSlikuPsu?idPas=' + id, formData, config).then((response) => {
   console.log(response);
     setFile(response.data)
-    
+    window.location.reload(false)
   });
 }
 const [pic,setPic]=useState('')

@@ -8,7 +8,7 @@ import { vratiSveSitereUrl } from '../../backendAddress';
 import { vratiSveNevalidneSittere } from '../../backendAddress';
 import Button from '@mui/material/Button';
 import BrojeviStranica from '../adminVlasnici/brojevi/index.jsx';
-
+import HeaderAdmin from '../../components/HeaderAdmin'
 const AdminVlasnici = () => {
   const navigate = useNavigate();
   const classes = classStyles();
@@ -63,7 +63,7 @@ const AdminVlasnici = () => {
   }, [stranica]);
   return (
     <div className={classes.container}>
-      <HeaderLogin />
+      <HeaderAdmin />
       <div style={{ display: 'flex', marginTop: '10px', marginLeft: ' 850px' }}>
         <Button
           style={{ color: 'white', backgroundColor: 'green' }}
@@ -77,6 +77,8 @@ const AdminVlasnici = () => {
           <Card
             ime={vlasnik.ime}
             prezime={vlasnik.prezime}
+            korisnickoIme={vlasnik.korisnickoIme}
+            adresa={vlasnik.adresa}
             grad={vlasnik.grad}
             telefon={vlasnik.brojTelefona}
             id={vlasnik.id}

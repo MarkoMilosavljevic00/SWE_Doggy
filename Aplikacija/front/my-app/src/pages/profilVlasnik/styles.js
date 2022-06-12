@@ -26,6 +26,7 @@ const classStyles = makeStyles({
     justifyContent: 'space-evenly',
     flex: 1,
     backgroundColor: 'initial',
+    minHeight:'585px'
   },
 
   paper: {

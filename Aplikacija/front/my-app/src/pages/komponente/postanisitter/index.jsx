@@ -16,7 +16,7 @@ const PostaniSitter=()=>
  <div className="container" data-aos="fade-up">
    <div className="row about-container">
 
-     <div style={{'margin-top':'50px'}}className="col-lg-6 content order-lg-1 order-2">
+     <div style={{marginTop:'50px'}}className="col-lg-6 content order-lg-1 order-2">
        <h2 className="title">Želiš da postaneš sitter?</h2>
        <h4>
       Ukoliko si osoba koja voli pse i koja želi da bude u njihovom prisustvu, a prirom i zaradi novac, ne traži dalje, na pravom si mestu!
@@ -52,7 +52,7 @@ const PostaniSitter=()=>
 
      </div>
      
-     <div class="class=col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch position-relative">
+     <div className="class=col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch position-relative">
      <CardContent>
      <div className="col-lg-6  order-1"  data-aos-delay="100" style={{display:'flex'}}>
      <img className={classes.slika}  style={{height: '400px',

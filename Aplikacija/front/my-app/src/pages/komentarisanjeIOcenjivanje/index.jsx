@@ -22,7 +22,7 @@ const KomentariasnjeIOcenjivanje = props => {
   const [komentari, postaviKomentar] = useState([]);
   useEffect(() => {
     fetch(
-      'https://localhost:5001/Recenzija/vratiSveRecenzije?siterId=' + idSitera
+      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera
     ).then(async res => {
       const recenzijeSvihSitera = await res.json();
 
@@ -82,7 +82,7 @@ const KomentariasnjeIOcenjivanje = props => {
       </div>
 
       <div className={classes.miniContainer}>
-        <PojedinacnaKartica />
+        {/* <PojedinacnaKartica /> */}
         {komentari.map((k, index) => {
           return (
             <Kartice

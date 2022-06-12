@@ -11,7 +11,7 @@ export default function BasicTextFields(props) {
     const unos = event.target.value;
 
     let isnum = /^\d+$/.test(unos);
-    if (isnum) {
+    if (isnum || unos == '') {
       setValues(unos);
     }
   };

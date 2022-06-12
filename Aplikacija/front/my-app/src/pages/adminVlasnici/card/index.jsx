@@ -11,7 +11,7 @@ import CardDialog from '../cardDialog';
 import { useState, useEffect, useContext } from 'react';
 
 export default function BasicCard(props) {
-  const { ime, prezime, grad, telefon, id } = props;
+  const { ime, prezime, korisnickoIme,adresa,grad, telefon, id } = props;
 
   const classes = classStyles();
   const obrisiVlasnika = () => {
@@ -20,6 +20,7 @@ export default function BasicCard(props) {
     }).then(async response => {
       if (response.ok) {
         const res = await response.json();
+        window.location.reload(false)
       } else {
         alert('greska');
       }
@@ -47,17 +48,22 @@ export default function BasicCard(props) {
           >
             {ime} {prezime}
           </Typography>
-
+          <Typography sx={{ fontSize: 20 }}>
+            Korisnicko ime: {korisnickoIme}
+          </Typography>
           <Typography sx={{ fontSize: 20 }}>
             Broj telefona: {telefon}
           </Typography>
           <Typography sx={{ fontSize: 20 }}>Grad: {grad}</Typography>
+          <Typography sx={{ fontSize: 20 }}>
+            Adresa: {adresa}
+          </Typography>
         </CardContent>
 
         <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
           <CardDialog id={id} />
           <Button
-            onClick={obrisiVlasnika}
+            onClick={()=>{obrisiVlasnika();}}
             style={{
               color: 'white',
               backgroundColor: '#07a607',

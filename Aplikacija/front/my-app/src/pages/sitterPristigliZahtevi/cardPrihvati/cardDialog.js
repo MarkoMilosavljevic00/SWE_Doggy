@@ -68,6 +68,7 @@ const CardDialog = props => {
       res=>
       {
       alert('success')
+      window.location.reload(false)
       }
     )
   }

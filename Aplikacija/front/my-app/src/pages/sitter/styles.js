@@ -24,6 +24,7 @@ const classStyles = makeStyles({
   buttonPotvrdi: {
     display: 'flex',
     margin: '15px',
+    backgroundColor: '#2e7d32',
   },
 
   pagination: {

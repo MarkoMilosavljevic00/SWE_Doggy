@@ -330,7 +330,7 @@ const handleIzmena=()=>
         </div>
         </div>
           <div className={classes.divButton}>
-          <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
+          {/* <div className='krajdugmici' style={{display:'grid',marginTop:'20px'}}>
           
             <Button
               style={{
@@ -338,7 +338,7 @@ const handleIzmena=()=>
                 color: 'white',
               }}
               onClick={() => {
-                localStorage.setItem('idSitera', id);
+                // localStorage.setItem('idSitera', id);
                 navigate(komentarisanjeIOcenjivanjeRoute);
 
                 // navigate(komentarisanjeIOcenjivanjeRoute, {
@@ -350,7 +350,7 @@ const handleIzmena=()=>
             >
               Komentari o psu
             </Button>
-            </div>
+            </div> */}
           </div>
         </DialogContent>
         <DialogActions>

@@ -78,6 +78,9 @@ const Login = () => {
           } else if (res.korisnik.tip == 1) {
             localStorage.setItem('idSitera', JSON.stringify(res.korisnik.id));
             alert('Uspesno ste se ulogovali kao Siter');
+          } else if (res.korisnik.tip == 2) {
+            localStorage.setItem('idAdmina', JSON.stringify(res.korisnik.id));
+            alert('Uspesno ste se ulogovali kao Admin');
           } else {
             localStorage.setItem('Admin', JSON.stringify(res.korisnik.id));
           }
@@ -85,10 +88,19 @@ const Login = () => {
           // localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
 
         }
+        else if(res.status==401)
+        {
+          alert('Losa sifra!!!')
+        }
+        else if(res.status==501)
+        {
+          alert('Niste jos prihvaceni od strane admina!!!')
+        }
       })
       .catch(err => {
-        alert(err);
-        alert('Losa sifra')
+        // alert(err);
+        // alert(err.response.data)
+        alert('Losa sifra!!!')
       });
  
   };

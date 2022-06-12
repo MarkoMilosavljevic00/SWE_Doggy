@@ -24,6 +24,7 @@ import AppFooter from '../../components/futer';
 import DoneIcon from '@mui/icons-material/Done';
 import Footer from '../../components/Footer'
 import { Refresh } from '@mui/icons-material';
+import Card from '@mui/material/Card';
 const ProfilVlasnik =()=>{
 console.log(1)
 
@@ -216,8 +217,185 @@ const [data,setData]=useState(
            console.log(res + 'zasto')
            setProfil(res.data)
            setData(res.data)
+           window.location.reload(false)
           })
         }
+        const izmeni_ime=()=>
+   {
+      Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+      {
+        id:profil.id,
+        ime:profil.ime,
+        // prezime:profil.prezime,
+        // email:profil.email,
+        // korisnickoIme:profil.korisnickoIme,
+        // sifra:profil.sifra,
+        // brojTelefona:profil.brojTelefona,
+        // grad:profil.grad,
+        // adresa:profil.adresa,
+   
+      }).then(res=>
+        {
+           console.log(res + 'zasto')
+           setProfil(res.data)
+           setData(res.data)
+           window.location.reload(false)
+          })
+        }
+        const izmeni_prezime=()=>
+        {
+           Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+           {
+             id:profil.id,
+            //  ime:profil.ime,
+             prezime:profil.prezime,
+             // email:profil.email,
+             // korisnickoIme:profil.korisnickoIme,
+             // sifra:profil.sifra,
+             // brojTelefona:profil.brojTelefona,
+             // grad:profil.grad,
+             // adresa:profil.adresa,
+        
+           }).then(res=>
+             {
+                console.log(res + 'zasto')
+                setProfil(res.data)
+                setData(res.data)
+                window.location.reload(false)
+               })
+             }
+             const izmeni_email=()=>
+             {
+                Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                {
+                  id:profil.id,
+                  // ime:profil.ime,
+                  // prezime:profil.prezime,
+                  email:profil.email,
+                  // korisnickoIme:profil.korisnickoIme,
+                  // sifra:profil.sifra,
+                  // brojTelefona:profil.brojTelefona,
+                  // grad:profil.grad,
+                  // adresa:profil.adresa,
+             
+                }).then(res=>
+                  {
+                     console.log(res + 'zasto')
+                     setProfil(res.data)
+                     setData(res.data)
+                     window.location.reload(false)
+                    })
+                  }
+                  const izmeni_korisnicko_ime=()=>
+                  {
+                     Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                     {
+                       id:profil.id,
+                      //  ime:profil.ime,
+                       // prezime:profil.prezime,
+                       // email:profil.email,
+                       korisnickoIme:profil.korisnickoIme,
+                       // sifra:profil.sifra,
+                       // brojTelefona:profil.brojTelefona,
+                       // grad:profil.grad,
+                       // adresa:profil.adresa,
+                  
+                     }).then(res=>
+                       {
+                          console.log(res + 'zasto')
+                          setProfil(res.data)
+                          setData(res.data)
+                          window.location.reload(false)
+                         })
+                       }
+                       const izmeni_sifru=()=>
+                       {
+                          Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                          {
+                            id:profil.id,
+                            // ime:profil.ime,
+                            // prezime:profil.prezime,
+                            // email:profil.email,
+                            // korisnickoIme:profil.korisnickoIme,
+                            sifra:profil.sifra,
+                            // brojTelefona:profil.brojTelefona,
+                            // grad:profil.grad,
+                            // adresa:profil.adresa,
+                       
+                          }).then(res=>
+                            {
+                               console.log(res + 'zasto')
+                               setProfil(res.data)
+                               setData(res.data)
+                               window.location.reload(false)
+                              })
+                            }
+                            const izmeni_broj_telefona=()=>
+                            {
+                               Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                               {
+                                 id:profil.id,
+                                //  ime:profil.ime,
+                                 // prezime:profil.prezime,
+                                 // email:profil.email,
+                                 // korisnickoIme:profil.korisnickoIme,
+                                 // sifra:profil.sifra,
+                                 brojTelefona:profil.brojTelefona,
+                                 // grad:profil.grad,
+                                 // adresa:profil.adresa,
+                            
+                               }).then(res=>
+                                 {
+                                    console.log(res + 'zasto')
+                                    setProfil(res.data)
+                                    setData(res.data)
+                                    window.location.reload(false)
+                                   })
+                                 }
+                                 const izmeni_grad=()=>
+                                 {
+                                    Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                                    {
+                                      id:profil.id,
+                                      // ime:profil.ime,
+                                      // prezime:profil.prezime,
+                                      // email:profil.email,
+                                      // korisnickoIme:profil.korisnickoIme,
+                                      // sifra:profil.sifra,
+                                      // brojTelefona:profil.brojTelefona,
+                                      grad:profil.grad,
+                                      // adresa:profil.adresa,
+                                 
+                                    }).then(res=>
+                                      {
+                                         console.log(res + 'zasto')
+                                         setProfil(res.data)
+                                         setData(res.data)
+                                         window.location.reload(false)
+                                        })
+                                      }
+                                      const izmeni_adresu=()=>
+                                      {
+                                         Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                                         {
+                                           id:profil.id,
+                                          //  ime:profil.ime,
+                                           // prezime:profil.prezime,
+                                           // email:profil.email,
+                                           // korisnickoIme:profil.korisnickoIme,
+                                           // sifra:profil.sifra,
+                                           // brojTelefona:profil.brojTelefona,
+                                           // grad:profil.grad,
+                                           adresa:profil.adresa,
+                                      
+                                         }).then(res=>
+                                           {
+                                              console.log(res + 'zasto')
+                                              setProfil(res.data)
+                                              setData(res.data)
+                                              window.location.reload(false)
+                                             })
+                                           }
         const[refresh,setRefresh]=useState(false)
 useEffect(()=>
 {
@@ -227,6 +405,7 @@ useEffect(()=>
          console.log(res)
          setProfil(res.data)
          setData(res.data)
+       
       }
    )
 },[])
@@ -259,10 +438,10 @@ const handleRefresh=()=>
              <CardSlika/>
             
             
-             <Paper elevation={8} style={{display:'grid',backgroundColor:'khaki',minWidth:'50px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+             <Card className={classes.paper} elevation={8}style={{display:'grid',backgroundColor:'khaki',minWidth:'50px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
             <div className='jedan'> 
-     <div className='glavno_dugme'>
-     </div>
+     {/* <div className='glavno_dugme'>
+     </div> */}
 
             
             <div className='dugmici'  style={{display:'grid',justifyContent:'center'}}>
@@ -365,82 +544,108 @@ const handleRefresh=()=>
                 
              </div>
   
-             </Paper>
+             </Card>
 
 
 
-             <Paper className={classes.paper} elevation={8} style={{backgroundColor:'khaki',display:'flex',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-             <h4 className={classes.naslov2}>Opšti podaci</h4>
-             <div className='inputi'>
+             <Card className={classes.paper} elevation={8} style={{backgroundColor:'khaki',display:'grid',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+             <h2 style={{textAlign:'center'}} className={classes.naslov2}>Opšti podaci</h2>
+             {/* <div className='inputi'> */}
              {/* <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button> */}
-             <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
-              <div className='prviinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                <label style={{margin:'10px',marginLeft:'40px'}}>Ime:</label>
+             <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }} style={{display:'flex'}}>
+              {/* <div className='prviinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                <label >Ime:</label>
              </Grid>
-             <Grid item xs={6}>
-                <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}} value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                <input type='text'  value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }disabled={ch}></input>
              </Grid>
-             </div>
-             <div className='drugiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Prezime:</label>
+
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_ime();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             {/* </Grid> */}
+             {/* </div> */}
+             {/* <div className='drugiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Prezime:</label>
              </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}} value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis' value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
              </Grid>
-             </div>
-             <div className='treciinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Email:</label>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_prezime();}}startIcon={<EditIcon/>}> Izmeni</Button>
+             {/* </Grid> */}
+             {/* </div> */}
+             {/* <div className='treciinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Email:</label>
              </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
              </Grid>
-             </div>
-             <div className='cetvrtiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Korisničko Ime:</label>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>
+             {/* </Grid> */}
+             {/* </div> */}
+             {/* <div className='cetvrtiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Korisničko Ime:</label>
              </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}}  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis'  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
              </Grid>
-             </div>
-             <div className='petiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Sifra:</label>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_korisnicko_ime();}}> Izmeni </Button>
+             {/* </Grid> */}
+             
+             {/* </div> */}
+             {/* <div className='petiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Sifra:</label>
              </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}}  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis'  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
              </Grid>
-             </div>
-             <div className='sestiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Broj telefona:</label>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_sifru();}}> Izmeni</Button>
+             {/* </Grid> */}
+             {/* </div> */}
+             {/* <div className='sestiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Broj telefona:</label>
              </Grid>
-             <Grid item xs={6}>
-             <input type='text' id='opis'style={{display:'flex',marginLeft:'40px'}} value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis' value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
              </Grid> 
-             </div>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_broj_telefona();}}> Izmeni </Button>
+             {/* </Grid> */}
+             {/* </div> */}
             
-             <div className='sedmiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Grad:</label>
+             {/* <div className='sedmiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Grad:</label>
             </Grid>
-            <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
+            <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis' value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
              </Grid> 
-             </div>
-             <div className='osmiinput'style={{display:'contents'}}>
-             <Grid item xs={6}>
-                   <label style={{margin:'10px',marginLeft:'40px'}}>Adresa:</label>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_grad();}}> Izmeni</Button>
+             {/* </Grid> */}
+             {/* </div> */}
+             {/* <div className='osmiinput'style={{display:'flex'}}> */}
+             <Grid item xs={6} sm={6} md={4} lg={3}>
+                   <label style={{}}>Adresa:</label>
             </Grid>
-            <Grid item xs={6}>
-             <input type='text' id='opis' style={{display:'flex',marginLeft:'40px'}}value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
+            <Grid item xs={6} sm={6} md={4} lg={3}>
+             <input type='text' id='opis' value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
              </Grid>
-             </div>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_adresu();}}> Izmeni</Button>
+             {/* </Grid> */}
+             {/* </div> */}
          </Grid>
-             </div>
+             {/* </div> */}
              <div className='izmeniVlasnika' style={{display:'flex'}} >
              {/* <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
         <EditIcon />
@@ -449,15 +654,15 @@ const handleRefresh=()=>
       <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography> */}
        <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Edituj podatke
-</Button>
-      <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+ </Button>
+      {/* <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Potvrdi izmene
-</Button>
+</Button>  */}
       <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Obrisi svoj profil
 </Button>
       </div>
-             </Paper>
+             </Card>
            
              </div>
               

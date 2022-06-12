@@ -76,7 +76,7 @@ const CardDialog = props => {
           >
             <h5 style={{ color: 'black' }}>
               {psi.map((k, index) => {
-                return <CardKomentari ime={k.ime} rasa={k.rasa} id={k.id} />;
+                return <CardKomentari ime={k.ime} rasa={k.rasa} pol={k.opis} opis={k.opis} visina={k.visina} tezina={k.tezina} id={k.id} />;
               })}
             </h5>
           </DialogContentText>

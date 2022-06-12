@@ -22,6 +22,12 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
+
+
+   
+  
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
@@ -165,6 +171,7 @@ const funkcija_napomena=()=>
 }
 const posalji_zahtev=()=>
 {
+  if(siterId===null){alert('Molimo Vas odaberite sitera!!!')}
   const podaci={
   vlasnikId,
   siterId,
@@ -183,15 +190,15 @@ const posalji_zahtev=()=>
 
       console.log(res)
       localStorage.removeItem('idSitera')
+      alert('Uspesno ste poslali sitter-u zahtev!!!')
     }).catch(err=>
     {
-    
-      
           console.log(err.response)
+         alert(err.response.data)
         
     })
 }
-{console.log(vlasnikId + 'vlasikje')}
+{console.log(vlasnikId + ':vlasnik id ')}
 
     return (
       
@@ -223,8 +230,8 @@ const posalji_zahtev=()=>
         // onChange={handleChange}
       >
         <MenuItem   value={1}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
-        <MenuItem value={2}><i class="fa-solid fa-paw"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
-        <MenuItem  value={3}><i class="fa-solid fa-dog"><h5>Čuvanje psa u kući sittera</h5></i></MenuItem>
+        <MenuItem value={2}><i class="fa-solid fa-house"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
+        <MenuItem  value={3}><i class="fa-solid fa-bone"><h5>Čuvanje psa u kući sittera</h5></i></MenuItem>
         <MenuItem  value={4}><i class="fa-solid fa-paw"><h5>Poseta sittera</h5></i></MenuItem>
       </Select>
     </FormControl>

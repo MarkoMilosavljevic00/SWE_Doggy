@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import classStyles from './styles';
 
 export default function CardKomentari(props) {
-  const { ime, rasa, id } = props;
+  const { ime, rasa,pol,opis,visina,tezina, id } = props;
 
   const classes = classStyles();
   // console.log(id, vreme, komentar, ocena);
@@ -84,6 +84,10 @@ export default function CardKomentari(props) {
           ></Typography>
           <Typography sx={{ fontSize: 18 }}>Ime:{ime}</Typography>
           <Typography sx={{ fontSize: 18 }}>Rasa: {rasa}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Pol:{pol}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Opis: {opis}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Visina:{visina}</Typography>
+          <Typography sx={{ fontSize: 18 }}>Tezina: {tezina}</Typography>
 
           {recenzijaPsa.map((recenzija, index) => {
             return (

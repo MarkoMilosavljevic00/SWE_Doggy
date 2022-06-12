@@ -86,9 +86,9 @@ const idSitera=localStorage.getItem('idSitera')
     <section id="about">
             {/* <div className='saasf' style={{}}> */}
       <div className="container">
-        <div class="row about-container">
+        <div className="row about-container">
        
-          <div class="class=col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch position-relative">
+          <div className="class=col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch position-relative">
             <CardContent>
             <img
               style={{height:'400px',
@@ -101,7 +101,7 @@ const idSitera=localStorage.getItem('idSitera')
           </CardContent>
           </div>
           <div
-            style={{ 'margin-top': '50px' }}
+            style={{ marginTop: '50px' }}
             className="col-lg-6 content order-lg-1 order-2"
           >
             <h2 className="title">Potreban Vam je sitter?</h2>

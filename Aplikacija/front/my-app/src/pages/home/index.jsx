@@ -8,6 +8,7 @@ import PostaniSitter from '../komponente/postanisitter';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import classStyles from './styles';
+import HeaderAdmin from '../../components/HeaderAdmin';
 import NavbarVlasnik from '../headerVlasnik';
 import NavBarSiter from '../headerSiter';
 
@@ -17,16 +18,17 @@ export const Home = (props) => {
   const[refresh,setRefresh]=useState('')
   useEffect(()=>{
     console.log('1')
-  },refresh)
+  },[refresh])
   const classes = classStyles();
   const proveraSiter=localStorage.getItem('idSitera')
   const proveraVlasnik=localStorage.getItem('idVlasnika')
-  console.log(proveraSiter + 'ahahha')
+  const proveraAdmin=localStorage.getItem('idAdmina');
+  // console.log(proveraSiter + 'ahahha')
   return (
 
 <div className='wrapper'>
 {/* { proveraVlasnik  ? <NavbarVlasnik/> :<Header />} */}
-{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)} 
+{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/>  :(proveraAdmin ? <HeaderAdmin/> : <Header/>))} 
   <section id="hero">
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>

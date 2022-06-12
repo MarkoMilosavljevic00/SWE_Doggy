@@ -15,8 +15,10 @@ export default function BasicCard(props) {
   const {
     ime,
     prezime,
+    korisnicko_ime,
     telefon,
     grad,
+    adresa,
     cenaPoSatu,
     bio,
     validan,
@@ -30,6 +32,7 @@ export default function BasicCard(props) {
     }).then(async response => {
       if (response.ok) {
         const res = await response.json();
+        window.location.reload(false)
       } else {
         alert('greska');
       }
@@ -49,6 +52,7 @@ export default function BasicCard(props) {
         console.log(res);
         alert('Sitter' + res.ime + ' ' + res.prezime + ' ' + 'je prihvaćen');
         setDostupan(res);
+        window.location.reload(false);
       } else {
         alert('greskaa');
       }
@@ -79,16 +83,19 @@ export default function BasicCard(props) {
           >
             {ime} {prezime}
           </Typography>
-
+          <Typography sx={{ fontSize: 20 }}>
+            Korisnicko ime: {korisnicko_ime}
+          </Typography>
           <Typography sx={{ fontSize: 20 }}>
             Broj telefona: {telefon}
           </Typography>
           <Typography sx={{ fontSize: 20 }}>Grad: {grad}</Typography>
+          <Typography sx={{ fontSize: 20 }}>Adresa: {adresa}</Typography>
           <Typography sx={{ fontSize: 20 }}>
             Cena po satu: {cenaPoSatu}
           </Typography>
 
-          <Typography sx={{ fontSize: 16 }}>Opis: {bio}</Typography>
+          <Typography sx={{ fontSize: 20 }}>Opis: {bio}</Typography>
         </CardContent>
 
         <div className={classes.divButton}>
@@ -101,7 +108,7 @@ export default function BasicCard(props) {
                   backgroundColor: '#07a607',
                   marginTop: 20,
                 }}
-                onClick={obrisiSitera}
+                onClick={()=>{obrisiSitera();}}
               >
                 Obrisi sitera{' '}
               </Button>
@@ -120,7 +127,7 @@ export default function BasicCard(props) {
               })}; */}
               <Button
                 style={{ color: 'white', backgroundColor: '#07a607' }}
-                onClick={uradi}
+                onClick={()=>{uradi();}}
               >
                 Prihvati sittera{' '}
               </Button>

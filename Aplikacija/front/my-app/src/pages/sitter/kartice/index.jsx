@@ -43,7 +43,7 @@ export default function RecipeReviewCard(props) {
   };
 
   const classes = classStyles();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const {
     ime,
@@ -57,57 +57,72 @@ export default function RecipeReviewCard(props) {
     prosecnaOcena,
     id,
   } = props;
-const posalji_id_sittera=()=>
-{
-  console.log(id)
-}
+  const posalji_id_sittera = () => {
+    console.log(id);
+  };
   // console.log('../../../slike/s1.jpg');
   return (
-    <div className='kartica'>
-    <Card sx={{ width: 200, maxHeigh: 10 }} className={classes.kartica}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {ime[0]}
-          </Avatar>
-        }
-        action={<PetsIcon style={{ color: 'green' }} />}
-        title={ime}
-      />
-      <CardMedia
-        component="img"
-        height="130"
-        // image={slika2}                           //OVA DVA NACINA SU ISTA
-        // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
-        src={slikeUrl + slika}
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Opis
-          opis={opis}
-          brojTelefona={brojTelefona}
-          grad={grad}
-          adresa={adresa}
-          cenaPoSatu={cenaPoSatu}
-          dostupan={dostupan}
-          prosecnaOcena={prosecnaOcena}
-          id={id}
+    <div className="kartica">
+      <Card sx={{ width: 200, maxHeigh: 10 }} className={classes.kartica}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              {ime[0]}
+            </Avatar>
+          }
+          action={<PetsIcon style={{ color: 'green' }} />}
+          title={ime}
         />
-        {/* <ThumbUpIcon style={{ color: 'green' }} /> */}
-        Prosecna ocena : {prosecnaOcena}
-        <br />
-        Cena : {cenaPoSatu}
-        <br />
-        Grad: {grad}
-      </CardContent>
-      {/* <CardActions disableSpacing>
+        <CardMedia
+          component="img"
+          height="130"
+          // image={slika2}                           //OVA DVA NACINA SU ISTA
+          // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
+          src={slikeUrl + slika}
+          alt="Paella dish"
+        />
+        <CardContent>
+          <Opis
+            opis={opis}
+            brojTelefona={brojTelefona}
+            grad={grad}
+            adresa={adresa}
+            cenaPoSatu={cenaPoSatu}
+            dostupan={dostupan}
+            prosecnaOcena={prosecnaOcena}
+            id={id}
+          />
+          <div>
+            <Button
+              style={{
+                color: 'white',
+                backgroundColor: 'rgb(93, 224, 100)',
+                height: '32px',
+                width:153
+              }}
+              value={id}
+              onChange={e => e.target.value}
+              onClick={() => {
+                localStorage.setItem('idSitera', id);
+                navigate('/vlasnikRoute');
+              }}
+            >
+              Odaberi sittera
+            </Button>
+          </div>
+          {/* <ThumbUpIcon style={{ color: 'green' }} /> */}
+          Prosecna ocena : {prosecnaOcena}
+          <br />
+          Cena : {cenaPoSatu}
+          <br />
+          Grad: {grad}
+        </CardContent>
+        {/* <CardActions disableSpacing>
         <Ocene />
       </CardActions> */}
-    </Card>
-        <Button color='success' value={id} onChange={e=>e.target.value}  onClick={() => {
-                localStorage.setItem('idSitera', id);
-                navigate('/vlasnikRoute');}}>Odaberi ovog sitter-a</Button>
-        {/* <h3>{id}</h3> */}
-        </div>
+      </Card>
+
+      {/* <h3>{id}</h3> */}
+    </div>
   );
 }

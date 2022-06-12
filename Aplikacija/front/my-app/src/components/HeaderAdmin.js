@@ -534,6 +534,17 @@ const NavBarSiter=()=> {
   );
 
   const navigate=useNavigate();
+  const log_out_admin=()=>
+  {
+    // const idVlasnika=localStorage.removeItem('idVlasnika')
+    const token=localStorage.removeItem('token')
+    const korisnik=localStorage.removeItem('korisnik')
+    const idAdmina=localStorage.removeItem('idAdmina')
+    navigate('/')
+    console.log('Uspesno ste se log autovali')
+    alert('Successful log out')
+
+}
   return (
       <Box sx={{ flexGrow: 1 }}>
       <AppBar  position='fixed' style={{display:'flex'}}>
@@ -570,16 +581,16 @@ const NavBarSiter=()=> {
           
             <li  style={{display:'flex'}}>
               
-              <IconButton  href="#about"  style={{display:'flex'}}>
+              <IconButton  onClick={()=>{navigate('/adminRoute')}}  style={{display:'flex'}}>
             
               <Typography style={{color:'white',display:'flex'}} className="nav-link scrollto">
-                O sajtu
+               Proveri sve
               </Typography>
               
               </IconButton>
            </li>
 
-            <li>
+            {/* <li>
               
               <IconButton  href="/registerRoute"  style={{display:'flex'}}>
             <PlayCircleFilledWhiteIcon/>
@@ -590,10 +601,10 @@ const NavBarSiter=()=> {
               </IconButton>
               
               
-            </li>
+            </li> */}
 
              
-            <li>
+            {/* <li>
             <IconButton href="#contact"  style={{display:'flex'}}>
               <AddLocationAltIcon/>
               <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white',display:'flex'}}>
@@ -608,14 +619,14 @@ const NavBarSiter=()=> {
                 Pomoć
               </Typography>
               </IconButton>
-            </li>
+            </li> */}
             {/* <li>
               <a className="nav-link scrollto" href="/adminRoute" style={{marginLeft:'50px'}}>
                Admin
               </a>
             </li>
              <li> */}
-            <li className="dropdown"  style={{display:'flex'}} >
+            {/* <li className="dropdown"  style={{display:'flex'}} >
             <IconButton>
               <Typography style={{color:'white',display:'flex'}}href="/#">
                 <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
@@ -631,7 +642,7 @@ const NavBarSiter=()=> {
                   <li><a href="/#">Deep Drop Down 5</a></li>
                 </ul>
               </li> */}
-                <li>
+                {/* <li>
                   <a href="#services" >Šetanje psa po gradu</a>
                 </li>
                 <li>
@@ -644,23 +655,18 @@ const NavBarSiter=()=> {
                   <a href="#services" >Čuvanje psa u kući sittera</a>
                 </li>
               </ul>
+              
+            </li>*/}
+            <li>  
+            <IconButton   onClick={()=>{log_out_admin();}} style={{display:'flex'}}>
+              <LogoutIcon />
+              <Typography fontSize={14} className="nav-link scrollto"  style={{color:'white',display:'flex'}}>
+                Log Out
+              </Typography>
+              </IconButton>
             </li>
             <div className='upadaj' style={{display:'flex'}}>
-             <li>
-             <IconButton href="/loginRoute"  style={{display:'flex'}}>
-              <Typography className="nav-link scrollto" href="/loginRoute" style={{color:'white',fontWeight:'bolder'}}>
-                Log In
-              </Typography>
-              </IconButton>
-            </li>
-            <li>
-              
-            <IconButton href="/registerRoute"  style={{display:'flex'}}>
-              <Typography className="nav-link scrollto" href="/registerRoute"style={{color:'white',fontWeight:'bolder'}}>
-                Registruj se
-              </Typography>
-              </IconButton>
-            </li>
+          
             </div>
           </ul>
           </nav>

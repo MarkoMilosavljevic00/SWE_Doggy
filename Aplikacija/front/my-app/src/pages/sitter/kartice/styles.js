@@ -9,7 +9,7 @@ const classStyles = makeStyles({
   },
 
   kartica: {
-    maxHeight: 330,
+    maxHeight: 375,
   },
 });
 export default classStyles;

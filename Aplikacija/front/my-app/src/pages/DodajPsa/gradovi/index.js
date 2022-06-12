@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import { useState, useEffect } from 'react';
 import { vratiSveGradoveSittera } from '../../../backendAddress';
 import Select from '@mui/material/Select';
+import { Axios } from 'axios';
 
 export default function BasicSelect(props) {
   // const [grad, postaviGrad] = React.useState('');
@@ -24,6 +25,17 @@ export default function BasicSelect(props) {
       postaviGradove(results);
     });
   }, []);
+  const[siteri,setSiteri]=useState('')
+  const vratisve=()=>
+  {
+    Axios.get('https://localhost:5001/Siter/vratiSveSitere').then(
+      res=>
+      {
+        console.log(res.data)
+        setSiteri(res.data)
+      }
+    )
+  }
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -35,6 +47,7 @@ export default function BasicSelect(props) {
           label="grad"
           onChange={handleChange}
         >
+          <Typography onClick={()=>{vratisve();}}>Svi</Typography>
           {gradovi.map((name, index) => (
             <MenuItem
               // style={getStyles(name, personName, theme)}

@@ -44,6 +44,13 @@ export default function BasicSelect(props) {
               {name}
             </MenuItem>
           ))}
+          <MenuItem
+            // style={getStyles(name, personName, theme)}
+            key={'sve'}
+            value={'sve'}
+          >
+            sve
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>

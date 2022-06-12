@@ -17,7 +17,11 @@ export default function BasicCard() {
   const classes = classStyles();
   const [komentar, setKomentar] = useState('');
   const [ocena, setOcena] = useState(null);
-  const idVlasnika = localStorage.getItem('idVlasnika');
+  const idSitera = localStorage.getItem('idSitera');
+    
+    const idVlasnika = localStorage.getItem('idVlasnika');
+    // const vreme = '2022-05-30T20:21:58.311Z';
+ 
   // const [pas, postaviPsa] = useState([]);
 
   // useEffect(() => {
@@ -29,35 +33,40 @@ export default function BasicCard() {
   //   });
   // }, []);
 
-  const sacuvajOnClick = () => {
-    const idSitera = localStorage.getItem('idSitera');
-    const vreme = '2022-05-30T20:21:58.311Z';
+  // const sacuvajOnClick = () => {
+  //   const idSitera = localStorage.getItem('idSitera');
+  // //   const classes = classStyles();
+  // // const [komentar, setKomentar] = useState('');
+  // // const [ocena, setOcena] = useState(null);
+ 
+  //   const idVlasnika = localStorage.getItem('idVlasnika');
+  //   const vreme = '2022-05-30T20:21:58.311Z';
 
-    const DTO = {
-      vreme: vreme,
-      komentar: komentar,
-      siterId: idSitera,
-      pasId: 4, //ovo ne treba, jer vlasnik ne ocenjuje svog psa, vec sitera!
-      vlasnikId: idVlasnika, //ovo fali, treba da se zna koji vlasnik ocenjuje kog sitera
-      ocena: ocena,
-    };
+  //   const DTO = {
+  //     vreme: vreme,
+  //     komentar: komentar,
+  //     siterId: idSitera,
+  //     pasId: 4, //ovo ne treba, jer vlasnik ne ocenjuje svog psa, vec sitera!
+  //     vlasnikId: idVlasnika, //ovo fali, treba da se zna koji vlasnik ocenjuje kog sitera
+  //     ocena: ocena,
+  //   };
 
-    fetch(
-      'https://localhost:5001/Recenzija/dodajRecenzijuSiteru?idSiter=' +
-        idSitera,
-      {
-        method: 'POST',
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(DTO),
-      }
-    ).then(async res => {
-      const r = await res.json();
-      console.log(r);
-    });
-  };
+  //   fetch(
+  //     'https://localhost:5001/Recenzija/dodajRecenzijuSiteru?idSiter=' +
+  //       idSitera,
+  //     {
+  //       method: 'POST',
+  //       headers: {
+  //         // Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(DTO),
+  //     }
+  //   ).then(async res => {
+  //     const r = await res.json();
+  //     console.log(r);
+  //   });
+  // };
 
   const textareaOnChange = ev => {
     setKomentar(ev.target.value);
@@ -68,7 +77,9 @@ export default function BasicCard() {
       'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + idVlasnika
     ).then(async res => {
       const rez = await res.json();
+      console.log(rez.data)
       setVlasnici(rez);
+    
     });
   }, []);
 
@@ -81,7 +92,7 @@ export default function BasicCard() {
           <div className={classes.divOcena}>
             <div className={classes.lbl}>
               <Typography variant="h5" component="div">
-                {vlasnik.ime} {vlasnik.prezime}
+                {vlasnik.ime + ' ' + vlasnik.prezime}
               </Typography>
             </div>
             <div className={classes.ocena}>
@@ -98,7 +109,7 @@ export default function BasicCard() {
           <Typography variant="h5" component="div"></Typography>
           <div className={classes.divKomentar}>
             <Button
-              onClick={sacuvajOnClick}
+              onClick={console.log('1')}
               style={{
                 display: 'flex',
                 width: '200px',
