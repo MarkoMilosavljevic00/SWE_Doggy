@@ -61,7 +61,7 @@ const CardDialog = props => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button style={{ color: 'green' }} onClick={handleClose}>
+          <Button style={{ color: 'rgb(93, 224, 100)' }} onClick={handleClose}>
             Cancel
           </Button>
         </DialogActions>

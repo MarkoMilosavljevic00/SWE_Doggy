@@ -68,6 +68,7 @@ const name = ()=>
     {
       console.log(res.data.slika)
       setIme(res.data.slika)
+      window.location.reload(false)
     }
   )
 }
@@ -137,7 +138,7 @@ const handleClick=()=>
 const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return(
-    <><Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'khaki', display: 'grid', marginBottom: '40px', marginTop: '40px', borderRadius: '50px' }}>
+    <><Card sx={{ maxWidth: 345 }} style={{ backgroundColor: 'khaki', display: 'grid', marginBottom: '40px', marginTop: '40px', borderRadius: '50px',minWidth:'300px' }}>
     {/* <ThemeProvider theme={darkTheme}>
       <main>This app is using the dark mode</main>
     </ThemeProvider> */}
@@ -155,35 +156,40 @@ const current = new Date();
         component='img'
         height="400"
         image={'https://localhost:5001/StaticFiles/' + ime}
-       alt='paela'
+      //  alt='paela'
        />
       <CardActions className={classes.divButtonCard}>
-      <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button>
-       <div className='sagfd'style={{justifyContent:'center'}}>
-        <input hidden={!klik} type="file" onChange={handleChange} />
-       </div>
-        {/* <Button color='success' onClick={handleSubmit}>klik</Button> */}
+      {/* <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button> */}
+       <Typography variant='h6' style={{marginBottom:'15px'}}>Odaberite sliku</Typography>
+      
+        <input  style={{display:'flex',textAlignLast:'center'}}type="file"onClick={()=>{handleClick();}} onChange={handleChange} />
+      
+        <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
         <ExpandMore
           expand={expanded}
-
-          onClick={() => { handleExpandClick(); handleSubmit(); } }
+hidden={!klik}
+          onClick={() => { handleExpandClick(); } }
           aria-expanded={expanded}
           aria-label="show more"
 
-            hidden={!klik}
+            
         >
+          <ExpandMoreIcon/>
         </ExpandMore>
+        Prikazi dugme za potvrdu
+        </IconButton >
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
 
             <Button
+            hidden={!klik}
               style={{ backgroundColor: 'rgb(93, 224, 100)', color: "black", width: '250px', height: '50px', borderRadius: '20px' }}
               variant="contained"
               color="success"
               type="submit"
               onClick={name}
             >
-              Dodaj sliku
+              Potvrdi
             </Button>
 
           </CardContent>
@@ -191,7 +197,8 @@ const current = new Date();
 
 
       </CardActions>
-    </Card><Card sx={{ maxWidth: 345 }} hidden={true}>
+    </Card>
+    {/* <Card sx={{ maxWidth: 345 }} hidden={true}>
         <CardHeader
           avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + ime}>
             
@@ -259,7 +266,8 @@ const current = new Date();
             </Typography>
           </CardContent>
         </Collapse>
-      </Card></>
+      </Card> */}
+      </>
   );
 }
 export default CardSlika

@@ -32,12 +32,19 @@ export default function CardPristigliZahtevi(props) {
       const prihvati_uslugu = idUsluge  =>
 {
     Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + idUsluge + '&status=1').then(
-        res =>
-        {
-            console.log(res)
-        }
-    )
-    window.location.reload(false)
+    res =>
+        { 
+          
+             console.log(res.data)
+            window.location.reload(false)
+          } 
+        
+        
+    ).catch((error)=>
+      {
+        alert(error.response)
+      
+      })
 }
 const odbij_uslugu=(id) =>
 {
@@ -45,9 +52,12 @@ const odbij_uslugu=(id) =>
         res =>
         {
             console.log('Odbijena usluga sa idejem: ' + props)
-        }
-    )
-    window.location.reload(false)
+            window.location.reload(false)
+          }
+          ).catch((err)=>
+          {
+                       alert(err.response.data)
+          })
 }
 
       return(

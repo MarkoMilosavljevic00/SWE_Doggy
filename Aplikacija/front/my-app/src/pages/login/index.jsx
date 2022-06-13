@@ -90,7 +90,7 @@ const Login = () => {
         }
         else if(res.status==401)
         {
-          alert('Losa sifra!!!')
+          alert('Los mejl!!!')
         }
         else if(res.status==501)
         {
@@ -99,8 +99,8 @@ const Login = () => {
       })
       .catch(err => {
         // alert(err);
-        // alert(err.response.data)
-        alert('Losa sifra!!!')
+        // alert('1')
+        
       });
  
   };

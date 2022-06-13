@@ -4,7 +4,7 @@ const classStyles = makeStyles({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#95e36e61',
+    
   },
 
   miniContainer: {

@@ -13,6 +13,7 @@ const Registracija = props => {
     formNumber,
     setZavrsiRegistraciju,
     zavrsiRegistraciju,
+    siter,
   } = props;
 
   const nazadOnClick = () => {
@@ -31,14 +32,16 @@ const Registracija = props => {
           >
             Bravo, uspešno ste uneli sve podatke!
           </Typography>
-          <Typography
-            gutterBottom
-            component="div"
-            style={{ textAlign: 'center' }}
-          >
-            ~Kada završite registraciju, administrator mora da odobri Vaš nalog
-            da bi ste mogli da ga koristite.
-          </Typography>
+          {siter ? (
+            <Typography
+              gutterBottom
+              component="div"
+              style={{ textAlign: 'center' }}
+            >
+              ~Kada završite registraciju, administrator mora da odobri Vaš
+              nalog da bi ste mogli da ga koristite.
+            </Typography>
+          ) : null}
           <div className={classes.buttonContainer}>
             <Button
               className={classes.divButton}

@@ -471,7 +471,7 @@ const azuriraj=()=>
           multiline
           rows={4}
           value={profil.bio}
-          style={{width:'500px',marginTop:'20px'}}
+          style={{width:'450px',marginTop:'20px'}}
           onChange={ (e) =>  setProfil((profil)=>({...profil,bio:e.target.value})) }
         />
 

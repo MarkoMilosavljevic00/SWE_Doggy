@@ -76,7 +76,7 @@ useEffect(()=>
             {ime[0]}
           </Avatar>
         }
-        action={<PetsIcon style={{ color: 'green' }} />}
+        action={<PetsIcon style={{ color: 'rgb(93, 224, 100)' }} />}
         title={ime}
       />
       <CardMedia
@@ -86,7 +86,7 @@ useEffect(()=>
         // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
         // src={slikeUrl + slika}
         src={'https://localhost:5001/StaticFiles/' + pic}
-        alt="Paella dish"
+        // alt="Paella dish"
       />
       <CardContent>
         <Opis

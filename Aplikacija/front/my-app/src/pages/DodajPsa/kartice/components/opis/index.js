@@ -355,7 +355,7 @@ const handleIzmena=()=>
         </DialogContent>
         <DialogActions>
           {/* style={{ backgroundColor: '#2ac94d', margin: 15 }} */}
-          <Button autoFocus onClick={handleClose} style={{ color: 'green' }}>
+          <Button autoFocus onClick={handleClose} style={{ color: 'rgb(93, 224, 100)' }}>
             Zatvori
           </Button>
         </DialogActions>

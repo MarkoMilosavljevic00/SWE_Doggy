@@ -51,6 +51,7 @@ useEffect(()=>
       {
         console.log(res.data.slika)
         setSlika(res.data.slika)
+        window.location.reload(false)
       }
     )
   }
@@ -128,20 +129,25 @@ function handleChange(event) {
         image={
           'https://localhost:5001/StaticFiles/' + slika
         }
-        alt="Paella dish"
+        // alt="Paella dish"
       />
       <CardActions className={classes.divButtonCard}>
-    <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button>
-    <input className='inputic' style={{display:'flex',textAlignLast:'center'}}type="file" hidden={!klik} onChange={handleChange} />
+        <Typography style={{marginBottom:'20px'}}variant='h6'>Odaberite sliku</Typography>
+    {/* <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button> */}
+    <input className='inputic' style={{display:'flex',textAlignLast:'center'}}type="file" onClick={handleClick} onChange={handleChange} />
+    <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
     <ExpandMore
 expand={expanded}
 hidden={!klik}
-onClick={() => { handleExpandClick(); handleSubmit(); } }
+onClick={() => { handleExpandClick(); } }
 aria-expanded={expanded}
 aria-label="show more"
-
+// handleSubmit();
 >
+  <ExpandMoreIcon/>
     </ExpandMore>
+  Prikazi dugme za potvrdu
+    </IconButton>
 <Collapse in={expanded} timeout="auto" unmountOnExit>
   <CardContent>
         <Button
@@ -155,9 +161,9 @@ aria-label="show more"
           }}
           variant="contained"
           color="success"
-          onClick={picture}
+          onClick={()=>{picture();}}
         >
-          Dodaj sliku
+          Potvrdi
         </Button>
         </CardContent>
   </Collapse>

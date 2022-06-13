@@ -9,7 +9,9 @@ import { Button } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
+import Footer from '../../components/Footer.js'
 import PojedinacnaKartica from '../komentarisanjeIOcenjivanje/pojedinacnaKartica/index.jsx';
+import HeaderVlasnik from '../headerVlasnik/index.js'
 const KomentariasnjeIOcenjivanje = props => {
   const classes = classStyles();
   const navigate = useNavigate();
@@ -43,9 +45,10 @@ const KomentariasnjeIOcenjivanje = props => {
     });
   }, []);
 
-  return (
+  return (<>
+    <div className='a' style={{minHeight:'752px',backgroundColor:'#95e36e61'}}>
+      <HeaderVlasnik />
     <div className={classes.container}>
-      <HeaderLogin />
       <div className={classes.divGore}>
         <div className={classes.naziv}>
           <h4 className={classes.divImeIPrezime}>
@@ -68,7 +71,7 @@ const KomentariasnjeIOcenjivanje = props => {
         <div className={classes.divButton}>
           <Button
             style={{
-              backgroundColor: 'green',
+              backgroundColor: 'rgb(93, 224, 100)',
               color: 'white',
               marginRight: ' 100px',
             }}
@@ -96,6 +99,9 @@ const KomentariasnjeIOcenjivanje = props => {
         })}
       </div>
     </div>
+    </div>
+  
+    </>
   );
 };
 export default KomentariasnjeIOcenjivanje;

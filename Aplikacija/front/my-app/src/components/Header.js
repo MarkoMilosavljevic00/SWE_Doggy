@@ -20,10 +20,10 @@
 //   const navigate = useNavigate();
 //   const [anchorEl, setAnchorEl] = React.useState(null);
 //   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  
+
 //   const isMenuOpen = Boolean(anchorEl);
 //   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
+
 //   const handleProfileMenuOpen = (event) => {
 //       setAnchorEl(event.currentTarget);
 //   };
@@ -43,7 +43,7 @@
 // const mobileMenuId = 'primary-search-account-menu-mobile';
 // const renderMobileMenu = (
 //   <Menu
- 
+
 //   anchorEl={mobileMoreAnchorEl}
 //   anchorOrigin={{
 //       vertical: 'top',
@@ -65,7 +65,7 @@
 //         <HomeIcon />
 //         </Badge>
 //         <Typography>Kuci</Typography>
-      
+
 //         </IconButton>
 //         </MenuItem> */}
 //   <MenuItem onClick={handleProfileMenuOpen}>
@@ -75,11 +75,11 @@
 //       aria-controls="primary-search-account-menu"
 //       aria-haspopup="true"
 //       color="inherit"
-    
+
 //       >
-      
-  
-  
+
+
+
 //     {/* <Typography >Profil</Typography> */}
 //     </IconButton>
 //   </MenuItem>
@@ -106,7 +106,7 @@
 //          <Typography >Kontakt</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //         </MenuItem>
 //         <MenuItem  href="/helpRoute">
 //   <IconButton size="large" color="inherit">
@@ -115,7 +115,7 @@
 //          <Typography >Pomoc</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //         </MenuItem>
 //         {/* <MenuItem>
 //   <IconButton size="large" href="/dodajPsaRoute" color="inherit">
@@ -124,38 +124,38 @@
 //          <Typography >Usluge</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //       </MenuItem>*/}
 //         <MenuItem onClick={()=>{navigate('./loginRoute')}}>
 //   <IconButton size="large"  color="inherit">
 //           <Badge >
-           
+
 //          <Typography >Log in</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //         </MenuItem>
 //         <MenuItem onClick={()=>{navigate('./registerRoute')}}>
 //   <IconButton size="large"  color="inherit">
 //           <Badge >
-            
+
 //          <Typography >Registruj se</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //         </MenuItem>
 //         <MenuItem >
 //   <IconButton size="large" color="inherit">
 //           <Badge >
-            
+
 //          <Typography >Zatvori</Typography>
 //           </Badge>
 //         </IconButton>
-          
+
 //         </MenuItem>
-       
-  
-        
+
+
+
 //     </Menu>
 //         );
 //   return (
@@ -182,7 +182,7 @@
 //     >
 //       <div className="container d-flex justify-content-between align-items-center">
 //         <div id="logo">
-  
+
 //           <h1>
 //             <a href="/">Doggy</a>
 //           </h1>
@@ -192,29 +192,29 @@
 //           <ul>
 //             {/* <li><a className="nav-link scrollto active" href="#hero">Početna</a></li> */}
 //             <li>
-              
+
 //               <IconButton  href="#about">
-            
+
 //               <Typography style={{color:'white'}} className="nav-link scrollto">
 //                 O sajtu
 //               </Typography>
-              
+
 //               </IconButton>
-              
-              
+
+
 //             </li>
 
 //             <li>
-              
+
 //               <IconButton  href="/registerRoute">
 //             <PlayCircleFilledWhiteIcon/>
 //               <Typography fontSize={14} style={{color:'white'}} className="nav-link scrollto">
 //                 Zapocni 
 //               </Typography>
-              
+
 //               </IconButton>
-              
-              
+
+
 //             </li>
 
 //              {/* <li> */}
@@ -307,7 +307,7 @@
 //             </li>
 //           </ul>
 //           <i  onClick={handleMobileMenuOpen}class="bi bi-list mobile-nav-toggle"></i>
- 
+
 //         </nav>
 //       </div>
 //       {renderMobileMenu}
@@ -318,7 +318,7 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
- import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
@@ -343,7 +343,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import { useState, useEffect, useContext } from 'react'
 // import IkonicaHome from '../../components/ikonicaHome';
-import { profilVlasnikRoute,profilSitterRoute,DodajPsaRoute } from "../router/routes";
+import { profilVlasnikRoute, profilSitterRoute, DodajPsaRoute } from "../router/routes";
 import { useNavigate } from "react-router-dom";
 import Axios from 'axios'
 import { red } from '@mui/material/colors';
@@ -351,7 +351,7 @@ import { Avatar } from '@mui/material';
 import { CardHeader } from '@mui/material';
 import { Home } from '@mui/icons-material';
 const Search = styled('div')(({ theme }) => ({
- 
+
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -390,54 +390,51 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const NavBarSiter=()=> {
-  const[slika,setSlika]=useState('')
-  const ajdi=localStorage.getItem('idSitera')
-  useEffect(()=>
-  {
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(res=>
-    {
+const NavBarSiter = () => {
+  const [slika, setSlika] = useState('')
+  const ajdi = localStorage.getItem('idSitera')
+  useEffect(() => {
+    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(res => {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)
     })
-  },[])
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-    
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  }, [])
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
-  
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-  
+
   const handleMobileMenuOpen = (event) => {
-      setMobileMoreAnchorEl(event.currentTarget);
-    };
-    const log_out=()=>
-    {
-            const idVlasnika=localStorage.removeItem('idVlasnika')
-            const token=localStorage.removeItem('token')
-            const korisnik=localStorage.removeItem('korisnik')
-            const idSitera=localStorage.removeItem('idSitera')
-            console.log('Uspesno ste se log autovali')
-            alert('Successful log out')
-  
-    }
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const log_out = () => {
+    const idVlasnika = localStorage.removeItem('idVlasnika')
+    const token = localStorage.removeItem('token')
+    const korisnik = localStorage.removeItem('korisnik')
+    const idSitera = localStorage.removeItem('idSitera')
+    console.log('Uspesno ste se log autovali')
+    alert('Successful log out')
+
+  }
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
     <Menu
-    anchorEl={mobileMoreAnchorEl}
-    anchorOrigin={{
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
@@ -450,179 +447,179 @@ const NavBarSiter=()=> {
       open={isMenuOpen}
       onClose={handleMenuClose}
       onClick={handleMobileMenuOpen}
-      >
-      <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
+    >
+      <MenuItem src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
       {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
-      <MenuItem onClick={()=>{handleMenuClose();log_out()}}>Log Out</MenuItem>
+      <MenuItem onClick={() => { handleMenuClose(); log_out() }}>Log Out</MenuItem>
     </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const slika1='https://localhost:5001/StaticFiles/' + slika
+  const slika1 = 'https://localhost:5001/StaticFiles/' + slika
   // console.log(slika1)
   const renderMobileMenu = (
-      <Menu
+    <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-          vertical: 'top',
-        horizontal: 'right',
-    }}
-    id={mobileMenuId}
-    keepMounted
-    transformOrigin={{
         vertical: 'top',
         horizontal: 'right',
-    }}
-    open={isMobileMenuOpen}
-    onClose={handleMobileMenuClose}
-    
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+
     >
-     
-      <MenuItem onClick={()=>{navigate('./registerRoute')}}>
+
+      <MenuItem onClick={() => { navigate('./registerRoute') }}>
         <IconButton
           size="large"
-         
+
           color="inherit"
         >
           <Badge color="error">
             <LogoutIcon />
-       <Typography > Zapocni </Typography>
+            <Typography > Zapocni </Typography>
           </Badge>
         </IconButton>
       </MenuItem>
-      
-      <MenuItem onClick={()=>{navigate('./helpRoute')}}>
+
+      <MenuItem onClick={() => { navigate('./helpRoute') }}>
         <IconButton
           size="large"
-         
+
           color="inherit"
         >
           <Badge color="error">
             <HelpOutlineIcon />
-       <Typography > Pomoc </Typography>
+            <Typography > Pomoc </Typography>
           </Badge>
         </IconButton>
       </MenuItem>
-   
-  
-     <MenuItem onClick={()=>{navigate('./loginRoute')}}>
-     <IconButton
-       size="large"
-      
-       color="inherit"
-     >
-       <Badge color="error">
-         <LoginIcon />
-    <Typography > Log in </Typography>
-       </Badge>
-     </IconButton>
-   </MenuItem>
 
- <MenuItem onClick={()=>{navigate('./registerRoute')}}>
- <IconButton
-   size="large"
-  
-   color="inherit"
- >
-   <Badge color="error">
-     <AppRegistrationIcon />
-<Typography > Registruj se </Typography>
-   </Badge>
- </IconButton>
-</MenuItem>
-</Menu>
+
+      <MenuItem onClick={() => { navigate('./loginRoute') }}>
+        <IconButton
+          size="large"
+
+          color="inherit"
+        >
+          <Badge color="error">
+            <LoginIcon />
+            <Typography > Log in </Typography>
+          </Badge>
+        </IconButton>
+      </MenuItem>
+
+      <MenuItem onClick={() => { navigate('./registerRoute') }}>
+        <IconButton
+          size="large"
+
+          color="inherit"
+        >
+          <Badge color="error">
+            <AppRegistrationIcon />
+            <Typography > Registruj se </Typography>
+          </Badge>
+        </IconButton>
+      </MenuItem>
+    </Menu>
   );
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
-      <Box sx={{ flexGrow: 1 }}>
-      <AppBar  position='fixed' style={{display:'flex'}}>
-        <Toolbar  position='fixed'style={{backgroundColor:'#5de064',display:'flex'}}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='fixed' style={{ display: 'flex' }}>
+        <Toolbar position='fixed' style={{ backgroundColor: '#5de064', display: 'flex' }}>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            
-            >
+
+          >
             {/* <HomeIcon /> */}
           </IconButton>
           <header
-      id="header"
-      className="fixed-top d-flex align-items-center header-transparent"
-    >
-    
-        <div id="logo">
-          <h1>
-            <a href="./">Doggy</a>
-          </h1>
-        </div>
-        </header>
-          
-          <Box sx={{ flexGrow: 1,flexShrink:1 }} />
+            id="header"
+            className="fixed-top d-flex align-items-center header-transparent"
+          >
+
+            <div id="logo">
+              <h1>
+                <a href="./">Doggy</a>
+              </h1>
+            </div>
+          </header>
+
+          <Box sx={{ flexGrow: 1, flexShrink: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <div className="container d-flex justify-content-between align-items-center">
-       
+            <div className="container d-flex justify-content-between align-items-center">
 
-        <nav xs={12} md={6} id="navbar" className="navbar">
-          <ul style={{display:'flex'}} xs={12} md={6}>
-          
-            <li  style={{display:'flex'}}>
-              
-              <IconButton  href="#about"  style={{display:'flex'}}>
-            
-              <Typography style={{color:'white',display:'flex'}} className="nav-link scrollto">
-                O sajtu
-              </Typography>
-              
-              </IconButton>
-           </li>
 
-            <li>
-              
-              <IconButton  href="/registerRoute"  style={{display:'flex'}}>
-            <PlayCircleFilledWhiteIcon/>
-              <Typography fontSize={14} style={{color:'white',display:'flex'}} className="nav-link scrollto">
-                Zapocni 
-              </Typography>
-              
-              </IconButton>
-              
-              
-            </li>
+              <nav xs={12} md={6} id="navbar" className="navbar">
+                <ul style={{ display: 'flex' }} xs={12} md={6}>
 
-             
-            <li>
-            <IconButton href="#contact"  style={{display:'flex'}}>
-              <AddLocationAltIcon/>
-              <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white',display:'flex'}}>
-                Kontakt
-              </Typography>
-              </IconButton>
-            </li>
-            <li>
-            <IconButton  href="/helpRoute"  style={{display:'flex'}}>
-              <HelpOutlineIcon />
-              <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{color:'white',display:'flex'}}>
-                Pomoć
-              </Typography>
-              </IconButton>
-            </li>
-            {/* <li>
+                  <li style={{ display: 'flex' }}>
+
+                    <IconButton href="#about" style={{ display: 'flex' }}>
+
+                      <Typography style={{ color: 'white', display: 'flex' }} className="nav-link scrollto">
+                        O sajtu
+                      </Typography>
+
+                    </IconButton>
+                  </li>
+
+                  <li>
+
+                    <IconButton href="/registerRoute" style={{ display: 'flex' }}>
+                      <PlayCircleFilledWhiteIcon />
+                      <Typography fontSize={14} style={{ color: 'white', display: 'flex' }} className="nav-link scrollto">
+                        Zapocni
+                      </Typography>
+
+                    </IconButton>
+
+
+                  </li>
+
+
+                  <li>
+                    <IconButton href="#contact" style={{ display: 'flex' }}>
+                      <AddLocationAltIcon />
+                      <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{ color: 'white', display: 'flex' }}>
+                        Kontakt
+                      </Typography>
+                    </IconButton>
+                  </li>
+                  <li>
+                    <IconButton href="/helpRoute" style={{ display: 'flex' }}>
+                      <HelpOutlineIcon />
+                      <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{ color: 'white', display: 'flex' }}>
+                        Pomoć
+                      </Typography>
+                    </IconButton>
+                  </li>
+                  {/* <li>
               <a className="nav-link scrollto" href="/adminRoute" style={{marginLeft:'50px'}}>
                Admin
               </a>
             </li>
              <li> */}
-            <li className="dropdown"  style={{display:'flex'}} >
-            <IconButton>
-              <Typography style={{color:'white',display:'flex'}}href="/#">
-                <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
-              </Typography>
-              </IconButton>
-              <ul>
-                {/* <li className="dropdown"><a href="#services"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
+                  <li className="dropdown" style={{ display: 'flex' }} >
+                    <IconButton>
+                      <Typography style={{ color: 'white', display: 'flex' }} href="/#">
+                        <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
+                      </Typography>
+                    </IconButton>
+                    <ul>
+                      {/* <li className="dropdown"><a href="#services"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a className="nav-link scrollto" href="#about">Deep Drop Down 1</a></li>
                   <li><a href="/#">Deep Drop Down 2</a></li>
@@ -631,40 +628,40 @@ const NavBarSiter=()=> {
                   <li><a href="/#">Deep Drop Down 5</a></li>
                 </ul>
               </li> */}
-                <li>
-                  <a href="#services" >Šetanje psa po gradu</a>
-                </li>
-                <li>
-                  <a href="#services" >Čuvanje psa u vašoj kući</a>
-                </li>
-                <li>
-                  <a href="#services">Poseta sittera</a>
-                </li>
-                <li>
-                  <a href="#services" >Čuvanje psa u kući sittera</a>
-                </li>
-              </ul>
-            </li>
-            <div className='upadaj' style={{display:'flex'}}>
-             <li>
-             <IconButton href="/loginRoute"  style={{display:'flex'}}>
-              <Typography className="nav-link scrollto" href="/loginRoute" style={{color:'white',fontWeight:'bolder'}}>
-                Log In
-              </Typography>
-              </IconButton>
-            </li>
-            <li>
-              
-            <IconButton href="/registerRoute"  style={{display:'flex'}}>
-              <Typography className="nav-link scrollto" href="/registerRoute"style={{color:'white',fontWeight:'bolder'}}>
-                Registruj se
-              </Typography>
-              </IconButton>
-            </li>
+                      <li>
+                        <a href="#services" >Šetanje psa po gradu</a>
+                      </li>
+                      <li>
+                        <a href="#services" >Čuvanje psa u vašoj kući</a>
+                      </li>
+                      <li>
+                        <a href="#services">Poseta sittera</a>
+                      </li>
+                      <li>
+                        <a href="#services" >Čuvanje psa u kući sittera</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <div className='upadaj' style={{ display: 'flex' }}>
+                    <li>
+                      <IconButton href="/loginRoute" style={{ display: 'flex' }}>
+                        <Typography className="nav-link scrollto" href="/loginRoute" style={{ color: 'white', fontWeight: 'bolder' }}>
+                          Log In
+                        </Typography>
+                      </IconButton>
+                    </li>
+                    <li>
+
+                      <IconButton href="/registerRoute" style={{ display: 'flex' }}>
+                        <Typography className="nav-link scrollto" href="/registerRoute" style={{ color: 'white', fontWeight: 'bolder' }}>
+                          Registruj se
+                        </Typography>
+                      </IconButton>
+                    </li>
+                  </div>
+                </ul>
+              </nav>
             </div>
-          </ul>
-          </nav>
-          </div>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             {/* {console.log('jebi se')} */}
@@ -675,7 +672,7 @@ const NavBarSiter=()=> {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
-              // src={'https://localhost:5001/StaticFiles/' + slika}
+            // src={'https://localhost:5001/StaticFiles/' + slika}
             >
               <MenuIcon />
             </IconButton>

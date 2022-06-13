@@ -101,16 +101,17 @@ useEffect(()=>
          component="img"
          height="194"
          image={'https://localhost:5001/StaticFiles/' + pic}
-         alt="Paella dish"
+        //  alt="Paella dish"
        />
       
-        <div className='asd' style={{textAlign:'center'}}>
+        {/* <div className='asd' style={{textAlign:'center'}}>
        <Button paragraph onClick={()=>{handleHide();}} style={{maxWidth:'200px',backgroundColor:'rgb(93, 224, 100)',marginBottom:'20px',marginTop:'20px',color:'white'}}>Izaberite novu sliku</Button>
-        </div>
+        </div> */}
        <CardActions className={classes.divButtonCard}> 
        <div className='dodajslikupas' style={{display:'grid'}}>
-        <input hidden={!hide} style={{marginLeft:'100px'}} type="file" onChange={handleChange} />
-        <IconButton onClick={() => { handleExpandClick();  } }>
+        <Typography style={{textAlign:'center',marginBottom:'15px',marginTop:'15px'}}variant='h6'>Odaberite sliku</Typography>
+        <input onClick={handleHide} style={{marginLeft:'100px'}} type="file" onChange={handleChange} />
+        <IconButton  hidden={!hide}onClick={() => { handleExpandClick();  } }>
         <ExpandMore
           expand={expanded}
           hidden={!hide}
@@ -120,11 +121,12 @@ useEffect(()=>
           style={{textAlign:'center'}}
           
           >
-          Informacije o psu
+        
           <ExpandMoreIcon />
         </ExpandMore >
+        Otvori dugme za potvrdu
         </IconButton>
-          </div>
+            </div>
             </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent    style={{ textAlign:'center' }}>
@@ -132,7 +134,7 @@ useEffect(()=>
           style={{ backgroundColor: 'rgb(93, 224, 100)',textAlign:'center' }}
           variant="contained"
           color="success"
-          onClick={handleSubmit}
+          onClick={()=>{handleSubmit();}}
           >
           Potvrdi
        </Button>

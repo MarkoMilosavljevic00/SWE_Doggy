@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import NavBar from '../headerVlasnik';
+import PetsIcon from '@mui/icons-material/Pets';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CardSlika from './card';
 import Fab from '@mui/material/Fab';
@@ -21,6 +22,7 @@ import { ButtonGroup } from '@mui/material';
 import axios from '../../api/axios';
 import { Typography } from '@mui/material';
 import AppFooter from '../../components/futer';
+import IconButton from '@mui/material/IconButton';
 import DoneIcon from '@mui/icons-material/Done';
 import Footer from '../../components/Footer'
 import { Refresh } from '@mui/icons-material';
@@ -84,7 +86,12 @@ const prihvaceni_zahtevi=()=>
             res=>
 
             {
-                console.log(res)
+              console.log(res.data + 'a')
+              const provera= res.data + 'nista'
+                if(provera==='nista')
+            {
+                  alert('Trenutno nema prihvacenih zahteva.Budite strpljivi!')
+            }
                 setPrihvaceni(res.data)
                 // if(res.data.id==null)
                 // {
@@ -99,7 +106,13 @@ const odbijeni_zahtevi=()=>
             res=>
 
             {
-                console.log(res)
+              console.log(res.data + 'a')
+              const provera= res.data + 'nista'
+                if(provera==='nista')
+            {
+                  alert('Trenutno nema Vasih zahteva koje je sitter odbio.')
+            }
+                console.log(res.data+ 'nep')
                 setNeprihvaceni(res.data)
                 // if(res.data.id==null)
                 // {
@@ -114,7 +127,13 @@ const pending_zahtevi=()=>
             res=>
 
             {
-                console.log(res)
+              console.log(res.data + 'a')
+              const provera= res.data + 'nista'
+                if(provera==='nista')
+            {
+                  alert('Trenutno nema odgovora od strane sitera za Vase zahteve.Molimo Vas budite strpljivi.')
+            }
+                // console.log(res)
                 setPending(res.data)
                 // if(res.data.id==null)
                 // {
@@ -129,7 +148,12 @@ const gotovi_zahtevi=async()=>
             res=>
 
             {
-                console.log(res)
+              console.log(res.data + 'a')
+              const provera= res.data + 'nista'
+                if(provera==='nista')
+            {
+                  alert('Siter jos uvek nije ocenio Vaseg psa.Molimo Vas budite strpljivi, cim oceni Vaseg psa bicete u mogucnosti da ocenite sitera.')
+            }
                 setGotovi(res.data)
                 // if(res.data.id==null)
                 // {
@@ -158,7 +182,7 @@ const vrati_psa=(props)=>
 const [komentar,setKomentar]=useState('');
 const [ocena,setOcena]=useState('');
 
-const oceni =(siterId,pasId,komentar,ocena)=>
+const oceni =(id,siterId,pasId,komentar,ocena)=>
 { console.log(siterId,pasId,komentar,ocena)
   //RADI
   Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuSiteru',
@@ -171,7 +195,19 @@ const oceni =(siterId,pasId,komentar,ocena)=>
   }).then(res=>{
        console.log(res.data)
        console.log('Uspesno poslat komentar')
-       alert('uspeh')
+       alert('Uspesno ste podelili Vase misljenje o izvrsenoj usluzi i ocenili sitter-a!')
+       brisi_uslugu(id)
+       window.location.reload(false)
+     }).catch((error)=>
+     {
+      if(error.response.status)
+      {
+        alert(error.response.data)
+      }
+      else
+      {
+        alert('Greska!')
+      }
      })
 }
 // useEffect(()=>{
@@ -428,6 +464,27 @@ const handleRefresh=()=>
 {
   setRefresh(!refresh);
 }
+const [j,setJ]=useState(false)
+const handlej=()=>
+{
+  setJ(!j)
+}
+const [x,setX]=useState(false)
+const handlex=()=>
+{
+  setX(!x)
+}
+const [y,setY]=useState(false)
+const handley=()=>
+{
+  setY(!y)
+}
+const [z,setZ]=useState(false)
+const handlez=()=>
+{
+  setZ(!z)
+}
+const [ker2,setKet2]=useState([' ',0])
       return(
            <>
            
@@ -463,23 +520,24 @@ const handleRefresh=()=>
     
     <ButtonGroup size="medium" aria-label="large button group" >
         {buttons}
+        {/* <Button onClick={odbijeni_zahtevi}>a</Button> */}
       </ButtonGroup>
     </Box>
               <div className='odgovor' style={{display:'grid'}}   >
 {prihvaceni && prihvaceni.map(x=>
     (     <div className='prihvaceni' hidden={otvoriPrihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'200px'}}>
      <h6 hidden={true}>{pasId=x.pasId}</h6>
-     <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!!</Typography>
-        <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Sitter:{x.siter.ime} {x.siter.prezime} je prihvatio vas zahtev za kera {ker}. </Typography>
-        <Typography paragraph>Ocekujte sitera u {x.pocetak}!!!</Typography>
-     <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography>
+     {/* <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!!</Typography> */}
+        <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!! Sitter:{x.siter.ime} {x.siter.prezime} je prihvatio vas zahtev za psa po imenu { <PetsIcon onClick={()=>{handlej();}}hidden={j}/>}  {<a hidden={!j}>{ker}</a>}!Sitter uskoro dolazi,uzivajte!</Typography>
+        {/* <Typography paragraph>Sitter dolazi!!!</Typography>
+     <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography> */}
 </div>
       ))}
 {neprihvaceni && neprihvaceni.map(l=>
   (   <div className='neprihvaceni' hidden={otvoriNeprihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
       <h6 hidden={true}>{pasId=l.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa {ker} je nazalost odbijena.</Typography>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{l.siter.ime} {l.siter.prezime} je odbio uslugu. </Typography>
+      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa  <PetsIcon onClick={()=>{handlex();}} hidden={x}/>   {<a hidden={!x}>{ker}</a>}je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography>
+      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{l.siter.ime} {l.siter.prezime} je odbio uslugu. </Typography> */}
       
 </div>
   ))
@@ -488,8 +546,8 @@ const handleRefresh=()=>
 {pending && pending.map(k=>
 (  <div className='pending' hidden={otvoriPending} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
       <h6 hidden={true}>{pasId=k.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa {ker}, sa pocetkom u {k.pocetak} jos nije otvorena!</Typography>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography>
+      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa po imenu { <PetsIcon onClick={()=>{handley();}}hidden={y}/>}{<a hidden={!y}>{ker}</a>}, jos nije otvorena! Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography>
+      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography> */}
 
 
 </div>
@@ -499,8 +557,8 @@ const handleRefresh=()=>
 {gotovi && gotovi.map((g,index)=>
 (  <div key={g.id} className='gotovi' hidden={otvoriGotovi} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'500px'}}>
       <h6 hidden={true}>{pasId=g.pasId} {}  {}</h6>
-      <Typography paragraph onClick={()=>{setGotovi(index);vrati_psa(pasId);}}> Vasa usluga za psa {ker}, je uspesno zavrsena!</Typography>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}>Molimo Vas ocenite sitera:{g.siter.ime} {g.siter.prezime}</Typography>
+      <Typography paragraph onClick={()=>{vrati_psa(pasId);}}> Vasa usluga za psa po imenu {<PetsIcon onClick={()=>{handlez();}} hidden={z}/> }{<a hidden={!z}>{ker}</a>}, je uspesno zavrsena! Molimo Vas da iskoristite minut Vaseg vremena i ocenite sitera:{g.siter.ime} {g.siter.prezime}.Hvala Vam!</Typography>
+      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Molimo Vas ocenite sitera:{g.siter.ime} {g.siter.prezime}</Typography> */}
      <div className='sakrij' hidden={skrij}>
       <TextField
      
@@ -523,14 +581,14 @@ const handleRefresh=()=>
           InputLabelProps={{
             shrink: true,
           }}
-          InputProps={{ inputProps: { min: 0, max: 5} }}
+          InputProps={{ inputProps: { min: 1, max: 5} }}
           onClick={(e)=>{setOcena(0);setStanje(index);}}
           //u on click stanje
           onChange={ (e) =>  { setOcena(e.target.value)}}
            
           
         />
-  <Button color='primary' onClick={()=>{oceni(g.siterId,g.pasId,komentar,ocena);brisi_uslugu(g.id);handleRefresh();gotovi_zahtevi();}}>Posalji ocenu siteru</Button>
+  <Button color='primary' onClick={()=>{oceni(g.id,g.siterId,g.pasId,komentar,ocena);gotovi_zahtevi();}}>Posalji ocenu siteru</Button>
   {/* <Button color='success' onClick={obrisi_uslugu}></Button> */}
   {console.log(g.id + 'mjauuu')}
   </div>
@@ -549,7 +607,7 @@ const handleRefresh=()=>
 
 
              <Card className={classes.paper} elevation={8} style={{backgroundColor:'khaki',display:'grid',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-             <h2 style={{textAlign:'center'}} className={classes.naslov2}>Opšti podaci</h2>
+             <h3 style={{textAlign:'center',color:'black'}} className={classes.naslov2}>Opšti podaci</h3>
              {/* <div className='inputi'> */}
              {/* <Button color='success'  onClick = {() => { setCh(!ch) }   }>Edituj podatke</Button> */}
              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }} style={{display:'flex'}}>
@@ -562,7 +620,7 @@ const handleRefresh=()=>
              </Grid>
 
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_ime();}}startIcon={<EditIcon/>}> Izmeni </Button>
+              <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_ime();}}startIcon={<EditIcon/>}> Izmeni </Button>
              {/* </Grid> */}
              {/* </div> */}
              {/* <div className='drugiinput'style={{display:'flex'}}> */}
@@ -573,7 +631,7 @@ const handleRefresh=()=>
              <input type='text' id='opis' value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_prezime();}}startIcon={<EditIcon/>}> Izmeni</Button>
+              <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_prezime();}}startIcon={<EditIcon/>}> Izmeni</Button>
              {/* </Grid> */}
              {/* </div> */}
              {/* <div className='treciinput'style={{display:'flex'}}> */}
@@ -584,7 +642,7 @@ const handleRefresh=()=>
              <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>
+              <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>
              {/* </Grid> */}
              {/* </div> */}
              {/* <div className='cetvrtiinput'style={{display:'flex'}}> */}
@@ -595,7 +653,7 @@ const handleRefresh=()=>
              <input type='text' id='opis'  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_korisnicko_ime();}}> Izmeni </Button>
+              <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_korisnicko_ime();}}> Izmeni </Button>
              {/* </Grid> */}
              
              {/* </div> */}
@@ -607,7 +665,7 @@ const handleRefresh=()=>
              <input type='text' id='opis'  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_sifru();}}> Izmeni</Button>
+              <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_sifru();}}> Izmeni</Button>
              {/* </Grid> */}
              {/* </div> */}
              {/* <div className='sestiinput'style={{display:'flex'}}> */}
@@ -618,7 +676,7 @@ const handleRefresh=()=>
              <input type='text' id='opis' value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
              </Grid> 
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_broj_telefona();}}> Izmeni </Button>
+              <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_broj_telefona();}}> Izmeni </Button>
              {/* </Grid> */}
              {/* </div> */}
             
@@ -630,7 +688,7 @@ const handleRefresh=()=>
              <input type='text' id='opis' value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
              </Grid> 
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_grad();}}> Izmeni</Button>
+              <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_grad();}}> Izmeni</Button>
              {/* </Grid> */}
              {/* </div> */}
              {/* <div className='osmiinput'style={{display:'flex'}}> */}
@@ -641,26 +699,26 @@ const handleRefresh=()=>
              <input type='text' id='opis' value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
-              <Button style={{marginLeft:'100px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_adresu();}}> Izmeni</Button>
+              <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_adresu();}}> Izmeni</Button>
              {/* </Grid> */}
              {/* </div> */}
          </Grid>
              {/* </div> */}
-             <div className='izmeniVlasnika' style={{display:'flex'}} >
+             <div className='izmeniVlasnika' style={{display:'flex',justifyContent:'center'}} >
              {/* <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
         <EditIcon />
       </Fab>
 
       <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography> */}
-       <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+       <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',marginTop:'20px'}}>
   Edituj podatke
  </Button>
       {/* <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Potvrdi izmene
 </Button>  */}
-      <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
+      {/* <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
   Obrisi svoj profil
-</Button>
+</Button> */}
       </div>
              </Card>
            

@@ -343,6 +343,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import { useState, useEffect, useContext } from 'react'
 // import IkonicaHome from '../../components/ikonicaHome';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { profilVlasnikRoute,profilSitterRoute,DodajPsaRoute } from "../router/routes";
 import { useNavigate } from "react-router-dom";
 import Axios from 'axios'
@@ -478,20 +479,20 @@ const NavBarSiter=()=> {
     
     >
      
-      <MenuItem onClick={()=>{navigate('./registerRoute')}}>
+      <MenuItem onClick={()=>{navigate('./adminRoute')}}>
         <IconButton
           size="large"
          
           color="inherit"
         >
           <Badge color="error">
-            <LogoutIcon />
-       <Typography > Zapocni </Typography>
+            <AdminPanelSettingsIcon />
+       <Typography > Proveri sve </Typography>
           </Badge>
         </IconButton>
       </MenuItem>
       
-      <MenuItem onClick={()=>{navigate('./helpRoute')}}>
+      {/* <MenuItem onClick={()=>{navigate('./helpRoute')}}>
         <IconButton
           size="large"
          
@@ -502,23 +503,23 @@ const NavBarSiter=()=> {
        <Typography > Pomoc </Typography>
           </Badge>
         </IconButton>
-      </MenuItem>
+      </MenuItem> */}
    
   
-     <MenuItem onClick={()=>{navigate('./loginRoute')}}>
+     <MenuItem onClick={()=>{log_out_admin();}}>
      <IconButton
        size="large"
       
        color="inherit"
      >
        <Badge color="error">
-         <LoginIcon />
-    <Typography > Log in </Typography>
+         <LogoutIcon />
+    <Typography > Log Out</Typography>
        </Badge>
      </IconButton>
    </MenuItem>
 
- <MenuItem onClick={()=>{navigate('./registerRoute')}}>
+ {/* <MenuItem onClick={()=>{navigate('./registerRoute')}}>
  <IconButton
    size="large"
   
@@ -529,7 +530,7 @@ const NavBarSiter=()=> {
 <Typography > Registruj se </Typography>
    </Badge>
  </IconButton>
-</MenuItem>
+</MenuItem> */}
 </Menu>
   );
 
@@ -582,7 +583,7 @@ const NavBarSiter=()=> {
             <li  style={{display:'flex'}}>
               
               <IconButton  onClick={()=>{navigate('/adminRoute')}}  style={{display:'flex'}}>
-            
+            <AdminPanelSettingsIcon></AdminPanelSettingsIcon>
               <Typography style={{color:'white',display:'flex'}} className="nav-link scrollto">
                Proveri sve
               </Typography>

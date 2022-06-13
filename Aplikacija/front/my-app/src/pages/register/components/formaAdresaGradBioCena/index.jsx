@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Grad from './components/grad';
 import Adresa from './components/adresa';
 
-const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
+const checkInput = value => (value.length > 3 ? true : false);
 
 const Registracija = props => {
   const { setFormNumber, formNumber } = props;
@@ -28,7 +28,7 @@ const Registracija = props => {
   const classes = classStyles();
 
   useEffect(() => {
-    if (NAME_REGEX.test(adresa) && NAME_REGEX.test(grad)) setAllValid(true);
+    if (checkInput(adresa) && checkInput(grad)) setAllValid(true);
     else setAllValid(false);
   }, [adresa, grad]);
 

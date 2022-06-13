@@ -187,14 +187,22 @@ const posalji_zahtev=()=>
     }
   ).then(res=>
     {
-
-      console.log(res)
+    
+      console.log(res.status)
       localStorage.removeItem('idSitera')
       alert('Uspesno ste poslali sitter-u zahtev!!!')
+      
     }).catch(err=>
     {
           console.log(err.response)
-         alert(err.response.data)
+          if(err.response.data=='Siter je tada zauzet!')
+          {
+         alert('Siter je tada zauzet!')
+          }
+          else
+          {
+            alert('Molimo Vas popunite pravilno formu!!!')
+          }
         
     })
 }
@@ -206,7 +214,7 @@ const posalji_zahtev=()=>
 <NavBar />
 
 <div className={klase.main}>
-   <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'610px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+   <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'700px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
        <IconButton color='primary' href='/sitterRoute'>
        <ArrowBackIosNewIcon/>
        <Typography variant='h6'color='black'>Nazad</Typography>

@@ -21,6 +21,7 @@ const Bio = props => {
         onChange={e => setBio(e.target.value)}
         aria-invalid={validBio ? 'false' : 'true'}
         value={bio}
+       
       />
       {/* <ValidationTextField
         label="Bio"

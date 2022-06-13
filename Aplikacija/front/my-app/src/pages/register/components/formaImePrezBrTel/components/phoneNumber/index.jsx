@@ -11,7 +11,7 @@ const PhoneNumber = props => {
   const postaviBrojTelefona = ev => {
     const brTel = ev.target.value;
     const valid = NUMBER_REGEX.test(brTel);
-    if (valid) setBrojTelefona(brTel);
+    if (valid || brTel.length == 0) setBrojTelefona(brTel);
   };
 
   return (

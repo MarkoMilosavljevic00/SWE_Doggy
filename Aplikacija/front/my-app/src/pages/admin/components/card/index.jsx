@@ -50,7 +50,7 @@ export default function BasicCard(props) {
       if (response.ok) {
         const res = await response.json();
         console.log(res);
-        alert('Sitter' + res.ime + ' ' + res.prezime + ' ' + 'je prihvaćen');
+        alert('Sitter:' + res.ime + ' ' + res.prezime + ' ' + 'je prihvaćen');
         setDostupan(res);
         window.location.reload(false);
       } else {

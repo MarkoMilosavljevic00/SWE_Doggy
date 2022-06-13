@@ -107,6 +107,8 @@ const NavBarSiter=()=> {
             const korisnik=localStorage.removeItem('korisnik')
             const idSitera=localStorage.removeItem('idSitera')
             console.log('Uspesno ste se log autovali')
+            
+            // window.location.reload(false)
             alert('Successful log out')
   
     }

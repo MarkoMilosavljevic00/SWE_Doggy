@@ -5,7 +5,6 @@ import classStyles from './styles';
 import FormaTipKorisnika from './components/formaTipKorisnika';
 import FormaImePrezBrTelefona from './components/formaImePrezBrTel';
 import FormaUsernameEmailSifra from './components/formaUsernameEmailSIfra';
-// import FormaGradAdresa from './components/formaGradAdresa';
 import FormaAdresaGradBioCena from './components/formaAdresaGradBioCena';
 import FormaZavrsiRegistraciju from './components/formaZavrsiRegistraciju';
 import { useNavigate } from 'react-router-dom';
@@ -82,72 +81,79 @@ const Registracija = () => {
       });
     }
   }, [zavrsiRegistraciju]);
-  const proveraSiter=localStorage.getItem('idSitera')
-  const proveraVlasnik=localStorage.getItem('idVlasnika')
+  const proveraSiter = localStorage.getItem('idSitera');
+  const proveraVlasnik = localStorage.getItem('idVlasnika');
   return (
-    <div className='jedanregister'>
-    { proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)}
-    <div className={classes.container}>
-      <div style={{minHeight:'675px'}} className={classes.divRegistracija}>
-        <h1 style={{ color: '#000000c2', marginTop: 20 }}>Registracija</h1>
-        {formNumber == 0 ? (
-          <FormaTipKorisnika
-            setFormNumber={setFormNumber}
-            formNumber={formNumber}
-            setSiter={setSiter}
-          />
-        ) : null}
-        {formNumber == 1 ? (
-          <FormaImePrezBrTelefona
-            formNumber={formNumber}
-            setFormNumber={setFormNumber}
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            brojTelefona={brojTelefona}
-            setBrojTelefona={setBrojTelefona}
-          />
-        ) : null}
-        {formNumber == 2 ? (
-          <FormaUsernameEmailSifra
-            formNumber={formNumber}
-            setFormNumber={setFormNumber}
-            userName={userName}
-            setUserName={setUserName}
-            pwd={pwd}
-            setPwd={setPwd}
-            matchPwd={matchPwd}
-            setMatchPwd={setMatchPwd}
-            email={email}
-            setEmail={setEmail}
-          />
-        ) : null}
-        {formNumber == 3 ? (
-          <FormaAdresaGradBioCena
-            formNumber={formNumber}
-            setFormNumber={setFormNumber}
-            bio={bio}
-            setBio={setBio}
-            cenaPoSatu={cenaPoSatu}
-            setCenaPoSatu={setCenaPoSatu}
-            adresa={adresa}
-            setAdresa={setAdresa}
-            grad={grad}
-            setGrad={setGrad}
-            siter={siter}
-          />
-        ) : null}
-        {formNumber == 4 ? (
-          <FormaZavrsiRegistraciju
-            setFormNumber={setFormNumber}
-            formNumber={formNumber}
-            setZavrsiRegistraciju={setZavrsiRegistraciju}
-            zavrsiRegistraciju={zavrsiRegistraciju}
-          />
-        ) : null}
+    <div className="jedanregister">
+      {proveraSiter ? (
+        <NavBarSiter />
+      ) : proveraVlasnik ? (
+        <NavbarVlasnik />
+      ) : (
+        <Header />
+      )}
+      <div className={classes.container}>
+        <div style={{ minHeight: '675px' }} className={classes.divRegistracija}>
+          <h1 style={{ color: '#000000c2', marginTop: 20 }}>Registracija</h1>
+          {formNumber == 0 ? (
+            <FormaTipKorisnika
+              setFormNumber={setFormNumber}
+              formNumber={formNumber}
+              setSiter={setSiter}
+            />
+          ) : null}
+          {formNumber == 1 ? (
+            <FormaImePrezBrTelefona
+              formNumber={formNumber}
+              setFormNumber={setFormNumber}
+              firstName={firstName}
+              setFirstName={setFirstName}
+              lastName={lastName}
+              setLastName={setLastName}
+              brojTelefona={brojTelefona}
+              setBrojTelefona={setBrojTelefona}
+            />
+          ) : null}
+          {formNumber == 2 ? (
+            <FormaUsernameEmailSifra
+              formNumber={formNumber}
+              setFormNumber={setFormNumber}
+              userName={userName}
+              setUserName={setUserName}
+              pwd={pwd}
+              setPwd={setPwd}
+              matchPwd={matchPwd}
+              setMatchPwd={setMatchPwd}
+              email={email}
+              setEmail={setEmail}
+            />
+          ) : null}
+          {formNumber == 3 ? (
+            <FormaAdresaGradBioCena
+              formNumber={formNumber}
+              setFormNumber={setFormNumber}
+              bio={bio}
+              setBio={setBio}
+              cenaPoSatu={cenaPoSatu}
+              setCenaPoSatu={setCenaPoSatu}
+              adresa={adresa}
+              setAdresa={setAdresa}
+              grad={grad}
+              setGrad={setGrad}
+              siter={siter}
+            />
+          ) : null}
+          {formNumber == 4 ? (
+            <FormaZavrsiRegistraciju
+              setFormNumber={setFormNumber}
+              formNumber={formNumber}
+              setZavrsiRegistraciju={setZavrsiRegistraciju}
+              zavrsiRegistraciju={zavrsiRegistraciju}
+              siter={siter}
+            />
+          ) : null}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

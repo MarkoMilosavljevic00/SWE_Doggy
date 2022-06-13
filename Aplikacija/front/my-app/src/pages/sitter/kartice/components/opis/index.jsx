@@ -117,7 +117,7 @@ export default function CustomizedDialogs(props) {
           <Typography gutterBottom>Grad : {grad}</Typography>
           <Typography gutterBottom>Adresa : {adresa}</Typography>
           <Typography gutterBottom>Cena po satu: {cenaPoSatu}</Typography>
-          <Typography gutterBottom>Prosecna ocena: {prosecnaOcena}</Typography>
+          {/* <Typography gutterBottom>Prosecna ocena: {prosecnaOcena}</Typography>
           <Typography gutterBottom>Komentari: </Typography>
 
           {com &&
@@ -125,7 +125,7 @@ export default function CustomizedDialogs(props) {
               <Typography gutterBottom>
                 {index + 1 + ':' + x.komentar}
               </Typography>
-            ))}
+            ))} */}
 
           <div className={classes.divButton}>
             <Button
@@ -144,7 +144,7 @@ export default function CustomizedDialogs(props) {
                 // });
               }}
             >
-              Komentarisi i oceni sitera
+              Vidi recenzije o siteru
             </Button>
           </div>
         </DialogContent>

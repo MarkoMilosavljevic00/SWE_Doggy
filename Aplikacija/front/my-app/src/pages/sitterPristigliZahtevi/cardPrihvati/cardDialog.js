@@ -67,10 +67,19 @@ const CardDialog = props => {
     }).then(
       res=>
       {
-      alert('success')
+      alert('Uspesno ste podelili Vase utiske o psu!')
       window.location.reload(false)
       }
-    )
+    ).catch((error)=>
+    {
+      if(error.response.status)
+      {
+        alert(error.response.data)
+      }
+      else{
+        alert("Greska!!!")
+      }
+    })
   }
 
   const handleClickOpen = scrollType => () => {
