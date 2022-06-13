@@ -9,7 +9,9 @@ namespace Doggy.Model
     public enum VrstaUsluge
     {
         Setnja,
-        Cuvanje
+        CuvanjeKodVlasnika,
+        PosetaSitera,
+        CuvanjePsaKodSitera
     };
 
     public enum StatusUsluge
