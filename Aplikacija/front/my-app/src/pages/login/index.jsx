@@ -43,7 +43,7 @@ const Login = () => {
     console.log('darjanaanannana');
 
     if (!validateEmail(email)) {
-      alert('Niste uneli validan email');
+      alert('Niste uneli validan email!');
       return;
     }
 
@@ -90,7 +90,7 @@ const Login = () => {
         }
         else if(res.status==401)
         {
-          alert('Los mejl!!!')
+          alert('Uneli ste losu sifru!!!')
         }
         else if(res.status==501)
         {
@@ -98,8 +98,7 @@ const Login = () => {
         }
       })
       .catch(err => {
-        // alert(err);
-        // alert('1')
+       alert(err.response.data)
         
       });
  

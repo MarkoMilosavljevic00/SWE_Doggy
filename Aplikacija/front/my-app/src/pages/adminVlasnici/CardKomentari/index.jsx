@@ -54,6 +54,7 @@ export default function CardKomentari(props) {
     ).then(async response => {
       if (response.ok) {
         const res = await response.json();
+        window.location.reload(false)
 
         setObrisiKomentar(res);
       } else {
@@ -108,7 +109,7 @@ export default function CardKomentari(props) {
                 <Typography sx={{ fontSize: 18 }}>
                   {' '}
                   Ocena: {recenzija.ocena}
-                  idrecnzije: {recenzija.id}
+                  {/* idrecnzije: {recenzija.id} */}
                 </Typography>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <Button

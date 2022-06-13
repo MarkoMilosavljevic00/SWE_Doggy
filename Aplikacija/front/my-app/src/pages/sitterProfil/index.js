@@ -548,7 +548,7 @@ const azuriraj=()=>
              Sačuvaj
                 </Button>*/}
           </div>
-<Footer />
+
        </>
           );
     }

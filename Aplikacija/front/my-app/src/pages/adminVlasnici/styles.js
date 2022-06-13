@@ -6,6 +6,7 @@ const classStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#d2facc',
+    marginTop:'70px'
   },
   divNevalidni: {
     display: 'flex',

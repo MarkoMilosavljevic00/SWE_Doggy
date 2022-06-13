@@ -21,7 +21,7 @@ const Usluge = () => {
               </div>
               <h4 className="title">Šetanje psa po gradu</h4>
               <p className="description">
-                Vaši psi će obožavati duge šetnje sa našim sitterima
+                Vaši psi će obožavati duge šetnje sa našim sitterima i ubrzo ce Vam traziti da ih naši sitteri ponovo šetaju.
               </p>
             </div>
           </div>
@@ -52,9 +52,9 @@ const Usluge = () => {
               </div>
               <h4 className="title">Poseta sittera</h4>
               <p className="description">
-                Ukoliko je Vas pas nabacio malo vise kilograma, a ne zelite da ga vodite na setnje,ovo je prava vrsta usluge za Vas.
-                Nasi siteri ce doci na vasu kucnu adresu sa razlicitim igrackama i lopticama za Vaseg psa i naterace malog nevaljalca na
-                malo fizicke aktivnosti u Vasem dvoristu.
+                Ukoliko je Vaš pas nabacio višak kilograma, a ne želite da ga vodite na šetnje,ovo je prava vrsta usluge za Vas.
+                Naši siteri će doći na vašu kućnu adresu sa različitim igračkama i lopticama za Vašeg psa i nateraće malog nevaljalca na
+                malo fizičke aktivnosti u Vašem dvorištu.
               </p>
             </div>
           </div>
@@ -66,8 +66,8 @@ const Usluge = () => {
               </div>
               <h4 className="title">Čuvanje psa u kući sittera</h4>
               <p className="description">
-                Ukoliko Vam je potreban Vas kucni prostor za neki dogadjaj, a pritom ce Vam pas praviti probleme,odaberite kada Vam odgovara
-                da nas siter pokupi vaseg psa i odvede ga kod svoje kuce na cuvanje.
+                Ukoliko Vam je potreban Vas kućni prostor za neki dogadjaj, a pritom će Vam pas praviti probleme,odaberite kada Vam odgovara
+                da naš siter pokupi vašeg psa i odvede ga kod svoje kuće na čuvanje.
               </p>
             </div>
           </div>

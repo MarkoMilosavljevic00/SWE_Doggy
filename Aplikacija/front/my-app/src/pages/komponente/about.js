@@ -6,7 +6,7 @@ const About = () => {
           <div className="col-lg-6 content order-lg-1 order-2">
             <h2 className="title">O sajtu</h2>
             <p>
-              Na ovom sajtu ćete naći različite usluge za Vaše najdraže ljubimce
+              Na ovom sajtu ćete naći različite usluge za Vaše najdraže ljubimce.
             </p>
             <p>
               Cilj sajta Doggy je da na lak i siguran način obezbedi čuvanje
@@ -21,8 +21,7 @@ const About = () => {
               obaveze.
             </p>
             <p>
-              Mogućnost komentarisanja i ocenjivanja na sajtu pomoći će Vam oko
-              komunikacije sa sitter-ma ili vlasnikom.
+              Sajt dalje pruža mogućnost komentarisanja i ocenjivanja sittera i pasa, kao pomoć pri odabiru sittera ili pasa.
             </p>
           </div>
 

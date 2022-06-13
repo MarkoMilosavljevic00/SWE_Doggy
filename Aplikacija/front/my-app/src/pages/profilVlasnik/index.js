@@ -169,13 +169,14 @@ const buttons = [
   <Button style={{borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}key="four"onClick={()=>{gotovi_zahtevi();handleGotovi();}}>Gotovi</Button>,
 ];
   const [ker,setKer]=useState('')
-const vrati_psa=(props)=>
+const vrati_psa=(props,index)=>
 {
     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
         res=>
         {
             console.log(res.data)
             setKer(res.data.ime)
+            setKet2({ime:res.data.ime,index:index})
         }
     )
 }
@@ -185,6 +186,11 @@ const [ocena,setOcena]=useState('');
 const oceni =(id,siterId,pasId,komentar,ocena)=>
 { console.log(siterId,pasId,komentar,ocena)
   //RADI
+  if(komentar==='' || ocena <0 || ocena >5 || ocena ==='' )
+  {
+    alert('Molimo Vas lepo popunite formu')
+    return
+  }
   Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuSiteru',
   {
      vlasnikId,
@@ -457,9 +463,15 @@ const brisi_uslugu=(props)=>
     res=>
     { 
       console.log(res.data + 'AHAHHAAH BRISANO')
-     }
-  )
+      window.location.reload(false)
+    }
+    )
+    // window.location.reload(false)
 }
+// const window=()=>
+// {
+//   window.location.reload();
+// }
 const handleRefresh=()=>
 {
   setRefresh(!refresh);
@@ -484,10 +496,11 @@ const handlez=()=>
 {
   setZ(!z)
 }
-const [ker2,setKet2]=useState([' ',0])
+const [ker2,setKet2]=useState({ime:' ',index:-1})
+
       return(
-           <>
-           
+        
+           <div className='a' >
            <div className={classes.container}>
            <NavBar />
              <div className={classes.glavni}>
@@ -533,11 +546,13 @@ const [ker2,setKet2]=useState([' ',0])
      <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography> */}
 </div>
       ))}
-{neprihvaceni && neprihvaceni.map(l=>
+{neprihvaceni && neprihvaceni.map((l,index)=>
   (   <div className='neprihvaceni' hidden={otvoriNeprihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
       <h6 hidden={true}>{pasId=l.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa  <PetsIcon onClick={()=>{handlex();}} hidden={x}/>   {<a hidden={!x}>{ker}</a>}je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography>
+      <Typography paragraph onClick={()=>vrati_psa(l.pasId,index)}> Vasa usluga za psa po imenu <PetsIcon onClick={()=>{handlex();}} hidden={ker2.index==index}/>   {<a hidden={!ker2.index==index}>{ker2.ime}</a>} je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography>
       {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{l.siter.ime} {l.siter.prezime} je odbio uslugu. </Typography> */}
+      <Button onClick={()=>{brisi_uslugu(l.id);}}>Brisi</Button>
+      {/* <Button onClick={()=>{window()}}>aaa</Button> */}
       
 </div>
   ))
@@ -734,8 +749,8 @@ const [ker2,setKet2]=useState([' ',0])
              Sačuvaj
                 </Button>*/}
           </div>
-<Footer />
-       </>
+
+   </div>
           );
     }
   

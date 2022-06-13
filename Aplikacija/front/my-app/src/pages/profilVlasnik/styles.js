@@ -8,6 +8,7 @@ const classStyles = makeStyles({
     flexDirection: 'row',
     // backgroundImage:'linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%)'
     backgroundColor: 'rgb(234, 252, 220)',
+    height:'750px'
   },
   naslov: {
     textAlign: 'center',

@@ -88,16 +88,15 @@ const Admin = () => {
       {success ? (
         <div className={classes.container}>
       <HeaderAdmin/>
-
           <div className={classes.divNazad}>
-            <Button
+            {/* <Button
               style={{ color: 'white', backgroundColor: '#07a607' }}
               onClick={nazad}
             >
               Nazad
-            </Button>
+            </Button> */}
           </div>
-          <div>
+          <div style={{marginTop:'50px'}}>
             {nevalidni.map((nevalidan, index) => {
               return (
                 <Card
@@ -115,6 +114,12 @@ const Admin = () => {
               );
             })}
           </div>
+          <Button
+              style={{ color: 'white', backgroundColor: '#07a607' }}
+              onClick={nazad}
+            >
+              Nazad
+            </Button>
         </div>
       ) : (
         <div className={classes.container}>
@@ -168,6 +173,12 @@ const Admin = () => {
               postaviStranicu={postaviStranicu}
             />
           </div>
+          {/* <Button
+              style={{ color: 'white', backgroundColor: '#07a607' }}
+              onClick={nazad}
+            >
+              Nazad
+            </Button> */}
         </div>
       )}
     </>

@@ -36,6 +36,7 @@ export default function CardPristigliZahtevi(props) {
         { 
           
              console.log(res.data)
+             alert('Uspesno ste prihvatili uslugu!')
             window.location.reload(false)
           } 
         
@@ -52,6 +53,7 @@ const odbij_uslugu=(id) =>
         res =>
         {
             console.log('Odbijena usluga sa idejem: ' + props)
+            alert('Odbili ste ovu uslugu!')
             window.location.reload(false)
           }
           ).catch((err)=>

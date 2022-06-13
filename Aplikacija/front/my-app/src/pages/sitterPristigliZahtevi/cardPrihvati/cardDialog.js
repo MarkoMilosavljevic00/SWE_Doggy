@@ -43,6 +43,7 @@ const CardDialog = props => {
             res=>
             {
                 console.log('Uspesno obavljena usluga xd')
+                alert('Cekirali ste da ste gotovi sa uslugom!')
                 
             }
             )
@@ -51,12 +52,14 @@ const CardDialog = props => {
   const[ocena,setOcena]=useState('')
   const[hajd,setHajd]=useState(true)
 
-  const handleHajd=()=>
-  {
-    setHajd(!hajd)
-  }
+  
   const oceni=(vlasnikId,pasId,komentar,ocena)=>
   {
+    if(komentar==='' || ocena <= 0 || ocena >5 || ocena==='')
+    {
+      alert('Molimo Vas lepo popunite formu!!!')
+      return
+    }
     Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuPsu',
     {
       siterId:idSittera,
@@ -76,6 +79,7 @@ const CardDialog = props => {
       {
         alert(error.response.data)
       }
+    
       else{
         alert("Greska!!!")
       }
@@ -145,12 +149,12 @@ const CardDialog = props => {
           <Typography variant="body1" color='black'>{opis}</Typography>
           {/* <Typography variant="h6" color='black'>Napomena: {napomena}</Typography> */}
           
-          <div className='svecek' style={{marginTop:'15px',textAlign:'center'}}>
+          <div className='svecek' style={{marginTop:'15px',textAlign:'center'}}  hidden={!hajd}>
             <Typography variant='h6' color='black'>Usluga izvrsena?</Typography>
           <div className='cekirano' style={{display:'flex',justifyContent:'center'}}>
 
           <Typography paragraph>Nije izvrsena</Typography>
-          <Switch {...label} checked={f} onClick={()=>{setChecked(!f);obavljena(id);handleHajd();}} color="secondary" name='jason'/>
+          <Switch {...label} checked={f} onClick={()=>{setChecked(!f);obavljena(id);setHajd(!hajd)}} color="secondary" name='jason'/>
           <Typography paragraph>Izvrsena</Typography>
           </div>
           </div>

@@ -6,12 +6,15 @@ const classStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#d2facc',
+    marginTop:'40px'
+  
   },
   divNevalidni: {
     display: 'flex',
     marginLeft: '800px',
     marginTop: ' 100px',
     flex: 1,
+    marginTop:'50px'
   },
 
   divNazad: {

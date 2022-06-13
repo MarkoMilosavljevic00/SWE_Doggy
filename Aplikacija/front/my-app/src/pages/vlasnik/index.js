@@ -188,7 +188,7 @@ const posalji_zahtev=()=>
   ).then(res=>
     {
     
-      console.log(res.status)
+      console.log(res.data)
       localStorage.removeItem('idSitera')
       alert('Uspesno ste poslali sitter-u zahtev!!!')
       
@@ -370,7 +370,7 @@ const posalji_zahtev=()=>
      </div>
     </Paper>
     </div>
-    <Footer />
+    {/* <Footer /> */}
      </div>
  
   );
