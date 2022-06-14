@@ -45,11 +45,24 @@ namespace Doggy.DataLayer.Services
             return unitOfWork.UslugaRepository.FindWithIncludes(k => k.VlasnikId == idVlasnika && k.PasId == idPsa, k => k.Siter).ToList();
         }
 
+
+        public List<Usluga> VratiUslugeVlasnikuPoStatusuSaPsom(int idVlasnika, StatusUsluge status, out List<Pas> psi)
+        {
+            var usluge = unitOfWork.UslugaRepository.FindWithIncludes(k => k.VlasnikId == idVlasnika && k.Status == status, k => k.Siter).ToList();
+            List<int> listaId = new List<int>();
+            List<Pas> psi1 = new List<Pas>();
+            psi = new List<Pas>();
+            usluge.ForEach(k => listaId.Add(k.PasId));
+            listaId.ForEach(k => psi1.Add(unitOfWork.PasRepository.Get(k)));
+            psi = psi1;
+            return usluge;
+
+        }
+
         public List<Usluga> VratiUslugeVlasnikuPoStatusu(int idVlasnika, StatusUsluge status)
         {
             return unitOfWork.UslugaRepository.FindWithIncludes(k => k.VlasnikId == idVlasnika && k.Status == status, k => k.Siter).ToList();
         }
-
 
         public List<Usluga> VratiUslugeSiteruPoStatusu(int idSitera, StatusUsluge status)
         {

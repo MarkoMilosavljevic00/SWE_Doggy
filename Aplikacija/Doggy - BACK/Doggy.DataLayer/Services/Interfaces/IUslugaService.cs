@@ -16,6 +16,7 @@ namespace Doggy.DataLayer.Services.Interfaces
         public List<Usluga> VratiUslugeSiteru(int idSitera);
         public List<Usluga> VratiUslugeSiteruPoStatusu(int idSitera, StatusUsluge status);
         public List<Usluga> VratiUslugeVlasniku(int idVlasnika);
+        public List<Usluga> VratiUslugeVlasnikuPoStatusuSaPsom(int idVlasnika, StatusUsluge status, out List<Pas> psi);
         public List<Usluga> VratiUslugeVlasnikuPoStatusu(int idVlasnika, StatusUsluge status);
     }
 }

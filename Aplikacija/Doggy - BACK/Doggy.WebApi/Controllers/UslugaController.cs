@@ -63,6 +63,36 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(uslugaService.VratiUslugeVlasnikuPoStatusu(idVlasnika, status));
         }
 
+        [HttpGet]
+        [Route("vratiUslugeVlasnikuPoStatusuSaPsom")]
+        public IActionResult VratiUslugeZaVlasnikaPoStatusuSaPsom(int idVlasnika, StatusUsluge status)
+        {
+            List<Pas> psi = new List<Pas>();
+            List<Usluga> usluge = uslugaService.VratiUslugeVlasnikuPoStatusuSaPsom(idVlasnika, status, out psi);
+            List<object> objects = new List<object>();
+            for(int i = 0; i < usluge.Count; i++)
+            {
+                Pas p = psi[i];
+                var obj = new
+                {
+                    Id = usluge[i].Id,
+                    Vlasnik = usluge[i].Vlasnik,
+                    VlasnikId = usluge[i].VlasnikId,
+                    Siter = usluge[i].Siter,
+                    SiterId = usluge[i].SiterId,
+                    PasId = usluge[i].PasId,
+                    Vrsta = usluge[i].Vrsta,
+                    Pocetak = usluge[i].Pocetak,
+                    AdresaPreuzimanjaPsa = usluge[i].AdresaPreuzimanjaPsa,
+                    Napomena = usluge[i].Napomena,
+                    Status = usluge[i].Status,
+                    Pas = p
+                };
+                objects.Add(obj);
+            }
+            return Ok(objects);
+        }
+
 
         [HttpGet]
         [Route("vratiUslugeSiteruPoStatusu")]
