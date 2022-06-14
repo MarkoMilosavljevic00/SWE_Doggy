@@ -39,7 +39,7 @@ const CardSlika=() =>{
 // }
 const ajdi=localStorage.getItem('idSitera')
 console.log(ajdi + 'jajkas')
-const[ime,setIme]=useState('1.jpg')
+const[ime,setIme]=useState('')
 useEffect(()=>
 {
   Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(

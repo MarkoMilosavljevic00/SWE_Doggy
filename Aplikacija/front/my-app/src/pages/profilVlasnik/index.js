@@ -17,6 +17,9 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Axios from 'axios';
+// 👇️ use visitor's default locale
+
+
 import TextField from '../../components/TextField';
 import { ButtonGroup } from '@mui/material';
 import axios from '../../api/axios';
@@ -82,11 +85,14 @@ const handleGotovi=()=>
 let pasId=[]
 const prihvaceni_zahtevi=()=>
 {
-        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=1').then(
+        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + vlasnikId + '&status=1').then(
             res=>
 
             {
-              console.log(res.data + 'a')
+              res.data.forEach(x=>
+                {
+                  console.log(x.pas.ime)
+                })
               const provera= res.data + 'nista'
                 if(provera==='nista')
             {
@@ -102,17 +108,20 @@ const prihvaceni_zahtevi=()=>
 }
 const odbijeni_zahtevi=()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=2').then(
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=2').then(
             res=>
 
             {
-              console.log(res.data + 'a')
+              res.data.forEach(x=>
+                {
+                  console.log(x.pas.ime)
+                })
               const provera= res.data + 'nista'
                 if(provera==='nista')
             {
                   alert('Trenutno nema Vasih zahteva koje je sitter odbio.')
             }
-                console.log(res.data+ 'nep')
+                
                 setNeprihvaceni(res.data)
                 // if(res.data.id==null)
                 // {
@@ -121,20 +130,44 @@ const odbijeni_zahtevi=()=>
             }
         )
 }
+// 👇️ use visitor's default locale
+const date = new Date();
+date.setHours(0)
+{console.log(
+  date.toLocaleDateString([], {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }),
+);}
+
 const pending_zahtevi=()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=0').then(
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=0').then(
             res=>
 
             {
-              console.log(res.data + 'a')
-              const provera= res.data + 'nista'
-                if(provera==='nista')
-            {
-                  alert('Trenutno nema odgovora od strane sitera za Vase zahteve.Molimo Vas budite strpljivi.')
-            }
+              res.data.forEach(x=>
+                {
+                  console.log(x.pas.ime)
+                })
+                
+                const provera= res.data + 'nista'
+                  if(provera==='nista')
+              {
+                    alert('Siter jos uvek nije ocenio Vaseg psa.Molimo Vas budite strpljivi, cim oceni Vaseg psa bicete u mogucnosti da ocenite sitera.')
+              }
+              setPending(res.data)
+                 
+              
+            //   console.log(res.data + 'a')
+            //   const provera= res.data + 'nista'
+            //     if(provera==='nista')
+            // {
+            //       alert('Trenutno nema odgovora od strane sitera za Vase zahteve.Molimo Vas budite strpljivi.')
+            // }
                 // console.log(res)
-                setPending(res.data)
+                // setPending(res.data)
                 // if(res.data.id==null)
                 // {
                 //   alert('Ne postoji nijedan takav zahtev')
@@ -142,25 +175,31 @@ const pending_zahtevi=()=>
             }
         )
 }
-const gotovi_zahtevi=async()=>
+
+const gotovi_zahtevi=()=>
 {
- await  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + vlasnikId + '&status=3').then(
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId +'&status=3').then(
             res=>
 
-            {
-              console.log(res.data + 'a')
+            { 
+              // console.log(res.data.status + 'a')
+             res.data.forEach(x=>
+              {
+                console.log(x.pas.ime)
+              })
+              
               const provera= res.data + 'nista'
                 if(provera==='nista')
             {
                   alert('Siter jos uvek nije ocenio Vaseg psa.Molimo Vas budite strpljivi, cim oceni Vaseg psa bicete u mogucnosti da ocenite sitera.')
             }
                 setGotovi(res.data)
-                // if(res.data.id==null)
-                // {
-                //   alert('Ne postoji nijedan takav zahtev')
-                // }
+               
             }
-        )
+        ).catch((error)=>
+        {
+          alert(error.message)
+        })
 }
 const buttons = [
   <Button style={{borderTopLeftRadius:'20px',borderBottomLeftRadius:'20px'}}key="one" onClick={()=>{prihvaceni_zahtevi();handlePrihvaceni();}}>Prihvaceni</Button>,
@@ -169,6 +208,10 @@ const buttons = [
   <Button style={{borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}key="four"onClick={()=>{gotovi_zahtevi();handleGotovi();}}>Gotovi</Button>,
 ];
   const [ker,setKer]=useState('')
+const [ker2,setKet2]=useState({ime:' ',index:-1})
+const [ker3,setKer3]=useState({ime:'',index:-1})
+const [ker4,setKer4]=useState({ime:'',index:-1})
+const [ker5,setKer5]=useState({ime:'',index:-1})
 const vrati_psa=(props,index)=>
 {
     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
@@ -176,7 +219,68 @@ const vrati_psa=(props,index)=>
         {
             console.log(res.data)
             setKer(res.data.ime)
+            // setKet2({ime:res.data.ime,index:index})
+            // setKer3({ime:res.data.ime,index:index})
+            // setKer4({ime:res.data.ime,index:index})
+            // setKer5({ime:res.data.ime,index:index})
+        }
+    )
+}
+const vrati_psa1=(props,index)=>
+{
+    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+        res=>
+        {
+            console.log(res.data.ime)
+            // setKer(res.data.ime)
+            // setKet2({ime:res.data.ime,index:index})
+            // setKer3({ime:res.data.ime,index:index})
+            setKer4({ime:res.data.ime,index:index})
+            console.log(ker4.ime)
+            // setKer5({ime:res.data.ime,index:index})
+        }
+    )
+}
+const vrati_psa2=(props,index)=>
+{
+    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+        res=>
+        {
+            console.log(res.data)
+            // setKer(res.data.ime)
             setKet2({ime:res.data.ime,index:index})
+            // console.log(ker2 + 'ahahaha')
+            // setKer3({ime:res.data.ime,index:index})
+            // setKer4({ime:res.data.ime,index:index})
+            // setKer5({ime:res.data.ime,index:index})
+        }
+    )
+}
+const vrati_psa3=(props,index)=>
+{
+    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+        res=>
+        {
+            console.log(res.data)
+            // setKer(res.data.ime)
+            // setKet2({ime:res.data.ime,index:index})
+            setKer3({ime:res.data.ime,index:index})
+            // setKer4({ime:res.data.ime,index:index})
+            // setKer5({ime:res.data.ime,index:index})
+        }
+    )
+}
+const vrati_psa4=(props,index)=>
+{
+    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+        res=>
+        {
+            console.log(res.data)
+            // setKer(res.data.ime)
+            // setKet2({ime:res.data.ime,index:index})
+            // setKer3({ime:res.data.ime,index:index})
+            // setKer4({ime:res.data.ime,index:index})
+            setKer5({ime:res.data.ime,index:index})
         }
     )
 }
@@ -186,7 +290,7 @@ const [ocena,setOcena]=useState('');
 const oceni =(id,siterId,pasId,komentar,ocena)=>
 { console.log(siterId,pasId,komentar,ocena)
   //RADI
-  if(komentar==='' || ocena <0 || ocena >5 || ocena ==='' )
+  if(komentar==='' || ocena <=0 || ocena >5 || ocena ==='' )
   {
     alert('Molimo Vas lepo popunite formu')
     return
@@ -216,15 +320,7 @@ const oceni =(id,siterId,pasId,komentar,ocena)=>
       }
      })
 }
-// useEffect(()=>{
-//   console.log(pasId+'ovo je id osa')
-// Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ pasId).then(
-//         res=>
-//         {
-//             console.log(res.data + 'ovo je id psa ')
-//             setKer(res.data.ime)
-//         })
-//       },[]);
+
 const [profil,setProfil]=useState([])
 const [data,setData]=useState(
    {
@@ -264,17 +360,24 @@ const [data,setData]=useState(
         }
         const izmeni_ime=()=>
    {
+    if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+    if(profil.ime==='')
+    {
+      alert('Polje ime ne sme biti prazno!')
+      return
+    }
+    if(profil.ime.length>20)
+    {
+       alert('Duzina imena ne sme biti duze od 20 karaktera!')
+       return
+    }
       Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
       {
         id:profil.id,
-        ime:profil.ime,
-        // prezime:profil.prezime,
-        // email:profil.email,
-        // korisnickoIme:profil.korisnickoIme,
-        // sifra:profil.sifra,
-        // brojTelefona:profil.brojTelefona,
-        // grad:profil.grad,
-        // adresa:profil.adresa,
+        ime:profil.ime
    
       }).then(res=>
         {
@@ -286,17 +389,25 @@ const [data,setData]=useState(
         }
         const izmeni_prezime=()=>
         {
+          if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+          if(profil.prezime==='')
+          {
+            alert('Polje prezime ne sme biti prazno!')
+            return
+          }
+          if(profil.prezime.length>30)
+          {
+             alert('Duzina prezimena ne sme biti duze od 30 karaktera!')
+             return
+          }
            Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
            {
              id:profil.id,
-            //  ime:profil.ime,
-             prezime:profil.prezime,
-             // email:profil.email,
-             // korisnickoIme:profil.korisnickoIme,
-             // sifra:profil.sifra,
-             // brojTelefona:profil.brojTelefona,
-             // grad:profil.grad,
-             // adresa:profil.adresa,
+            
+             prezime:profil.prezime
         
            }).then(res=>
              {
@@ -308,17 +419,21 @@ const [data,setData]=useState(
              }
              const izmeni_email=()=>
              {
+              if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+              if(profil.email==='')
+              {
+                alert('Polje email ne sme biti prazno!!!')
+                return
+              }
                 Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                 {
                   id:profil.id,
-                  // ime:profil.ime,
-                  // prezime:profil.prezime,
-                  email:profil.email,
-                  // korisnickoIme:profil.korisnickoIme,
-                  // sifra:profil.sifra,
-                  // brojTelefona:profil.brojTelefona,
-                  // grad:profil.grad,
-                  // adresa:profil.adresa,
+                 
+                  email:profil.email
+                
              
                 }).then(res=>
                   {
@@ -326,21 +441,32 @@ const [data,setData]=useState(
                      setProfil(res.data)
                      setData(res.data)
                      window.location.reload(false)
+                    
+                    }).catch((error)=>
+                    {
+                      if(error.response.status)
+                      {
+                        alert(error.response.data)
+                      }
                     })
                   }
                   const izmeni_korisnicko_ime=()=>
                   {
+                    if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+                    if(profil.korisnickoIme==='')
+              {
+                alert('Polje korisnicko ime ne sme biti prazno!!!')
+                return
+              }
                      Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                      {
                        id:profil.id,
-                      //  ime:profil.ime,
-                       // prezime:profil.prezime,
-                       // email:profil.email,
+                     
                        korisnickoIme:profil.korisnickoIme,
-                       // sifra:profil.sifra,
-                       // brojTelefona:profil.brojTelefona,
-                       // grad:profil.grad,
-                       // adresa:profil.adresa,
+                    
                   
                      }).then(res=>
                        {
@@ -348,21 +474,36 @@ const [data,setData]=useState(
                           setProfil(res.data)
                           setData(res.data)
                           window.location.reload(false)
+                         }).catch((error)=>
+                         {
+                           if(error.response.status)
+                           {
+                             alert(error.response.data)
+                           }
                          })
                        }
                        const izmeni_sifru=()=>
                        {
+                        if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+                        if(profil.sifra==='')
+              {
+                alert('Polje sifra ne sme biti prazno!!!')
+                return
+              }
+              if(profil.sifra.length>=20)
+              {
+                alert('Polje sifra ne sme imati vise od 20 karaktera!!!')
+                return
+              }
                           Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                           {
                             id:profil.id,
-                            // ime:profil.ime,
-                            // prezime:profil.prezime,
-                            // email:profil.email,
-                            // korisnickoIme:profil.korisnickoIme,
-                            sifra:profil.sifra,
-                            // brojTelefona:profil.brojTelefona,
-                            // grad:profil.grad,
-                            // adresa:profil.adresa,
+                           
+                            sifra:profil.sifra
+                            
                        
                           }).then(res=>
                             {
@@ -374,17 +515,22 @@ const [data,setData]=useState(
                             }
                             const izmeni_broj_telefona=()=>
                             {
+                              if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+                              if(profil.brojTelefona==='')
+              {
+                alert('Polje broj telefona ne sme biti prazno!!!')
+                return
+              }
+             
                                Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                {
                                  id:profil.id,
-                                //  ime:profil.ime,
-                                 // prezime:profil.prezime,
-                                 // email:profil.email,
-                                 // korisnickoIme:profil.korisnickoIme,
-                                 // sifra:profil.sifra,
+                              
                                  brojTelefona:profil.brojTelefona,
-                                 // grad:profil.grad,
-                                 // adresa:profil.adresa,
+                                 
                             
                                }).then(res=>
                                  {
@@ -396,17 +542,21 @@ const [data,setData]=useState(
                                  }
                                  const izmeni_grad=()=>
                                  {
+                                  if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+                                  if(profil.grad==='')
+              {
+                alert('Polje grad ne sme biti prazno!!!')
+                return
+              }
                                     Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                     {
                                       id:profil.id,
-                                      // ime:profil.ime,
-                                      // prezime:profil.prezime,
-                                      // email:profil.email,
-                                      // korisnickoIme:profil.korisnickoIme,
-                                      // sifra:profil.sifra,
-                                      // brojTelefona:profil.brojTelefona,
-                                      grad:profil.grad,
-                                      // adresa:profil.adresa,
+                               
+                                      grad:profil.grad
+                                      
                                  
                                     }).then(res=>
                                       {
@@ -418,17 +568,20 @@ const [data,setData]=useState(
                                       }
                                       const izmeni_adresu=()=>
                                       {
+                                        if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+                                        if(profil.adresa==='')
+              {
+                alert('Polje adresa ne sme biti prazno!!!')
+                return
+              }
                                          Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                          {
                                            id:profil.id,
-                                          //  ime:profil.ime,
-                                           // prezime:profil.prezime,
-                                           // email:profil.email,
-                                           // korisnickoIme:profil.korisnickoIme,
-                                           // sifra:profil.sifra,
-                                           // brojTelefona:profil.brojTelefona,
-                                           // grad:profil.grad,
-                                           adresa:profil.adresa,
+                              
+                                           adresa:profil.adresa
                                       
                                          }).then(res=>
                                            {
@@ -496,7 +649,18 @@ const handlez=()=>
 {
   setZ(!z)
 }
-const [ker2,setKet2]=useState({ime:' ',index:-1})
+
+let a=null
+// const [PocetakDatum,setPocetakDatum]=useState('')
+// const [PocetakVreme,setPocetakVreme]=useState('')
+// const [KrajDatum,setKrajDatum]=useState('')
+// const [KrajVreme,setKrajVreme]=useState('')
+let PocetakDatumPrihvaceni=null
+let PocetakVremePrihvaceni=null
+let PocetakDatumOdbijeni=null
+let PocetakVremeOdbijeni=null
+let PocetakDatumPending=null
+let PocetakVremePending=null
 
       return(
         
@@ -508,10 +672,9 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
              <CardSlika/>
             
             
-             <Card className={classes.paper} elevation={8}style={{display:'grid',backgroundColor:'khaki',minWidth:'50px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+             <Card className={classes.paper} elevation={8}style={{display:'grid',backgroundColor:'khaki',minWidth:'475px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
             <div className='jedan'> 
-     {/* <div className='glavno_dugme'>
-     </div> */}
+  
 
             
             <div className='dugmici'  style={{display:'grid',justifyContent:'center'}}>
@@ -537,20 +700,40 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
       </ButtonGroup>
     </Box>
               <div className='odgovor' style={{display:'grid'}}   >
-{prihvaceni && prihvaceni.map(x=>
-    (     <div className='prihvaceni' hidden={otvoriPrihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'200px'}}>
+{prihvaceni && prihvaceni.map((x,index5)=>
+      (   <div className='prihvaceni' hidden={otvoriPrihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'200px'}}>
+   
+      <h6 hidden={true}>{PocetakDatumPrihvaceni= new Date(x.pocetak).toLocaleDateString()}</h6>
+     <h6 hidden={true}>{ PocetakVremePrihvaceni= new Date(x.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
+     
      <h6 hidden={true}>{pasId=x.pasId}</h6>
      {/* <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!!</Typography> */}
-        <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!! Sitter:{x.siter.ime} {x.siter.prezime} je prihvatio vas zahtev za psa po imenu { <PetsIcon onClick={()=>{handlej();}}hidden={j}/>}  {<a hidden={!j}>{ker}</a>}!Sitter uskoro dolazi,uzivajte!</Typography>
-        {/* <Typography paragraph>Sitter dolazi!!!</Typography>
-     <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography> */}
+        {/* <Typography paragraph  onClick={()=>vrati_psa1(x.pasId,index5)}>Vasa usluga je uspesno prihvacena!!! Sitter:{x.siter.ime} {x.siter.prezime} 
+        je prihvatio vas zahtev za psa za uslugu {} <PetsIcon onClick={()=>{handlej();}}hidden={ker4.index==index5}/>}  {<a hidden={!ker4.index==index5}>{ker4.ime}</a>}
+        !Sitter uskoro dolazi,uzivajte!</Typography> */}
+        {/*<Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography> */}
+        <Typography>Siter je prihvatio Vas zahtev za uslugu {x.vrsta == 0 ? <a> setanje psa</a>:
+        x.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
+        x.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za vaseg psa {x.pas.ime}!
+         Spremite se, sitter dolazi {PocetakDatumPrihvaceni}  u  {PocetakVremePrihvaceni}. </Typography>
+      
+            
+             <Button onClick={()=>{brisi_uslugu(x.id);}}>Brisi</Button>
 </div>
       ))}
-{neprihvaceni && neprihvaceni.map((l,index)=>
-  (   <div className='neprihvaceni' hidden={otvoriNeprihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
-      <h6 hidden={true}>{pasId=l.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(l.pasId,index)}> Vasa usluga za psa po imenu <PetsIcon onClick={()=>{handlex();}} hidden={ker2.index==index}/>   {<a hidden={!ker2.index==index}>{ker2.ime}</a>} je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography>
+{neprihvaceni && neprihvaceni.map((l,index1)=>
+  (   <div className='neprihvaceni' hidden={otvoriNeprihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk'}}>
+      <h6 hidden={true}>{PocetakDatumOdbijeni= new Date(l.pocetak).toLocaleDateString()}</h6>
+     <h6 hidden={true}>{ PocetakVremeOdbijeni= new Date(l.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
+      {/* <h6 hidden={true}>{pasId=l.pasId}</h6>
+      <Typography paragraph onClick={()=>vrati_psa2(l.pasId,index1)}> Vasa usluga za psa po imenu <PetsIcon onClick={()=>{handlex();}} hidden={ker2.index==index1}/>  
+       {<a hidden={!ker2.index==index1}>{ker2.ime}</a>} je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography> */}
       {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{l.siter.ime} {l.siter.prezime} je odbio uslugu. </Typography> */}
+     <Typography>Sitter {l.siter.ime} {l.siter.prezime} je nazalost odbio uslugu 
+     {x.vrsta == 0 ? <a> setanje psa</a>:
+        x.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
+        x.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} 
+              , datuma {PocetakDatumOdbijeni} u {PocetakVremeOdbijeni} za Vaseg psa {l.pas.ime}.Molimo Vas ne dajte da Vas ovo obeshrabri, vec potrazite novog sittera!</Typography>
       <Button onClick={()=>{brisi_uslugu(l.id);}}>Brisi</Button>
       {/* <Button onClick={()=>{window()}}>aaa</Button> */}
       
@@ -558,13 +741,18 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
   ))
 
 }
-{pending && pending.map(k=>
+{pending && pending.map((k,index2)=>
 (  <div className='pending' hidden={otvoriPending} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
-      <h6 hidden={true}>{pasId=k.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa(pasId)}> Vasa usluga za psa po imenu { <PetsIcon onClick={()=>{handley();}}hidden={y}/>}{<a hidden={!y}>{ker}</a>}, jos nije otvorena! Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography>
+    <h6 hidden={true}>{PocetakDatumPending= new Date(k.pocetak).toLocaleDateString()}</h6>
+     <h6 hidden={true}>{ PocetakVremePending= new Date(k.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
+      {/* <h6 hidden={true}>{pasId=k.pasId}</h6> */}
+      {/* <Typography paragraph onClick={()=>vrati_psa3(k.pasId,index2)}> Vasa usluga za psa po imenu { <PetsIcon onClick={()=>{handley();}}hidden={ker3.index==index2}/>}{<a hidden={!ker3.index==index2}>{ker3.ime}</a>}, jos nije otvorena! Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography> */}
       {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography> */}
-
-
+<Typography>Molimo Vas budite strpljivi sitter {k.siter.ime} {k.siter.prezime} jos uvek nije video Vasu uslugu 
+{k.vrsta == 0 ? <a> setanje psa</a>:
+        k.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
+        k.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za psa {k.pas.ime} datuma {PocetakDatumPending} u {PocetakVremePending}. </Typography>
+<Button onClick={()=>{brisi_uslugu(k.id);}}>Brisi</Button>
 </div>
   ))
 
@@ -572,8 +760,13 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
 {gotovi && gotovi.map((g,index)=>
 (  <div key={g.id} className='gotovi' hidden={otvoriGotovi} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'500px'}}>
       <h6 hidden={true}>{pasId=g.pasId} {}  {}</h6>
-      <Typography paragraph onClick={()=>{vrati_psa(pasId);}}> Vasa usluga za psa po imenu {<PetsIcon onClick={()=>{handlez();}} hidden={z}/> }{<a hidden={!z}>{ker}</a>}, je uspesno zavrsena! Molimo Vas da iskoristite minut Vaseg vremena i ocenite sitera:{g.siter.ime} {g.siter.prezime}.Hvala Vam!</Typography>
+      {/* <Typography paragraph onClick={()=>{vrati_psa4(g.pasId,index);}}> Vasa usluga za psa po imenu {<PetsIcon onClick={()=>{handlez();}} hidden={ker5.index==index}/> }{<a hidden={!ker5.index==index}>{ker5.ime}</a>}, je uspesno zavrsena! Molimo Vas da iskoristite minut Vaseg vremena i ocenite sitera:{g.siter.ime} {g.siter.prezime}.Hvala Vam!</Typography> */}
       {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Molimo Vas ocenite sitera:{g.siter.ime} {g.siter.prezime}</Typography> */}
+    <Typography>Vasa usluga {g.vrsta == 0 ? <a> setanje psa</a>:
+        g.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
+        g.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za psa:{g.pas.ime} je obavljena od strane sittera {g.siter.ime} {g.siter.prezime}  </Typography>
+        <Typography style={{marginBottom:'20px',marginTop:'10px'}}>Molimo vas odvojite bar sekundi i ocenite sittera! </Typography>
+   {/* <Button onClick={()=>{brisi_uslugu(g.id);}}>Brisi</Button> */}
      <div className='sakrij' hidden={skrij}>
       <TextField
      
@@ -677,7 +870,7 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
                    <label style={{}}>Sifra:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
-             <input type='text' id='opis'  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
+             <input type='password' id='opis'  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
              </Grid>
              {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_sifru();}}> Izmeni</Button>
@@ -728,12 +921,7 @@ const [ker2,setKet2]=useState({ime:' ',index:-1})
        <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',marginTop:'20px'}}>
   Edituj podatke
  </Button>
-      {/* <Button variant="outlined" startIcon={< DoneIcon/>} onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
-  Potvrdi izmene
-</Button>  */}
-      {/* <Button variant="outlined" startIcon={<DeleteIcon />} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',margin:'10px'}}>
-  Obrisi svoj profil
-</Button> */}
+      
       </div>
              </Card>
            

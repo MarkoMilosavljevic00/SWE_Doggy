@@ -13,11 +13,13 @@ const classStyles = makeStyles({
   },
   zahteviPristigli:{
      display:'flex',
-     flexDirection:'row'
+     flexDirection:'row',
+     flexWrap:'wrap'
   }, 
   zahteviPrihvaceni:{
      display:'flex',
-     flexDirection:'row'                                           
+     flexDirection:'row',
+     flexWrap:'wrap'                                           
   },
   divButton:{
      display:'flex',

@@ -576,7 +576,7 @@ const NavBarSiter = () => {
                     </IconButton>
                   </li>
 
-                  <li>
+                  {/* <li>
 
                     <IconButton href="/registerRoute" style={{ display: 'flex' }}>
                       <PlayCircleFilledWhiteIcon />
@@ -587,7 +587,7 @@ const NavBarSiter = () => {
                     </IconButton>
 
 
-                  </li>
+                  </li> */}
 
 
                   <li>

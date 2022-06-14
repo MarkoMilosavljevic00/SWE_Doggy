@@ -25,6 +25,7 @@ const classStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    flexWrap:'wrap',
     flex: 1,
     backgroundColor: 'initial',
     minHeight:'585px'

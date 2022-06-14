@@ -13,7 +13,7 @@ export default function BasicSelect(props) {
     postaviOcenu(event.target.value);
   };
 
-  const [prosecnaOcena, postaviProsecnuOcenu] = useState([1, 2, 3, 4, 5]);
+  const [prosecnaOcena, postaviProsecnuOcenu] = useState([0,1, 2, 3, 4, 5]);
 
   return (
     <Box sx={{ minWidth: 170 }}>

@@ -293,7 +293,7 @@ const NavBarSiter=()=> {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            {console.log('jebi se')}
+            {/* {console.log('jebi se')} */}
             <IconButton
               size="large"
               aria-label="show more"

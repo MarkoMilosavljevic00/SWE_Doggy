@@ -182,6 +182,11 @@ const posalji_zahtev=()=>
   adresaPreuzimanjaPsa,
   napomena
 }
+if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || adresaPreuzimanjaPsa==='')
+{
+  alert('Molimo Vas popunite formu do kraja!!!')
+  return
+}
   Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
 
     }
@@ -194,19 +199,21 @@ const posalji_zahtev=()=>
       
     }).catch(err=>
     {
-          console.log(err.response)
+         
           if(err.response.data=='Siter je tada zauzet!')
           {
          alert('Siter je tada zauzet!')
           }
-          else
-          {
-            alert('Molimo Vas popunite pravilno formu!!!')
-          }
+        
         
     })
 }
 {console.log(vlasnikId + ':vlasnik id ')}
+
+  const brisiS=()=>
+  {
+    const siter=localStorage.removeItem('idSitera')
+  }
 
     return (
       
@@ -215,9 +222,9 @@ const posalji_zahtev=()=>
 
 <div className={klase.main}>
    <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'700px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-       <IconButton color='primary' href='/sitterRoute'>
+       <IconButton color='primary'  onClick={()=>{brisiS();navigate('/sitterRoute')}}>
        <ArrowBackIosNewIcon/>
-       <Typography variant='h6'color='black'>Nazad</Typography>
+       <Typography variant='h6'color='black' onClick={()=>{brisiS();navigate('/sitterRoute');}}>Nazad</Typography>
        </IconButton>
    <h1 className={klase.naslov}>Kreirajte zahtev</h1>
    <div className={klase.selectbox}>
@@ -237,10 +244,10 @@ const posalji_zahtev=()=>
 
         // onChange={handleChange}
       >
-        <MenuItem   value={1}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
-        <MenuItem value={2}><i class="fa-solid fa-house"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
+        <MenuItem   value={0}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
+        <MenuItem value={1}><i class="fa-solid fa-house"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
+        <MenuItem  value={2}><i class="fa-solid fa-paw"><h5>Poseta sittera</h5></i></MenuItem>
         <MenuItem  value={3}><i class="fa-solid fa-bone"><h5>Čuvanje psa u kući sittera</h5></i></MenuItem>
-        <MenuItem  value={4}><i class="fa-solid fa-paw"><h5>Poseta sittera</h5></i></MenuItem>
       </Select>
     </FormControl>
    

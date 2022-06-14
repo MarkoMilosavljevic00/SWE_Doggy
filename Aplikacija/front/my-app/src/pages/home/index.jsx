@@ -11,8 +11,9 @@ import classStyles from './styles';
 import HeaderAdmin from '../../components/HeaderAdmin';
 import NavbarVlasnik from '../headerVlasnik';
 import NavBarSiter from '../headerSiter';
+import { useNavigate } from 'react-router-dom';
 
-import NavBarVlasnik from '../headerVlasnik';
+import PlayCircleFilledWhite from '@mui/icons-material/PlayCircleFilledWhite';
 
 export const Home = (props) => {
   const[refresh,setRefresh]=useState('')
@@ -23,6 +24,7 @@ export const Home = (props) => {
   const proveraSiter=localStorage.getItem('idSitera')
   const proveraVlasnik=localStorage.getItem('idVlasnika')
   const proveraAdmin=localStorage.getItem('idAdmina');
+  const navigate=useNavigate();
   // console.log(proveraSiter + 'ahahha')
   return (
 
@@ -33,7 +35,13 @@ export const Home = (props) => {
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>
       <h2>Pravo mesto za vas i vašeg najboljeg prijatelja</h2>
-      <a href="#about" className="btn-get-started">Nadji ono što ti je potrebno</a>
+      { proveraSiter ?  <a href="#about"  hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> :
+       (proveraVlasnik ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a>  :
+       (proveraAdmin ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> : 
+       <a hidden={false} className="btn-get-started" onClick={()=>{navigate('/registerRoute')}}>
+        Zapocnite Doggy avanturu!
+        </a> ))} 
+      
     </div>
   </section>
 

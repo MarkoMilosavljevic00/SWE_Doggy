@@ -110,6 +110,7 @@ const Sitter = () => {
     });
   };
 
+
   return (
     <div className={classes.container}>
       <NavBarVlasnik />
@@ -129,10 +130,10 @@ const Sitter = () => {
         >
           Potvrdi
         </Button>
-        <IconButton color="primary" href="vlasnikRoute">
+        {/* <IconButton color="primary" href="vlasnikRoute">
           <Typography color="black">Vidi usluge</Typography>
           <ArrowForwardIosIcon />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div className={classes.miniContainer}>
         {/* {users.map((user, index) => <Kartica ime={user.ime} opis={user.opis} key={index } />)}   */}

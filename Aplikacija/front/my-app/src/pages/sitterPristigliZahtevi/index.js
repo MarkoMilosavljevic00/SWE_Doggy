@@ -488,6 +488,7 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
            <div className={classes.zahteviPristigli} hidden={!p1}>
          {data1.map((x) => {
               return (
+                
                 <CardPristigliZahtevi   
                   id={x.id}
                   ime={x.vlasnik.ime}
@@ -499,7 +500,10 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
                   adresa={x.vlasnik.adresa}
                   pasId={x.pasId}
                   napomena={x.napomena}
-                  
+                  tip={x.vrsta}
+                  begin={x.pocetak}
+                  end={x.kraj}
+                 
                 />
               );
            })}
@@ -524,6 +528,9 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
               napomena={p.napomena}
               idSittera={idSitera}
               vlasnikId={p.vlasnikId}
+              tip={p.vrsta}
+              begin={p.pocetak}
+              end={p.kraj}
             />
           );
         })}

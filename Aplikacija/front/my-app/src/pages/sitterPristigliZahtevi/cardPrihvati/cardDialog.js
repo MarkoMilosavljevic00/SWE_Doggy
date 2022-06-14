@@ -26,6 +26,7 @@ const CardDialog = props => {
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const { idPsa, ime, rasa, pol, visina, tezina, prosecnaOcena, opis, idSittera, vlasnikId, id, napomena} = props;
+  
   useEffect(() => {
 
    Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa).then(

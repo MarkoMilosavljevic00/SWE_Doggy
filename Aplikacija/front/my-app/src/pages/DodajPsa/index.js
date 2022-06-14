@@ -227,6 +227,11 @@ const [refresh,setRefresh]=useState('')
 const dodajPsa=()=>
 {const AJDI = localStorage.getItem('idVlasnika')
 
+if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.visina==='' || data.tezina==='' || data.visina<=0 || data.tezina <=0 || data.tezina>=100 || data.visina>=200)
+{
+  alert('Molimo Vas popunite pravilno formu!!!')
+  return 
+}
   Axios.post('https://localhost:5001/Pas/dodajPsa',
     {
       ime:data.ime,

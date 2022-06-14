@@ -13,7 +13,7 @@ export default function Footer(){
     
         <div className="container">
           <div className="copyright">
-            &copy;<strong >Doggy organisation</strong>
+            &copy;<strong >Dogs vs Cats</strong>
           </div>
         </div>
       </footer>

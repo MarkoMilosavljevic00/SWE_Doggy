@@ -117,12 +117,7 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
 }
 
 const [izmena,setIzmena ] = useState(true)
-// const [ime,setIme] = useState("")
-// const [rasa,setrace] = useState("")
-// const [pol,setsex] = useState("")
-// const [opis,setdescription] = useState("")
-// const [visina,setheight] = useState("")
-// const [tezina,setweight] = useState("")
+
 const handle=(e)=>
 {
     const newData={...data}
@@ -149,6 +144,12 @@ const [data,setData]=useState({
   })
   const izmeniPsa =()=>
   {console.log(data)
+    if(data.id==='' || data.ime==='' || data.rasa==='' || data.pol===''|| data.opis===''||data.visina==='' || data.tezina==='' || data.visina <=0 || data.visina>=200|| data.tezina<=0 || data.tezina>=100)
+    {
+
+      alert('Molimo Vas unesite validne informacija na formi za izmenu podataka o psu!')
+      return
+    }
     const i=localStorage.getItem('idVlasnika')
       Axios.put('https://localhost:5001/Pas/azurirajPsa',
       {  id:data.id,
@@ -168,8 +169,16 @@ const [data,setData]=useState({
                   console.log('Uspesna promena podataka')
                  console.log(response)
                  setData(response.data)
+                 window.location.reload(false)
+                 alert('Uspesno ste izmenili podatke o psu')
               }
   
+          }).catch((error)=>
+          {
+            if(error.response.status)
+            {
+              alert(error.response.data)
+            }
           })
          
   }
@@ -235,7 +244,7 @@ const handleIzmena=()=>
       >
         Informacije o psu
       </Button>
-      <Button variant='contained' color='error' size='small' onClick={obrisiPsa} >Obrisi psa</Button>
+      <Button variant='contained' color='error' size='small' onClick={()=>{obrisiPsa();}} >Obrisi psa</Button>
       {/* <Button variant='contained' color='warning' size='small' onClick={()=>{status_usluge();poper();}} >Proverite status usluge</Button> */}
     {usluga.map(x=>
     (
@@ -314,11 +323,11 @@ const handleIzmena=()=>
           </div>
           <div className='5p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
           <Typography gutterBottom>Visina:</Typography>
-          <input  type='text'id='visina' value={data.visina  } style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
+          <input  type='number'id='visina' value={data.visina  } style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
           </div>
           <div className='6p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
           <Typography gutterBottom>Tezina: </Typography>
-          <input  type='text' id='tezina'value={data.tezina} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
+          <input  type='number' id='tezina'value={data.tezina} style={{minWidth:'250px',maxWidth:'350px'}}disabled={izmena} onChange={ (e) =>  handle(e) } />
           </div>
           </div>
           <div className='cardslika'>

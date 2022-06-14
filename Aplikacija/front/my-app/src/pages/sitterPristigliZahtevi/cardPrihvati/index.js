@@ -13,12 +13,39 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function CardPrihvaceneUsluge(props) {
-      const{P2,id, ime, prezime, korisnickoIme, brojTelefona, email, grad, adresa, pasId, napomena, idSittera, vlasnikId}=props;
+      const{P2,id, ime, prezime, korisnickoIme, brojTelefona, email, grad, adresa, pasId, napomena, idSittera, vlasnikId,tip,begin,end}=props;
       const navigate = useNavigate();
       const classes = classStyles();
       const[data2,setData2]=useState([]);
       const [open, setOpen] = React.useState(false);
-      
+      const[type,setType]=useState('')
+
+      let PocetakDatum=new Date(begin).toLocaleDateString();
+      let PocetakVreme = new Date(begin).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'});
+      let KrajDatum= new Date(end).toLocaleDateString();
+      let KrajVreme = new Date(end).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})
+
+      useEffect(()=>
+      {
+          if(tip==0)
+          {
+            setType('Setanje psa')
+          }
+          if(tip==1)
+          {
+            setType('Cuvanje psa u kuci vlasnika')
+          }
+          if(tip==2)
+          {
+            setType('Poseta sittera')
+          }
+          if(tip==3)
+          {
+            setType('Cuvanje psa u kuci sittera')
+          }
+
+      })
+
       useEffect(() => {
         Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + pasId).then(res=>
         {
@@ -38,6 +65,10 @@ export default function CardPrihvaceneUsluge(props) {
       <Typography variant="body1" > Email: {email} </Typography>
       <Typography variant="body1" > Grad: {grad}  </Typography>
       <Typography variant="body1" > Adresa: {adresa} </Typography> 
+      <Typography variant="body1" > Vrsta usluge: {type}</Typography>
+      <Typography variant="body1" > Pocetak usluge: {PocetakDatum} u {PocetakVreme}</Typography>
+      <Typography variant="body1" > Kraj usluge: {KrajDatum} u {KrajVreme}</Typography>
+      
       </CardContent>
      
       <CardActions disableSpacing>

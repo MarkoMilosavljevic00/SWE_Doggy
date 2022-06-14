@@ -108,7 +108,8 @@ const NavBarVlasnik=()=> {
           const korisnik=localStorage.removeItem('korisnik')
           const idSitera=localStorage.removeItem('idSitera')
           console.log('Uspesno ste se log autovali')
-          // window.location.reload(false)
+          navigate('/')
+          window.location.reload(false)
           alert('Successful log out')
 
   }
@@ -130,7 +131,7 @@ const NavBarVlasnik=()=> {
       onClose={handleMenuClose}
       >
       <MenuItem onClick={() => navigate(profilVlasnikRoute)}>Profil</MenuItem>
-      <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem>
+      {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
       <MenuItem onClick={()=>{handleMenuClose();log_out();navigate('/')}}>Log Out</MenuItem>
     </Menu>
   );
@@ -193,7 +194,7 @@ const NavBarVlasnik=()=> {
           </Badge>
         </IconButton>
       </MenuItem>
-      <MenuItem>
+      {/* <MenuItem>
       <IconButton size="large" href="/dodajPsaRoute" color="inherit">
               <Badge >
                 <PetsIcon />
@@ -201,7 +202,7 @@ const NavBarVlasnik=()=> {
               </Badge>
             </IconButton>
               
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem>
             <IconButton size="large" href="/" color="inherit">
               <Badge >

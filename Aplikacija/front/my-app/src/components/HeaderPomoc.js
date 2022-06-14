@@ -338,6 +338,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import PetsIcon from '@mui/icons-material/Pets';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
+import HelpIcon from '@mui/icons-material/Help';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
@@ -478,7 +479,7 @@ const NavBarSiter=()=> {
     
     >
      
-      <MenuItem onClick={()=>{navigate('./registerRoute')}}>
+      <MenuItem onClick={()=>{navigate('/registerRoute')}}>
         <IconButton
           size="large"
          
@@ -491,21 +492,21 @@ const NavBarSiter=()=> {
         </IconButton>
       </MenuItem>
       
-      <MenuItem onClick={()=>{navigate('./helpRoute')}}>
+      <MenuItem onClick={()=>{navigate('/helpRoute')}}>
         <IconButton
           size="large"
          
           color="inherit"
         >
           <Badge color="error">
-            <HelpOutlineIcon />
+            <HelpIcon />
        <Typography > Pomoc </Typography>
           </Badge>
         </IconButton>
       </MenuItem>
    
   
-     <MenuItem onClick={()=>{navigate('./loginRoute')}}>
+     <MenuItem onClick={()=>{navigate('/loginRoute')}}>
      <IconButton
        size="large"
       
@@ -518,7 +519,7 @@ const NavBarSiter=()=> {
      </IconButton>
    </MenuItem>
 
- <MenuItem onClick={()=>{navigate('./registerRoute')}}>
+ <MenuItem onClick={()=>{navigate('/registerRoute')}}>
  <IconButton
    size="large"
   
@@ -578,7 +579,7 @@ const NavBarSiter=()=> {
             {/* <li><a className="nav-link scrollto active" href="#hero">Početna</a></li> */}
             <li>
               
-              <IconButton  href="./#about">
+              <IconButton  onClick={()=>{navigate('/')}}>
             
               <Typography style={{color:'white'}} className="nav-link scrollto">
                 O sajtu
@@ -586,7 +587,7 @@ const NavBarSiter=()=> {
               
               </IconButton>
            </li>
-
+{/* 
             <li>
               
               <IconButton  onClick={()=>{navigate('/registerRoute')}}>
@@ -598,11 +599,11 @@ const NavBarSiter=()=> {
               </IconButton>
               
               
-            </li>
+            </li> */}
 
              
             <li>
-            <IconButton href="./#contact">
+            <IconButton onClick={()=>{navigate('/')}}>
               <AddLocationAltIcon/>
               <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white'}}>
                 Kontakt
@@ -611,7 +612,7 @@ const NavBarSiter=()=> {
             </li>
             <li>
             <IconButton  onClick={()=>{navigate('/helpRoute')}}>
-              <HelpOutlineIcon />
+              <HelpIcon />
               <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{color:'white'}}>
                 Pomoć
               </Typography>
@@ -623,13 +624,13 @@ const NavBarSiter=()=> {
               </a>
             </li>
              <li> */}
-            <li className="dropdown" >
+            {/* <li className="dropdown" >
             <IconButton>
               <Typography style={{color:'white'}}href="./">
                 <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
               </Typography>
               </IconButton>
-              <ul>
+              <ul> */}
                 {/* <li className="dropdown"><a href="#services"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a className="nav-link scrollto" href="#about">Deep Drop Down 1</a></li>
@@ -639,7 +640,7 @@ const NavBarSiter=()=> {
                   <li><a href="/#">Deep Drop Down 5</a></li>
                 </ul>
               </li> */}
-                <li>
+                {/* <li>
                   <a href="./#services" >Šetanje psa po gradu</a>
                 </li>
                 <li>
@@ -652,7 +653,7 @@ const NavBarSiter=()=> {
                   <a href="./#services" >Čuvanje psa u kući sittera</a>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <div className='upadaj' style={{display:'flex'}}>
              <li>
              <IconButton onClick={()=>{navigate('/loginRoute')}}>

@@ -108,9 +108,23 @@ const azuriraj=()=>
       }
       )
    }
-   const izmeniime=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+   const izmeniime=()=>{
+// {  {console.log('2')}
+//    {console.log(profil)}
+if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.ime==='')
+   {
+     alert('Polje ime ne sme biti prazno!')
+     return
+   }
+   if(profil.ime.length>20)
+   {
+      alert('Duzina imena ne sme biti duze od 20 karaktera!')
+      return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -134,9 +148,23 @@ const azuriraj=()=>
       }
       )
    }
-   const izmeniprezime=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+   const izmeniprezime=()=>{
+// {  {console.log('2')}
+//    {console.log(profil)}
+if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+if(profil.prezime==='')
+          {
+            alert('Polje prezime ne sme biti prazno!')
+            return
+          }
+          if(profil.prezime.length>30)
+          {
+             alert('Duzina prezimena ne sme biti duze od 30 karaktera!')
+             return
+          }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -162,8 +190,18 @@ const azuriraj=()=>
       )
    }
    const izmenikorisnickoime=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{  
+   // {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.korisnickoIme==='')
+   {
+     alert('Polje korisnicko ime ne sme biti prazno!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -187,11 +225,27 @@ const azuriraj=()=>
          window.location.reload(false)
          
       }
-      )
+      ).catch((error)=>
+      {
+         if(error.response.status)
+         {
+            alert(error.response.data)
+         }
+      })
    }
    const izmeniemail=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{  
+   // {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.email==='')
+   {
+     alert('Polje email ne sme biti prazno!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -201,16 +255,38 @@ const azuriraj=()=>
    ).then(
       res=>
       {
-         console.log(res)
+         console.log(res.data)
          setProfil(res.data)
          setData(res.data)
          window.location.reload(false)
+       
       }
-      )
+      ).catch((error)=>
+      {
+        if(error.response.status)
+        {
+         alert(error.response.data)
+        }
+      })
    }
    const izmenisifru=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{ 
+   //  {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.sifra==='')
+   {
+     alert('Polje sifra ne sme biti prazno!!!')
+     return
+   }
+   if(profil.sifra.length>=20)
+   {
+     alert('Polje sifra ne sme imati vise od 20 karaktera!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -235,8 +311,18 @@ const azuriraj=()=>
       )
    }
    const izmenibrojtelefona=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{  
+   // {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.brojTelefona==='')
+   {
+     alert('Polje broj telefona ne sme biti prazno!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -261,8 +347,18 @@ const azuriraj=()=>
       )
    }
    const izmenigrad=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{ 
+   //  {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.grad==='')
+   {
+     alert('Polje grad ne sme biti prazno!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -287,8 +383,18 @@ const azuriraj=()=>
       )
    }
    const izmeniadresu=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{  
+   // {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+   }
+   if(profil.adresa==='')
+   {
+     alert('Polje adresa ne sme biti prazno!!!')
+     return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -313,9 +419,24 @@ const azuriraj=()=>
       }
       )
    }
-   const izmenicenuposatu=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+   const izmenicenuposatu=()=>{
+// {  {console.log('2')}
+//    {console.log(profil)}
+if(profil.id==='')
+   {
+      alert('Greska!!!')
+      return
+   }
+if(profil.cenaPoSatu<=0)
+{
+   alert('Molimo Vas unesite validan broj veci od nule!!!')
+   return
+}
+if(profil.cenaPoSatu==='')
+{
+   alert('Polje cena po satu ne sme biti prazno!!!')
+   return
+}
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -341,8 +462,19 @@ const azuriraj=()=>
       )
    }
    const izmenibio=()=>
-{  {console.log('2')}
-   {console.log(profil)}
+{ 
+   //  {console.log('2')}
+   // {console.log(profil)}
+   if(profil.id==='')
+   {
+      alert('Greska!!!')
+      return
+   }
+   if(profil.bio==='')
+   {
+      alert('Polje biografija ne sme biti prazno!!!')
+      return
+   }
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -396,7 +528,7 @@ const azuriraj=()=>
                 <input type='text' id='opis' value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }  disabled={ch}></input>
             
              </Grid>
-                <Button style={{marginLeft:'100px'}}onClick={()=>{izmeniime();}}startIcon={<EditIcon/>}> Izmeni </Button>
+                <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniime();}}startIcon={<EditIcon/>}> Izmeni </Button>
                 <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Prezime:</label>
              </Grid>
@@ -404,7 +536,7 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
            
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmeniprezime();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniprezime();}}startIcon={<EditIcon/>}> Izmeni </Button>
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Email:</label>
              </Grid>
@@ -412,7 +544,7 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) }  disabled={ch}></input>
             
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmeniemail();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniemail();}}startIcon={<EditIcon/>}> Izmeni </Button>
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Korisničko Ime:</label>
              </Grid>
@@ -420,15 +552,15 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }  disabled={ch}></input>
             
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmenikorisnickoime();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmenikorisnickoime();}}startIcon={<EditIcon/>}> Izmeni </Button>
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Sifra:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
-             <input type='text' id='opis' value={profil.sifra} onChange={ (e) => setProfil((profil)=>({...profil,sifra:e.target.value}))}  disabled={ch}></input>
+             <input type='password' id='opis' value={profil.sifra} onChange={ (e) => setProfil((profil)=>({...profil,sifra:e.target.value}))}  disabled={ch}></input>
             
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmenisifru();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmenisifru();}}startIcon={<EditIcon/>}> Izmeni </Button>
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Broj telefona:</label>
              </Grid>
@@ -436,7 +568,7 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) }  disabled={ch}></input>
             
              </Grid> 
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmenibrojtelefona();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmenibrojtelefona();}}startIcon={<EditIcon/>}> Izmeni </Button>
              
              
              <Grid item xs={6} sm={6} md={4} lg={3}>
@@ -446,7 +578,7 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value}))}  disabled={ch}></input>
            
              </Grid> 
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmenigrad();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmenigrad();}}startIcon={<EditIcon/>}> Izmeni </Button>
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Adresa:</label>
             </Grid>
@@ -454,16 +586,16 @@ const azuriraj=()=>
              <input type='text' id='opis' value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value}))}   disabled={ch}></input>
              
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmeniadresu();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniadresu();}}startIcon={<EditIcon/>}> Izmeni </Button>
       
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Cena po satu:</label>
             </Grid>
             <Grid item xs={6} sm={6} md={4} lg={3}>
-             <input type='text' id='opis'  value={profil.cenaPoSatu} onChange={ (e) =>  setProfil((profil)=>({...profil,cenaPoSatu:e.target.value}))}  disabled={ch}></input>
+             <input type='number' id='opis'  value={profil.cenaPoSatu} onChange={ (e) =>  setProfil((profil)=>({...profil,cenaPoSatu:e.target.value}))}  disabled={ch}></input>
            
              </Grid>
-             <Button style={{marginLeft:'100px'}}onClick={()=>{izmenicenuposatu();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmenicenuposatu();}}startIcon={<EditIcon/>}> Izmeni </Button>
              </Grid>
              <TextField 
           id="outlined-multiline-static"
