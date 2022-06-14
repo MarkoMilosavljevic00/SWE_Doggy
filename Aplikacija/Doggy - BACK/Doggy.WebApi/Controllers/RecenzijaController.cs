@@ -53,8 +53,8 @@ namespace Doggy.WebAPI.Controllers
         public IActionResult DodajRecenzijuSiteru([FromBody] Recenzija r)
         {
             Recenzija recenzija = recenzijaService.DodajRecenzijuSiteru(r);
-            if (recenzija == null)
-                return BadRequest("Vec ste pisali recenziju za ovog sitera za setanje ovog psa!");
+            //if (recenzija == null)
+            //    return BadRequest("Vec ste pisali recenziju za ovog sitera za setanje ovog psa!");
 
             return new JsonResult(recenzija);
         }
@@ -64,8 +64,8 @@ namespace Doggy.WebAPI.Controllers
         public IActionResult DodajRecenzijuPsu([FromBody] Recenzija r)
         {
             Recenzija recenzija = recenzijaService.DodajRecenzijuPsu(r);
-            if (recenzija == null)
-                return BadRequest("Vec ste pisali recenziju za ovog psa!");
+            //if (recenzija == null)
+            //    return BadRequest("Vec ste pisali recenziju za ovog psa!");
 
             return new JsonResult(recenzija);
         }

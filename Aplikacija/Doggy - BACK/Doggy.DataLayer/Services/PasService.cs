@@ -43,6 +43,7 @@ namespace Doggy.DataLayer.Services
             if(provera!=null)
                 return null;
 
+            p.Slika = "defaultPas.jpg";
             var pas = unitOfWork.PasRepository.Add(p);
             unitOfWork.SaveChanges();
             return pas;
@@ -62,6 +63,8 @@ namespace Doggy.DataLayer.Services
             Pas p = unitOfWork.PasRepository.Get(id);
             if (p != null)
             {
+                List<Usluga> uslugeZaPsa = unitOfWork.UslugaRepository.Find(k => k.PasId == id).ToList();
+                unitOfWork.UslugaRepository.DeleteRange(uslugeZaPsa);
                 unitOfWork.PasRepository.Delete(p);
                 unitOfWork.SaveChanges();
                 return p;

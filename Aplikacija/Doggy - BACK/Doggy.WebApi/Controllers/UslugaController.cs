@@ -83,6 +83,7 @@ namespace Doggy.WebAPI.Controllers
                     PasId = usluge[i].PasId,
                     Vrsta = usluge[i].Vrsta,
                     Pocetak = usluge[i].Pocetak,
+                    Kraj = usluge[i].Kraj,
                     AdresaPreuzimanjaPsa = usluge[i].AdresaPreuzimanjaPsa,
                     Napomena = usluge[i].Napomena,
                     Status = usluge[i].Status,

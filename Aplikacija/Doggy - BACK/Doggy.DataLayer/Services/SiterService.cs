@@ -66,6 +66,7 @@ namespace Doggy.DataLayer.Services
             if(ValidacijaDodavanja(s, out status))
             {
                 s.Tip = TipKorisnika.Siter;
+                s.Slika = "defaultKorisnik.jpg";
                 var siter = unitOfWork.SiterRepository.Add(s);
                 unitOfWork.SaveChanges();
                 return siter;
