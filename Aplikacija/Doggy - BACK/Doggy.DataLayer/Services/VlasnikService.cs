@@ -33,6 +33,7 @@ namespace Doggy.DataLayer.Services
             if (ValidacijaDodavanja(v, out status))
             {
                 v.Tip = TipKorisnika.Vlasnik;
+                v.Slika = "defaultKorisnik.jpg";
                 var vlasnik = unitOfWork.VlasnikRepository.Add(v);
                 unitOfWork.SaveChanges();
                 return vlasnik;

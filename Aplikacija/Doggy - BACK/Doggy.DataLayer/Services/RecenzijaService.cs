@@ -40,9 +40,9 @@ namespace Doggy.DataLayer.Services
         {
             var siter = unitOfWork.SiterRepository.FindWithIncludes(k => k.Id == r.SiterId, k => k.Recenzije).FirstOrDefault();
 
-            var provera = siter.Recenzije.Find(k => k.VlasnikId == r.VlasnikId && k.PasId == r.PasId && k.Tip == TipRecenzije.Siter);
-            if (provera != null)
-                return null;
+            //var provera = siter.Recenzije.Find(k => k.VlasnikId == r.VlasnikId && k.PasId == r.PasId && k.Tip == TipRecenzije.Siter);
+            //if (provera != null)
+            //    return null;
 
             r.Tip = TipRecenzije.Siter;
             r.Vreme = DateTime.Now;
@@ -64,9 +64,9 @@ namespace Doggy.DataLayer.Services
         {
             var pas = unitOfWork.PasRepository.FindWithIncludes(k => k.Id == r.PasId, k => k.Recenzije).FirstOrDefault();
 
-            var provera = pas.Recenzije.Find(k => k.SiterId == r.SiterId && k.Tip == TipRecenzije.Pas);
-            if (provera != null)
-                return null;
+            //var provera = pas.Recenzije.Find(k => k.SiterId == r.SiterId && k.Tip == TipRecenzije.Pas);
+            //if (provera != null)
+            //    return null;
 
             r.Tip = TipRecenzije.Pas;
             r.Vreme = DateTime.Now;
