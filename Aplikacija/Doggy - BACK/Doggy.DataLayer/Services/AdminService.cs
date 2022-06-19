@@ -29,6 +29,7 @@ namespace Doggy.DataLayer.Services
             if (ValidacijaDodavanja(a, out status))
             {
                 a.Tip = TipKorisnika.Admin;
+                a.Sifra = BCrypt.Net.BCrypt.HashPassword(a.Sifra);
                 var admin = unitOfWork.AdminRepository.Add(a);
                 unitOfWork.SaveChanges();
                 return admin;
@@ -58,7 +59,9 @@ namespace Doggy.DataLayer.Services
                 admin.Prezime = a.Prezime ?? admin.Prezime;
                 admin.KorisnickoIme = a.KorisnickoIme ?? admin.KorisnickoIme;
                 admin.Email = a.Email ?? admin.Email;
-                admin.Sifra = a.Sifra ?? admin.Sifra;
+                if (a.Sifra != null)
+                    admin.Sifra = BCrypt.Net.BCrypt.HashPassword(a.Sifra);
+                //admin.Sifra = a.Sifra ?? admin.Sifra;
                 admin.BrojTelefona = a.BrojTelefona ?? admin.BrojTelefona;
                 admin.Grad = a.Grad ?? admin.Grad;
                 admin.Adresa = a.Adresa ?? admin.Adresa;

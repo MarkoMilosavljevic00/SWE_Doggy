@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -23,6 +24,7 @@ namespace Doggy.WebAPI.Controllers
             this.authService = authService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
         public IActionResult Login([FromBody] Login data)

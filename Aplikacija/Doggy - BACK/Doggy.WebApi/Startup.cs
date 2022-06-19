@@ -41,7 +41,8 @@ namespace Doggy.WebApi
         {
             services.AddControllers();
 
-            services.AddDbContext<DoggyContext>(conf => {
+            services.AddDbContext<DoggyContext>(conf =>
+            {
                 conf.UseSqlServer(Configuration.GetConnectionString("Konekcija"));
             });
 
@@ -56,6 +57,28 @@ namespace Doggy.WebApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doggy.WebApi", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                            }
+                    },
+                        new string[] {}
+                    }
+                });
             });
 
 
@@ -140,10 +163,10 @@ namespace Doggy.WebApi
                         }
                         else
                         {
-                            var claims = (ClaimsIdentity)context.Principal.Identity;
-                            var userType = nameof(user);
-                            Claim role = new Claim(ClaimTypes.Role, userType);
-                            claims.AddClaim(role);
+                            //var claims = (ClaimsIdentity)context.Principal.Identity;
+                            //var userType = nameof(user);
+                            //Claim role = new Claim(ClaimTypes.Role, userType);
+                            //claims.AddClaim(role);
                             context.Success();
                         }
                     }

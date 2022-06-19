@@ -66,6 +66,7 @@ namespace Doggy.DataLayer.Services
             if(ValidacijaDodavanja(s, out status))
             {
                 s.Tip = TipKorisnika.Siter;
+                s.Sifra = BCrypt.Net.BCrypt.HashPassword(s.Sifra);
                 s.Slika = "defaultKorisnik.jpg";
                 var siter = unitOfWork.SiterRepository.Add(s);
                 unitOfWork.SaveChanges();
@@ -114,7 +115,8 @@ namespace Doggy.DataLayer.Services
                     if (ValidacijaDodavanja(s, out status))
                         siter.KorisnickoIme = s.KorisnickoIme;
                 }
-                siter.Sifra = s.Sifra ?? siter.Sifra;
+                if (s.Sifra != null)
+                    siter.Sifra = BCrypt.Net.BCrypt.HashPassword(s.Sifra);
                 siter.BrojTelefona = s.BrojTelefona ?? siter.BrojTelefona;
                 siter.Grad = s.Grad ?? siter.Grad;
                 siter.Adresa = s.Adresa ?? siter.Adresa;

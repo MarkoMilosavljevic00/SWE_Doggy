@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Doggy.WebAPI.Controllers
             this.adminService = adminService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("vratiSveAdmine")]
         public IActionResult VratiSveAdmine()
@@ -27,6 +29,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(adminService.VratiSveAdmine());
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("dodajAdmina")]
         public IActionResult DodajAdmina([FromBody] Admin a)
@@ -42,7 +45,7 @@ namespace Doggy.WebAPI.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpDelete]
         [Route("obrisiAdmina")]
         public IActionResult ObrisiAdmina(int id)
@@ -52,6 +55,7 @@ namespace Doggy.WebAPI.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("azurirajAdmina")]
         public IActionResult AzurirajAdmina([FromBody] Admin a)

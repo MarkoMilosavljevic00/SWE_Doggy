@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,7 @@ namespace Doggy.WebAPI.Controllers
             this.imageService = imageService;
         }
 
+        [Authorize(Roles = "Vlasnik, Siter")]
         [HttpGet]
         [Route("vratiSvePse")]
         public IActionResult VratiSvePse()
@@ -31,6 +33,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiSvePse());
         }
 
+        [Authorize(Roles = "Vlasnik, Siter")]
         [HttpGet]
         [Route("vratiPseZaVlasnika")]
         public IActionResult VratiPseZaVlasnika(int idVlasnika)
@@ -38,6 +41,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiPseZaVlasnika(idVlasnika));
         }
 
+        [Authorize(Roles = "Vlasnik, Siter")]
         [HttpGet]
         [Route("vratiPsaPoId")]
         public IActionResult VratiPsaPoId(int idPas)
@@ -45,6 +49,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiPsaPoId(idPas));
         }
 
+        [Authorize(Roles = "Vlasnik, Siter")]
         [HttpGet]
         [Route("vratiSlikuPsa")]
         public IActionResult VratiSlikuSitera(int id)

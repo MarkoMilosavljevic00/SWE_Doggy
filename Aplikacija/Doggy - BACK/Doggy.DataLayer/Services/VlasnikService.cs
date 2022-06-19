@@ -1,6 +1,7 @@
 ﻿using Doggy.DataLayer.Services.Interfaces;
 using Doggy.DataLayer.UnitOfWork;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace Doggy.DataLayer.Services
             if (ValidacijaDodavanja(v, out status))
             {
                 v.Tip = TipKorisnika.Vlasnik;
+                v.Sifra = BCrypt.Net.BCrypt.HashPassword(v.Sifra);
                 v.Slika = "defaultKorisnik.jpg";
                 var vlasnik = unitOfWork.VlasnikRepository.Add(v);
                 unitOfWork.SaveChanges();
@@ -61,7 +63,8 @@ namespace Doggy.DataLayer.Services
                     if (ValidacijaDodavanja(v, out status))
                         vlasnik.KorisnickoIme = v.KorisnickoIme;
                 }
-                vlasnik.Sifra = v.Sifra ?? vlasnik.Sifra;
+                if (v.Sifra != null)
+                    vlasnik.Sifra = BCrypt.Net.BCrypt.HashPassword(v.Sifra);
                 vlasnik.BrojTelefona = v.BrojTelefona ?? vlasnik.BrojTelefona;
                 vlasnik.Grad = v.Grad ?? vlasnik.Grad;
                 vlasnik.Adresa = v.Adresa ?? vlasnik.Adresa;

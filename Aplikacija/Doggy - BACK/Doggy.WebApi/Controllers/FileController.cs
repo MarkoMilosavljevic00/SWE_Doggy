@@ -33,6 +33,7 @@ namespace Doggy.WebAPI.Controllers
             this.config = config;
         }
 
+        [Authorize (Roles = "Admin")]
         [HttpPost]
         [Route("postaviSliku")]                        
         public async Task<ActionResult> postaviSliku(IFormFile file)
@@ -49,6 +50,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratisliku/{url}")]
         public ActionResult vratisliku(String url)

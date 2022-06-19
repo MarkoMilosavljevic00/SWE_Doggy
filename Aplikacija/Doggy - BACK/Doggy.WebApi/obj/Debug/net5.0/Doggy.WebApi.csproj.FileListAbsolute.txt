@@ -718,3 +718,10 @@ C:\Users\Marko\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\bin\D
 C:\Users\Marko\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Marko\Desktop\si.22.06.doggy\Aplikacija\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\System.IO.Pipelines.dll
 C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Doggy.WebApi.StaticWebAssets.xml
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\Marko\Desktop\Doggy - BACK\Doggy.WebApi\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

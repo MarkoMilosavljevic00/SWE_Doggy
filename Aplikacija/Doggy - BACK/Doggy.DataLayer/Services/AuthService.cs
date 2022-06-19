@@ -25,9 +25,35 @@ namespace Doggy.DataLayer.Services
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
             List<Claim> claims = new List<Claim>();
-            Claim c = new Claim(ClaimTypes.Email, user.Email);
+            Claim c = new Claim(ClaimTypes.NameIdentifier, user.KorisnickoIme);
             claims.Add(c);
+            c = new Claim(ClaimTypes.Email, user.Email);
+            claims.Add(c);
+            //c = new Claim(ClaimTypes.GivenName, user.Ime);
+            //claims.Add(c);
+            //c = new Claim(ClaimTypes.Surname, user.Prezime);
+            //claims.Add(c);
+            string role ="";
+            switch(user.Tip)
+            {
+                case TipKorisnika.Vlasnik:
+                    role = "Vlasnik";
+                    break;
+                case TipKorisnika.Siter:
+                    role = "Siter";
+                    break;
+                case TipKorisnika.Admin:
+                    role = "Admin";
+                    break;
+                default:
+                    break;
+            };
+            c = new Claim(ClaimTypes.Role, role);
+            claims.Add(c);
+
+
             var token = new JwtSecurityToken(config["Jwt:Issuer"],
               config["Jwt:Issuer"],
               claims,
@@ -41,8 +67,9 @@ namespace Doggy.DataLayer.Services
         {
 
             Korisnik result = VratiKorisnikaPoEmailu(data.Email);
+            bool isValidPass = BCrypt.Net.BCrypt.Verify(data.Password, result.Sifra);
 
-            if (result != null && result.Sifra == data.Password)
+            if (result != null && isValidPass)
                 return result;
             else return null;
         }
