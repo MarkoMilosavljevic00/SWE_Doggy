@@ -21,7 +21,7 @@ namespace Doggy.WebAPI.Controllers
             this.adminService = adminService;
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSveAdmine")]
         public IActionResult VratiSveAdmine()
