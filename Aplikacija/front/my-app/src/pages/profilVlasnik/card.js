@@ -33,7 +33,11 @@ const CardSlika = () => {
 const ajdi=localStorage.getItem('idVlasnika')
 useEffect(()=>
 {
-  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+  {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(
     res=>
     {
       console.log(res.data.slika)
@@ -46,7 +50,11 @@ useEffect(()=>
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   const picture = ()=>
   {
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
       res=>
       {
         console.log(res.data.slika)
@@ -58,7 +66,11 @@ useEffect(()=>
   const[namino,setNamino]=useState('')
 useEffect(()=>
   {
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi).then(
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
       res=>
       {
         console.log(res.data)
@@ -73,13 +85,16 @@ function handleChange(event) {
   function handleSubmit(event) {
   
     
+    const TOKEN=localStorage.getItem('token')
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', file.name);
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
-        'responseType': 'blob' 
+        'responseType': 'blob',
+          'Authorization': `Bearer ${TOKEN}`
+        
       },
     };
     Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + ajdi, formData, config).then((response) => {

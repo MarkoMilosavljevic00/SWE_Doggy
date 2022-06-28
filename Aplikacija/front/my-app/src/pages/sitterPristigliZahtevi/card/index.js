@@ -46,7 +46,11 @@ export default function CardPristigliZahtevi(props) {
         }
       },[])
       useEffect(() => {
-        Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + pasId).then(res=>
+        const TOKEN=localStorage.getItem('token')
+        Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + pasId,
+        {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+        }).then(res=>
         {
           setData2(res.data)
 
@@ -55,7 +59,11 @@ export default function CardPristigliZahtevi(props) {
 
       const prihvati_uslugu = idUsluge  =>
 {
-    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + idUsluge + '&status=1').then(
+  const TOKEN=localStorage.getItem('token')
+    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + idUsluge + '&status=1',
+    {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
     res =>
         { 
           
@@ -73,7 +81,11 @@ export default function CardPristigliZahtevi(props) {
 }
 const odbij_uslugu=(id) =>
 {
-    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + id + '&status=2').then(
+  const TOKEN=localStorage.getItem('token')
+    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + id + '&status=2',
+    {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
         res =>
         {
             console.log('Odbijena usluga sa idejem: ' + props)

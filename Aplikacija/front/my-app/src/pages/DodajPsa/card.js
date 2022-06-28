@@ -20,7 +20,7 @@
  import Axios from 'axios'
  import { ExpandMore } from '@mui/icons-material';
  import { useState,useEffect } from 'react';
-import { MenuItem } from '@mui/material';
+import { Alert, MenuItem } from '@mui/material';
 
  const CardSlika=(props) =>{
  {/*const [state,setState]=useState('')
@@ -46,7 +46,7 @@ const handleExpandClick = () => {
   setExpanded(!expanded);
 };
 function handleSubmit(event) {
-  
+  const TOKEN=localStorage.getItem('token')
   // const url = 'http://localhost:3000/uploadFile';
   const formData = new FormData();
   formData.append('file', file);
@@ -54,14 +54,21 @@ function handleSubmit(event) {
   const config = {
     headers: {
       'content-type': 'multipart/form-data',
-      'responseType': 'blob' 
+      'responseType': 'blob' ,
+      'Authorization': `Bearer ${TOKEN}`
     },
   };
   Axios.post('https://localhost:5001/Pas/dodajSlikuPsu?idPas=' + id, formData, config).then((response) => {
   console.log(response);
     setFile(response.data)
     window.location.reload(false)
-  });
+  }).catch(err=>
+    {
+      if(err.response.status)
+      {
+        alert(err.response.data)
+      }
+    });
 }
 const [pic,setPic]=useState('')
 // const picture = ()=>
@@ -76,7 +83,11 @@ const [pic,setPic]=useState('')
 // }
 useEffect(()=>
 {
-  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
+    
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
     res=>
     {
       console.log(res.data.slika)

@@ -23,8 +23,12 @@ const KomentariasnjeIOcenjivanje = props => {
 
   const [komentari, postaviKomentar] = useState([]);
   useEffect(() => {
+    const TOKEN=localStorage.getItem('token')
     fetch(
-      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera
+      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera,
+      {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+      }
     ).then(async res => {
       const recenzijeSvihSitera = await res.json();
 

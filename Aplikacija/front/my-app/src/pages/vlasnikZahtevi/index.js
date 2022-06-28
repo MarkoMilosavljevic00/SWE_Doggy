@@ -28,7 +28,11 @@ const idVlasnika=localStorage.getItem('idVlasnika')
 const [prihvaceni,setPrihvaceni]=useState([])
 const prihvaceni_zahtevi=()=>
 {
-        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + idVlasnika + '&status=1').then(
+    const TOKEN=localStorage.getItem('token')
+        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusu?idVlasnika=' + idVlasnika + '&status=1',
+        {
+            headers:{ Authorization: `Bearer ${TOKEN}`}
+          }).then(
             res=>
 
             {

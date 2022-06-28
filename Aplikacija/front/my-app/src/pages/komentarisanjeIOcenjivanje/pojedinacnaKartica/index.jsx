@@ -73,8 +73,12 @@ export default function BasicCard() {
   };
   const [vlasnik, setVlasnici] = useState([]);
   useEffect(() => {
+    const TOKEN=localStorage.getItem('token')
     fetch(
-      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + idVlasnika
+      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + idVlasnika,
+      {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+      }
     ).then(async res => {
       const rez = await res.json();
       console.log(rez.data)

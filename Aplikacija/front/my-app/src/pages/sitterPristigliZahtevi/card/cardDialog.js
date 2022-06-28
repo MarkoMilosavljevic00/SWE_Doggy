@@ -19,7 +19,11 @@ const CardDialog = props => {
   const { idPsa, ime, rasa, pol, visina, tezina, prosecnaOcena, opis } = props;
   useEffect(() => {
 
-   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa).then(
+    const TOKEN=localStorage.getItem('token')
+   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
+   {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+   }).then(
      res=>
      {
        

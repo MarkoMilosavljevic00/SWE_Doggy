@@ -25,31 +25,20 @@ import NavBarSiter from '../headerSiter';
 import Card from '@mui/material/Card';
 const SitterProfil =()=>
 {
-// console.log('1')
 
 const id1=localStorage.getItem('idSitera')
 const[profil,setProfil]=useState([])
 {console.log(profil)}
-// const [izmena,setIzmena ] = useState(true)
-// const[id,set2]=useState('')
-// const[ime,set1]=useState('')
-// const[prezime,set3]=useState('')
 
-// const[email,setx]=useState('')
-// const[korisnickoIme,sett]=useState('')
-
-// const[sifra,seth]=useState('')
-
-// const[brojTelefona,setj]=useState('')
-// const[grad,set23]=useState('')
-// const[adresa,set16]=useState('')
-// const[cenaPoSatu,set1gt]=useState('')
-// const[bio,set1h]=useState('')
 
 let niz=[]
 useEffect(()=>
 {
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + id1).then(
+   const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + id1,
+   {
+    headers:{ Authorization: `Bearer ${TOKEN}`
+}}).then(
        res=>
        {
            console.log(res)
@@ -85,6 +74,7 @@ const [data,setData]=useState(
 const azuriraj=()=>
 {  {console.log('2')}
    {console.log(profil)}
+   const TOKEN=localStorage.getItem('token')
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -97,7 +87,9 @@ const azuriraj=()=>
    adresa:profil.adresa,
    cenaPoSatu:profil.cenaPoSatu,
    bio:profil.bio
-}
+},{
+    headers:{ Authorization: `Bearer ${TOKEN}`
+}}
    ).then(
       res=>
       {
@@ -125,6 +117,7 @@ if(profil.id==='')
       alert('Duzina imena ne sme biti duze od 20 karaktera!')
       return
    }
+   const TOKEN=localStorage.getItem('token')
    Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
@@ -137,6 +130,9 @@ if(profil.id==='')
    // adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -148,9 +144,10 @@ if(profil.id==='')
       }
       )
    }
-   const izmeniprezime=()=>{
+const izmeniprezime=()=>{
 // {  {console.log('2')}
 //    {console.log(profil)}
+const TOKEN=localStorage.getItem('token')
 if(profil.id==='')
    {
       alert('Greska!!!')
@@ -177,6 +174,9 @@ if(profil.prezime==='')
    // adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -193,6 +193,7 @@ if(profil.prezime==='')
 {  
    // {console.log('2')}
    // {console.log(profil)}
+   const TOKEN=localStorage.getItem('token')
    if(profil.id==='')
    {
       alert('Greska!!!')
@@ -215,7 +216,10 @@ if(profil.prezime==='')
 //    cenaPoSatu:profil.cenaPoSatu,
 //    bio:profil.bio
 // }
-}
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`
+}}
    ).then(
       res=>
       {
@@ -235,6 +239,7 @@ if(profil.prezime==='')
    }
    const izmeniemail=()=>
 {  
+   const TOKEN=localStorage.getItem('token')
    // {console.log('2')}
    // {console.log(profil)}
    if(profil.id==='')
@@ -251,6 +256,9 @@ if(profil.prezime==='')
    id:profil.id,
  email:profil.email
    
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -311,7 +319,8 @@ if(profil.prezime==='')
       )
    }
    const izmenibrojtelefona=()=>
-{  
+   {  
+   const TOKEN=localStorage.getItem('token')
    // {console.log('2')}
    // {console.log(profil)}
    if(profil.id==='')
@@ -335,6 +344,9 @@ if(profil.prezime==='')
    // adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -348,6 +360,7 @@ if(profil.prezime==='')
    }
    const izmenigrad=()=>
 { 
+   const TOKEN=localStorage.getItem('token')
    //  {console.log('2')}
    // {console.log(profil)}
    if(profil.id==='')
@@ -371,6 +384,9 @@ if(profil.prezime==='')
    // adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -386,6 +402,7 @@ if(profil.prezime==='')
 {  
    // {console.log('2')}
    // {console.log(profil)}
+   const TOKEN=localStorage.getItem('token')
    if(profil.id==='')
    {
       alert('Greska!!!')
@@ -407,6 +424,9 @@ if(profil.prezime==='')
    adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -422,6 +442,7 @@ if(profil.prezime==='')
    const izmenicenuposatu=()=>{
 // {  {console.log('2')}
 //    {console.log(profil)}
+const TOKEN=localStorage.getItem('token')
 if(profil.id==='')
    {
       alert('Greska!!!')
@@ -449,6 +470,9 @@ if(profil.cenaPoSatu==='')
    // adresa:profil.adresa,
    cenaPoSatu:profil.cenaPoSatu,
    // bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>
@@ -462,7 +486,8 @@ if(profil.cenaPoSatu==='')
       )
    }
    const izmenibio=()=>
-{ 
+   { 
+   const TOKEN=localStorage.getItem('token')
    //  {console.log('2')}
    // {console.log(profil)}
    if(profil.id==='')
@@ -487,6 +512,9 @@ if(profil.cenaPoSatu==='')
    // adresa:profil.adresa,
    // cenaPoSatu:profil.cenaPoSatu,
    bio:profil.bio
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>

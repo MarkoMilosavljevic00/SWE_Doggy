@@ -424,7 +424,11 @@ const PristigliZahtevi=()=>
     const idSitera=localStorage.getItem('idSitera')
     const pristigle =()=>{
    
-       Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera='+ idSitera + '&status=0').then(
+      const TOKEN=localStorage.getItem('token')
+       Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera='+ idSitera + '&status=0',
+       {
+    headers:{ Authorization: `Bearer ${TOKEN}`
+    }}).then(
             res=>
             {
               setData(res.data);
@@ -446,7 +450,12 @@ const ispitaj_uslugu =(props)=>
 const[accept,setAccept]=useState([])
 const prihvacene =()=>
 {
-Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + idSitera + '&status=1').then(
+  const TOKEN=localStorage.getItem('token')
+Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + idSitera + '&status=1',
+{
+headers:{ Authorization: `Bearer ${TOKEN}`
+}
+}).then(
     res=>{
        
         setAccept(res.data)
@@ -455,7 +464,11 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
 }
 const odbijene =()=>
 {
-Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + idSitera + '&status=2').then(
+  const TOKEN=localStorage.getItem('token')
+Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + idSitera + '&status=2',
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`
+}}).then(
     res=>{
         console.log(res)
     }

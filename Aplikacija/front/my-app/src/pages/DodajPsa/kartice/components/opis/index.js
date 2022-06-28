@@ -96,7 +96,12 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
   }
   useEffect(()=>
   {
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika1).then(
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika1,
+      {
+        headers:{ Authorization: `Bearer ${TOKEN}`}
+      
+    }).then(
       res=>
       {
       console.log(res.data + 'ahah')
@@ -108,7 +113,14 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
   
   const obrisiPsa = ()=>
   {
-      Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id).then(res=>
+    const TOKEN=localStorage.getItem('token')
+      Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id,
+      {
+        headers:
+        {
+          Authorization: `Bearer ${TOKEN}`
+        }
+      }).then(res=>
       {   
       console.log(res);
     })
@@ -144,6 +156,7 @@ const [data,setData]=useState({
   })
   const izmeniPsa =()=>
   {console.log(data)
+    const TOKEN=localStorage.getItem('token')
     if(data.id==='' || data.ime==='' || data.rasa==='' || data.pol===''|| data.opis===''||data.visina==='' || data.tezina==='' || data.visina <=0 || data.visina>=200|| data.tezina<=0 || data.tezina>=100)
     {
 
@@ -161,6 +174,10 @@ const [data,setData]=useState({
          tezina:data.tezina,
          slika:data.slika,
          vlasnikId:i
+      },
+      {
+      
+        headers:{ Authorization: `Bearer ${TOKEN}`}
       })
          .then(response=>
           {
@@ -186,9 +203,15 @@ const idVlasnika=localStorage.getItem('idVlasnika')
 const[usluga,setUsluga]=useState([])
  useEffect(()=>{
 
+   const TOKEN=localStorage.getItem('token')
   console.log('id psa je:' + id)
   console.log('id vlasnika je:' + idVlasnika)
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + idVlasnika).then(
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + idVlasnika,
+  {
+    
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    }
+  ).then(
     res=>
     {
       console.log(res)
@@ -196,17 +219,6 @@ const[usluga,setUsluga]=useState([])
     }
   )
 },[])
-// const[pic,setPic]=useState('')
-// useEffect(()=>
-// {
-//   Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
-//     res=>
-//     {
-//       console.log(res.data.slika)
-//       setPic(res.data.slika)
-//     }
-//   )
-// })
 
   const navigate = useNavigate();
 

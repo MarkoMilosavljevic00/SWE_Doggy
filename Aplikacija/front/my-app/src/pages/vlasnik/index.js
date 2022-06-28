@@ -54,7 +54,11 @@ const Vlasnik=(props)=> {
   const[psi,setPsi]=useState('')
   const psici=()=>
   {
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnikId).then(
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnikId,
+    {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(
       res=>
       {
         console.log(res.data + 'svi psi')
@@ -67,10 +71,8 @@ const Vlasnik=(props)=> {
   const inputProps = {
     step: 300,
   };
-  //const[valueOcena,setValueOcena]=useState('')
   const navigate=useNavigate();
-  // const [value, setValue] = React.useState<Date | null>(
-    //   new Date('2014-08-18T21:11:54'),);
+  
     const klase = classStyles();
     const labels = {
       0.5: 'Useless',
@@ -93,16 +95,11 @@ const Vlasnik=(props)=> {
     const [hover, setHover] = React.useState(-1);
     
     
-    // const handleChange = (newValue: Date | null) => {
-      //   setValue(newValue);
-      // };
+   
       const valuetext=(value)=> {
         return `${value*5}DIN`;
       }
       
-      // const RangeSlider=()=> {
-        //   const [value, setValue] = React.useState([20, 37]);
-        // }
         const handleChangee = (event, newValuee) => {
           setValue1(newValuee);
         };
@@ -110,11 +107,9 @@ const Vlasnik=(props)=> {
       return `${valuee}DIN`;
     }
     
-    // const RangeSlider=()=> {
-      //   const [value, setValue] = React.useState([20, 37]);
-      // }
+  
       const handleChange = (event, newValue) => {
-        // setValue(newValue);
+     
         console.log('1')
     };
     const buttons = [
@@ -171,6 +166,7 @@ const funkcija_napomena=()=>
 }
 const posalji_zahtev=()=>
 {
+  const TOKEN=localStorage.getItem('token')
   if(siterId===null){alert('Molimo Vas odaberite sitera!!!')}
   const podaci={
   vlasnikId,
@@ -188,7 +184,9 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
   return
 }
   Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
-
+    
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+   
     }
   ).then(res=>
     {

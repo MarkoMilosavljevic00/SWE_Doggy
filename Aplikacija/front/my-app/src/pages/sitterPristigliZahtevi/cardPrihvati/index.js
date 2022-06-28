@@ -47,7 +47,11 @@ export default function CardPrihvaceneUsluge(props) {
       })
 
       useEffect(() => {
-        Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + pasId).then(res=>
+        const TOKEN=localStorage.getItem('token')
+        Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + pasId,
+        {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+        }).then(res=>
         {
           setData2(res.data)
 

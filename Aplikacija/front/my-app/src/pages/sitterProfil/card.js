@@ -42,7 +42,10 @@ console.log(ajdi + 'jajkas')
 const[ime,setIme]=useState('')
 useEffect(()=>
 {
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi,{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(
     res=>
     {
       console.log(res.data.slika)
@@ -53,7 +56,10 @@ useEffect(()=>
 const [imenoto,setImenoto]=useState('')
 useEffect(()=>
 {
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi,
+  {
+  headers:{ Authorization: `Bearer ${TOKEN}`}}).then(
     res=>
     {
       console.log(res.data)
@@ -63,7 +69,11 @@ useEffect(()=>
 },[])
 const name = ()=>
 {
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi,
+  {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(
     res=>
     {
       console.log(res.data.slika)
@@ -84,6 +94,7 @@ let srcValue = ''
 let base64ImageString=''
 function handleSubmit(event) {
   
+  const TOKEN=localStorage.getItem('token')
   // const url = 'http://localhost:3000/uploadFile';
   const formData = new FormData();
   formData.append('file', file);
@@ -91,7 +102,8 @@ function handleSubmit(event) {
   const config = {
     headers: {
       'content-type': 'multipart/form-data',
-      'responseType': 'blob' 
+      'responseType': 'blob' ,
+ 'Authorization': `Bearer ${TOKEN}`
     },
   };
   Axios.post('https://localhost:5001/Siter/dodajSlikuSiteru?idSiter=' + ajdi, formData, config).then((response) => {

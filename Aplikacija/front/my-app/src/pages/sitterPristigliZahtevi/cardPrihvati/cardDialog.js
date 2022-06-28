@@ -29,7 +29,11 @@ const CardDialog = props => {
   
   useEffect(() => {
 
-   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa).then(
+    const TOKEN=localStorage.getItem('token')
+   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
+   {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+   }).then(
      res=>
      {
        
@@ -40,7 +44,11 @@ const CardDialog = props => {
 
   const obavljena=(props)=>
     {
-        Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3').then(
+      const TOKEN=localStorage.getItem('token')
+        Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3',
+        {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+        }).then(
             res=>
             {
                 console.log('Uspesno obavljena usluga xd')
@@ -56,6 +64,7 @@ const CardDialog = props => {
   
   const oceni=(vlasnikId,pasId,komentar,ocena)=>
   {
+    const TOKEN=localStorage.getItem('token')
     if(komentar==='' || ocena <= 0 || ocena >5 || ocena==='')
     {
       alert('Molimo Vas lepo popunite formu!!!')
@@ -68,6 +77,9 @@ const CardDialog = props => {
       pasId:idPsa,
       komentar,
       ocena
+    },
+    {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
       res=>
       {

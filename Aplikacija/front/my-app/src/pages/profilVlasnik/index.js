@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from 'react';
 import classStyles from './styles';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +16,6 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Axios from 'axios';
-// 👇️ use visitor's default locale
-
-
 import TextField from '../../components/TextField';
 import { ButtonGroup } from '@mui/material';
 import axios from '../../api/axios';
@@ -35,23 +31,13 @@ console.log(1)
 
     const[ch,setCh]=useState(true)
     const vlasnikId=localStorage.getItem('idVlasnika')
-      //const navigate = useNavigate();
       const classes = classStyles();
       const[usluga0,setUsluga0]=useState([])
       const[usluga1,setUsluga1]=useState([])
       const[usluga2,setUsluga2]=useState([])
       const[uslugaX,setUslugaX]=useState([])
       const[sve_usluge,setSveUsluge]=useState([])
-  // useEffect(()=>
-  // {
-  //   Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + idVlasnika).then(
-  //     res=>
-  //     {
-  //       console.log(res.data)
-  //       setSveUsluge(res.data)
-  //     }
-  //   )
-  // },[])
+
 
 
 
@@ -85,7 +71,11 @@ const handleGotovi=()=>
 let pasId=[]
 const prihvaceni_zahtevi=()=>
 {
-        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + vlasnikId + '&status=1').then(
+  const TOKEN=localStorage.getItem('token')
+        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + vlasnikId + '&status=1',
+        {
+          headers:{ Authorization: `Bearer ${TOKEN}`}
+        }).then(
             res=>
 
             {
@@ -104,11 +94,22 @@ const prihvaceni_zahtevi=()=>
                 //   alert('Ne postoji nijedan takav zahtev')
                 // }
             }
-        )
+        ).catch(err=>
+          {
+            if(err.response.status)
+            {
+              alert(err.response.data)
+            }
+          }
+          )
 }
 const odbijeni_zahtevi=()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=2').then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=2',
+  {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(
             res=>
 
             {
@@ -128,9 +129,16 @@ const odbijeni_zahtevi=()=>
                 //   alert('Ne postoji nijedan takav zahtev')
                 // }
             }
-        )
+        ).catch(err=>
+          {
+            if(err.response.status)
+            {
+              alert(err.response.data)
+            }
+          }
+          )
 }
-// 👇️ use visitor's default locale
+
 const date = new Date();
 date.setHours(0)
 {console.log(
@@ -143,7 +151,10 @@ date.setHours(0)
 
 const pending_zahtevi=()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=0').then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=0',
+   { headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(
             res=>
 
             {
@@ -178,7 +189,11 @@ const pending_zahtevi=()=>
 
 const gotovi_zahtevi=()=>
 {
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId +'&status=3').then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId +'&status=3',
+  {
+  headers:{ Authorization: `Bearer ${TOKEN}`
+}}).then(
             res=>
 
             { 
@@ -198,7 +213,8 @@ const gotovi_zahtevi=()=>
             }
         ).catch((error)=>
         {
-          alert(error.message)
+          if(error.response.status)
+          alert(error.response.data)
         })
 }
 const buttons = [

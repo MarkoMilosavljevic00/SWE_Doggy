@@ -177,7 +177,12 @@ const Sitter = (props) => {
 const idVlasnika=localStorage.getItem('idVlasnika')
 const [refresh,setRefresh]=useState('')
   useEffect(() => {
-    fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika).then(async res => {
+    const TOKEN=localStorage.getItem('token')
+    fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika,{
+      headers:{
+        Authorization: `Bearer ${TOKEN}`
+      }
+    }).then(async res => {
       const results = await res.json();
       postaviSitere(results);
 
@@ -201,7 +206,13 @@ const [refresh,setRefresh]=useState('')
       } else {
         postaviUkupanBrojStranica(results.length / brojObjavaPoStrani);
       }
-    });
+    }).catch(err=>
+      {
+        if(err.response.status)
+        {
+          alert(err.response.data)
+        }
+      });
   }, [refresh]);
 
   useEffect(() => {
@@ -226,7 +237,12 @@ const [refresh,setRefresh]=useState('')
   }
 const dodajPsa=()=>
 {const AJDI = localStorage.getItem('idVlasnika')
-
+const TOKEN=localStorage.getItem('token')
+// let config = {
+//   headers: {
+//     'Authorization': 'Bearer ' + TOKEN
+//   }
+// }
 if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.visina==='' || data.tezina==='' || data.visina<=0 || data.tezina <=0 || data.tezina>=100 || data.visina>=200)
 {
   alert('Molimo Vas popunite pravilno formu!!!')
@@ -243,7 +259,9 @@ if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.vi
     
       vlasnikid:AJDI
 
-    }).then(
+    },{ headers: {
+      'Authorization': 'Bearer ' + TOKEN
+    }}).then(
       res=>
       {
         console.log(res)
@@ -251,7 +269,13 @@ if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.vi
         localStorage.setItem('idPsa',res.data.id);
         handleRefresh()
       }
-    )
+    ).catch(err=>
+      {
+        if(err.response.status)
+        {
+          alert(err.response.data)
+        }
+      })
 }
 const [data,setData]=useState({
   ime:"",

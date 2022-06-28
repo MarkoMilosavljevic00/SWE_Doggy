@@ -59,7 +59,12 @@ export default function RecipeReviewCard(props) {
   const[pic,setPic]=useState('')
 useEffect(()=>
 {
-  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
+  
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    
+  }).then(
     res=>
     {
       console.log(res.data.slika)

@@ -16,8 +16,12 @@ export default function BasicCard(props) {
 
   const [vlasnik, setVlasnici] = useState([]);
   useEffect(() => {
+    const TOKEN=localStorage.getItem('token')
     fetch(
-      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId
+      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId,
+      {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+      }
     ).then(async res => {
       const rez = await res.json();
       setVlasnici(rez);
