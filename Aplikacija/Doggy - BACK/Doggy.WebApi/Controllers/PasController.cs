@@ -25,7 +25,7 @@ namespace Doggy.WebAPI.Controllers
             this.imageService = imageService;
         }
 
-        [Authorize(Roles = "Vlasnik, Siter")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSvePse")]
         public IActionResult VratiSvePse()
@@ -33,7 +33,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiSvePse());
         }
 
-        [Authorize(Roles = "Vlasnik, Siter")]
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiPseZaVlasnika")]
         public IActionResult VratiPseZaVlasnika(int idVlasnika)
@@ -41,7 +41,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiPseZaVlasnika(idVlasnika));
         }
 
-        [Authorize(Roles = "Vlasnik, Siter")]
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpGet]
         [Route("vratiPsaPoId")]
         public IActionResult VratiPsaPoId(int idPas)
@@ -49,10 +49,10 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pasService.VratiPsaPoId(idPas));
         }
 
-        [Authorize(Roles = "Vlasnik, Siter")]
+        [Authorize(Roles = "Vlasnik")]
         [HttpGet]
         [Route("vratiSlikuPsa")]
-        public IActionResult VratiSlikuSitera(int id)
+        public IActionResult VratiSlikuPsa(int id)
         {
             try
             {
@@ -66,6 +66,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPost]
         [Route("dodajPsa")]
         public IActionResult DodajPsa([FromBody] Pas p)
@@ -77,6 +78,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(pas);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPost]
         [Route("dodajSlikuPsu")]
         public async Task<ActionResult> dodajSlikuPsu(int idPas, IFormFile file)
@@ -96,6 +98,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpDelete]
         [Route("obrisiPsa")]
         public IActionResult ObrisiPsa(int id)
@@ -104,6 +107,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(p);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPut]
         [Route("azurirajPsa")]
         public IActionResult AzurirajPsa([FromBody] Pas p)

@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +26,7 @@ namespace Doggy.WebAPI.Controllers
             this.imageService = imageService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSveSitere")]
         public IActionResult VratiSveSitere()
@@ -32,6 +34,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.VratiSveSitere());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiNevalidneSitere")]
         public IActionResult VratiNevalidneSitere()
@@ -39,6 +42,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.VratiNevalidneSitere());
         }
 
+        [Authorize(Roles = "Siter,Admin")]
         [HttpGet]
         [Route("vratiSveGradoveSvihSitera")]
         public IActionResult VratiSveGradoveSvihSitera()
@@ -46,6 +50,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.VratiSveGradoveSvihSitera());
         }
 
+        [Authorize(Roles = "Admin,Siter,Vlasnik")]
         [HttpGet]
         [Route("vratiSiteraPoId")]
         public IActionResult VratiSiteraPoId(int id)
@@ -53,6 +58,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.VratiSiteraPoId(id));
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpGet]
         [Route("vratiSlikuSitera")]
         public IActionResult VratiSlikuSitera(int id)
@@ -69,6 +75,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("filterSiteri")]
         public IActionResult VratiSitereFilter([FromQuery] string? ime, string? prezime, string? grad, bool? dostupan, int? minBrUsluga,double? minCena, double? maxCena, double? minOcena)
@@ -76,6 +83,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.FilterSiteri(ime, prezime, grad,dostupan, minBrUsluga,minCena, maxCena, minOcena));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("dodajSitera")]
         public IActionResult DodajSitera([FromBody] Siter s)
@@ -90,6 +98,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(result);
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpPost]
         [Route("dodajSlikuSiteru")]
         public async Task<ActionResult> DodajSlikuSiteru(int idSiter, IFormFile file)
@@ -109,6 +118,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpDelete]
         [Route("obrisiSitera")]
         public IActionResult ObrisiSitera(int id)
@@ -117,7 +127,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(s);
         }
 
-
+        [Authorize(Roles = "Admin,Siter")]
         [HttpPut]
         [Route("azurirajSitera")]
         public IActionResult AzurirajSitera([FromBody] Siter s)
@@ -131,6 +141,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siter);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("prihvatiSitera")]
         public IActionResult AzurirajSiteraValidan(int idSiter)
@@ -138,6 +149,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(this.siterService.AzurirajSiteraValidan(idSiter));
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpPut]
         [Route("dostupan")]
         public IActionResult AzurirajSiteraDostupan(int idSiter)

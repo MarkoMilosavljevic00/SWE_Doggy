@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Doggy.WebAPI.Controllers
             this.uslugaService = uslugaService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSveUsluge")]
         public IActionResult VratiSveUsluge()
@@ -27,21 +29,23 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(uslugaService.VratiSveUsluge());
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiUslugeVlasniku")]
-        public IActionResult VratiUslugeZaVlasnika(int idVlasnika)
+        public IActionResult VratiUslugeVlasniku(int idVlasnika)
         {
             return new JsonResult(uslugaService.VratiUslugeVlasniku(idVlasnika));
         }
 
-
+        [Authorize(Roles = "Admin,Siter")]
         [HttpGet]
         [Route("vratiUslugeSiteru")]
-        public IActionResult VratiZahteveSiteru(int idSitera)
+        public IActionResult VratiUslugeSiteru(int idSitera)
         {
             return new JsonResult(uslugaService.VratiUslugeSiteru(idSitera));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiUslugeVlasnikuZaPsa")]
         public IActionResult vratiUslugeVlasnikuZaPsa(int idVlasnika, int idPsa)
@@ -49,6 +53,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(uslugaService.vratiUslugeVlasnikuZaPsa(idVlasnika, idPsa));
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpGet]
         [Route("vratiUslugeSiteruZaPsa")]
         public IActionResult vratiUslugeSiteruZaPsa(int idSitera, int idPsa)
@@ -56,13 +61,15 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(uslugaService.vratiUslugeSiteruZaPsa(idSitera, idPsa));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiUslugeVlasnikuPoStatusu")]
-        public IActionResult VratiUslugeZaVlasnikaPoStatusu(int idVlasnika, StatusUsluge status)
+        public IActionResult VratiUslugeVlasnikuPoStatusu(int idVlasnika, StatusUsluge status)
         {
             return new JsonResult(uslugaService.VratiUslugeVlasnikuPoStatusu(idVlasnika, status));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiUslugeVlasnikuPoStatusuSaPsom")]
         public IActionResult VratiUslugeZaVlasnikaPoStatusuSaPsom(int idVlasnika, StatusUsluge status)
@@ -94,7 +101,7 @@ namespace Doggy.WebAPI.Controllers
             return Ok(objects);
         }
 
-
+        [Authorize(Roles = "Admin,Siter")]
         [HttpGet]
         [Route("vratiUslugeSiteruPoStatusu")]
         public IActionResult VratiZahteveSiteruPoStatusu(int idSitera, StatusUsluge status)
@@ -102,6 +109,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(uslugaService.VratiUslugeSiteruPoStatusu(idSitera,status));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPost]
         [Route("dodajUslugu")]
         public IActionResult DodajUslugu([FromBody] Usluga u)
@@ -113,6 +121,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(usluga);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpDelete]
         [Route("obrisiUslugu")]
         public IActionResult ObrisiUslugu(int idUsluge)
@@ -128,6 +137,7 @@ namespace Doggy.WebAPI.Controllers
         //    return new JsonResult(this.uslugaService.AzurirajUslugu(u));
         //}
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpPut]     
         [Route("azurirajStatusUsluge")]
         public IActionResult AzurirajStatusUsluge(int idUsluge, StatusUsluge status)

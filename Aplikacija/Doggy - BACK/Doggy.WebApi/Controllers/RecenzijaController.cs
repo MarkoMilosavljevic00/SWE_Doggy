@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,15 @@ namespace Doggy.WebAPI.Controllers
             this.recenzijaService = recenzijaService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSveRecenzije")]
-        public IActionResult VratiSveUsluge()
+        public IActionResult VratiSveRecenzije()
         {
             return new JsonResult(recenzijaService.VratiSveRecenzije());
         }
 
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpGet]
         [Route("vratiRecenzijuPoId")]
         public IActionResult VratiRecenzijuPoId(int id)
@@ -34,6 +37,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzijaService.VratiRecenzijuPoId(id));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiRecenzijeZaSitera")]
         public IActionResult VratiRecenzijeZaSitera(int id)
@@ -41,6 +45,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzijaService.VratiRecenzijeZaSitera(id));
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpGet]
         [Route("vratiRecenzijeZaPsa")]
         public IActionResult VratiRecenzijeZaPsa(int id)
@@ -48,6 +53,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzijaService.VratiRecenzijeZaPsa(id));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPost]
         [Route("dodajRecenzijuSiteru")]
         public IActionResult DodajRecenzijuSiteru([FromBody] Recenzija r)
@@ -59,6 +65,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzija);
         }
 
+        [Authorize(Roles = "Admin,Siter")]
         [HttpPost]
         [Route("dodajRecenzijuPsu")]
         public IActionResult DodajRecenzijuPsu([FromBody] Recenzija r)
@@ -70,6 +77,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(recenzija);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpDelete]
         [Route("obrisiRecenziju")]
         public IActionResult ObrisiRecenziju(int idRecenzija)
@@ -78,6 +86,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(r);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpPut]
         [Route("azurirajRecenziju")]
         public IActionResult AzurirajRecenziju(Recenzija r)

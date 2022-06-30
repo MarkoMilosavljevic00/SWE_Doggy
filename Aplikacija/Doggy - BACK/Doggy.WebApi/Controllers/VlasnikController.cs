@@ -1,5 +1,6 @@
 ﻿using Doggy.DataLayer.Services;
 using Doggy.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,7 @@ namespace Doggy.WebAPI.Controllers
             this.imageService = imageService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vratiSveVlasnike")]
         public IActionResult VratiSveVlasnike()
@@ -31,6 +33,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(vlasnikService.VratiSveVlasnike());
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiVlasnikaPoId")]
         public IActionResult VratiVlasnikaPoId(int id)
@@ -38,6 +41,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(vlasnikService.VratiVlasnikaPoId(id));
         }
 
+        [Authorize(Roles = "Admin,Vlasnik,Siter")]
         [HttpGet]
         [Route("vratiSlikuVlasnika")]
         public IActionResult VratiSlikuVlasnika(int id)
@@ -54,6 +58,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPost]
         [Route("dodajSlikuVlasniku")]
         public async Task<ActionResult> DodajSlikuVlasniku(int idVlasnik, IFormFile file)
@@ -72,6 +77,7 @@ namespace Doggy.WebAPI.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("dodajVlasnika")]
         public IActionResult DodajVlasnika([FromBody] Vlasnik v)
@@ -86,6 +92,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(result);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpDelete]
         [Route("obrisiVlasnika")]
         public IActionResult ObrisiVlasnika(int id)
@@ -94,6 +101,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(v);
         }
 
+        [Authorize(Roles = "Admin,Vlasnik")]
         [HttpPut]
         [Route("azurirajVlasnika")]
         public IActionResult AzurirajVlasnika([FromBody] Vlasnik v)
