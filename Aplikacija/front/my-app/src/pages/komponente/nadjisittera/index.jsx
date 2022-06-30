@@ -133,9 +133,7 @@ const idSitera=localStorage.getItem('idSitera')
               >
               Nadji sittera
             </button>
-              )
-}
-
+              )}
           </div>
         </div>
         </div>

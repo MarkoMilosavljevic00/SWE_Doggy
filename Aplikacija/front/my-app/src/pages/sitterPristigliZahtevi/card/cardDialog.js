@@ -52,9 +52,6 @@ const CardDialog = props => {
   }, [open]);
   return (
     <div>
-      {/* <Button style={{ color: 'green' }} onClick={handleClickOpen('paper')}>
-        {tekstButton}
-  </Button>*/}
       <Button
         style={{ color: 'white', backgroundColor: 'rgb(93, 224, 100)', borderRadius: '20px' }}
         onClick={handleClickOpen('paper')}

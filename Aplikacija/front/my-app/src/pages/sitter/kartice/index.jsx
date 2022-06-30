@@ -110,19 +110,13 @@ export default function RecipeReviewCard(props) {
               Odaberi sittera
             </Button>
           </div>
-          {/* <ThumbUpIcon style={{ color: 'green' }} /> */}
           Prosecna ocena : {prosecnaOcena}
           <br />
           Cena : {cenaPoSatu}
           <br />
           Grad: {grad}
         </CardContent>
-        {/* <CardActions disableSpacing>
-        <Ocene />
-      </CardActions> */}
       </Card>
-
-      {/* <h3>{id}</h3> */}
     </div>
   );
 }

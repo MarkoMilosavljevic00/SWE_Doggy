@@ -344,7 +344,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { useState, useEffect, useContext } from 'react'
 // import IkonicaHome from '../../components/ikonicaHome';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import { profilVlasnikRoute,profilSitterRoute,DodajPsaRoute } from "../router/routes";
+import { profilVlasnikRoute,profilSitterRoute,DodajPsaRoute, adminRoute } from "../router/routes";
 import { useNavigate } from "react-router-dom";
 import Axios from 'axios'
 import { red } from '@mui/material/colors';
@@ -426,11 +426,11 @@ const NavBarSiter=()=> {
     };
     const log_out=()=>
     {
-            const idVlasnika=localStorage.removeItem('idVlasnika')
+           
             const token=localStorage.removeItem('token')
-            const korisnik=localStorage.removeItem('korisnik')
-            const idSitera=localStorage.removeItem('idSitera')
-            console.log('Uspesno ste se log autovali')
+            navigate('/')
+          window.location.reload(false)
+            // console.log('Uspesno ste se log autovali')
             alert('Successful log out')
   
     }
@@ -452,7 +452,7 @@ const NavBarSiter=()=> {
       onClose={handleMenuClose}
       onClick={handleMobileMenuOpen}
       >
-      <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
+      <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(adminRoute)}>Profil</MenuItem>
       {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
       <MenuItem onClick={()=>{handleMenuClose();log_out()}}>Log Out</MenuItem>
     </Menu>
@@ -506,7 +506,7 @@ const NavBarSiter=()=> {
       </MenuItem> */}
    
   
-     <MenuItem onClick={()=>{log_out_admin();}}>
+     <MenuItem onClick={()=>{log_out();}}>
      <IconButton
        size="large"
       
@@ -582,7 +582,7 @@ const NavBarSiter=()=> {
           
             <li  style={{display:'flex'}}>
               
-              <IconButton  onClick={()=>{navigate('/adminRoute')}}  style={{display:'flex'}}>
+              <IconButton  href='/adminRoute'  style={{display:'flex'}}>
             <AdminPanelSettingsIcon></AdminPanelSettingsIcon>
               <Typography style={{color:'white',display:'flex'}} className="nav-link scrollto">
                Proveri sve
@@ -591,76 +591,9 @@ const NavBarSiter=()=> {
               </IconButton>
            </li>
 
-            {/* <li>
-              
-              <IconButton  href="/registerRoute"  style={{display:'flex'}}>
-            <PlayCircleFilledWhiteIcon/>
-              <Typography fontSize={14} style={{color:'white',display:'flex'}} className="nav-link scrollto">
-                Zapocni 
-              </Typography>
-              
-              </IconButton>
-              
-              
-            </li> */}
-
-             
-            {/* <li>
-            <IconButton href="#contact"  style={{display:'flex'}}>
-              <AddLocationAltIcon/>
-              <Typography fontSize={14} className="nav-link scrollto" href="#contact" style={{color:'white',display:'flex'}}>
-                Kontakt
-              </Typography>
-              </IconButton>
-            </li>
-            <li>
-            <IconButton  href="/helpRoute"  style={{display:'flex'}}>
-              <HelpOutlineIcon />
-              <Typography fontSize={14} className="nav-link scrollto" href="/helpRoute" style={{color:'white',display:'flex'}}>
-                Pomoć
-              </Typography>
-              </IconButton>
-            </li> */}
-            {/* <li>
-              <a className="nav-link scrollto" href="/adminRoute" style={{marginLeft:'50px'}}>
-               Admin
-              </a>
-            </li>
-             <li> */}
-            {/* <li className="dropdown"  style={{display:'flex'}} >
-            <IconButton>
-              <Typography style={{color:'white',display:'flex'}}href="/#">
-                <span fontSize={18}>Usluge</span> <i className="bi bi-chevron-down"></i>
-              </Typography>
-              </IconButton>
-              <ul>
-                {/* <li className="dropdown"><a href="#services"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a className="nav-link scrollto" href="#about">Deep Drop Down 1</a></li>
-                  <li><a href="/#">Deep Drop Down 2</a></li>
-                  <li><a href="/#">Deep Drop Down 3</a></li>
-                  <li><a href="/#">Deep Drop Down 4</a></li>
-                  <li><a href="/#">Deep Drop Down 5</a></li>
-                </ul>
-              </li> */}
-                {/* <li>
-                  <a href="#services" >Šetanje psa po gradu</a>
-                </li>
-                <li>
-                  <a href="#services" >Čuvanje psa u vašoj kući</a>
-                </li>
-                <li>
-                  <a href="#services">Poseta sittera</a>
-                </li>
-                <li>
-                  <a href="#services" >Čuvanje psa u kući sittera</a>
-                </li>
-              </ul>
-              
-            </li>*/}
             <li>  
-            <IconButton   onClick={()=>{log_out_admin();}} style={{display:'flex'}}>
-              <LogoutIcon />
+            <IconButton   onClick={()=>{log_out();}} style={{display:'flex'}}>
+              <LogoutIcon style={{color:'white'}} />
               <Typography fontSize={14} className="nav-link scrollto"  style={{color:'white',display:'flex'}}>
                 Log Out
               </Typography>

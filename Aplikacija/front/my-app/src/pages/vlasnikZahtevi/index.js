@@ -64,7 +64,6 @@ return(
         <h3 onClick={()=>vrati_psa(pasId)}>Sitter:{x.siter.ime} {x.siter.prezime} je prihvatio vas zahtev za kera {ker} </h3>
 </div>
     ))}
-{/* <h3>Pas kojeg ce cuvati je {prihvaceni.pasId}</h3> */}
 
 </div>
 )

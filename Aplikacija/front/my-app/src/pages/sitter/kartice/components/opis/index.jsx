@@ -56,6 +56,7 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs(props) {
+  const token=localStorage.getItem('token')
   const classes = classStyles();
   const [open, setOpen] = React.useState(false);
   const {
@@ -71,14 +72,23 @@ export default function CustomizedDialogs(props) {
 
   const [com, setCom] = useState('');
   const komentari = props => {
+    const TOKEN=localStorage.getItem('token')
     Axios.get(
       'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + props
-    ).then(res => {
+    ,{
+      headers:{Authorization:`Bearer ${TOKEN}`}
+    }).then(res => {
       console.log(res.data);
       setCom(res.data);
     });
   };
   const handleClickOpen = () => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     setOpen(true);
   };
   const handleClose = () => {
@@ -117,15 +127,6 @@ export default function CustomizedDialogs(props) {
           <Typography gutterBottom>Grad : {grad}</Typography>
           <Typography gutterBottom>Adresa : {adresa}</Typography>
           <Typography gutterBottom>Cena po satu: {cenaPoSatu}</Typography>
-          {/* <Typography gutterBottom>Prosecna ocena: {prosecnaOcena}</Typography>
-          <Typography gutterBottom>Komentari: </Typography>
-
-          {com &&
-            com.map((x, index) => (
-              <Typography gutterBottom>
-                {index + 1 + ':' + x.komentar}
-              </Typography>
-            ))} */}
 
           <div className={classes.divButton}>
             <Button
@@ -136,12 +137,6 @@ export default function CustomizedDialogs(props) {
               onClick={() => {
                 localStorage.setItem('idSitera', id);
                 navigate(komentarisanjeIOcenjivanjeRoute);
-
-                // navigate(komentarisanjeIOcenjivanjeRoute, {
-                //   state: {
-                //     idSitera: id,
-                //   },
-                // });
               }}
             >
               Vidi recenzije o siteru

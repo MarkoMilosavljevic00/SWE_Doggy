@@ -10,31 +10,36 @@ import Select from '@mui/material/Select';
 import { Axios } from 'axios';
 
 export default function BasicSelect(props) {
-  // const [grad, postaviGrad] = React.useState('');
   const { grad, postaviGrad } = props;
+  const [gradovi, postaviGradove] = useState([]);
 
   const handleChange = event => {
     postaviGrad(event.target.value);
   };
 
-  const [gradovi, postaviGradove] = useState([]);
 
   useEffect(() => {
+    const TOKEN=localStorage.getItem('token')
     fetch(vratiSveGradoveSittera).then(async res => {
       const results = await res.json();
       postaviGradove(results);
+    },{
+      headers:{Authorization:`Bearer ${TOKEN}`}
     });
   }, []);
   const[siteri,setSiteri]=useState('')
   const vratisve=()=>
   {
+    const TOKEN=localStorage.getItem('token')
     Axios.get('https://localhost:5001/Siter/vratiSveSitere').then(
       res=>
       {
         console.log(res.data)
         setSiteri(res.data)
       }
-    )
+      ,{
+        headers:{Authorization:`Bearer ${TOKEN}`}
+      })
   }
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -50,7 +55,6 @@ export default function BasicSelect(props) {
           <Typography onClick={()=>{vratisve();}}>Svi</Typography>
           {gradovi.map((name, index) => (
             <MenuItem
-              // style={getStyles(name, personName, theme)}
               key={index}
               value={name}
             >

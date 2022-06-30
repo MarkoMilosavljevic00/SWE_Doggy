@@ -12,6 +12,7 @@ import Admin from '../../index';
 import { useState, useEffect, useContext } from 'react';
 
 export default function BasicCard(props) {
+  const token=localStorage.getItem('token')
   const {
     ime,
     prezime,
@@ -25,10 +26,18 @@ export default function BasicCard(props) {
     dugme,
     idSitera,
   } = props;
-
   const obrisiSitera = () => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     fetch('https://localhost:5001/Siter/obrisiSitera?id=' + idSitera, {
       method: 'DELETE',
+    },
+    {
+      headers:{'Authorization':`Bearer ${TOKEN}`}
     }).then(async response => {
       if (response.ok) {
         const res = await response.json();
@@ -40,10 +49,17 @@ export default function BasicCard(props) {
   };
 
   const uradi = () => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     fetch('https://localhost:5001/Siter/prihvatiSitera?idSiter=' + idSitera, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization':`Bearer ${TOKEN}`
       },
       body: JSON.stringify(idSitera),
     }).then(async response => {
@@ -59,7 +75,6 @@ export default function BasicCard(props) {
     });
   };
   const [dostupan, setDostupan] = useState([]);
-
   const classes = classStyles();
 
   return (
@@ -115,16 +130,6 @@ export default function BasicCard(props) {
             </CardActions>
           ) : (
             <CardActions>
-              {/* <label>Validan: </label>
-              <FormControlLabel control={<Android12Switch />} /> */}
-              {/* {dostupan.map((d, index) => {
-                return(
-                  <MenuItem>
-                  ime={d.ime}
-                  prezime = {d.prezime}
-                </MenuItem>
-                );
-              })}; */}
               <Button
                 style={{ color: 'white', backgroundColor: '#07a607' }}
                 onClick={()=>{uradi();}}

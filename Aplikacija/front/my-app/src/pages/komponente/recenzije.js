@@ -1,17 +1,13 @@
-
-
 const Recenzije=()=>
 {
     return(
-
       <section id="team">
       <div className="container" data-aos="fade-up">
         <div className="section-header">
           <h3 className="section-title">Užitak za sve</h3>
           <p className="section-description">
             Uverite se i sami!
-          </p>
-          
+          </p> 
         </div>
         <div className="row">
           

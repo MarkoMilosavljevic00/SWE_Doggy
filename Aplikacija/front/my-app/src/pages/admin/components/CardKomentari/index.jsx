@@ -11,9 +11,7 @@ import classStyles from './styles';
 
 export default function CardKomentari(props) {
   const { id, vreme, komentar, ocena } = props;
-
   const classes = classStyles();
-  // console.log(id, vreme, komentar, ocena);
   const [obrisiKomentar, setObrisiKomentar] = useState([]);
 
   const obrisi = () => {
@@ -54,13 +52,10 @@ export default function CardKomentari(props) {
             component="div"
             gutterBottom
           ></Typography>
-
           <Typography sx={{ fontSize: 18 }}>Vreme ocenjivanja: {vreme}</Typography>
           <Typography sx={{ fontSize: 18 }}>Ocena: {ocena}</Typography>
           <Typography sx={{ fontSize: 18 }}>Komentar: {komentar}</Typography>
-
         </CardContent>
-
         <div
           style={{
             justifyContent: 'center',
@@ -74,8 +69,7 @@ export default function CardKomentari(props) {
               color: 'white',
               backgroundColor: 'green',
             }}
-          >
-            Obrisi
+          > Obrisi
           </Button>
         </div>
       </Card>

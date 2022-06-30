@@ -12,13 +12,13 @@ import Ocene from '../ocene/index.jsx';
 import { Label } from '@mui/icons-material';
 
 export default function BasicCard(props) {
-  const { vreme, komentar, ocena, vlasnikId } = props;
-
+  const { vreme, komentar, ocena, vlasnikId,comment } = props;
+{console.log(comment.id)}
   const [vlasnik, setVlasnici] = useState([]);
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
     fetch(
-      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId,
+      'https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + comment.id,
       {
     headers:{ Authorization: `Bearer ${TOKEN}`}
       }

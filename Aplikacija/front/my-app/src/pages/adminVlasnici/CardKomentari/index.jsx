@@ -13,13 +13,17 @@ export default function CardKomentari(props) {
   const { ime, rasa,pol,opis,visina,tezina, id } = props;
 
   const classes = classStyles();
-  // console.log(id, vreme, komentar, ocena);
   const [obrisiKomentar, setObrisiKomentar] = useState([]);
-
+  
+{console.log(id+ 'id')}
   const [recenzijaPsa, setRecenzijaPsa] = useState([]);
   const [prazno] = useState([]);
   useEffect(() => {
-    fetch('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + id).then(
+    const TOKEN=localStorage.getItem('token')
+    fetch('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + id,
+    {
+      headers:{Authorization:`Bearer ${TOKEN}`}
+    }).then(
       async res => {
         const rez = await res.json();
 
@@ -46,10 +50,14 @@ export default function CardKomentari(props) {
   // };
 
   const obrisi = rec => {
+    const TOKEN=localStorage.getItem('token')
+
     fetch(
+      
       'https://localhost:5001/Recenzija/obrisiRecenziju?idRecenzija=' + rec,
       {
         method: 'DELETE',
+        headers:{Authorization:`Bearer ${TOKEN}`}
       }
     ).then(async response => {
       if (response.ok) {

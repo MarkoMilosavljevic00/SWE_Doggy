@@ -12,9 +12,7 @@ export default function BasicSelect(props) {
   const handleChange = event => {
     postaviOcenu(event.target.value);
   };
-
   const [prosecnaOcena, postaviProsecnuOcenu] = useState([1, 2, 3, 4, 5]);
-
   return (
     <Box sx={{ minWidth: 170 }}>
       <FormControl fullWidth>
@@ -33,16 +31,6 @@ export default function BasicSelect(props) {
               </MenuItem>
             );
           })}
-
-          {/* {ocene.map(ocena => {
-            return (<MenuItem>{ocena}</MenuItem>);
-          })} */}
-
-          {/* {ocene.map(ocena => (
-            <MenuItem>{ocena}</MenuItem>
-          ))} */}
-
-          {/* {ocene.map(ocena => <MenuItem>{ocena}</MenuItem> )} */}
         </Select>
       </FormControl>
     </Box>

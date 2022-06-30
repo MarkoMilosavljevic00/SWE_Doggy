@@ -37,14 +37,10 @@ const ExpandMore = styled(props => {
 
 export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
-  // const classes = classStyles();
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
- 
   const classes = classStyles();
-
   const {
     id,
     ime,
@@ -72,7 +68,6 @@ useEffect(()=>
     }
   )
 })
-  // console.log('../../../slike/s1.jpg');
   return (
     <Card sx={{ width: 200, height:600 }} className={classes.kartica}>
       <CardHeader
@@ -91,7 +86,6 @@ useEffect(()=>
         // src={require('../../../slike/s1.jpg')}   //OVA DVA NACINA SU ISTA
         // src={slikeUrl + slika}
         src={'https://localhost:5001/StaticFiles/' + pic}
-        // alt="Paella dish"
       />
       <CardContent>
         <Opis

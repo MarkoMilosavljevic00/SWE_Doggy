@@ -20,21 +20,35 @@ import Axios from 'axios';
 import classStyles from './styles';
 import { useState,useEffect } from 'react';
 import { ExpandMore } from '@mui/icons-material';
-const CardSlika = () => {
+const CardSlika = (props) => {
   
-  
+  const {loged}=props;
+  const token=localStorage.getItem('token')
   const classes = classStyles();
   const[expanded,setExpanded]=useState('')
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
-  const[slika,setSlika]=useState('')
-const ajdi=localStorage.getItem('idVlasnika')
+const[slika,setSlika]=useState('')
+const [logovan,setLogovan]=useState('')
+const[handle,setHandle1]=useState('')
 useEffect(()=>
 {
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+  Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+  {
+    headers:{ Authorization: `Bearer ${TOKEN}`
+}}).then(res=>
+  {
+     setLogovan(res.data)
+     console.log(res.data.id)
+     setHandle1(!handle)
+  })
+},[])
+useEffect(()=>
+{
+  const TOKEN=localStorage.getItem('token')
+  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
@@ -44,14 +58,14 @@ useEffect(()=>
       setSlika(res.data.slika)
     }
   )
-},[])
-  console.log(ajdi + 'jajkas')
+},[handle])
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  
   const picture = ()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
     {
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -67,7 +81,7 @@ useEffect(()=>
 useEffect(()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
     {
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -77,7 +91,8 @@ useEffect(()=>
         setNamino(res.data)
       }
     )
-  },[])
+  },[handle])
+  
   const [file, setFile] = useState()
 function handleChange(event) {
   setFile(event.target.files[0])
@@ -97,13 +112,10 @@ function handleChange(event) {
         
       },
     };
-    Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + ajdi, formData, config).then((response) => {
-     
+    Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + loged.id, formData, config).then((response) => {
     //    base64ImageString = Buffer.from(response.data, 'binary').toString('base64')
     // srcValue = "data:image/png;base64,"+base64ImageString
-    console.log(response);
-    // const blob1= response.data.blob();
-      
+    console.log(response);    
       setFile(response.data)
       
     });
@@ -111,7 +123,15 @@ function handleChange(event) {
   const[klik,setKlik]=useState(false)
   const handleClick=()=>
   {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     setKlik(!klik)
+
+
   }
   return (
     <Card
@@ -126,12 +146,7 @@ function handleChange(event) {
       }}
     >   <div className='spoj' style={{display:'flex',justifyContent:'flex-start'}}>
         <CardHeader
-          avatar={<Avatar style={{marginRight:'0px'}}sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
-            
-          </Avatar>}
-          // action={<IconButton aria-label="settings">
-          //   <MoreVertIcon />
-          // </IconButton>}
+          avatar={<Avatar style={{marginRight:'0px'}}sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>  </Avatar>}
           title={'Ime i prezime:' + namino.ime + ' ' + namino.prezime}
           subheader={'Danasnji datum:' + date}
           >
@@ -144,7 +159,6 @@ function handleChange(event) {
         image={
           'https://localhost:5001/StaticFiles/' + slika
         }
-        // alt="Paella dish"
       />
       <CardActions className={classes.divButtonCard}>
         <Typography style={{marginBottom:'20px'}}variant='h6'>Odaberite sliku</Typography>

@@ -12,12 +12,19 @@ import { useState, useEffect, useContext } from 'react';
 
 export default function BasicCard(props) {
   const { ime, prezime, korisnickoIme,adresa,grad, telefon, id } = props;
-
+  const token=localStorage.getItem('token')
   const classes = classStyles();
   const obrisiVlasnika = () => {
-    fetch('https://localhost:5001/Vlasnik/obrisiVlasnika?id=' + id, {
-      method: 'DELETE',
-    }).then(async response => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+    fetch('https://localhost:5001/Vlasnik/obrisiVlasnika?id=' + id, 
+    {  method: 'DELETE',
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+   } ).then(async response => {
       if (response.ok) {
         const res = await response.json();
         window.location.reload(false)

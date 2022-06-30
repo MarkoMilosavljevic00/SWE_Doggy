@@ -10,12 +10,12 @@ import { adminVlasniciRoute } from '../../router/routes';
 import { useNavigate } from 'react-router-dom';
 import HeaderAdmin from '../../components/HeaderAdmin'
 const Admin = () => {
+  const token=localStorage.getItem('token')
   const [siteri, postaviSitere] = useState([]);
   const [dugme, setDugme] = useState([]);
   const [nevalidni, postaviNevalidneSittere] = useState([]);
   const [success, setSucess] = useState([]);
   const [siteriKojiSePrikazuju, postaviSitereKojiSePrikazuju] = useState([]);
-
   const [stranica, postaviStranicu] = useState(1);
   const [ukupanBrojStranica, postaviUkupanBrojStranica] = useState(1);
   const [brojObjavaPoStrani, postaviBrojObjavaPoStrani] = useState(3);
@@ -29,7 +29,6 @@ const Admin = () => {
     });
   };
   const navigate = useNavigate();
-
   useEffect(() => {
     fetch(vratiSveSitereUrl).then(async res => {
       const rezultat = await res.json();
@@ -77,7 +76,6 @@ const Admin = () => {
   }, [stranica]);
 
   const classes = classStyles();
-
   const nazad = () => {
     setSucess(false);
     setDugme(true);
@@ -89,12 +87,6 @@ const Admin = () => {
         <div className={classes.container}>
       <HeaderAdmin/>
           <div className={classes.divNazad}>
-            {/* <Button
-              style={{ color: 'white', backgroundColor: '#07a607' }}
-              onClick={nazad}
-            >
-              Nazad
-            </Button> */}
           </div>
           <div style={{marginTop:'50px'}}>
             {nevalidni.map((nevalidan, index) => {
@@ -166,7 +158,6 @@ const Admin = () => {
               />
             );
           })}
-
           <div className={classes.pagination}>
             <BrojeviStranica
               ukupanBrojStranica={ukupanBrojStranica}

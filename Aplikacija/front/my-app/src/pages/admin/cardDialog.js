@@ -11,37 +11,45 @@ import { useNavigate } from 'react-router-dom';
 import { MenuItem } from '@mui/material';
 
 const CardDialog = props => {
+  const token=localStorage.getItem('token')
   const classes = classStyles();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
-
   const { idSitera } = props;
-
   const [komentari, postaviKomentar] = useState([]);
-
   useEffect(() => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     fetch(
       'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera
-    ).then(async res => {
+    ,
+    {
+      headers:{Authorize: `Bearer ${TOKEN}`}
+    }).then(async res => {
       const recenzijeSvihSitera = await res.json();
-
       const recenzije = recenzijeSvihSitera.filter(
         recenzijaSitera => recenzijaSitera.siterId == idSitera
       );
-
       postaviKomentar(recenzije);
     });
   }, []);
-
   const handleClickOpen = scrollType => () => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     setOpen(true);
     setScroll(scrollType);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   const descriptionElementRef = React.useRef(null);
   React.useEffect(() => {
     if (open) {
@@ -53,9 +61,6 @@ const CardDialog = props => {
   }, [open]);
   return (
     <div>
-      {/* <Button style={{ color: 'green' }} onClick={handleClickOpen('paper')}>
-        {tekstButton}
-  </Button>*/}
       <Button
         style={{ color: 'white', backgroundColor: '#07a607' }}
         onClick={handleClickOpen('paper')}

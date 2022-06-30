@@ -24,8 +24,6 @@ const CardDialog = props => {
   const handleClose = () => {
     setOpen(false);
   };
-  
- 
   const descriptionElementRef = React.useRef(null);
   React.useEffect(() => {
     if (open) {
@@ -38,9 +36,6 @@ const CardDialog = props => {
  
   return (
     <div>
-      {/* <Button style={{ color: 'green' }} onClick={handleClickOpen('paper')}>
-       klikni me
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}

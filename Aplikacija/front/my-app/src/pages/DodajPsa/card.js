@@ -22,21 +22,10 @@
  import { useState,useEffect } from 'react';
 import { Alert, MenuItem } from '@mui/material';
 
- const CardSlika=(props) =>{
- {/*const [state,setState]=useState('')
- state:{profileImg="https://image.shutterstock.com/image-illustration/photo-silhouette-male-profile-white-260nw-1018631086.jpg"}
- const imageHandler = (e) =>
- {
-   const reader = new FileReader()
-   reader.onload = () =>
-   {
-    if(reader.readyState===2){
-     this.setState({state:reader.result})
-     }
-   }
-   reader.readAsDataURL(e.target.files[0])
- }*/}
+const CardSlika=(props) =>{
+
 const { id }=props
+const token=localStorage.getItem('token')
 const [file, setFile] = useState()
 function handleChange(event) {
   setFile(event.target.files[0])
@@ -71,16 +60,7 @@ function handleSubmit(event) {
     });
 }
 const [pic,setPic]=useState('')
-// const picture = ()=>
-// {
-//   Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id).then(
-//     res=>
-//     {
-//       console.log(res.data.slika + 'ahahahaaahha')
-//       setPic(res.data.slika)
-//     }
-//   )
-// }
+
 useEffect(()=>
 {
   const TOKEN=localStorage.getItem('token')
@@ -100,6 +80,12 @@ useEffect(()=>
 
     const handleHide=()=>
     {
+      const TOKEN=localStorage.getItem('token')
+      if(token!=TOKEN || !TOKEN)
+      {
+        window.location.reload(false)
+        return
+      }
       setHide(!hide)
     }
    return(
@@ -112,7 +98,7 @@ useEffect(()=>
          component="img"
          height="194"
          image={'https://localhost:5001/StaticFiles/' + pic}
-        //  alt="Paella dish"
+       
        />
       
         {/* <div className='asd' style={{textAlign:'center'}}>
@@ -132,7 +118,6 @@ useEffect(()=>
           style={{textAlign:'center'}}
           
           >
-        
           <ExpandMoreIcon />
         </ExpandMore >
         Otvori dugme za potvrdu

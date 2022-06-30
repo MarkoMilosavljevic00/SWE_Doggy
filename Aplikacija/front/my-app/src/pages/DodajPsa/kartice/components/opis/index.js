@@ -70,6 +70,22 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CustomizedDialogs(props) {
   const classes = classStyles();
+  const [logovan,setLogovan]=useState('')
+  const[handle1,setHandle1]=useState('')
+  const token=localStorage.getItem('token')
+  useEffect(()=>
+  {
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data.id)
+       setHandle1(!handle1)
+    })
+  },[])
   const [open, setOpen] = React.useState(false);
   const {  id,
     ime,
@@ -80,8 +96,15 @@ export default function CustomizedDialogs(props) {
     tezina,
     slika,
     vlasnikId} = props;
-const idVlasnika1=localStorage.getItem('idVlasnika')
+
+
   const handleClickOpen = () => {
+    const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     setOpen(true);
   };
   const handleClose = () => {
@@ -97,7 +120,7 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
   useEffect(()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika1,
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + logovan.id,
       {
         headers:{ Authorization: `Bearer ${TOKEN}`}
       
@@ -108,12 +131,18 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
       
       }
     )
-  },[brisi])
+  },[brisi,handle1])
 
   
   const obrisiPsa = ()=>
   {
+    
     const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
       Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id,
       {
         headers:
@@ -123,8 +152,8 @@ const idVlasnika1=localStorage.getItem('idVlasnika')
       }).then(res=>
       {   
       console.log(res);
+      window.location.reload(false)
     })
-    window.location.reload(false)
    
 }
 
@@ -151,19 +180,24 @@ const [data,setData]=useState({
     visina:visina,
     tezina:tezina,
     slika:slika,
-    vlasnikId:vlasnikId
+    vlasnikId:logovan.id
   
   })
   const izmeniPsa =()=>
   {console.log(data)
     const TOKEN=localStorage.getItem('token')
+  
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
     if(data.id==='' || data.ime==='' || data.rasa==='' || data.pol===''|| data.opis===''||data.visina==='' || data.tezina==='' || data.visina <=0 || data.visina>=200|| data.tezina<=0 || data.tezina>=100)
     {
 
       alert('Molimo Vas unesite validne informacija na formi za izmenu podataka o psu!')
       return
     }
-    const i=localStorage.getItem('idVlasnika')
       Axios.put('https://localhost:5001/Pas/azurirajPsa',
       {  id:data.id,
          ime:data.ime,
@@ -173,7 +207,7 @@ const [data,setData]=useState({
          visina:data.visina,
          tezina:data.tezina,
          slika:data.slika,
-         vlasnikId:i
+         vlasnikId:logovan.id
       },
       {
       
@@ -199,55 +233,52 @@ const [data,setData]=useState({
           })
          
   }
-const idVlasnika=localStorage.getItem('idVlasnika')
+
 const[usluga,setUsluga]=useState([])
  useEffect(()=>{
 
    const TOKEN=localStorage.getItem('token')
   console.log('id psa je:' + id)
-  console.log('id vlasnika je:' + idVlasnika)
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + idVlasnika,
-  {
+  // console.log('id vlasnika je:' + idVlasnika)
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + vlasnikId,
+  { 
     
-      headers:{ Authorization: `Bearer ${TOKEN}`}
-    }
-  ).then(
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+    
+  }).then(
     res=>
     {
       console.log(res)
       setUsluga(res.data)
     }
   )
-},[])
+},[handle1])
 
   const navigate = useNavigate();
-
- const[otkriven,setOtkriven]=useState(false)
-
+  const[otkriven,setOtkriven]=useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick1= (event) => {
     setAnchorEl(1);
   };
-
   const handleClose1 = () => {
     setAnchorEl(null);
   };
-
   const open1 = Boolean(anchorEl);
   const id1 = open ? 'simple-popover' : undefined;
 const handleIzmena=()=>
 {
+  const TOKEN=localStorage.getItem('token')
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
   setIzmena(!izmena)
 }
-
   return (
     <>
- 
- 
     <div className={classes.container}>
       <div className='dugmici' style={{display:'grid'}}>
-    
       <Button
         variant="contained"
         color="success"
@@ -257,20 +288,11 @@ const handleIzmena=()=>
         Informacije o psu
       </Button>
       <Button variant='contained' color='error' size='small' onClick={()=>{obrisiPsa();}} >Obrisi psa</Button>
-      {/* <Button variant='contained' color='warning' size='small' onClick={()=>{status_usluge();poper();}} >Proverite status usluge</Button> */}
     {usluga.map(x=>
     (
-    
-      
-      <CardDialog  imesitera={x.siter.ime} />
-      
-      
+      <CardDialog  imesitera={x.siter.ime} />    
      ) )}
       <div>
-        {/* <Button aria-describedby={id1} variant="contained" onClick={()=>{handleClick1();status_usluge();}}> */}
-          
-        {/* Open Popover */}
-      {/* </Button> */}
       <Popover
       id={id1}
       open={open1}
@@ -281,21 +303,13 @@ const handleIzmena=()=>
         horizontal: 'left',
       }}
       >
-        {usluga.map(p=>(
-          
+      {usluga.map(p=>(         
           <h3>{p.siter.ime} je prihvatio vasu uslugu</h3>
-          
-          
         )
         )
         }
-  
       </Popover>
     </div>
-    
-      
-
-  
       </div>
       
       <BootstrapDialog
@@ -314,7 +328,7 @@ const handleIzmena=()=>
           <div className='izmena'style={{display:'inital',maxWidth:'425px'}}>
             <div className='prvideoizmena'>
           <div className='dugmeizmena' style={{display:'grid',marginBottom:'20px'}}>
-        <button onClick = {() => { setIzmena(!izmena) }} style={{maxWidth:'377px',minWidth:'377px',marginLeft:'25px'}}> Izmeni podatke </button>
+        <button onClick = {() => { handleIzmena();}} style={{maxWidth:'377px',minWidth:'377px',marginLeft:'25px'}}> Izmeni podatke </button>
          </div>
          <div className='1p'style={{display:'flex',justifyContent:'space-between',margin:'25px'}}>
           <Typography gutterBottom>Ime:  </Typography>

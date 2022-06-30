@@ -14,8 +14,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IconButton } from '@mui/material';
 import NavBarVlasnik from '../headerVlasnik';
 import Typography from '../../components/Typography';
-const Sitter = () => {
+import Axios from 'axios'
+const Sitter = (props) => {
   const navigate = useNavigate();
+  const{siter}=props;
   const classes = classStyles();
   const [siteri, postaviSitere] = useState([]);
   const [siteriKojiSePrikazuju, postaviSitereKojiSePrikazuju] = useState([]);
@@ -26,9 +28,28 @@ const Sitter = () => {
   const [Ocena, postaviOcenu] = useState('');
   const [cenaOd, postaviCenuOd] = useState('');
   const [cenaDo, postaviCenuDo] = useState('');
-
+  const [logovan,setLogovan]=useState('')
+  const[handle,setHandle1]=useState('')
+  const token=localStorage.getItem('token')
+  useEffect(()=>
+  {
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data.id)
+       setHandle1(!handle)
+    })
+  },[])
   useEffect(() => {
-    fetch(vratiSveSitereUrl).then(async res => {
+    const TOKEN=localStorage.getItem('token')
+    fetch(filtrirajSitere,
+      {
+        headers:{Authorization: `Bearer ${TOKEN}`}
+      }).then(async res => {
       const results = await res.json();
       postaviSitere(results);
 
@@ -119,21 +140,15 @@ const Sitter = () => {
         <CenaPoSatu naziv="Cena od" setValues={postaviCenuOd} />
         <CenaPoSatu naziv="Cena do" setValues={postaviCenuDo} />
         <ProsecnaOcena Ocena={Ocena} postaviOcenu={postaviOcenu} />
-
         <Button
           className={classes.buttonPotvrdi}
           style={{ backgroundColor: 'rgb(93, 224, 100)', margin: 15 }}
           variant="contained"
           color="success"
           onClick={buttonPotvrdiOnCLick}
-          // onClick={() =>buttonPotvrdiOnCLick()}
         >
           Potvrdi
         </Button>
-        {/* <IconButton color="primary" href="vlasnikRoute">
-          <Typography color="black">Vidi usluge</Typography>
-          <ArrowForwardIosIcon />
-        </IconButton> */}
       </div>
       <div className={classes.miniContainer}>
         {/* {users.map((user, index) => <Kartica ime={user.ime} opis={user.opis} key={index } />)}   */}

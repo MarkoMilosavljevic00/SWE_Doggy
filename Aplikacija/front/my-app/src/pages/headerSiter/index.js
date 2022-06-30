@@ -68,16 +68,31 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const NavBarSiter=()=> {
+
   const[slika,setSlika]=useState('')
-  const ajdi=localStorage.getItem('idSitera')
+  const [logovan,setLogovan]=useState('')
+  const[handle,setHandle1]=useState('')
   useEffect(()=>
   {
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + ajdi).then(res=>
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data.id)
+       setHandle1(!handle)
+    })
+  },[])
+  useEffect(()=>
+  {
+    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + logovan.id).then(res=>
     {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)
     })
-  },[])
+  },[handle])
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     
@@ -102,15 +117,11 @@ const NavBarSiter=()=> {
     };
     const log_out=()=>
     {
-            const idVlasnika=localStorage.removeItem('idVlasnika')
             const token=localStorage.removeItem('token')
-            const korisnik=localStorage.removeItem('korisnik')
-            const idSitera=localStorage.removeItem('idSitera')
             console.log('Uspesno ste se log autovali')
-            
-            // window.location.reload(false)
+            navigate('/')
+             window.location.reload(false)
             alert('Successful log out')
-  
     }
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -128,11 +139,18 @@ const NavBarSiter=()=> {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      // onClick={handleMobileMenuOpen}
       >
-      <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} onClick={() => navigate(profilSitterRoute)}>Profil</MenuItem>
-      {/* <MenuItem onClick={() => navigate(DodajPsaRoute)}>Tvoji psi</MenuItem> */}
-      <MenuItem onClick={()=>{handleMenuClose();log_out();navigate('/')}}>Log Out</MenuItem>
+      <MenuItem    src={'https://localhost:5001/StaticFiles/' + slika} href='/sitterProfilRoute'>
+        <IconButton href='/sitterProfilRoute'>
+        Profil
+        </IconButton>
+        
+        </MenuItem>
+      <MenuItem onClick={()=>{handleMenuClose();log_out();navigate('/')}}>
+       <IconButton>
+        Log Out
+       </IconButton>
+        </MenuItem>
     </Menu>
   );
 
@@ -168,17 +186,13 @@ const NavBarSiter=()=> {
           >
          {/* <AccountCircle src={'https://localhost:5001/StaticFiles/' + slika}/> */}
          {/* <img src={'https://localhost:5001/StaticFiles/' + slika}/> */}
-      
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
-            
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}> 
           </Avatar>
         </IconButton>
-        {/* <p>Profil</p> */}
       </MenuItem>
       <MenuItem onClick={() => navigate(profilSitterRoute)}>
         <IconButton
           size="large"
-         
           color="inherit"
         >
           <Badge color="success">
@@ -190,7 +204,6 @@ const NavBarSiter=()=> {
       <MenuItem onClick={()=>{navigate('/sitterZahteviRoute')}} >
         <IconButton
           size="large"
-         
           color="inherit"
         >
           <Badge color="error">
@@ -202,7 +215,6 @@ const NavBarSiter=()=> {
       <MenuItem href='./'onClick={()=>{handleMobileMenuClose();log_out();navigate('/')}}>
         <IconButton
           size="large"
-         
           color="inherit"
         >
           <Badge color="error">
@@ -225,30 +237,18 @@ const NavBarSiter=()=> {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            
             >
-            {/* <HomeIcon /> */}
           </IconButton>
           <header
       id="header"
       className="fixed-top d-flex align-items-center header-transparent"
     >
-    
         <div id="logo">
           <h1>
             <a href="./">Doggy</a>
           </h1>
         </div>
         </header>
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" color="inherit" href='/'>
@@ -258,11 +258,6 @@ const NavBarSiter=()=> {
             <Typography>Kuci</Typography>
           
              </IconButton>
-            {/* <IconButton size="large" href='/sitterZahteviRoute' color="inherit">
-              <Badge >
-                <MailIcon />
-              </Badge>
-            </IconButton> */} 
             <IconButton
               size="larger"
               color="inherit"
@@ -285,11 +280,8 @@ const NavBarSiter=()=> {
             >
               {/* <AccountCircle src={'https://localhost:5001/StaticFiles/' + slika}/> */}
               {/* <img src={'https://localhost:5001/StaticFiles/' + slika}/> */}
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>
-            
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={'https://localhost:5001/StaticFiles/'  + slika}>  
           </Avatar>
-              
-
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -314,165 +306,3 @@ const NavBarSiter=()=> {
   );
 }
 export default NavBarSiter
-// import * as React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-// import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
-// import MenuItem from '@mui/material/MenuItem';
-// import AdbIcon from '@mui/icons-material/Adb';
-
-// const pages = ['Products', 'Pricing', 'Blog'];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-// const ResponsiveAppBar = () => {
-//   const [anchorElNav, setAnchorElNav] = React.useState(null);
-//   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-//   const handleOpenNavMenu = (event) => {
-//     setAnchorElNav(event.currentTarget);
-//   };
-//   const handleOpenUserMenu = (event) => {
-//     setAnchorElUser(event.currentTarget);
-//   };
-
-//   const handleCloseNavMenu = () => {
-//     setAnchorElNav(null);
-//   };
-
-//   const handleCloseUserMenu = () => {
-//     setAnchorElUser(null);
-//   };
-
-//   return (
-//     <AppBar position="static">
-//       <Container maxWidth="xl">
-//         <Toolbar disableGutters>
-//           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-//           <Typography
-//             variant="h6"
-//             noWrap
-//             component="a"
-//             href="/"
-//             sx={{
-//               mr: 2,
-//               display: { xs: 'none', md: 'flex' },
-//               fontFamily: 'monospace',
-//               fontWeight: 700,
-//               letterSpacing: '.3rem',
-//               color: 'inherit',
-//               textDecoration: 'none',
-//             }}
-//           >
-//             LOGO
-//           </Typography>
-
-//           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-//             <IconButton
-//               size="large"
-//               aria-label="account of current user"
-//               aria-controls="menu-appbar"
-//               aria-haspopup="true"
-//               onClick={handleOpenNavMenu}
-//               color="inherit"
-//             >
-//               <MenuIcon />
-//             </IconButton>
-//             <Menu
-//               id="menu-appbar"
-//               anchorEl={anchorElNav}
-//               anchorOrigin={{
-//                 vertical: 'bottom',
-//                 horizontal: 'left',
-//               }}
-//               keepMounted
-//               transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'left',
-//               }}
-//               open={Boolean(anchorElNav)}
-//               onClose={handleCloseNavMenu}
-//               sx={{
-//                 display: { xs: 'block', md: 'none' },
-//               }}
-//             >
-//               {pages.map((page) => (
-//                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-//                   <Typography textAlign="center">{page}</Typography>
-//                 </MenuItem>
-//               ))}
-//             </Menu>
-//           </Box>
-//           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-//           <Typography
-//             variant="h5"
-//             noWrap
-//             component="a"
-//             href=""
-//             sx={{
-//               mr: 2,
-//               display: { xs: 'flex', md: 'none' },
-//               flexGrow: 1,
-//               fontFamily: 'monospace',
-//               fontWeight: 700,
-//               letterSpacing: '.3rem',
-//               color: 'inherit',
-//               textDecoration: 'none',
-//             }}
-//           >
-//             LOGO
-//           </Typography>
-//           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-//             {pages.map((page) => (
-//               <Button
-//                 key={page}
-//                 onClick={handleCloseNavMenu}
-//                 sx={{ my: 2, color: 'white', display: 'block' }}
-//               >
-//                 {page}
-//               </Button>
-//             ))}
-//           </Box>
-
-//           <Box sx={{ flexGrow: 0 }}>
-//             <Tooltip title="Open settings">
-//               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-//                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-//               </IconButton>
-//             </Tooltip>
-//             <Menu
-//               sx={{ mt: '45px' }}
-//               id="menu-appbar"
-//               anchorEl={anchorElUser}
-//               anchorOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-//               }}
-//               keepMounted
-//               transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-//               }}
-//               open={Boolean(anchorElUser)}
-//               onClose={handleCloseUserMenu}
-//             >
-//               {settings.map((setting) => (
-//                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-//                   <Typography textAlign="center">{setting}</Typography>
-//                 </MenuItem>
-//               ))}
-//             </Menu>
-//           </Box>
-//         </Toolbar>
-//       </Container>
-//     </AppBar>
-//   );
-// };
-// export default ResponsiveAppBar;

@@ -25,19 +25,76 @@ import IconButton from '@mui/material/IconButton';
 import DoneIcon from '@mui/icons-material/Done';
 import Footer from '../../components/Footer'
 import { Refresh } from '@mui/icons-material';
+import { Navigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
-const ProfilVlasnik =()=>{
-console.log(1)
+const ProfilVlasnik =(props)=>{
 
+const {loged}=props;
+const [logovan,setLogovan]=useState('')
+const[handle,setHandle1]=useState('')
+const[tokencic,setToken]=useState('false')
+// useEffect(()=>
+// {
+//   const TOKEN=localStorage.getItem('');
+
+
+// })
+const token=localStorage.getItem('token')
+
+
+  useEffect(()=>
+  {
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data.id)
+       setHandle1(!handle)
+      //  window.location.reload(false)
+      //  setToken(!tokencic)
+    }).catch(err=>
+      {
+        // window.location.reload(false)
+      })
+  },[])
+  
+  // useEffect(()=>
+  // {
+  //   const TOKEN=localStorage.getItem('token')
+  //   Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+  //   {
+  //     headers:{ Authorization: `Bearer ${TOKEN}`
+  // }}).then(res=>
+  //   {
+  //      setLogovan(res.data)
+  //      console.log(res.data.id)
+       
+  //   }).catch(err=>
+  //     {
+  //       return <Navigate to={'/'}/>
+  //     })
+  // },[tokencic])
     const[ch,setCh]=useState(true)
-    const vlasnikId=localStorage.getItem('idVlasnika')
+    const handleCh=()=>
+    {
+      const TOKEN=localStorage.getItem('token')
+      if(token!=TOKEN || !TOKEN)
+      {
+        window.location.reload(false)
+        return
+      }
+      setCh(!ch)
+    }
+    // const vlasnikId=localStorage.getItem('idVlasnika')
       const classes = classStyles();
       const[usluga0,setUsluga0]=useState([])
       const[usluga1,setUsluga1]=useState([])
       const[usluga2,setUsluga2]=useState([])
       const[uslugaX,setUslugaX]=useState([])
       const[sve_usluge,setSveUsluge]=useState([])
-
 
 
 
@@ -72,12 +129,16 @@ let pasId=[]
 const prihvaceni_zahtevi=()=>
 {
   const TOKEN=localStorage.getItem('token')
-        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + vlasnikId + '&status=1',
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
+        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + loged.id + '&status=1',
         {
           headers:{ Authorization: `Bearer ${TOKEN}`}
         }).then(
             res=>
-
             {
               res.data.forEach(x=>
                 {
@@ -100,18 +161,23 @@ const prihvaceni_zahtevi=()=>
             {
               alert(err.response.data)
             }
+            window.location.reload(false)
           }
           )
 }
 const odbijeni_zahtevi=()=>
 {
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=2',
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=2',
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
             res=>
-
             {
               res.data.forEach(x=>
                 {
@@ -122,7 +188,6 @@ const odbijeni_zahtevi=()=>
             {
                   alert('Trenutno nema Vasih zahteva koje je sitter odbio.')
             }
-                
                 setNeprihvaceni(res.data)
                 // if(res.data.id==null)
                 // {
@@ -152,11 +217,15 @@ date.setHours(0)
 const pending_zahtevi=()=>
 {
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId + '&status=0',
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=0',
    { headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(
             res=>
-
             {
               res.data.forEach(x=>
                 {
@@ -169,20 +238,6 @@ const pending_zahtevi=()=>
                     alert('Siter jos uvek nije ocenio Vaseg psa.Molimo Vas budite strpljivi, cim oceni Vaseg psa bicete u mogucnosti da ocenite sitera.')
               }
               setPending(res.data)
-                 
-              
-            //   console.log(res.data + 'a')
-            //   const provera= res.data + 'nista'
-            //     if(provera==='nista')
-            // {
-            //       alert('Trenutno nema odgovora od strane sitera za Vase zahteve.Molimo Vas budite strpljivi.')
-            // }
-                // console.log(res)
-                // setPending(res.data)
-                // if(res.data.id==null)
-                // {
-                //   alert('Ne postoji nijedan takav zahtev')
-                // }
             }
         )
 }
@@ -190,12 +245,16 @@ const pending_zahtevi=()=>
 const gotovi_zahtevi=()=>
 {
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + vlasnikId +'&status=3',
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
+  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id +'&status=3',
   {
   headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(
             res=>
-
             { 
               // console.log(res.data.status + 'a')
              res.data.forEach(x=>
@@ -208,8 +267,7 @@ const gotovi_zahtevi=()=>
             {
                   alert('Siter jos uvek nije ocenio Vaseg psa.Molimo Vas budite strpljivi, cim oceni Vaseg psa bicete u mogucnosti da ocenite sitera.')
             }
-                setGotovi(res.data)
-               
+                setGotovi(res.data)            
             }
         ).catch((error)=>
         {
@@ -223,101 +281,111 @@ const buttons = [
   <Button key="three" onClick={()=>{pending_zahtevi();handlePending();}}>Na cekanju</Button>,
   <Button style={{borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}key="four"onClick={()=>{gotovi_zahtevi();handleGotovi();}}>Gotovi</Button>,
 ];
-  const [ker,setKer]=useState('')
-const [ker2,setKet2]=useState({ime:' ',index:-1})
-const [ker3,setKer3]=useState({ime:'',index:-1})
-const [ker4,setKer4]=useState({ime:'',index:-1})
-const [ker5,setKer5]=useState({ime:'',index:-1})
-const vrati_psa=(props,index)=>
-{
-    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-        res=>
-        {
-            console.log(res.data)
-            setKer(res.data.ime)
-            // setKet2({ime:res.data.ime,index:index})
-            // setKer3({ime:res.data.ime,index:index})
-            // setKer4({ime:res.data.ime,index:index})
-            // setKer5({ime:res.data.ime,index:index})
-        }
-    )
-}
-const vrati_psa1=(props,index)=>
-{
-    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-        res=>
-        {
-            console.log(res.data.ime)
-            // setKer(res.data.ime)
-            // setKet2({ime:res.data.ime,index:index})
-            // setKer3({ime:res.data.ime,index:index})
-            setKer4({ime:res.data.ime,index:index})
-            console.log(ker4.ime)
-            // setKer5({ime:res.data.ime,index:index})
-        }
-    )
-}
-const vrati_psa2=(props,index)=>
-{
-    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-        res=>
-        {
-            console.log(res.data)
-            // setKer(res.data.ime)
-            setKet2({ime:res.data.ime,index:index})
-            // console.log(ker2 + 'ahahaha')
-            // setKer3({ime:res.data.ime,index:index})
-            // setKer4({ime:res.data.ime,index:index})
-            // setKer5({ime:res.data.ime,index:index})
-        }
-    )
-}
-const vrati_psa3=(props,index)=>
-{
-    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-        res=>
-        {
-            console.log(res.data)
-            // setKer(res.data.ime)
-            // setKet2({ime:res.data.ime,index:index})
-            setKer3({ime:res.data.ime,index:index})
-            // setKer4({ime:res.data.ime,index:index})
-            // setKer5({ime:res.data.ime,index:index})
-        }
-    )
-}
-const vrati_psa4=(props,index)=>
-{
-    Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-        res=>
-        {
-            console.log(res.data)
-            // setKer(res.data.ime)
-            // setKet2({ime:res.data.ime,index:index})
-            // setKer3({ime:res.data.ime,index:index})
-            // setKer4({ime:res.data.ime,index:index})
-            setKer5({ime:res.data.ime,index:index})
-        }
-    )
-}
+//   const [ker,setKer]=useState('')
+// const [ker2,setKet2]=useState({ime:' ',index:-1})
+// const [ker3,setKer3]=useState({ime:'',index:-1})
+// const [ker4,setKer4]=useState({ime:'',index:-1})
+// const [ker5,setKer5]=useState({ime:'',index:-1})
+// const vrati_psa=(props,index)=>
+// {
+//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+//         res=>
+//         {
+//             console.log(res.data)
+//             setKer(res.data.ime)
+//             // setKet2({ime:res.data.ime,index:index})
+//             // setKer3({ime:res.data.ime,index:index})
+//             // setKer4({ime:res.data.ime,index:index})
+//             // setKer5({ime:res.data.ime,index:index})
+//         }
+//     )
+// }
+// const vrati_psa1=(props,index)=>
+// {
+//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+//         res=>
+//         {
+//             console.log(res.data.ime)
+//             // setKer(res.data.ime)
+//             // setKet2({ime:res.data.ime,index:index})
+//             // setKer3({ime:res.data.ime,index:index})
+//             setKer4({ime:res.data.ime,index:index})
+//             console.log(ker4.ime)
+//             // setKer5({ime:res.data.ime,index:index})
+//         }
+//     )
+// }
+// const vrati_psa2=(props,index)=>
+// {
+//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+//         res=>
+//         {
+//             console.log(res.data)
+//             // setKer(res.data.ime)
+//             setKet2({ime:res.data.ime,index:index})
+//             // console.log(ker2 + 'ahahaha')
+//             // setKer3({ime:res.data.ime,index:index})
+//             // setKer4({ime:res.data.ime,index:index})
+//             // setKer5({ime:res.data.ime,index:index})
+//         }
+//     )
+// }
+// const vrati_psa3=(props,index)=>
+// {
+//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+//         res=>
+//         {
+//             console.log(res.data)
+//             // setKer(res.data.ime)
+//             // setKet2({ime:res.data.ime,index:index})
+//             setKer3({ime:res.data.ime,index:index})
+//             // setKer4({ime:res.data.ime,index:index})
+//             // setKer5({ime:res.data.ime,index:index})
+//         }
+//     )
+// }
+// const vrati_psa4=(props,index)=>
+// {
+//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
+//         res=>
+//         {
+//             console.log(res.data)
+//             // setKer(res.data.ime)
+//             // setKet2({ime:res.data.ime,index:index})
+//             // setKer3({ime:res.data.ime,index:index})
+//             // setKer4({ime:res.data.ime,index:index})
+//             setKer5({ime:res.data.ime,index:index})
+//         }
+//     )
+// }
 const [komentar,setKomentar]=useState('');
 const [ocena,setOcena]=useState('');
 
 const oceni =(id,siterId,pasId,komentar,ocena)=>
 { console.log(siterId,pasId,komentar,ocena)
+  const TOKEN=localStorage.getItem('token')
+  if(token!=TOKEN || !TOKEN)
+  {
+    window.location.reload(false)
+    return
+  }
   //RADI
   if(komentar==='' || ocena <=0 || ocena >5 || ocena ==='' )
   {
     alert('Molimo Vas lepo popunite formu')
     return
   }
+  let vlasnikAJDI=loged.id
   Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuSiteru',
   {
-     vlasnikId,
+    vlasnikAJDI,
      siterId,
      pasId,
      komentar,
      ocena
+  },
+  {
+    headers:{Authorization:`Bearer ${TOKEN}`}
   }).then(res=>{
        console.log(res.data)
        console.log('Uspesno poslat komentar')
@@ -349,34 +417,16 @@ const [data,setData]=useState(
       brojTelefona:'',
       grad:'',
       adresa:'',
-      
-      
    })
-   const izmeni=()=>
+  const izmeni_ime=()=>
    {
-      Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
-      {
-        id:profil.id,
-        ime:profil.ime,
-        prezime:profil.prezime,
-        email:profil.email,
-        korisnickoIme:profil.korisnickoIme,
-        sifra:profil.sifra,
-        brojTelefona:profil.brojTelefona,
-        grad:profil.grad,
-        adresa:profil.adresa,
-   
-      }).then(res=>
-        {
-           console.log(res + 'zasto')
-           setProfil(res.data)
-           setData(res.data)
-           window.location.reload(false)
-          })
-        }
-        const izmeni_ime=()=>
-   {
-    if(profil.id==='')
+     const TOKEN=localStorage.getItem('token')
+    if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+    if(loged.id==='')
    {
       alert('Greska!!!')
    }
@@ -392,9 +442,11 @@ const [data,setData]=useState(
     }
       Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
       {
-        id:profil.id,
-        ime:profil.ime
-   
+        id:loged.id,
+        ime:profil.ime 
+      },
+      {
+        headers:{ Authorization: `Bearer ${TOKEN}`}
       }).then(res=>
         {
            console.log(res + 'zasto')
@@ -405,7 +457,13 @@ const [data,setData]=useState(
         }
         const izmeni_prezime=()=>
         {
-          if(profil.id==='')
+          const TOKEN=localStorage.getItem('token')
+          if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+          if(loged.id==='')
    {
       alert('Greska!!!')
    }
@@ -421,11 +479,13 @@ const [data,setData]=useState(
           }
            Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
            {
-             id:profil.id,
+             id:loged.id,
             
              prezime:profil.prezime
         
-           }).then(res=>
+           },{
+            headers:{ Authorization: `Bearer ${TOKEN}`}
+          }).then(res=>
              {
                 console.log(res + 'zasto')
                 setProfil(res.data)
@@ -434,8 +494,13 @@ const [data,setData]=useState(
                })
              }
              const izmeni_email=()=>
-             {
-              if(profil.id==='')
+             { const TOKEN=localStorage.getItem('token')
+             if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+              if(loged.id==='')
    {
       alert('Greska!!!')
    }
@@ -446,11 +511,13 @@ const [data,setData]=useState(
               }
                 Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                 {
-                  id:profil.id,
+                  id:loged.id,
                  
                   email:profil.email
                 
              
+                },{
+                  headers:{ Authorization: `Bearer ${TOKEN}`}
                 }).then(res=>
                   {
                      console.log(res + 'zasto')
@@ -467,24 +534,28 @@ const [data,setData]=useState(
                     })
                   }
                   const izmeni_korisnicko_ime=()=>
-                  {
-                    if(profil.id==='')
+                  { const TOKEN=localStorage.getItem('token')
+                  if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+                    if(loged.id==='')
    {
       alert('Greska!!!')
    }
                     if(profil.korisnickoIme==='')
-              {
+              { const TOKEN=localStorage.getItem('token')
                 alert('Polje korisnicko ime ne sme biti prazno!!!')
                 return
               }
                      Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                      {
-                       id:profil.id,
-                     
+                       id:loged.id,                    
                        korisnickoIme:profil.korisnickoIme,
-                    
-                  
-                     }).then(res=>
+                     },{
+                      headers:{ Authorization: `Bearer ${TOKEN}`}
+                    }).then(res=>
                        {
                           console.log(res + 'zasto')
                           setProfil(res.data)
@@ -500,7 +571,7 @@ const [data,setData]=useState(
                        }
                        const izmeni_sifru=()=>
                        {
-                        if(profil.id==='')
+                        if(loged.id==='')
    {
       alert('Greska!!!')
    }
@@ -516,10 +587,8 @@ const [data,setData]=useState(
               }
                           Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                           {
-                            id:profil.id,
-                           
-                            sifra:profil.sifra
-                            
+                            id:loged.id,                         
+                            sifra:profil.sifra                            
                        
                           }).then(res=>
                             {
@@ -530,25 +599,28 @@ const [data,setData]=useState(
                               })
                             }
                             const izmeni_broj_telefona=()=>
-                            {
-                              if(profil.id==='')
-   {
-      alert('Greska!!!')
-   }
+                            { const TOKEN=localStorage.getItem('token')
+                            if(token!=TOKEN || !TOKEN)
+    {
+      window.location.reload(false)
+      return
+    }
+                              if(loged.id==='')
+                              {
+                               alert('Greska!!!')
+                               }
                               if(profil.brojTelefona==='')
               {
                 alert('Polje broj telefona ne sme biti prazno!!!')
                 return
-              }
-             
+              }           
                                Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                {
-                                 id:profil.id,
-                              
-                                 brojTelefona:profil.brojTelefona,
-                                 
-                            
-                               }).then(res=>
+                                 id:loged.id,                            
+                                 brojTelefona:profil.brojTelefona,                                                           
+                               },{
+                                headers:{ Authorization: `Bearer ${TOKEN}`}
+                              }).then(res=>
                                  {
                                     console.log(res + 'zasto')
                                     setProfil(res.data)
@@ -557,23 +629,28 @@ const [data,setData]=useState(
                                    })
                                  }
                                  const izmeni_grad=()=>
+                                 { 
+                                  const TOKEN=localStorage.getItem('token')
+                                  if(token!=TOKEN || !TOKEN)
+                                  {
+                                    window.location.reload(false)
+                                    return
+                                  }
+                                  if(loged.id==='')
                                  {
-                                  if(profil.id==='')
-   {
-      alert('Greska!!!')
-   }
+                                  alert('Greska!!!')
+                                   }
                                   if(profil.grad==='')
-              {
-                alert('Polje grad ne sme biti prazno!!!')
-                return
-              }
+                                   {
+                                       alert('Polje grad ne sme biti prazno!!!')
+                                          return
+                                            }
                                     Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                     {
-                                      id:profil.id,
-                               
+                                      id:loged.id,                               
                                       grad:profil.grad
-                                      
-                                 
+                                    },{
+                                      headers:{ Authorization: `Bearer ${TOKEN}`}
                                     }).then(res=>
                                       {
                                          console.log(res + 'zasto')
@@ -583,23 +660,28 @@ const [data,setData]=useState(
                                         })
                                       }
                                       const izmeni_adresu=()=>
+                                      { const TOKEN=localStorage.getItem('token')
+                                      if(token!=TOKEN || !TOKEN)
                                       {
-                                        if(profil.id==='')
-   {
-      alert('Greska!!!')
-   }
+                                        window.location.reload(false)
+                                        return
+                                      }
+                                        if(loged.id==='')
+                                        {
+                                          alert('Greska!!!')
+                                          }
                                         if(profil.adresa==='')
-              {
-                alert('Polje adresa ne sme biti prazno!!!')
-                return
-              }
+                                         {
+                                             alert('Polje adresa ne sme biti prazno!!!')
+                                            return
+                                           }
                                          Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                          {
-                                           id:profil.id,
-                              
-                                           adresa:profil.adresa
-                                      
-                                         }).then(res=>
+                                           id:loged.id,                             
+                                           adresa:profil.adresa                                      
+                                         },{
+                                          headers:{ Authorization: `Bearer ${TOKEN}`}
+                                        }).then(res=>
                                            {
                                               console.log(res + 'zasto')
                                               setProfil(res.data)
@@ -607,10 +689,16 @@ const [data,setData]=useState(
                                               window.location.reload(false)
                                              })
                                            }
-        const[refresh,setRefresh]=useState(false)
+                                     const[refresh,setRefresh]=useState(false)
 useEffect(()=>
 {
-   Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + vlasnikId).then(
+  const TOKEN=localStorage.getItem('token')
+   Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + loged.id,
+   {
+ 
+      headers:{ Authorization: `Bearer ${TOKEN}`
+}
+   }).then(
       res=>
       {
          console.log(res)
@@ -619,7 +707,7 @@ useEffect(()=>
        
       }
    )
-},[])
+},[handle])
 const[stanje,setStanje]=useState(-1)
 const[skrij,setSkrij]=useState(false)
 const handleklik=()=>
@@ -627,8 +715,17 @@ const handleklik=()=>
   setSkrij(!skrij)
 }
 const brisi_uslugu=(props)=>
-{ console.log('miloca' + props)
-  Axios.delete('https://localhost:5001/Usluga/obrisiUslugu?idUsluge=' + props).then(
+{ 
+const TOKEN=localStorage.getItem('token')
+if(token!=TOKEN || !TOKEN)
+{
+  window.location.reload(false)
+  return
+}
+  Axios.delete('https://localhost:5001/Usluga/obrisiUslugu?idUsluge=' + props,
+  {
+    headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(
     res=>
     { 
       console.log(res.data + 'AHAHHAAH BRISANO')
@@ -665,12 +762,6 @@ const handlez=()=>
 {
   setZ(!z)
 }
-
-let a=null
-// const [PocetakDatum,setPocetakDatum]=useState('')
-// const [PocetakVreme,setPocetakVreme]=useState('')
-// const [KrajDatum,setKrajDatum]=useState('')
-// const [KrajVreme,setKrajVreme]=useState('')
 let PocetakDatumPrihvaceni=null
 let PocetakVremePrihvaceni=null
 let PocetakDatumOdbijeni=null
@@ -679,23 +770,14 @@ let PocetakDatumPending=null
 let PocetakVremePending=null
 
       return(
-        
            <div className='a' >
            <div className={classes.container}>
            <NavBar />
-             <div className={classes.glavni}>
-  
-             <CardSlika/>
-            
-            
+             <div className={classes.glavni}>  
+             <CardSlika loged={loged}/>            
              <Card className={classes.paper} elevation={8}style={{display:'grid',backgroundColor:'khaki',minWidth:'475px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-            <div className='jedan'> 
-  
-
-            
-            <div className='dugmici'  style={{display:'grid',justifyContent:'center'}}>
-           
-            
+            <div className='jedan'>            
+            <div className='dugmici'  style={{display:'grid',justifyContent:'center'}}>           
           </div>
           <div className='obavestenje'>
             <Typography variant='h6'style={{textAlign:'center'}}>Obavestenja o uslugama</Typography>
@@ -708,51 +790,37 @@ let PocetakVremePending=null
           m: 1,
         },
       }}
-    >
-    
+    >   
     <ButtonGroup size="medium" aria-label="large button group" >
         {buttons}
-        {/* <Button onClick={odbijeni_zahtevi}>a</Button> */}
       </ButtonGroup>
     </Box>
-              <div className='odgovor' style={{display:'grid'}}   >
+  <div className='odgovor' style={{display:'grid'}}   >
+
 {prihvaceni && prihvaceni.map((x,index5)=>
-      (   <div className='prihvaceni' hidden={otvoriPrihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'200px'}}>
-   
+
+      (<div className='prihvaceni' hidden={otvoriPrihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'200px'}}>
       <h6 hidden={true}>{PocetakDatumPrihvaceni= new Date(x.pocetak).toLocaleDateString()}</h6>
      <h6 hidden={true}>{ PocetakVremePrihvaceni= new Date(x.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
      
      <h6 hidden={true}>{pasId=x.pasId}</h6>
-     {/* <Typography paragraph  onClick={()=>vrati_psa(pasId)}>Vasa usluga je uspesno prihvacena!!!</Typography> */}
-        {/* <Typography paragraph  onClick={()=>vrati_psa1(x.pasId,index5)}>Vasa usluga je uspesno prihvacena!!! Sitter:{x.siter.ime} {x.siter.prezime} 
-        je prihvatio vas zahtev za psa za uslugu {} <PetsIcon onClick={()=>{handlej();}}hidden={ker4.index==index5}/>}  {<a hidden={!ker4.index==index5}>{ker4.ime}</a>}
-        !Sitter uskoro dolazi,uzivajte!</Typography> */}
-        {/*<Typography paragraph  onClick={()=>vrati_psa(pasId)}>Uzivajte!!!</Typography> */}
         <Typography>Siter je prihvatio Vas zahtev za uslugu {x.vrsta == 0 ? <a> setanje psa</a>:
         x.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
         x.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za vaseg psa {x.pas.ime}!
-         Spremite se, sitter dolazi {PocetakDatumPrihvaceni}  u  {PocetakVremePrihvaceni}. </Typography>
-      
-            
+         Spremite se, sitter dolazi {PocetakDatumPrihvaceni}  u  {PocetakVremePrihvaceni}. </Typography>               
              <Button onClick={()=>{brisi_uslugu(x.id);}}>Brisi</Button>
-</div>
-      ))}
+          </div>))}
+
 {neprihvaceni && neprihvaceni.map((l,index1)=>
   (   <div className='neprihvaceni' hidden={otvoriNeprihvaceni}style={{borderRadius:'10px',backgroundColor:'cornsilk'}}>
       <h6 hidden={true}>{PocetakDatumOdbijeni= new Date(l.pocetak).toLocaleDateString()}</h6>
      <h6 hidden={true}>{ PocetakVremeOdbijeni= new Date(l.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
-      {/* <h6 hidden={true}>{pasId=l.pasId}</h6>
-      <Typography paragraph onClick={()=>vrati_psa2(l.pasId,index1)}> Vasa usluga za psa po imenu <PetsIcon onClick={()=>{handlex();}} hidden={ker2.index==index1}/>  
-       {<a hidden={!ker2.index==index1}>{ker2.ime}</a>} je nazalost odbijena. Siter:{l.siter.ime} {l.siter.prezime} je odbio uslugu.</Typography> */}
-      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{l.siter.ime} {l.siter.prezime} je odbio uslugu. </Typography> */}
      <Typography>Sitter {l.siter.ime} {l.siter.prezime} je nazalost odbio uslugu 
      {x.vrsta == 0 ? <a> setanje psa</a>:
         x.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
         x.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} 
               , datuma {PocetakDatumOdbijeni} u {PocetakVremeOdbijeni} za Vaseg psa {l.pas.ime}.Molimo Vas ne dajte da Vas ovo obeshrabri, vec potrazite novog sittera!</Typography>
-      <Button onClick={()=>{brisi_uslugu(l.id);}}>Brisi</Button>
-      {/* <Button onClick={()=>{window()}}>aaa</Button> */}
-      
+      <Button onClick={()=>{brisi_uslugu(l.id);}}>Brisi</Button>  
 </div>
   ))
 
@@ -761,31 +829,23 @@ let PocetakVremePending=null
 (  <div className='pending' hidden={otvoriPending} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'100px'}}>
     <h6 hidden={true}>{PocetakDatumPending= new Date(k.pocetak).toLocaleDateString()}</h6>
      <h6 hidden={true}>{ PocetakVremePending= new Date(k.pocetak).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'})}</h6>
-      {/* <h6 hidden={true}>{pasId=k.pasId}</h6> */}
-      {/* <Typography paragraph onClick={()=>vrati_psa3(k.pasId,index2)}> Vasa usluga za psa po imenu { <PetsIcon onClick={()=>{handley();}}hidden={ker3.index==index2}/>}{<a hidden={!ker3.index==index2}>{ker3.ime}</a>}, jos nije otvorena! Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography> */}
-      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Sitter:{k.siter.ime} {k.siter.prezime} tek treba da vidi Vas zahtev!</Typography> */}
 <Typography>Molimo Vas budite strpljivi sitter {k.siter.ime} {k.siter.prezime} jos uvek nije video Vasu uslugu 
 {k.vrsta == 0 ? <a> setanje psa</a>:
         k.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
         k.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za psa {k.pas.ime} datuma {PocetakDatumPending} u {PocetakVremePending}. </Typography>
 <Button onClick={()=>{brisi_uslugu(k.id);}}>Brisi</Button>
 </div>
-  ))
-
-}
+  ))}
+  
 {gotovi && gotovi.map((g,index)=>
 (  <div key={g.id} className='gotovi' hidden={otvoriGotovi} style={{borderRadius:'10px',backgroundColor:'cornsilk',maxHeight:'500px'}}>
       <h6 hidden={true}>{pasId=g.pasId} {}  {}</h6>
-      {/* <Typography paragraph onClick={()=>{vrati_psa4(g.pasId,index);}}> Vasa usluga za psa po imenu {<PetsIcon onClick={()=>{handlez();}} hidden={ker5.index==index}/> }{<a hidden={!ker5.index==index}>{ker5.ime}</a>}, je uspesno zavrsena! Molimo Vas da iskoristite minut Vaseg vremena i ocenite sitera:{g.siter.ime} {g.siter.prezime}.Hvala Vam!</Typography> */}
-      {/* <Typography paragraph onClick={()=>vrati_psa(pasId)}>Molimo Vas ocenite sitera:{g.siter.ime} {g.siter.prezime}</Typography> */}
     <Typography>Vasa usluga {g.vrsta == 0 ? <a> setanje psa</a>:
         g.vrsta == 1?<a> cuvanje psa u kuci vlasnika</a>:
         g.vrsta==2 ? <a> poseta sittera</a>:<a> cuvanje psa u kuci sittera</a>} za psa:{g.pas.ime} je obavljena od strane sittera {g.siter.ime} {g.siter.prezime}  </Typography>
         <Typography style={{marginBottom:'20px',marginTop:'10px'}}>Molimo vas odvojite bar sekundi i ocenite sittera! </Typography>
-   {/* <Button onClick={()=>{brisi_uslugu(g.id);}}>Brisi</Button> */}
      <div className='sakrij' hidden={skrij}>
-      <TextField
-     
+      <TextField     
           required
           id="outlined-required"
           label="Komentari"
@@ -793,11 +853,9 @@ let PocetakVremePending=null
           value={stanje===index ? komentar: ' '}
           defaultValue="Hello World"
           onClick={(e)=>{setKomentar('');setOcena(0);setStanje(index);}}
-          onChange={ (e) => { setKomentar(e.target.value)}}
-          
+          onChange={ (e) => { setKomentar(e.target.value)}}  
         />
-         <TextField
-         
+         <TextField   
           id="outlined-number"
           label="Ocena"
           type="number"
@@ -807,29 +865,17 @@ let PocetakVremePending=null
           }}
           InputProps={{ inputProps: { min: 1, max: 5} }}
           onClick={(e)=>{setOcena(0);setStanje(index);}}
-          //u on click stanje
-          onChange={ (e) =>  { setOcena(e.target.value)}}
-           
-          
+          onChange={ (e) =>  { setOcena(e.target.value)}}                
         />
   <Button color='primary' onClick={()=>{oceni(g.id,g.siterId,g.pasId,komentar,ocena);gotovi_zahtevi();}}>Posalji ocenu siteru</Button>
-  {/* <Button color='success' onClick={obrisi_uslugu}></Button> */}
   {console.log(g.id + 'mjauuu')}
   </div>
 </div>
-  ))
-  
-}
-
+  ))}
 </div>
-                  </div>
-                
-             </div>
-  
-             </Card>
-
-
-
+</div>
+ </div>
+ </Card>
              <Card className={classes.paper} elevation={8} style={{backgroundColor:'khaki',display:'grid',minWidth:'500px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
              <h3 style={{textAlign:'center',color:'black'}} className={classes.naslov2}>Opšti podaci</h3>
              {/* <div className='inputi'> */}
@@ -842,121 +888,69 @@ let PocetakVremePending=null
              <Grid item xs={6} sm={6} md={4} lg={3}>
                 <input type='text'  value={profil.ime} onChange={ (e) =>  setProfil((profil)=>({...profil,ime:e.target.value})) }disabled={ch}></input>
              </Grid>
-
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_ime();}}startIcon={<EditIcon/>}> Izmeni </Button>
-             {/* </Grid> */}
-             {/* </div> */}
-             {/* <div className='drugiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Prezime:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
-             </Grid>
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+             </Grid>         
               <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_prezime();}}startIcon={<EditIcon/>}> Izmeni</Button>
-             {/* </Grid> */}
-             {/* </div> */}
-             {/* <div className='treciinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Email:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
              </Grid>
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
+            
               <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>
-             {/* </Grid> */}
-             {/* </div> */}
-             {/* <div className='cetvrtiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Korisničko Ime:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis'  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
              </Grid>
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_korisnicko_ime();}}> Izmeni </Button>
-             {/* </Grid> */}
-             
-             {/* </div> */}
-             {/* <div className='petiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Sifra:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
-             <input type='password' id='opis'  value={profil.sifra} onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
+             <input type='password' id='opis'   onChange={ (e) =>  setProfil((profil)=>({...profil,sifra:e.target.value})) }disabled={ch}></input>
              </Grid>
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_sifru();}}> Izmeni</Button>
-             {/* </Grid> */}
-             {/* </div> */}
-             {/* <div className='sestiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Broj telefona:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.brojTelefona} onChange={ (e) =>  setProfil((profil)=>({...profil,brojTelefona:e.target.value})) } disabled={ch}></input>
              </Grid> 
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_broj_telefona();}}> Izmeni </Button>
-             {/* </Grid> */}
-             {/* </div> */}
-            
-             {/* <div className='sedmiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Grad:</label>
             </Grid>
             <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.grad} onChange={ (e) =>  setProfil((profil)=>({...profil,grad:e.target.value})) } disabled={ch}></input>
              </Grid> 
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_grad();}}> Izmeni</Button>
-             {/* </Grid> */}
-             {/* </div> */}
-             {/* <div className='osmiinput'style={{display:'flex'}}> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Adresa:</label>
             </Grid>
             <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.adresa} onChange={ (e) =>  setProfil((profil)=>({...profil,adresa:e.target.value})) } disabled={ch}></input>
              </Grid>
-             {/* <Grid item xs={6} sm={6} md={4} lg={3}> */}
               <Button style={{marginLeft:'120px'}}startIcon={<EditIcon/>}onClick={()=>{izmeni_adresu();}}> Izmeni</Button>
-             {/* </Grid> */}
-             {/* </div> */}
-         </Grid>
-             {/* </div> */}
-             <div className='izmeniVlasnika' style={{display:'flex',justifyContent:'center'}} >
-             {/* <Fab color="secondary" aria-label="edit" onClick = {() => { setCh(!ch);izmeni(); }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
-        <EditIcon />
-      </Fab>
-
-      <Typography gutterTop style={{fontSize:'large',alignSelf:'center'}}>Izmeni podatke</Typography> */}
-       <Button variant="outlined" startIcon={<EditIcon />} onClick = {() => { setCh(!ch) }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',marginTop:'20px'}}>
+         </Grid> <div className='izmeniVlasnika' style={{display:'flex',justifyContent:'center'}} >
+             
+       <Button variant="outlined" startIcon={<EditIcon />} onClick = {() =>{ handleCh() }} style={{backgroundColor:'rgb(93, 224, 100)',color:'black',borderRadius:'25px',marginTop:'20px'}}>
   Edituj podatke
  </Button>
-      
-      </div>
-             </Card>
-           
-             </div>
-              
-           </div>
-           <div className={classes.divButton}>
-          {/* <Button
-             style={{ backgroundColor: 'green' }}
-             variant="contained"
-             color="success"
-             >
-             Sačuvaj
-                </Button>*/}
-          </div>
-
-   </div>
-          );
-    }
+  </div>
+   </Card>
+     </div>
+    </div>
+  <div className={classes.divButton}>
+</div>
+ </div>);}
   
 
 

@@ -9,7 +9,7 @@ import { vratiSveGradoveSittera } from '../../../backendAddress';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect(props) {
-  // const [grad, postaviGrad] = React.useState('');
+
   const { grad, postaviGrad } = props;
 
   const handleChange = event => {
@@ -19,7 +19,11 @@ export default function BasicSelect(props) {
   const [gradovi, postaviGradove] = useState([]);
 
   useEffect(() => {
-    fetch(vratiSveGradoveSittera).then(async res => {
+    const TOKEN=localStorage.getItem('token')
+    fetch(vratiSveGradoveSittera,
+      {
+        headers:{Authorization: `Bearer ${TOKEN}`}
+      }).then(async res => {
       const results = await res.json();
       postaviGradove(results);
     });
@@ -37,7 +41,6 @@ export default function BasicSelect(props) {
         >
           {gradovi.map((name, index) => (
             <MenuItem
-              // style={getStyles(name, personName, theme)}
               key={index}
               value={name}
             >
@@ -45,7 +48,6 @@ export default function BasicSelect(props) {
             </MenuItem>
           ))}
           <MenuItem
-            // style={getStyles(name, personName, theme)}
             key={'sve'}
             value={'sve'}
           >

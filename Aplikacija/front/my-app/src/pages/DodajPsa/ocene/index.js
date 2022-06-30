@@ -15,15 +15,12 @@ const labels = {
   4.5: 'Excellent',
   5: 'Excellent+',
 };
-
 function getLabelText(value) {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
-
 export default function HoverRating() {
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
-
   return (
     <Box
       sx={{

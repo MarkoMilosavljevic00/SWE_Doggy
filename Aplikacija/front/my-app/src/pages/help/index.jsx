@@ -25,9 +25,6 @@ const Help = () => {
   return (
     <div className={classes.container}>
 { proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/>  :(proveraAdmin ? <HeaderAdmin/> : <Header/>))} 
-
-      
-
       <div className={classes.divSlikaVelika}>
         <div className={classes.divSlika}></div>
         <div className={classes.divNaslov}>
@@ -50,15 +47,6 @@ const Help = () => {
               />
             </div>
           </Grid>
-          {/* <Grid item xs={6}>
-            <div className={classes.divSlikaVelika}>
-              <PetsIcon />
-              <CardDialog
-                tekstButton={'Kako da znam da li je moj nalog odobren,ukoliko se registrujem kao sitter?'}
-                opis={'Ukoliko ne mozete da se loginujete onda niste prihvaceni od strane sittera, a ukoliko mozete onda ste spremni za rad?'}
-              />
-            </div>
-          </Grid> */}
           <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />
@@ -83,19 +71,6 @@ const Help = () => {
               />
             </div>
           </Grid>
-          {/* <Grid item xs={6}>
-            <div className={classes.divSlikaVelika}>
-              <PetsIcon />
-              <CardDialog
-                tekstButton={
-                  'Koje su mogućnosti ako postanem vlasnik psa na vašem sajtu?'
-                }
-                opis={
-                  'Možete bez brige da odete bez Vašeg psa, zato što se on nalazi u sigurnim rukama.'
-                }
-              />
-            </div>
-          </Grid> */}
           <Grid item xs={6}>
             <div className={classes.divSlikaVelika}>
               <PetsIcon />

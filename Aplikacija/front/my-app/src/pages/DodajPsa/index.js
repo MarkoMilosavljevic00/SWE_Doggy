@@ -1,140 +1,3 @@
-// import React from 'react';
-// import classStyles from './styles';
-// import { useNavigate } from 'react-router-dom';
-// import Avatar from '@mui/material/Avatar'
-// //import HeaderSitter from '../../components/HeaderSitter';
-// import Box from '@mui/material/Box';
-// import Paper from '@mui/material/Paper';
-// import Grid from '@mui/material/Grid';
-// import Button from '@mui/material/Button';
-// import NavBar from '../headerVlasnik';
-// import CardSlika from './card';
-
-
-
-// const DodajPsa = ()=>
-// {/*import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-// import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import PhotoCamera from '@mui/icons-material/PhotoCamera';
-// import Stack from '@mui/material/Stack';
-
-// const Input = styled('input')({
-//   display: 'none',
-// });
-
-// export default function UploadButtons() {
-//   return (
-//     <Stack direction="row" alignItems="center" spacing={2}>
-//       <label htmlFor="contained-button-file">
-//         <Input accept="image/*" id="contained-button-file" multiple type="file" />
-//         <Button variant="contained" component="span">
-//           Upload
-//         </Button>
-//       </label>
-//       <label htmlFor="icon-button-file">
-//         <Input accept="image/*" id="icon-button-file" type="file" />
-//         <IconButton color="primary" aria-label="upload picture" component="span">
-//           <PhotoCamera />
-//         </IconButton>
-//       </label>
-//     </Stack>
-//   );
-// }
-//  */
-//     console.log(1);
-//     const classes = classStyles();
-//     return(
-//      <>
-//      <NavBar />
-//      <div className={classes.container}>
-//        <div className={classes.glavni}>
-//      <CardSlika/>
-
-//        <Paper className={classes.paper} elevation={8}>
-//        <h4 className={classes.naslov2}>Opšti podaci</h4>
-//        <div>
-//        <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
-//        <Grid item xs={6}>
-//           <label>Ime:</label>
-//        </Grid>
-//        <Grid item xs={6}>
-//           <input></input>
-//        </Grid>
-//        <Grid item xs={6}>
-//              <label>Rasa:</label>
-//        </Grid>
-//        <Grid item xs={6}>
-//        <input></input>
-//        </Grid>
-//        <Grid item xs={6}>
-//              <label>Pol:</label>
-//        </Grid>
-//        <Grid item xs={6}>
-//        <input></input>
-//        </Grid>
-//        <Grid item xs={6}>
-//              <label>Opis:</label>
-//        </Grid>
-//        <Grid item xs={6}>
-//        <input></input>
-//        </Grid>
-//        <Grid item xs={6}>
-//              <label>Visina:</label>
-//        </Grid>
-//        <Grid item xs={6}>
-//        <input></input>
-//        </Grid>
-//    </Grid>
-//        </div>
-//        </Paper>
-    
-      
-     
-//              <Paper className={classes.paper} elevation={8}>
-//              <h4 className={classes.naslov2}>Izmeni pristupne parametre</h4>
-//              <div>
-//              <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
-//              <Grid item xs={6}>
-//                 <label>Novo Visina:</label>
-//              </Grid>
-//              <Grid item xs={6}>
-//                 <input></input>
-//              </Grid>
-//              <Grid item xs={6}>
-//                 <label>Nova tezina:</label>
-//              </Grid>
-//              <Grid item xs={6}>
-//                 <input></input>
-//              </Grid>
-//              </Grid>
-//              </div>                                          
-//              </Paper>
-         
-//       <div className='dugme1'>
-//       <Button classname = 'dugme' type='text' variant = 'contained'>Dodaj psa </Button>
-//       </div>
-//       </div>
-//       <div className='contact-card'>
-//         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3aafGt0LRhdmy4NTfLq7gO7U7XMR-P2VT3w&usqp=CAU' />
-//         <h3>Mr shiske</h3>
-//         <div className='info-group'>
-//           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3aafGt0LRhdmy4NTfLq7gO7U7XMR-P2VT3w&usqp=CAU'/>
-//           <p>123@gmail.com</p>
-//         </div>
-//         <div className='info-group'>
-//           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3aafGt0LRhdmy4NTfLq7gO7U7XMR-P2VT3w&usqp=CAU'/>
-
-//         <p>Mr goody</p>
-//       </div>
-//       </div>
-
-//       </div>
-//       </>
-//       );
-//     }
-//     export default DodajPsa
 import React, { useEffect, useState } from 'react';
 import classStyles from './styles';
 import Kartica from './kartice/index.js';
@@ -158,7 +21,6 @@ import ProsecnaOcena from '../sitter/prosecnaOcena';
 import BrojeviStranica from '../sitter/broj';
 import { Grid } from '@mui/material';
 import Axios from 'axios'
-
 import NavBar from '../headerVlasnik';
 
 const Sitter = (props) => {
@@ -173,12 +35,32 @@ const Sitter = (props) => {
   const [Ocena, postaviOcenu] = useState('');
   const [cenaOd, postaviCenuOd] = useState('');
   const [cenaDo, postaviCenuDo] = useState('');
-  const{brisi}=props
-const idVlasnika=localStorage.getItem('idVlasnika')
+ 
+  const{doggy}=props;
+
+  // console.log('ime je: ' + doggy.ime + ' || id je:' + doggy.id)
+
+// const idVlasnika=localStorage.getItem('idVlasnika')
 const [refresh,setRefresh]=useState('')
+const [logovan,setLogovan]=useState('')
+  const[handle1,setHandle1]=useState('')
+  const token=localStorage.getItem('token')
+  useEffect(()=>
+  {
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data.id)
+       setHandle1(!handle1)
+    })
+  },[])
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
-    fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + idVlasnika,{
+    fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + doggy.id,{
       headers:{
         Authorization: `Bearer ${TOKEN}`
       }
@@ -213,7 +95,7 @@ const [refresh,setRefresh]=useState('')
           alert(err.response.data)
         }
       });
-  }, [refresh]);
+  }, [refresh,handle1]);
 
   useEffect(() => {
     const objave = [];
@@ -236,13 +118,16 @@ const [refresh,setRefresh]=useState('')
     setRefresh(!refresh)
   }
 const dodajPsa=()=>
-{const AJDI = localStorage.getItem('idVlasnika')
+{
+
+  const AJDI=doggy.id
 const TOKEN=localStorage.getItem('token')
-// let config = {
-//   headers: {
-//     'Authorization': 'Bearer ' + TOKEN
-//   }
-// }
+
+if(token!=TOKEN || !TOKEN)
+{
+  window.location.reload(false)
+  return
+}
 if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.visina==='' || data.tezina==='' || data.visina<=0 || data.tezina <=0 || data.tezina>=100 || data.visina>=200)
 {
   alert('Molimo Vas popunite pravilno formu!!!')
@@ -256,7 +141,6 @@ if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.vi
       opis:data.opis,
       visina:data.visina,
       tezina:data.tezina,
-    
       vlasnikid:AJDI
 
     },{ headers: {
@@ -266,7 +150,6 @@ if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.vi
       {
         console.log(res)
         console.log(res.data.id)
-        localStorage.setItem('idPsa',res.data.id);
         handleRefresh()
       }
     ).catch(err=>
@@ -396,20 +279,6 @@ const [open, setOpen] = React.useState(false);
             <input onChange={(e)=>handle(e)}  id='tezina' value={data.tezina} type="number"></input>
             </Grid> 
             </div>
-            {/* <iframe title='myfeame' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameBorder="0" value={}style={{border:0}} allowFullScreen></iframe> */}
-            {/* <Grid item xs={6}>
-            <Button variant="contained">Dodaj sliku</Button>
-            </Grid> 
-            
-            <input placeholder='slika' onChange={(e)=>handle(e)} id='slika'value={data.slika} type="text"></input>
-           
-            {/* <Grid item xs={6}>
-                  <label>Vas id:</label>
-            </Grid>
-            <Grid item xs={6}>
-            <input placeholder='vlasnikid'onChange={(e)=>handle(e)} id='vlasnikid'value={data.vlasnikid}  type="number"></input>
-            </Grid> 
-            */}     
         </Grid>
         </div>
         {/* <CardSlika/> */}
@@ -422,12 +291,9 @@ const [open, setOpen] = React.useState(false);
         </DialogActions>
       </Dialog>
             </div>
+            </div>           
             </div>
-           
-            </div>
-
       <div className={classes.miniContainer}>
-        {/* {users.map((user, index) => <Kartica ime={user.ime} opis={user.opis} key={index } />)}   */}
         {siteriKojiSePrikazuju.map((siter, index) => {
           return (
             <Kartica
@@ -439,9 +305,8 @@ const [open, setOpen] = React.useState(false);
               visina={siter.visina}
               tezina={siter.tezina}
               slika={siter.slika}
-
               key={index}
-              vlasnikid={siter.vlasnikid}
+              vlasnikid={doggy.id}
             />
           );
         })}

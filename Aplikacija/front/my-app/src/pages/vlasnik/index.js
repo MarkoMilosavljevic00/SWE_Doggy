@@ -52,10 +52,11 @@ import Typography from '../../components/Typography';
 
 const Vlasnik=(props)=> {
   const[psi,setPsi]=useState('')
+  const {vlasnik}=props;
   const psici=()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnikId,
+    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnik.id,
     {
     headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -155,20 +156,24 @@ const funkcija_adresa=()=>
   console.log(adresaPreuzimanjaPsa)
 }
 const siterId=localStorage.getItem('idSitera');
-// const pasId=localStorage.getItem('idPsa');
-
-const vlasnikId=localStorage.getItem('idVlasnika')
 const funkcija_napomena=()=>
 {
   console.log(siterId)
   console.log(pasId)
-  console.log(vlasnikId)
+  // console.log(vlasnikId)
 }
+const vlasnikId=vlasnik.id;
 const posalji_zahtev=()=>
 {
   const TOKEN=localStorage.getItem('token')
+if(pocetak>kraj)
+{
+  alert('Greska kod datuma!')
+  return
+}
   if(siterId===null){alert('Molimo Vas odaberite sitera!!!')}
   const podaci={
+    
   vlasnikId,
   siterId,
   pasId,
@@ -176,19 +181,20 @@ const posalji_zahtev=()=>
   pocetak,
   kraj,
   adresaPreuzimanjaPsa,
-  napomena
+  napomena,
+  
 }
 if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || adresaPreuzimanjaPsa==='')
 {
   alert('Molimo Vas popunite formu do kraja!!!')
   return
 }
+
   Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
     
-      headers:{ Authorization: `Bearer ${TOKEN}`}
-   
-    }
-  ).then(res=>
+    headers:{ Authorization: `Bearer ${TOKEN}`
+  }
+}).then(res=>
     {
     
       console.log(res.data)
@@ -202,11 +208,13 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
           {
          alert('Siter je tada zauzet!')
           }
+          else if(err.response.status){
+            alert(err.response.data)
+          }
         
         
     })
 }
-{console.log(vlasnikId + ':vlasnik id ')}
 
   const brisiS=()=>
   {
@@ -239,8 +247,6 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
         label="Age"
         onChange={(e)=>setSelect(e.target.value)}
         onClick={()=>{usluge();psici();}}
-
-        // onChange={handleChange}
       >
         <MenuItem   value={0}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
         <MenuItem value={1}><i class="fa-solid fa-house"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
@@ -256,7 +262,6 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
      <div className={klase.vrstapsi}>
   
      <Box sx={{ minWidth: 150 }}>
-       {/* <Button color='primary' onClick={()=>{psici();}}>klikni me</Button> */}
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label1" >Odaberite vaseg psa</InputLabel>
       {/* <h3>{}</h3> */}
@@ -267,18 +272,14 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
         label="Age"
         onChange={(e)=>setPasId(e.target.value)}
        onClick={dogs1}
-        // onChange={handleChange}
       >
         {psi && psi.map(x=>
           (
-
         <MenuItem   onClick={()=>{dogs(x.id)}} value={x.id}><i class="fa-solid fa-dog"><h5>{x.ime} </h5></i></MenuItem>
-
           ))}
           {console.log(pasId + 'pas id je')}
       </Select>
     </FormControl>
-   
    </Box>
 </div>
 </div>
@@ -318,27 +319,6 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
     </Grid>
     </div>
      </div>
-    
-
-    {/* <h2>Tezina psa u kilogramima</h2>
-    <div className={klase.tezina}>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        '& > *': {
-          m: 1,
-        },
-      }}
-      >
-      </Box>
-      <ButtonGroup size="large" aria-label="large button group">
-        {tezina}
-      </ButtonGroup>
-      </div> */}
-   
-
     <div className={klase.adresa}>
      <Box
       component="form"
@@ -361,21 +341,18 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
       noValidate
       autoComplete="off"
     >
-      {/* {<TextField id="outlined-basic" label="Outlined" variant="outlined" /> } */}
-      {/* { <TextField id="filled-basic" label="Napomena" variant="filled" required/> } */}
       <TextField style={{width:'300px'}} id='outlined-multiline-static'label='Napomena' type="text" multiline maxRows={4} inputProps={inputProps} value={napomena} onChange={e=>setNapomena(e.target.value)}/>
      </Box>
      </div>
      {/* <Button color='primary' onClick={funkcija_napomena}>Klik napomena</Button> */}
      <div className={klase.dugme}>
-     <Button variant="contained" onClick={posalji_zahtev} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
+     <Button variant="contained" onClick={()=>{posalji_zahtev();}} endIcon={<SendIcon />} style={{borderRadius:'50px',backgroundColor:'rgb(93, 224, 100)',color:'black'}}>
       Prosledi zahtev sitteru
      </Button>
    
      </div>
     </Paper>
     </div>
-    {/* <Footer /> */}
      </div>
  
   );

@@ -21,6 +21,7 @@ export default function CardPristigliZahtevi(props) {
       const classes = classStyles();
       const[data2,setData2]=useState([]);
      const[type,setType]=useState('')
+     const token=localStorage.getItem('token')
     let PocetakDatum=new Date(begin).toLocaleDateString();
      let PocetakVreme = new Date(begin).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'});
      let KrajDatum= new Date(end).toLocaleDateString();

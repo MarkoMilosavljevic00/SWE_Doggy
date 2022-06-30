@@ -12,47 +12,55 @@ import HeaderAdmin from '../../components/HeaderAdmin';
 import NavbarVlasnik from '../headerVlasnik';
 import NavBarSiter from '../headerSiter';
 import { useNavigate } from 'react-router-dom';
-
+import Axios from 'axios'
 import PlayCircleFilledWhite from '@mui/icons-material/PlayCircleFilledWhite';
 
 export const Home = (props) => {
   const[refresh,setRefresh]=useState('')
-  useEffect(()=>{
-    console.log('1')
-  },[refresh])
-  const classes = classStyles();
-  const proveraSiter=localStorage.getItem('idSitera')
-  const proveraVlasnik=localStorage.getItem('idVlasnika')
-  const proveraAdmin=localStorage.getItem('idAdmina');
+  const {kuca}=props
   const navigate=useNavigate();
-  // console.log(proveraSiter + 'ahahha')
-  return (
+  const [logovan,setLogovan]=useState('')
 
+  useEffect(()=>
+  {
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`
+  }}).then(res=>
+    {
+       setLogovan(res.data)
+       console.log(res.data)
+    }).catch(err=>
+      {
+        if(err.response.status)
+        {
+          //  alert('Niste logovani')
+        }
+      })
+  },[])
+ 
+  return (
 <div className='wrapper'>
-{/* { proveraVlasnik  ? <NavbarVlasnik/> :<Header />} */}
-{ proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/>  :(proveraAdmin ? <HeaderAdmin/> : <Header/>))} 
+{ logovan.tip==0 ? <NavbarVlasnik/>: (logovan.tip==1 ?  <NavBarSiter/> :(logovan.tip==2 ? <HeaderAdmin/> : <Header/>))} 
   <section id="hero">
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>
       <h2>Pravo mesto za vas i vašeg najboljeg prijatelja</h2>
-      { proveraSiter ?  <a href="#about"  hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> :
-       (proveraVlasnik ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a>  :
-       (proveraAdmin ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> : 
+      {logovan.tip==1?  <a href="#about"  hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> :
+       (logovan.tip==0 ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a>  :
+       (logovan.tip==2?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> : 
        <a hidden={false} className="btn-get-started" onClick={()=>{navigate('/registerRoute')}}>
         Zapocnite Doggy avanturu!
         </a> ))} 
-      
     </div>
   </section>
-
   <main id="main">
-
 <About/>
 <NadjiSittera/>
 <PostaniSitter/>
 <Recenzije/>
 <Usluge/>
-    
     <section id="contact"  xs={12} md={6}>
       <div className="container" xs={12} md={6}>
         <div className="section-header">
@@ -61,15 +69,12 @@ export const Home = (props) => {
       </div>
      
      <div className='mapa' style={{display:'flex'}} >
-     
       {/* <iframe title='myfeame' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameBorder="0" style={{border:0}} allowFullScreen></iframe> */}
       <iframe src="https://www.google.com/maps/d/embed?mid=1MHPHSMUMxGVcx5mMF587j5qzg6b5d0E&ehbc=2E312F" width="1520" height="480" style={{display:'flex'}}></iframe>
       </div>
       <div className="container mt-5" >
         <div className="row justify-content-center" >
-
           <div className="col-lg-3 col-md-4">
-
             <div className="info" style={{display:'contents'}} >
               <div>
                 <i className="bi bi-geo-alt"></i>
@@ -86,16 +91,7 @@ export const Home = (props) => {
                 <p >+381 064 123 4567</p>
               </div>
             </div>
-
-            {/* <div className="social-links" >
-              <a href="/#"  className="twitter"style={{margin:'5px'}}><i className="bi bi-twitter"></i></a>
-              <a href="/#" className="facebook"style={{margin:'5px'}}><i className="bi bi-facebook"></i></a>
-              <a href="/#" className="instagram"style={{margin:'5px'}}><i className="bi bi-instagram"></i></a>
-              <a href="/#" className="linkedin"style={{margin:'5px'}}><i className="bi bi-linkedin"></i></a>
-            </div> */}
-
         </div>
-
       </div>
       </div>
     </section>

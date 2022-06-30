@@ -12,6 +12,7 @@ import { red } from '@mui/material/colors';
 import Footer from '../../components/Footer.js'
 import PojedinacnaKartica from '../komentarisanjeIOcenjivanje/pojedinacnaKartica/index.jsx';
 import HeaderVlasnik from '../headerVlasnik/index.js'
+import axios from 'axios'
 const KomentariasnjeIOcenjivanje = props => {
   const classes = classStyles();
   const navigate = useNavigate();
@@ -20,8 +21,22 @@ const KomentariasnjeIOcenjivanje = props => {
   // console.log(idSitera);
 
   const idSitera = localStorage.getItem('idSitera');
-
+const{komentar}=props;
+const [siter, postaviSitera] = useState([]);
+useEffect(() => {
+  async function vrati()
+  {
+  const TOKEN=localStorage.getItem('token')
+ await fetch('https://localhost:5001/Siter/vratiSiteraPoId?id=' + idSitera,
+ {
+  headers:{ Authorization: `Bearer ${TOKEN}`
+}}).then(p=>{console.log(p)
+      p.json().then(p=>postaviSitera(p))
+      })}
+      vrati();
+}, []);
   const [komentari, postaviKomentar] = useState([]);
+  const[menjaj,setMenjaj]=useState('')
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
     fetch(
@@ -35,20 +50,14 @@ const KomentariasnjeIOcenjivanje = props => {
       const recenzije = recenzijeSvihSitera.filter(
         recenzijaSitera => recenzijaSitera.siterId == idSitera
       );
-
       postaviKomentar(recenzije);
     });
   }, []);
 
-  const [siter, postaviSitera] = useState([]);
-  useEffect(() => {
-    fetch(vratiSveSitereUrl).then(async res => {
-      const siteri = await res.json();
-      const r = siteri.find(s => s.id == idSitera);
-      postaviSitera(r);
-    });
-  }, []);
-
+const brisiID=()=>
+{
+   localStorage.removeItem('idSitera')
+}
   return (<>
     <div className='a' style={{minHeight:'752px',backgroundColor:'#95e36e61'}}>
       <HeaderVlasnik />
@@ -81,6 +90,7 @@ const KomentariasnjeIOcenjivanje = props => {
             }}
             onClick={() => {
               navigate(sitterRoute);
+              brisiID();
             }}
           >
             Vrati se nazad
@@ -98,6 +108,7 @@ const KomentariasnjeIOcenjivanje = props => {
               ocena={k.ocena}
               key={index}
               vlasnikId={k.vlasnikId}
+              comment={komentar}
             />
           );
         })}

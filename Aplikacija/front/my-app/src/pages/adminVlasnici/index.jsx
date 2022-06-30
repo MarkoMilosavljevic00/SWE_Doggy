@@ -13,19 +13,19 @@ const AdminVlasnici = () => {
   const navigate = useNavigate();
   const classes = classStyles();
   const [siteriKojiSePrikazuju, postaviSitereKojiSePrikazuju] = useState([]);
-
   const [stranica, postaviStranicu] = useState(1);
   const [ukupanBrojStranica, postaviUkupanBrojStranica] = useState(1);
   const [brojObjavaPoStrani, postaviBrojObjavaPoStrani] = useState(2);
-
   const [vlasnici, setVlasnici] = useState([]);
 
   useEffect(() => {
-    fetch('https://localhost:5001/Vlasnik/vratiSveVlasnike').then(async res => {
+    const TOKEN=localStorage.getItem('token')
+    fetch('https://localhost:5001/Vlasnik/vratiSveVlasnike',
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+    }).then(async res => {
       const rez = await res.json();
-
       setVlasnici(rez);
-
       const objave = [];
       if (rez.length > brojObjavaPoStrani) {
         for (let i = 0; i < brojObjavaPoStrani; i++) {
@@ -37,7 +37,6 @@ const AdminVlasnici = () => {
         }
       }
       postaviSitereKojiSePrikazuju(objave);
-
       if ((rez.length / brojObjavaPoStrani) % 1 != 0) {
         //check if number have decimal places, example: 23 % 1 = 0, 23.5 % 1 = 0.5
         postaviUkupanBrojStranica(Math.ceil(rez.length / brojObjavaPoStrani));
