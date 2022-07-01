@@ -29,8 +29,14 @@ const Admin = () => {
     });
   };
   const navigate = useNavigate();
+  
   useEffect(() => {
-    fetch(vratiSveSitereUrl).then(async res => {
+    const TOKEN=localStorage.getItem('token')
+
+    fetch(vratiSveSitereUrl,
+      {
+        headers:{Authorization: `Bearer ${TOKEN}`}
+      }).then(async res => {
       const rezultat = await res.json();
       postaviSitere(rezultat);
       console.log(rezultat)

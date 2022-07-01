@@ -281,83 +281,7 @@ const buttons = [
   <Button key="three" onClick={()=>{pending_zahtevi();handlePending();}}>Na cekanju</Button>,
   <Button style={{borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}key="four"onClick={()=>{gotovi_zahtevi();handleGotovi();}}>Gotovi</Button>,
 ];
-//   const [ker,setKer]=useState('')
-// const [ker2,setKet2]=useState({ime:' ',index:-1})
-// const [ker3,setKer3]=useState({ime:'',index:-1})
-// const [ker4,setKer4]=useState({ime:'',index:-1})
-// const [ker5,setKer5]=useState({ime:'',index:-1})
-// const vrati_psa=(props,index)=>
-// {
-//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-//         res=>
-//         {
-//             console.log(res.data)
-//             setKer(res.data.ime)
-//             // setKet2({ime:res.data.ime,index:index})
-//             // setKer3({ime:res.data.ime,index:index})
-//             // setKer4({ime:res.data.ime,index:index})
-//             // setKer5({ime:res.data.ime,index:index})
-//         }
-//     )
-// }
-// const vrati_psa1=(props,index)=>
-// {
-//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-//         res=>
-//         {
-//             console.log(res.data.ime)
-//             // setKer(res.data.ime)
-//             // setKet2({ime:res.data.ime,index:index})
-//             // setKer3({ime:res.data.ime,index:index})
-//             setKer4({ime:res.data.ime,index:index})
-//             console.log(ker4.ime)
-//             // setKer5({ime:res.data.ime,index:index})
-//         }
-//     )
-// }
-// const vrati_psa2=(props,index)=>
-// {
-//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-//         res=>
-//         {
-//             console.log(res.data)
-//             // setKer(res.data.ime)
-//             setKet2({ime:res.data.ime,index:index})
-//             // console.log(ker2 + 'ahahaha')
-//             // setKer3({ime:res.data.ime,index:index})
-//             // setKer4({ime:res.data.ime,index:index})
-//             // setKer5({ime:res.data.ime,index:index})
-//         }
-//     )
-// }
-// const vrati_psa3=(props,index)=>
-// {
-//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-//         res=>
-//         {
-//             console.log(res.data)
-//             // setKer(res.data.ime)
-//             // setKet2({ime:res.data.ime,index:index})
-//             setKer3({ime:res.data.ime,index:index})
-//             // setKer4({ime:res.data.ime,index:index})
-//             // setKer5({ime:res.data.ime,index:index})
-//         }
-//     )
-// }
-// const vrati_psa4=(props,index)=>
-// {
-//     Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas='+ props).then(
-//         res=>
-//         {
-//             console.log(res.data)
-//             // setKer(res.data.ime)
-//             // setKet2({ime:res.data.ime,index:index})
-//             // setKer3({ime:res.data.ime,index:index})
-//             // setKer4({ime:res.data.ime,index:index})
-//             setKer5({ime:res.data.ime,index:index})
-//         }
-//     )
-// }
+
 const [komentar,setKomentar]=useState('');
 const [ocena,setOcena]=useState('');
 
@@ -571,6 +495,7 @@ const [data,setData]=useState(
                        }
                        const izmeni_sifru=()=>
                        {
+                        const TOKEN=localStorage.getItem('token')
                         if(loged.id==='')
    {
       alert('Greska!!!')
@@ -590,7 +515,8 @@ const [data,setData]=useState(
                             id:loged.id,                         
                             sifra:profil.sifra                            
                        
-                          }).then(res=>
+                          }, { headers:{ Authorization: `Bearer ${TOKEN}`}
+                        }).then(res=>
                             {
                                console.log(res + 'zasto')
                                setProfil(res.data)

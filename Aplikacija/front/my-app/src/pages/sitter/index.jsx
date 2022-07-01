@@ -94,6 +94,7 @@ const Sitter = (props) => {
   const buttonPotvrdiOnCLick = () => {
     const city = grad != 'sve' ? grad : ' ';
     console.log(city);
+    const TOKEN=localStorage.getItem('token')
     fetch(
       'https://localhost:5001/Siter/filterSiteri?grad=' +
         city +
@@ -103,7 +104,10 @@ const Sitter = (props) => {
         cenaDo +
         '&minOcena=' +
         Ocena
-    ).then(async res => {
+    ,
+    {
+      headers:{Authorization:`Bearer ${TOKEN}`}
+    }).then(async res => {
       const results = await res.json();
 
       postaviSitere(results);

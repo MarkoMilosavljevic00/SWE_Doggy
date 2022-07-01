@@ -87,7 +87,11 @@ const NavBarSiter=()=> {
   },[])
   useEffect(()=>
   {
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + logovan.id).then(res=>
+    const TOKEN=localStorage.getItem('token')
+    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + logovan.id,
+    {
+      headers:{ Authorization: `Bearer ${TOKEN}`}
+  }).then(res=>
     {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)

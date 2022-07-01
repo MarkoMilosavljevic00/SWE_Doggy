@@ -58,32 +58,32 @@ export default function CardPristigliZahtevi(props) {
        })
        }, []);
 
-      const prihvati_uslugu = idUsluge  =>
-{
-  const TOKEN=localStorage.getItem('token')
-    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + idUsluge + '&status=1',
-    {
-    headers:{ Authorization: `Bearer ${TOKEN}`}
-    }).then(
-    res =>
-        { 
-          
-             console.log(res.data)
-             alert('Uspesno ste prihvatili uslugu!')
-            window.location.reload(false)
-          } 
-        
-        
-    ).catch((error)=>
-      {
-        alert(error.response)
-      
-      })
-}
+       const prihvati_uslugu = (id)  =>
+       {
+         const TOKEN=localStorage.getItem('token')
+           Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + id + '&status=1',{},
+           {
+            headers:{Authorization: `Bearer ${TOKEN}`}
+           }).then(
+           res =>
+               { 
+                 
+                    console.log(res.data)
+                    alert('Uspesno ste prihvatili uslugu!')
+                   window.location.reload(false)
+                 } 
+               
+               
+           ).catch((error)=>
+             {
+               alert(error.response.data)
+             
+             })
+       }
 const odbij_uslugu=(id) =>
 {
   const TOKEN=localStorage.getItem('token')
-    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + id + '&status=2',
+    Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + id + '&status=2',{},
     {
     headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(

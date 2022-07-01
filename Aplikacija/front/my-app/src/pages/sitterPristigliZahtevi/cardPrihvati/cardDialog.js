@@ -45,7 +45,7 @@ const CardDialog = props => {
   const obavljena=(props)=>
     {
       const TOKEN=localStorage.getItem('token')
-        Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3',
+        Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3',{},
         {
     headers:{ Authorization: `Bearer ${TOKEN}`}
         }).then(

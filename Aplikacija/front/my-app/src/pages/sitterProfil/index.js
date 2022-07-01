@@ -245,6 +245,7 @@ if(profil.prezime==='')
    }
    const izmenisifru=()=>
 { 
+   const TOKEN=localStorage.getItem('token')
    if(user.id==='')
    {
       alert('Greska!!!')
@@ -263,6 +264,9 @@ if(profil.prezime==='')
 {
    id:user.id,
    sifra:profil.sifra,
+},
+{
+    headers:{ Authorization: `Bearer ${TOKEN}`}
 }
    ).then(
       res=>

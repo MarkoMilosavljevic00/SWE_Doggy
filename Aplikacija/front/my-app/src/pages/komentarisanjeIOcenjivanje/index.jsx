@@ -13,6 +13,7 @@ import Footer from '../../components/Footer.js'
 import PojedinacnaKartica from '../komentarisanjeIOcenjivanje/pojedinacnaKartica/index.jsx';
 import HeaderVlasnik from '../headerVlasnik/index.js'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom';
 const KomentariasnjeIOcenjivanje = props => {
   const classes = classStyles();
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ useEffect(() => {
   async function vrati()
   {
   const TOKEN=localStorage.getItem('token')
+
  await fetch('https://localhost:5001/Siter/vratiSiteraPoId?id=' + idSitera,
  {
   headers:{ Authorization: `Bearer ${TOKEN}`
@@ -39,6 +41,8 @@ useEffect(() => {
   const[menjaj,setMenjaj]=useState('')
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
+    
+  
     fetch(
       'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera,
       {

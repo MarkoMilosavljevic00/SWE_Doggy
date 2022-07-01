@@ -40,7 +40,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    console.log('darjanaanannana');
+    // console.log('darjanaanannana');
 
     if (!validateEmail(email)) {
       alert('Niste uneli validan email!');
@@ -72,7 +72,7 @@ const Login = () => {
           // localStorage.setItem('korisnik', JSON.stringify(res.korisnik));
           localStorage.setItem('token', res.token);
           setMilica(true)
-          alert('Uspesno ste se ulogovali kao Vlasnik');
+          alert('Uspesno ste se ulogovali!');
           // if (res.korisnik.tip == 0) {
           //   localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
           //   alert('Uspesno ste se ulogovali kao Vlasnik');
