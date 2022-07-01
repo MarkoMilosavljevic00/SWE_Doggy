@@ -42,7 +42,7 @@ namespace Doggy.WebAPI.Controllers
             return new JsonResult(siterService.VratiNevalidneSitere());
         }
 
-        [Authorize(Roles = "Siter,Admin")]
+        [Authorize(Roles = "Siter,Admin,Vlasnik")]
         [HttpGet]
         [Route("vratiSveGradoveSvihSitera")]
         public IActionResult VratiSveGradoveSvihSitera()
