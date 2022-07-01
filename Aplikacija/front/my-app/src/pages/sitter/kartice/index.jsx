@@ -103,8 +103,8 @@ export default function RecipeReviewCard(props) {
               value={id}
               onChange={e => e.target.value}
               onClick={() => {
-                localStorage.setItem('idSitera', id);
-                navigate('/vlasnikRoute');
+                // localStorage.setItem('idSitera', id);
+                navigate('/vlasnikRoute',{state:id}); 
               }}
             >
               Odaberi sittera

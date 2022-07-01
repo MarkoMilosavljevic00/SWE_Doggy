@@ -41,7 +41,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Axios from 'axios'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -53,6 +53,9 @@ import Typography from '../../components/Typography';
 const Vlasnik=(props)=> {
   const[psi,setPsi]=useState('')
   const {vlasnik}=props;
+
+  const location=useLocation();
+  console.log(location.state)
   const psici=()=>
   {
     const TOKEN=localStorage.getItem('token')
@@ -155,10 +158,10 @@ const funkcija_adresa=()=>
 {
   console.log(adresaPreuzimanjaPsa)
 }
-const siterId=localStorage.getItem('idSitera');
+// const siterId=localStorage.getItem('idSitera');
 const funkcija_napomena=()=>
 {
-  console.log(siterId)
+  // console.log(siterId)
   console.log(pasId)
   // console.log(vlasnikId)
 }
@@ -171,6 +174,7 @@ if(pocetak>kraj)
   alert('Greska kod datuma!')
   return
 }
+const siterId=location.state;
   if(siterId===null){alert('Molimo Vas odaberite sitera!!!')}
   const podaci={
     
@@ -198,7 +202,7 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
     {
     
       console.log(res.data)
-      localStorage.removeItem('idSitera')
+      // localStorage.removeItem('idSitera')
       alert('Uspesno ste poslali sitter-u zahtev!!!')
       
     }).catch(err=>
@@ -216,10 +220,10 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
     })
 }
 
-  const brisiS=()=>
-  {
-    const siter=localStorage.removeItem('idSitera')
-  }
+  // const brisiS=()=>
+  // {
+  //   const siter=localStorage.removeItem('idSitera')
+  // }
 
     return (
       
@@ -228,9 +232,9 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
 
 <div className={klase.main}>
    <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'700px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
-       <IconButton color='primary'  onClick={()=>{brisiS();navigate('/sitterRoute')}}>
+       <IconButton color='primary'  onClick={()=>{navigate('/sitterRoute')}}>
        <ArrowBackIosNewIcon/>
-       <Typography variant='h6'color='black' onClick={()=>{brisiS();navigate('/sitterRoute');}}>Nazad</Typography>
+       <Typography variant='h6'color='black' onClick={()=>{navigate('/sitterRoute');}}>Nazad</Typography>
        </IconButton>
    <h1 className={klase.naslov}>Kreirajte zahtev</h1>
    <div className={klase.selectbox}>
@@ -275,7 +279,7 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
       >
         {psi && psi.map(x=>
           (
-        <MenuItem   onClick={()=>{dogs(x.id)}} value={x.id}><i class="fa-solid fa-dog"><h5>{x.ime} </h5></i></MenuItem>
+        <MenuItem onClick={()=>{dogs(x.id)}} value={x.id}><i class="fa-solid fa-dog"><h5>{x.ime} </h5></i></MenuItem>
           ))}
           {console.log(pasId + 'pas id je')}
       </Select>

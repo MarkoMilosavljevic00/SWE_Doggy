@@ -106,10 +106,11 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
          <div className={classes.divpristigli}>
          <Typography variant='h6' color='black' style={{textAlign:'center'}} hidden={!p1}>Ovde su vaši pristigli zahtevi:</Typography>
            <div className={classes.zahteviPristigli} hidden={!p1}>
-         {data1.map((x) => {
+         {data1.map((x,index) => {
               return (
                 
-                <CardPristigliZahtevi   
+                <CardPristigliZahtevi
+                key={index}   
                   id={x.id}
                   ime={x.vlasnik.ime}
                   prezime={x.vlasnik.prezime}
@@ -132,9 +133,10 @@ Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' +
         <div className={classes.divpristigli}>
         <Typography variant='h6' color='black' style={{textAlign:'center'}}hidden={!p2}>Ovde su zahtevi koji ste prihvatili:</Typography>
        <div className={classes.zahteviPrihvaceni} hidden={!p2}>
-       {accept.map((p) => {
+       {accept.map((p,index) => {
           return (
             <CardPrihvaceneUsluge 
+            key={index}
             P2={p2}
               id={p.id}
               ime={p.vlasnik.ime}

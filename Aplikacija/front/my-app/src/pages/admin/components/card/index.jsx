@@ -35,9 +35,9 @@ export default function BasicCard(props) {
     }
     fetch('https://localhost:5001/Siter/obrisiSitera?id=' + idSitera, {
       method: 'DELETE',
-    },
-    {
-      headers:{'Authorization':`Bearer ${TOKEN}`}
+    
+    
+      headers:{Authorization:`Bearer ${TOKEN}`}
     }).then(async response => {
       if (response.ok) {
         const res = await response.json();

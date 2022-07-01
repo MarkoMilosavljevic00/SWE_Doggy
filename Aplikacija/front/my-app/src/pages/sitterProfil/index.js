@@ -203,46 +203,46 @@ if(profil.prezime==='')
          }
       })
    }
-   const izmeniemail=()=>
-{  
-   const TOKEN=localStorage.getItem('token')
-   // {console.log('2')}
-   // {console.log(profil)}
-   if(user.id==='')
-   {
-      alert('Greska!!!')
-   }
-   if(profil.email==='')
-   {
-     alert('Polje email ne sme biti prazno!!!')
-     return
-   }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
-{
-   id:user.id,
- email:profil.email
+//    const izmeniemail=()=>
+// {  
+//    const TOKEN=localStorage.getItem('token')
+//    // {console.log('2')}
+//    // {console.log(profil)}
+//    if(user.id==='')
+//    {
+//       alert('Greska!!!')
+//    }
+//    if(profil.email==='')
+//    {
+//      alert('Polje email ne sme biti prazno!!!')
+//      return
+//    }
+//    Axios.put('https://localhost:5001/Siter/azurirajSitera',
+// {
+//    id:user.id,
+//  email:profil.email
    
-},
-{
-    headers:{ Authorization: `Bearer ${TOKEN}`}
-}
-   ).then(
-      res=>
-      {
-         console.log(res.data)
-         setProfil(res.data)
-         setData(res.data)
-         window.location.reload(false)
+// },
+// {
+//     headers:{ Authorization: `Bearer ${TOKEN}`}
+// }
+//    ).then(
+//       res=>
+//       {
+//          console.log(res.data)
+//          setProfil(res.data)
+//          setData(res.data)
+//          window.location.reload(false)
        
-      }
-      ).catch((error)=>
-      {
-        if(error.response.status)
-        {
-         alert(error.response.data)
-        }
-      })
-   }
+//       }
+//       ).catch((error)=>
+//       {
+//         if(error.response.status)
+//         {
+//          alert(error.response.data)
+//         }
+//       })
+//    }
    const izmenisifru=()=>
 { 
    const TOKEN=localStorage.getItem('token')
@@ -482,14 +482,14 @@ if(profil.cenaPoSatu==='')
            
              </Grid>
              <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniprezime();}}startIcon={<EditIcon/>}> Izmeni </Button>
-             <Grid item xs={6} sm={6} md={4} lg={3}>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Email:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) }  disabled={ch}></input>
             
              </Grid>
-             <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniemail();}}startIcon={<EditIcon/>}> Izmeni </Button>
+             <Button style={{marginLeft:'110px'}}onClick={()=>{izmeniemail();}}startIcon={<EditIcon/>}> Izmeni </Button> */}
              <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label>Korisničko Ime:</label>
              </Grid>

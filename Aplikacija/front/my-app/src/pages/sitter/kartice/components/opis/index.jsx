@@ -135,8 +135,8 @@ export default function CustomizedDialogs(props) {
                 color: 'white',
               }}
               onClick={() => {
-                localStorage.setItem('idSitera', id);
-                navigate(komentarisanjeIOcenjivanjeRoute);
+                // localStorage.setItem('idSitera', id);
+                navigate(komentarisanjeIOcenjivanjeRoute,{state:id});
               }}
             >
               Vidi recenzije o siteru

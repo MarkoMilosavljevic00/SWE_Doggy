@@ -417,46 +417,46 @@ const [data,setData]=useState(
                 window.location.reload(false)
                })
              }
-             const izmeni_email=()=>
-             { const TOKEN=localStorage.getItem('token')
-             if(token!=TOKEN || !TOKEN)
-    {
-      window.location.reload(false)
-      return
-    }
-              if(loged.id==='')
-   {
-      alert('Greska!!!')
-   }
-              if(profil.email==='')
-              {
-                alert('Polje email ne sme biti prazno!!!')
-                return
-              }
-                Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
-                {
-                  id:loged.id,
+  //            const izmeni_email=()=>
+  //            { const TOKEN=localStorage.getItem('token')
+  //            if(token!=TOKEN || !TOKEN)
+  //   {
+  //     window.location.reload(false)
+  //     return
+  //   }
+  //             if(loged.id==='')
+  //  {
+  //     alert('Greska!!!')
+  //  }
+  //             if(profil.email==='')
+  //             {
+  //               alert('Polje email ne sme biti prazno!!!')
+  //               return
+  //             }
+  //               Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+  //               {
+  //                 id:loged.id,
                  
-                  email:profil.email
+  //                 email:profil.email
                 
              
-                },{
-                  headers:{ Authorization: `Bearer ${TOKEN}`}
-                }).then(res=>
-                  {
-                     console.log(res + 'zasto')
-                     setProfil(res.data)
-                     setData(res.data)
-                     window.location.reload(false)
+  //               },{
+  //                 headers:{ Authorization: `Bearer ${TOKEN}`}
+  //               }).then(res=>
+  //                 {
+  //                    console.log(res + 'zasto')
+  //                    setProfil(res.data)
+  //                    setData(res.data)
+  //                    window.location.reload(false)
                     
-                    }).catch((error)=>
-                    {
-                      if(error.response.status)
-                      {
-                        alert(error.response.data)
-                      }
-                    })
-                  }
+  //                   }).catch((error)=>
+  //                   {
+  //                     if(error.response.status)
+  //                     {
+  //                       alert(error.response.data)
+  //                     }
+  //                   })
+  //                 }
                   const izmeni_korisnicko_ime=()=>
                   { const TOKEN=localStorage.getItem('token')
                   if(token!=TOKEN || !TOKEN)
@@ -822,17 +822,17 @@ let PocetakVremePending=null
              <input type='text' id='opis' value={profil.prezime} onChange={ (e) =>  setProfil((profil)=>({...profil,prezime:e.target.value})) }  disabled={ch}></input>
              </Grid>         
               <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_prezime();}}startIcon={<EditIcon/>}> Izmeni</Button>
-             <Grid item xs={6} sm={6} md={4} lg={3}>
+             {/* <Grid item xs={6} sm={6} md={4} lg={3}>
                    <label style={{}}>Email:</label>
              </Grid>
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis' value={profil.email} onChange={ (e) =>  setProfil((profil)=>({...profil,email:e.target.value})) } disabled={ch}></input>
              </Grid>
             
-              <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>
-             <Grid item xs={6} sm={6} md={4} lg={3}>
-                   <label style={{}}>Korisničko Ime:</label>
-             </Grid>
+        <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>*/}
+              <Grid item xs={6} sm={6} md={4} lg={3}>
+                    <label style={{}}>Korisničko Ime:</label>
+              </Grid> 
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis'  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
              </Grid>

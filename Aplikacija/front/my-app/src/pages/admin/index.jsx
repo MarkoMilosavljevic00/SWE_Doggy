@@ -21,7 +21,11 @@ const Admin = () => {
   const [brojObjavaPoStrani, postaviBrojObjavaPoStrani] = useState(3);
 
   const uradi = () => {
-    fetch(vratiSveNevalidneSittere).then(async res => {
+    const TOKEN=localStorage.getItem('token')
+    fetch(vratiSveNevalidneSittere,
+      {
+        headers:{Authorization:`Bearer ${TOKEN}`}
+      }).then(async res => {
       const rez = await res.json();
       postaviNevalidneSittere(rez);
       setSucess(true);
@@ -98,6 +102,7 @@ const Admin = () => {
             {nevalidni.map((nevalidan, index) => {
               return (
                 <Card
+                key={index}
                   ime={nevalidan.ime}
                   prezime={nevalidan.prezime}
                   telefon={nevalidan.brojTelefona}
@@ -150,6 +155,7 @@ const Admin = () => {
           {siteriKojiSePrikazuju.map((siter, index) => {
             return (
               <Card
+              key={index}
                 ime={siter.ime}
                 prezime={siter.prezime}
                 korisnicko_ime={siter.korisnickoIme}

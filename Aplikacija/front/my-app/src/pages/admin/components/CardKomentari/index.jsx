@@ -11,14 +11,18 @@ import classStyles from './styles';
 
 export default function CardKomentari(props) {
   const { id, vreme, komentar, ocena } = props;
+  {console.log(props)}
+  console.log('CardKomentar')
   const classes = classStyles();
   const [obrisiKomentar, setObrisiKomentar] = useState([]);
 
   const obrisi = () => {
+    const TOKEN=localStorage.getItem('token')
     fetch(
       'https://localhost:5001/Recenzija/obrisiRecenziju?idRecenzija=' + id,
       {
         method: 'DELETE',
+        headers:{Authorization:`Bearer ${TOKEN}`}
       }
     ).then(async response => {
       if (response.ok) {

@@ -17,26 +17,27 @@ const CardDialog = props => {
   const [scroll, setScroll] = React.useState('paper');
   const { idSitera } = props;
   const [komentari, postaviKomentar] = useState([]);
-  useEffect(() => {
+const otvori=() => {
     const TOKEN=localStorage.getItem('token')
     if(token!=TOKEN || !TOKEN)
     {
       window.location.reload(false)
       return
     }
-    fetch(
-      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera
-    ,
+   fetch(
+      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera,
     {
-      headers:{Authorize: `Bearer ${TOKEN}`}
+      headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(async res => {
+      {console.log(idSitera)}
       const recenzijeSvihSitera = await res.json();
       const recenzije = recenzijeSvihSitera.filter(
         recenzijaSitera => recenzijaSitera.siterId == idSitera
       );
       postaviKomentar(recenzije);
+      {console.log(komentari)}
     });
-  }, []);
+  };
   const handleClickOpen = scrollType => () => {
     const TOKEN=localStorage.getItem('token')
     if(token!=TOKEN || !TOKEN)
@@ -58,12 +59,13 @@ const CardDialog = props => {
         descriptionElement.focus();
       }
     }
+    console.log('mica')
   }, [open]);
   return (
     <div>
       <Button
         style={{ color: 'white', backgroundColor: '#07a607' }}
-        onClick={handleClickOpen('paper')}
+        onClick={()=>{setOpen(true);otvori();}}
       >
         Prikazi komentare i ocene
       </Button>
@@ -84,9 +86,13 @@ const CardDialog = props => {
             tabIndex={-1}
           >
             <h5 style={{ color: 'black' }}>
+              
               {komentari.map((k, index) => {
+                // console.log(k)
                 return (
+              
                   <CardKomentari
+                  key={index}
                     id={k.id}
                     vreme={k.vreme}
                     komentar={k.komentar}

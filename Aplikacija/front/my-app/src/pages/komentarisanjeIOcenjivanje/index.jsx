@@ -3,7 +3,7 @@ import classStyles from './styles';
 import HeaderLogin from '../../components/HeaderLogin';
 import Kartice from '../komentarisanjeIOcenjivanje/kartice/index.jsx';
 import { vratiSveSitereUrl } from '../../backendAddress';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { sitterRoute } from '../../router/routes';
 import { Button } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
@@ -15,13 +15,15 @@ import HeaderVlasnik from '../headerVlasnik/index.js'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom';
 const KomentariasnjeIOcenjivanje = props => {
+  const location=useLocation();
+  console.log(location.state)
   const classes = classStyles();
   const navigate = useNavigate();
   // const { state } = useLocation();
   // const { idSitera } = state;
   // console.log(idSitera);
 
-  const idSitera = localStorage.getItem('idSitera');
+  // const idSitera = localStorage.getItem('idSitera');
 const{komentar}=props;
 const [siter, postaviSitera] = useState([]);
 useEffect(() => {
@@ -29,7 +31,7 @@ useEffect(() => {
   {
   const TOKEN=localStorage.getItem('token')
 
- await fetch('https://localhost:5001/Siter/vratiSiteraPoId?id=' + idSitera,
+ await fetch('https://localhost:5001/Siter/vratiSiteraPoId?id=' + location.state,
  {
   headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(p=>{console.log(p)
@@ -44,7 +46,7 @@ useEffect(() => {
     
   
     fetch(
-      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + idSitera,
+      'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + location.state,
       {
     headers:{ Authorization: `Bearer ${TOKEN}`}
       }
@@ -52,16 +54,16 @@ useEffect(() => {
       const recenzijeSvihSitera = await res.json();
 
       const recenzije = recenzijeSvihSitera.filter(
-        recenzijaSitera => recenzijaSitera.siterId == idSitera
+        recenzijaSitera => recenzijaSitera.siterId == location.state
       );
       postaviKomentar(recenzije);
     });
   }, []);
 
-const brisiID=()=>
-{
-   localStorage.removeItem('idSitera')
-}
+// const brisiID=()=>
+// {
+//    localStorage.removeItem('idSitera')
+// }
   return (<>
     <div className='a' style={{minHeight:'752px',backgroundColor:'#95e36e61'}}>
       <HeaderVlasnik />
@@ -94,7 +96,7 @@ const brisiID=()=>
             }}
             onClick={() => {
               navigate(sitterRoute);
-              brisiID();
+              // brisiID();
             }}
           >
             Vrati se nazad
