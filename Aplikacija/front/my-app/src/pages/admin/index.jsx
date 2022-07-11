@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import classStyles from './styles';
 import HeaderLogin from '../../components/HeaderLogin';
 import Card from '../admin/components/card/index.jsx';
-import { vratiSveSitereUrl } from '../../backendAddress';
+import { filtrirajSitere, vratiSveSitereUrl } from '../../backendAddress';
 import { vratiSveNevalidneSittere } from '../../backendAddress';
 import Button from '@mui/material/Button';
 import BrojeviStranica from '../admin/components/brojevi/index.jsx';
@@ -37,7 +37,7 @@ const Admin = () => {
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
 
-    fetch(vratiSveSitereUrl,
+    fetch(filtrirajSitere,
       {
         headers:{Authorization: `Bearer ${TOKEN}`}
       }).then(async res => {
@@ -119,7 +119,7 @@ const Admin = () => {
           </div>
           <Button
               style={{ color: 'white', backgroundColor: '#07a607' }}
-              onClick={nazad}
+              onClick={()=>{nazad();}}
             >
               Nazad
             </Button>
@@ -140,7 +140,7 @@ const Admin = () => {
               Prikaži vlasnike
             </Button>
             <Button
-              onClick={uradi}
+              onClick={()=>{uradi();}}
               style={{
                 color: 'white',
                 backgroundColor: '#07a607',

@@ -18,7 +18,7 @@ const PristigliZahtevi=(props)=>
   {console.log(pristigli.id)}
   const classes = classStyles();
     const[data1,setData]=useState([])
-    const pristigle =()=>{
+    const pristigle =async()=>{
    
       const TOKEN=localStorage.getItem('token')
       if(token!=TOKEN || !TOKEN)
@@ -26,7 +26,7 @@ const PristigliZahtevi=(props)=>
         window.location.reload(false)
         return
       }
-       Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera='+ pristigli.id + '&status=0',
+       await Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera='+ pristigli.id + '&status=0',
        {
     headers:{ Authorization: `Bearer ${TOKEN}`
     }}).then(
@@ -49,7 +49,7 @@ const ispitaj_uslugu =(props)=>
 }
 
 const[accept,setAccept]=useState([])
-const prihvacene =()=>
+const prihvacene =async()=>
 {
   const TOKEN=localStorage.getItem('token')
   
@@ -58,7 +58,7 @@ const prihvacene =()=>
     window.location.reload(false)
     return
   }
-Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + pristigli.id + '&status=1',
+await Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + pristigli.id + '&status=1',
 {
 headers:{ Authorization: `Bearer ${TOKEN}`
 }
@@ -69,10 +69,10 @@ headers:{ Authorization: `Bearer ${TOKEN}`
     }
 )
 }
-const odbijene =()=>
+const odbijene =async()=>
 {
   const TOKEN=localStorage.getItem('token')
-Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + pristigli.id + '&status=2',
+await Axios.get('https://localhost:5001/Usluga/vratiUslugeSiteruPoStatusu?idSitera=' + pristigli.id + '&status=2',
 {
     headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(

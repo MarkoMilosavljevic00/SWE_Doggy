@@ -33,8 +33,9 @@ const Sitter = (props) => {
   const token=localStorage.getItem('token')
   useEffect(()=>
   {
+    async function vrati(){
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
     {
       headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(res=>
@@ -42,7 +43,8 @@ const Sitter = (props) => {
        setLogovan(res.data)
        console.log(res.data.id)
        setHandle1(!handle)
-    })
+    })}
+    vrati()
   },[])
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')

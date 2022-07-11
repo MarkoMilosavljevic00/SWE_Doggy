@@ -71,9 +71,9 @@ export default function CustomizedDialogs(props) {
   } = props;
 
   const [com, setCom] = useState('');
-  const komentari = props => {
+  const komentari = async (props) => {
     const TOKEN=localStorage.getItem('token')
-    Axios.get(
+    await Axios.get(
       'https://localhost:5001/Recenzija/vratiRecenzijeZaSitera?id=' + props
     ,{
       headers:{Authorization:`Bearer ${TOKEN}`}

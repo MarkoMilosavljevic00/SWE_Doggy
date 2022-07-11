@@ -28,10 +28,10 @@ export default function BasicSelect(props) {
     });
   }, []);
   const[siteri,setSiteri]=useState('')
-  const vratisve=()=>
+  const vratisve= async()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Siter/vratiSveSitere').then(
+   await Axios.get('https://localhost:5001/Siter/vratiSveSitere').then(
       res=>
       {
         console.log(res.data)

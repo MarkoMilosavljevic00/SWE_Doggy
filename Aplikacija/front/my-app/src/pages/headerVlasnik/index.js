@@ -71,8 +71,9 @@ const NavBarVlasnik=()=> {
   const[handle,setHandle1]=useState('')
   useEffect(()=>
   {
+    async function fetchData(){
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
     {
       headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(res=>
@@ -80,21 +81,24 @@ const NavBarVlasnik=()=> {
        setLogovan(res.data)
        console.log(res.data.id)
        setHandle1(!handle)
-    })
+    })}
+    fetchData();
   },[])
 const ajdi=logovan.id
 useEffect(()=>
 {
-  console.log(ajdi)
+  async function fetchData(){
+  
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
+   await Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + ajdi,
     {
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(res=>
     {
       console.log(res.data.slika + 'slik je')
       setSlika(res.data.slika)
-    })
+    })}
+    fetchData();
   },[handle])
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);

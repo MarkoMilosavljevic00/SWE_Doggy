@@ -55,8 +55,9 @@ export default function RecipeReviewCard(props) {
   const[pic,setPic]=useState('')
 useEffect(()=>
 {
+  async function fetchData(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
+  await Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
   
       headers:{ Authorization: `Bearer ${TOKEN}`}
     
@@ -66,7 +67,8 @@ useEffect(()=>
       console.log(res.data.slika)
       setPic(res.data.slika)
     }
-  )
+  )}
+fetchData();
 })
   return (
     <Card sx={{ width: 200, height:600 }} className={classes.kartica}>

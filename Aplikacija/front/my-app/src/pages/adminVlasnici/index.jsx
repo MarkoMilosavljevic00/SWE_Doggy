@@ -12,7 +12,7 @@ import HeaderAdmin from '../../components/HeaderAdmin'
 const AdminVlasnici = () => {
   const navigate = useNavigate();
   const classes = classStyles();
-  const [siteriKojiSePrikazuju, postaviSitereKojiSePrikazuju] = useState([]);
+  const [vlasniciKojiSePrikazuju, postaviVlasnikeKojiSePrikazuju] = useState([]);
   const [stranica, postaviStranicu] = useState(1);
   const [ukupanBrojStranica, postaviUkupanBrojStranica] = useState(1);
   const [brojObjavaPoStrani, postaviBrojObjavaPoStrani] = useState(2);
@@ -36,7 +36,7 @@ const AdminVlasnici = () => {
           objave.push(rez[i]);
         }
       }
-      postaviSitereKojiSePrikazuju(objave);
+      postaviVlasnikeKojiSePrikazuju(objave);
       if ((rez.length / brojObjavaPoStrani) % 1 != 0) {
         //check if number have decimal places, example: 23 % 1 = 0, 23.5 % 1 = 0.5
         postaviUkupanBrojStranica(Math.ceil(rez.length / brojObjavaPoStrani));
@@ -58,7 +58,7 @@ const AdminVlasnici = () => {
         objave.push(vlasnici[i]);
       }
     }
-    postaviSitereKojiSePrikazuju(objave);
+    postaviVlasnikeKojiSePrikazuju(objave);
   }, [stranica]);
   return (
     <div className={classes.container}>
@@ -71,7 +71,7 @@ const AdminVlasnici = () => {
           Nazad
         </Button>
       </div>
-      {siteriKojiSePrikazuju.map((vlasnik, index) => {
+      {vlasniciKojiSePrikazuju.map((vlasnik, index) => {
         return (
           <Card
             ime={vlasnik.ime}

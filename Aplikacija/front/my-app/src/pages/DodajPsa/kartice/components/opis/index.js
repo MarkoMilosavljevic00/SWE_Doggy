@@ -29,6 +29,7 @@ import { Popover } from '@mui/material';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import CardSlika from '../../../card.js';
 import Sitter from '../../../index.js';
+import Modal from '@mui/material/Modal';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -75,8 +76,9 @@ export default function CustomizedDialogs(props) {
   const token=localStorage.getItem('token')
   useEffect(()=>
   {
+    async function fetchData(){
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+    await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
     {
       headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(res=>
@@ -85,6 +87,8 @@ export default function CustomizedDialogs(props) {
        console.log(res.data.id)
        setHandle1(!handle1)
     })
+  }
+  fetchData();
   },[])
   const [open, setOpen] = React.useState(false);
   const {  id,
@@ -119,8 +123,9 @@ export default function CustomizedDialogs(props) {
   }
   useEffect(()=>
   {
+    async function fetchData(){
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + logovan.id,
+    await Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + logovan.id,
       {
         headers:{ Authorization: `Bearer ${TOKEN}`}
       
@@ -130,11 +135,12 @@ export default function CustomizedDialogs(props) {
       console.log(res.data + 'ahah')
       
       }
-    )
+    )}
+    fetchData();
   },[brisi,handle1])
 
   
-  const obrisiPsa = ()=>
+  const obrisiPsa = async ()=>
   {
     
     const TOKEN=localStorage.getItem('token')
@@ -143,7 +149,8 @@ export default function CustomizedDialogs(props) {
       window.location.reload(false)
       return
     }
-      Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id,
+  
+     await Axios.delete('https://localhost:5001/Pas/obrisiPsa?id=' + id,
       {
         headers:
         {
@@ -183,7 +190,7 @@ const [data,setData]=useState({
     vlasnikId:logovan.id
   
   })
-  const izmeniPsa =()=>
+  const izmeniPsa = async()=>
   {console.log(data)
     const TOKEN=localStorage.getItem('token')
   
@@ -198,7 +205,7 @@ const [data,setData]=useState({
       alert('Molimo Vas unesite validne informacija na formi za izmenu podataka o psu!')
       return
     }
-      Axios.put('https://localhost:5001/Pas/azurirajPsa',
+    await  Axios.put('https://localhost:5001/Pas/azurirajPsa',
       {  id:data.id,
          ime:data.ime,
          rasa:data.rasa,
@@ -236,11 +243,11 @@ const [data,setData]=useState({
 
 const[usluga,setUsluga]=useState([])
  useEffect(()=>{
-
+async function fetchData(){
    const TOKEN=localStorage.getItem('token')
   console.log('id psa je:' + id)
   // console.log('id vlasnika je:' + idVlasnika)
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + vlasnikId,
+ await Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasniku?idVlasnika=' + vlasnikId,
   { 
     
     headers:{ Authorization: `Bearer ${TOKEN}`}
@@ -252,6 +259,8 @@ const[usluga,setUsluga]=useState([])
       setUsluga(res.data)
     }
   )
+}
+fetchData();
 },[handle1])
 
   const navigate = useNavigate();
@@ -275,6 +284,20 @@ const handleIzmena=()=>
   }
   setIzmena(!izmena)
 }
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
   return (
     <>
     <div className={classes.container}>
@@ -287,7 +310,22 @@ const handleIzmena=()=>
       >
         Informacije o psu
       </Button>
-      <Button variant='contained' color='error' size='small' onClick={()=>{obrisiPsa();}} >Obrisi psa</Button>
+      <Button variant='contained' color='error' size='small' onClick={handleOpenModal} >Obrisi psa</Button>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+           Da li zaiste zelite da obrisete Vaseg psa?
+          </Typography>
+                  <button type='button' className="btn btn-primary" onClick={()=>{obrisiPsa();}} >Potvrdi</button>
+        <button type='button' className="btn btn-outline-primary ms-1" onClick={handleCloseModal} >Zatvori</button>
+                
+        </Box>
+      </Modal>
     {usluga.map(x=>
     (
       <CardDialog  imesitera={x.siter.ime} />    

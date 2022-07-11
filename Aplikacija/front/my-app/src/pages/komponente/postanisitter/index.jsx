@@ -22,29 +22,14 @@ const PostaniSitter=()=>
       Ukoliko si osoba koja voli pse i koja želi da bude u njihovom prisustvu, a prirom i zaradi novac, ne traži dalje, na pravom si mestu!
        </h4>
        
-       {idSitera ? 
-       <button
-         className={classes.dugme}
-         onClick={()=>{navigate(profilSitterRoute)}}
-       >
-        Postani sitter
-       </button>
-       :
-       (idVlasnika ?
-        <button
-        className={classes.dugme}
-        onClick={() => {alert('Ulogovani ste kao vlasnik!!!')}}
-        >
-         Postani sitter
-       </button>
-       :
+      
        <button
        className={classes.dugme}
        onClick={() => {navigate(registerRoute)}}
        >
         Postani sitter
       </button>
-         )}
+       
      </div>
      <div className="class=col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch position-relative">
      <CardContent>

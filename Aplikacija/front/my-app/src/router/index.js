@@ -20,15 +20,13 @@ import SitterProfil from '../pages/sitterProfil/index.js';
 import AdminVlasnici from '../pages/adminVlasnici/index.jsx';
 import Axios from 'axios';
 import * as routes from './routes';
-import ProtectedRoute from './ProtectedROute.js';
+
 import { Navigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import ProtectedRouteLogovanTrue from './ProtectedRouteLogin.js';
-import ProtectedRouteAdmin from './ProtectedRouteAdmin.js';
 import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Box';
 import NotFound from './NotFound.js';
-import ProtectAdmin from './ProtectAdmin.js';
+
 const Router = () => {
 
   const [logovan,setLogovan]=useState('')
@@ -37,16 +35,16 @@ const Router = () => {
   const TOKEN=localStorage.getItem('token')
   useEffect(()=>
   {
-    
+    async function fetchData(){
     setLoading(true)
-Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
     {
      
       headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(res=>
     {
      
-       setLogovan(()=>(res.data))
+       setLogovan(res.data)
        setLoading(false)
       
     }).catch(err=>
@@ -55,7 +53,8 @@ Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
 
       setLoading(false)
      
-      })
+      })}
+      fetchData();
   
 },[]);
 
@@ -65,8 +64,6 @@ if(isLoading)
 return <Grid style={{display:'flex',justifyContent:'center',width:'100%',height:'100vh',alignItems:'center'}}>
 <CircularProgress/>
 </Grid>
- 
-
 }
 else
   return (
@@ -75,43 +72,43 @@ else
    
     <BrowserRouter>
       <Routes>
-       <Route element={<ProtectedRouteLogovanTrue user={logovan} />}>
+       {/* <Route element={<ProtectedRouteLogovanTrue user={logovan} />}>
 
-         <Route exact path={routes.loginRoute} element={<Login />} />
     
-        <Route exact path={routes.registerRoute} element={<Registracija />} />
       
-       <Route exact path={routes.helpRoute} element={<Help />} />
        
-       </Route>
+       </Route> */}
+        <Route exact path={routes.loginRoute} element={logovan ? <Navigate to={'/'}/>:<Login />} />
+       <Route exact path={routes.registerRoute} element={logovan ? <Navigate to={'/'}/>:<Registracija />} />
+       <Route exact path={routes.helpRoute} element={logovan ? <Navigate to={'/'}/>: <Help />} />
 
   
 
 
 <Route exact path={routes.adminRoute}  element={  logovan?.tip===2 ? <Admin /> :
- <ProtectAdmin />
+ <Navigate to={'/'}/>
 
   }  />
 
 <Route exact path={routes.DodajPsaRoute} element={ logovan?.tip===0 ? <DodajPsa doggy={logovan}/> :
-   <ProtectAdmin/>}  />
+   <Navigate to={'/'}/>}  />
         <Route
           exact
           path={routes.profilVlasnikRoute}
           element={ logovan?.tip===0 ? <ProfilVlasnik loged={logovan} /> : 
-            <ProtectAdmin/> }
+          <Navigate to={'/'}/> }
         />
         <Route exact path={routes.sitterRoute}
          element={
            logovan?.tip===0 ? 
            <Sitter siter={logovan}/>:
-           <ProtectAdmin/>} />
+           <Navigate to={'/'}/>} />
         <Route exact path="/" element={<Home kuca={logovan} />} />
         <Route
           exact
           path={routes.adminVlasniciRoute}
           element={logovan?.tip===2  ?<AdminVlasnici /> :
-          <ProtectAdmin/>}
+          <Navigate to={'/'}/>}
         />
         
         <Route
@@ -120,16 +117,16 @@ else
           element={
             logovan?.tip===0 ?
             <KomentariasnjeIOcenjivanje komentar={logovan}/>:
-            <ProtectAdmin/> }
+            <Navigate to={'/'}/>}
         />
         <Route exact path={routes.vlasnikRoute} element={  logovan?.tip===0 ? <Vlasnik vlasnik={logovan} />: 
-          <ProtectAdmin/> } />
+          <Navigate to={'/'}/>} />
         <Route exact path ={routes.profilSitterRoute} element={  logovan?.tip===1 ?<SitterProfil user={logovan}/>:
-           <ProtectAdmin/> }/>
+         <Navigate to={'/'}/>}/>
           <Route exact path ={routes.pristigliZahteviRoute} element={logovan?.tip===1 ? <PristigliZahtevi pristigli={logovan}/>:
-         <ProtectAdmin/> }/>
+         <Navigate to={'/'}/>}/>
           <Route exact path ={routes.pristigliZahteviVlasnikRoute} element={logovan?.tip===1 ? <VlasnikZahtevi/>:
-          <ProtectAdmin/>}/>
+         <Navigate to={'/'}/>}/>
            <Route path='*' element={<NotFound/>} />
       </Routes>
     </BrowserRouter>

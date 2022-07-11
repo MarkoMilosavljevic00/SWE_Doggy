@@ -19,6 +19,7 @@ const classStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     marginTop: '20px',
+    flexWrap:'wrap'
   },
 
   buttonPotvrdi: {

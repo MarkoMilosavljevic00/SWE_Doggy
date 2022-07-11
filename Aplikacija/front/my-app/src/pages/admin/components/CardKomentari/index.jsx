@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import classStyles from './styles';
+import Modal from '@mui/material/Modal';
 
 export default function CardKomentari(props) {
   const { id, vreme, komentar, ocena } = props;
@@ -35,9 +36,23 @@ export default function CardKomentari(props) {
       }
     });
   };
-
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [openModal, setOpenModal] = React.useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
   return (
     <div className={classes.miniContainer}>
+      
       <Card
         style={{
           display: 'flex',
@@ -68,13 +83,28 @@ export default function CardKomentari(props) {
           }}
         >
           <Button
-            onClick={()=>{obrisi();}}
+            onClick={()=>{handleOpenModal();}}
             style={{
               color: 'white',
               backgroundColor: 'green',
             }}
           > Obrisi
           </Button>
+           <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+           Da li zaiste zelite da obrisete ovu recenziju?
+          </Typography>
+                  <button type='button' className="btn btn-primary" onClick={()=>{obrisi();}} >Potvrdi</button>
+        <button type='button' className="btn btn-outline-primary ms-1" onClick={handleCloseModal} >Zatvori</button>
+                
+        </Box>
+      </Modal>
         </div>
       </Card>
     </div>

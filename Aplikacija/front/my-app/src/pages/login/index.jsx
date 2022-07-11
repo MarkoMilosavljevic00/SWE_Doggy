@@ -73,20 +73,6 @@ const Login = () => {
           localStorage.setItem('token', res.token);
           setMilica(true)
           alert('Uspesno ste se ulogovali!');
-          // if (res.korisnik.tip == 0) {
-          //   localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
-          //   alert('Uspesno ste se ulogovali kao Vlasnik');
-          // } else if (res.korisnik.tip == 1) {
-          //   localStorage.setItem('idSitera', JSON.stringify(res.korisnik.id));
-          //   alert('Uspesno ste se ulogovali kao Siter');
-          // } else if (res.korisnik.tip == 2) {
-          //   localStorage.setItem('idAdmina', JSON.stringify(res.korisnik.id));
-          //   alert('Uspesno ste se ulogovali kao Admin');
-          // } else {
-          //   localStorage.setItem('Admin', JSON.stringify(res.korisnik.id));
-          // }
-
-          // localStorage.setItem('idVlasnika', JSON.stringify(res.korisnik.id));
 
         }
         else if(res.status==401)

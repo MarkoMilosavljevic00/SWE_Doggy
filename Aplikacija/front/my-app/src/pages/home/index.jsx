@@ -21,35 +21,37 @@ export const Home = (props) => {
   const navigate=useNavigate();
   const [logovan,setLogovan]=useState('')
 
-  useEffect(()=>
-  {
-    const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
-    {
-      headers:{ Authorization: `Bearer ${TOKEN}`
-  }}).then(res=>
-    {
-       setLogovan(res.data)
-       console.log(res.data)
-    }).catch(err=>
-      {
-        if(err.response.status)
-        {
-          //  alert('Niste logovani')
-        }
-      })
-  },[])
+  // useEffect(()=>
+  // {
+  //   async function fetchData(){
+  //   const TOKEN=localStorage.getItem('token')
+  //  await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+  //   {
+  //     headers:{ Authorization: `Bearer ${TOKEN}`
+  // }}).then(res=>
+  //   {
+  //      setLogovan(res.data)
+  //      console.log(res.data)
+  //   }).catch(err=>
+  //     {
+  //       if(err.response.status)
+  //       {
+  //         //  alert('Niste logovani')
+  //       }
+  //     })}
+  //     fetchData();
+  // },[])
  
   return (
 <div className='wrapper'>
-{ logovan.tip==0 ? <NavbarVlasnik/>: (logovan.tip==1 ?  <NavBarSiter/> :(logovan.tip==2 ? <HeaderAdmin/> : <Header/>))} 
+{ kuca.tip==0 ? <NavbarVlasnik/>: (kuca.tip==1 ?  <NavBarSiter/> :(kuca.tip==2 ? <HeaderAdmin/> : <Header/>))} 
   <section id="hero">
     <div className="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Dobro došli na sajt Doggy</h1>
       <h2>Pravo mesto za vas i vašeg najboljeg prijatelja</h2>
-      {logovan.tip==1?  <a href="#about"  hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> :
-       (logovan.tip==0 ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a>  :
-       (logovan.tip==2?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> : 
+      {kuca.tip==1?  <a href="#about"  hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> :
+       (kuca.tip==0 ?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a>  :
+       (kuca.tip==2?  <a href="#about" hidden={true} className="btn-get-started">Zapocnite Doggy avanturu!</a> : 
        <a hidden={false} className="btn-get-started" onClick={()=>{navigate('/registerRoute')}}>
         Zapocnite Doggy avanturu!
         </a> ))} 

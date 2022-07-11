@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import classStyles from './styles';
 import CardDialog from '../../cardDialog';
 import Admin from '../../index';
+import Modal from '@mui/material/Modal';
 import { useState, useEffect, useContext } from 'react';
 
 export default function BasicCard(props) {
@@ -35,7 +36,6 @@ export default function BasicCard(props) {
     }
     fetch('https://localhost:5001/Siter/obrisiSitera?id=' + idSitera, {
       method: 'DELETE',
-    
     
       headers:{Authorization:`Bearer ${TOKEN}`}
     }).then(async response => {
@@ -74,9 +74,22 @@ export default function BasicCard(props) {
       }
     });
   };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   const [dostupan, setDostupan] = useState([]);
   const classes = classStyles();
-
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
   return (
     <div className={classes.miniContainer}>
       <Card
@@ -123,10 +136,25 @@ export default function BasicCard(props) {
                   backgroundColor: '#07a607',
                   marginTop: 20,
                 }}
-                onClick={()=>{obrisiSitera();}}
+                onClick={()=>{handleOpenModal();}}
               >
                 Obrisi sitera{' '}
               </Button>
+              <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+           Da li zaiste zelite da obrisete ovog sitera?
+          </Typography>
+                  <button type='button' className="btn btn-primary" onClick={()=>{obrisiSitera();}} >Potvrdi</button>
+        <button type='button' className="btn btn-outline-primary ms-1" onClick={handleCloseModal} >Zatvori</button>
+                
+        </Box>
+      </Modal>
             </CardActions>
           ) : (
             <CardActions>

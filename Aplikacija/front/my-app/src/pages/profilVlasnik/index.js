@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import classStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar'
-//import HeaderSitter from '../../components/HeaderSitter';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -33,33 +32,30 @@ const {loged}=props;
 const [logovan,setLogovan]=useState('')
 const[handle,setHandle1]=useState('')
 const[tokencic,setToken]=useState('false')
-// useEffect(()=>
-// {
-//   const TOKEN=localStorage.getItem('');
 
-
-// })
 const token=localStorage.getItem('token')
 
 
-  useEffect(()=>
-  {
-    const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
-    {
-      headers:{ Authorization: `Bearer ${TOKEN}`
-  }}).then(res=>
-    {
-       setLogovan(res.data)
-       console.log(res.data.id)
-       setHandle1(!handle)
-      //  window.location.reload(false)
-      //  setToken(!tokencic)
-    }).catch(err=>
-      {
-        // window.location.reload(false)
-      })
-  },[])
+  // useEffect(()=>
+  // {
+  //   async function fetchData(){
+  //   const TOKEN=localStorage.getItem('token')
+  //   await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+  //   {
+  //     headers:{ Authorization: `Bearer ${TOKEN}`
+  // }}).then(res=>
+  //   {
+  //      setLogovan(res.data)
+  //      console.log(res.data.id)
+  //      setHandle1(!handle)
+  //     //  window.location.reload(false)
+  //     //  setToken(!tokencic)
+  //   }).catch(err=>
+  //     {
+  //       // window.location.reload(false)
+  //     })}
+  //     fetchData();
+  // },[])
   
   // useEffect(()=>
   // {
@@ -126,7 +122,7 @@ const handleGotovi=()=>
   setG(!otvoriGotovi)
 }
 let pasId=[]
-const prihvaceni_zahtevi=()=>
+const prihvaceni_zahtevi=async()=>
 {
   const TOKEN=localStorage.getItem('token')
   if(token!=TOKEN || !TOKEN)
@@ -134,7 +130,7 @@ const prihvaceni_zahtevi=()=>
     window.location.reload(false)
     return
   }
-        Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + loged.id + '&status=1',
+       await Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika='  + loged.id + '&status=1',
         {
           headers:{ Authorization: `Bearer ${TOKEN}`}
         }).then(
@@ -165,7 +161,7 @@ const prihvaceni_zahtevi=()=>
           }
           )
 }
-const odbijeni_zahtevi=()=>
+const odbijeni_zahtevi=async()=>
 {
   const TOKEN=localStorage.getItem('token')
   if(token!=TOKEN || !TOKEN)
@@ -173,7 +169,7 @@ const odbijeni_zahtevi=()=>
     window.location.reload(false)
     return
   }
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=2',
+  await Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=2',
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
@@ -214,7 +210,7 @@ date.setHours(0)
   }),
 );}
 
-const pending_zahtevi=()=>
+const pending_zahtevi=async()=>
 {
   const TOKEN=localStorage.getItem('token')
   if(token!=TOKEN || !TOKEN)
@@ -222,7 +218,7 @@ const pending_zahtevi=()=>
     window.location.reload(false)
     return
   }
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=0',
+  await Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id + '&status=0',
    { headers:{ Authorization: `Bearer ${TOKEN}`
   }}).then(
             res=>
@@ -242,7 +238,7 @@ const pending_zahtevi=()=>
         )
 }
 
-const gotovi_zahtevi=()=>
+const gotovi_zahtevi=async()=>
 {
   const TOKEN=localStorage.getItem('token')
   if(token!=TOKEN || !TOKEN)
@@ -250,7 +246,7 @@ const gotovi_zahtevi=()=>
     window.location.reload(false)
     return
   }
-  Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id +'&status=3',
+ await Axios.get('https://localhost:5001/Usluga/vratiUslugeVlasnikuPoStatusuSaPsom?idVlasnika=' + loged.id +'&status=3',
   {
   headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(
@@ -285,7 +281,7 @@ const buttons = [
 const [komentar,setKomentar]=useState('');
 const [ocena,setOcena]=useState('');
 
-const oceni =(id,siterId,pasId,komentar,ocena)=>
+const oceni =async(id,siterId,pasId,komentar,ocena)=>
 { console.log(siterId,pasId,komentar,ocena)
   const TOKEN=localStorage.getItem('token')
   if(token!=TOKEN || !TOKEN)
@@ -300,7 +296,7 @@ const oceni =(id,siterId,pasId,komentar,ocena)=>
     return
   }
   let vlasnikAJDI=loged.id
-  Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuSiteru',
+  await Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuSiteru',
   {
     vlasnikAJDI,
      siterId,
@@ -342,7 +338,7 @@ const [data,setData]=useState(
       grad:'',
       adresa:'',
    })
-  const izmeni_ime=()=>
+  const izmeni_ime=async()=>
    {
      const TOKEN=localStorage.getItem('token')
     if(token!=TOKEN || !TOKEN)
@@ -364,7 +360,7 @@ const [data,setData]=useState(
        alert('Duzina imena ne sme biti duze od 20 karaktera!')
        return
     }
-      Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+     await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
       {
         id:loged.id,
         ime:profil.ime 
@@ -379,7 +375,7 @@ const [data,setData]=useState(
            window.location.reload(false)
           })
         }
-        const izmeni_prezime=()=>
+        const izmeni_prezime=async()=>
         {
           const TOKEN=localStorage.getItem('token')
           if(token!=TOKEN || !TOKEN)
@@ -401,7 +397,7 @@ const [data,setData]=useState(
              alert('Duzina prezimena ne sme biti duze od 30 karaktera!')
              return
           }
-           Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+          await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
            {
              id:loged.id,
             
@@ -457,7 +453,7 @@ const [data,setData]=useState(
   //                     }
   //                   })
   //                 }
-                  const izmeni_korisnicko_ime=()=>
+                  const izmeni_korisnicko_ime=async()=>
                   { const TOKEN=localStorage.getItem('token')
                   if(token!=TOKEN || !TOKEN)
     {
@@ -473,7 +469,7 @@ const [data,setData]=useState(
                 alert('Polje korisnicko ime ne sme biti prazno!!!')
                 return
               }
-                     Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                   await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                      {
                        id:loged.id,                    
                        korisnickoIme:profil.korisnickoIme,
@@ -493,7 +489,22 @@ const [data,setData]=useState(
                            }
                          })
                        }
-                       const izmeni_sifru=()=>
+                       const [pwd, setPwd] = useState('');
+                       const validatePwd = pass => {
+                        return pass.match(
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
+                        );
+                      };
+                       const handleSifra=()=>
+                       {
+                        if (!validatePwd(pwd)) {
+                          alert(
+                            'Niste uneli validnu sifru. Sifra mora da sadrzi: 1 malo slovo, 1 veliko slovo, 1 broj i mora da bude najmanje duzine 8'
+                          );
+                          return;
+                        }
+                       }
+                       const izmeni_sifru=async()=>
                        {
                         const TOKEN=localStorage.getItem('token')
                         if(loged.id==='')
@@ -510,7 +521,14 @@ const [data,setData]=useState(
                 alert('Polje sifra ne sme imati vise od 20 karaktera!!!')
                 return
               }
-                          Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+              // if (!validatePwd(pwd)) {
+              //   alert(
+              //     'Niste uneli validnu sifru. Sifra mora da sadrzi: 1 malo slovo, 1 veliko slovo, 1 broj i mora da bude najmanje duzine 8'
+              //   );
+              //   return;
+              // }
+          
+                          await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                           {
                             id:loged.id,                         
                             sifra:profil.sifra                            
@@ -521,10 +539,11 @@ const [data,setData]=useState(
                                console.log(res + 'zasto')
                                setProfil(res.data)
                                setData(res.data)
+                               alert('Uspesno ste izmenili sifru!')
                                window.location.reload(false)
                               })
                             }
-                            const izmeni_broj_telefona=()=>
+                            const izmeni_broj_telefona=async()=>
                             { const TOKEN=localStorage.getItem('token')
                             if(token!=TOKEN || !TOKEN)
     {
@@ -540,7 +559,7 @@ const [data,setData]=useState(
                 alert('Polje broj telefona ne sme biti prazno!!!')
                 return
               }           
-                               Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                              await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                {
                                  id:loged.id,                            
                                  brojTelefona:profil.brojTelefona,                                                           
@@ -554,7 +573,7 @@ const [data,setData]=useState(
                                     window.location.reload(false)
                                    })
                                  }
-                                 const izmeni_grad=()=>
+                                 const izmeni_grad=async()=>
                                  { 
                                   const TOKEN=localStorage.getItem('token')
                                   if(token!=TOKEN || !TOKEN)
@@ -571,7 +590,7 @@ const [data,setData]=useState(
                                        alert('Polje grad ne sme biti prazno!!!')
                                           return
                                             }
-                                    Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                                   await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                     {
                                       id:loged.id,                               
                                       grad:profil.grad
@@ -585,7 +604,7 @@ const [data,setData]=useState(
                                          window.location.reload(false)
                                         })
                                       }
-                                      const izmeni_adresu=()=>
+                                      const izmeni_adresu=async()=>
                                       { const TOKEN=localStorage.getItem('token')
                                       if(token!=TOKEN || !TOKEN)
                                       {
@@ -601,7 +620,7 @@ const [data,setData]=useState(
                                              alert('Polje adresa ne sme biti prazno!!!')
                                             return
                                            }
-                                         Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
+                                         await Axios.put('https://localhost:5001/Vlasnik/azurirajVlasnika',
                                          {
                                            id:loged.id,                             
                                            adresa:profil.adresa                                      
@@ -618,8 +637,9 @@ const [data,setData]=useState(
                                      const[refresh,setRefresh]=useState(false)
 useEffect(()=>
 {
+  async function fetch(){
   const TOKEN=localStorage.getItem('token')
-   Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + loged.id,
+  await Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + loged.id,
    {
  
       headers:{ Authorization: `Bearer ${TOKEN}`
@@ -632,7 +652,8 @@ useEffect(()=>
          setData(res.data)
        
       }
-   )
+   )}
+   fetch()
 },[handle])
 const[stanje,setStanje]=useState(-1)
 const[skrij,setSkrij]=useState(false)
@@ -640,7 +661,7 @@ const handleklik=()=>
 {
   setSkrij(!skrij)
 }
-const brisi_uslugu=(props)=>
+const brisi_uslugu=async(props)=>
 { 
 const TOKEN=localStorage.getItem('token')
 if(token!=TOKEN || !TOKEN)
@@ -648,7 +669,7 @@ if(token!=TOKEN || !TOKEN)
   window.location.reload(false)
   return
 }
-  Axios.delete('https://localhost:5001/Usluga/obrisiUslugu?idUsluge=' + props,
+ await Axios.delete('https://localhost:5001/Usluga/obrisiUslugu?idUsluge=' + props,
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
@@ -832,7 +853,7 @@ let PocetakVremePending=null
         <Button style={{marginLeft:'120px'}}onClick={()=>{izmeni_email();}}startIcon={<EditIcon/>}> Izmeni</Button>*/}
               <Grid item xs={6} sm={6} md={4} lg={3}>
                     <label style={{}}>Korisničko Ime:</label>
-              </Grid> 
+             </Grid> 
              <Grid item xs={6} sm={6} md={4} lg={3}>
              <input type='text' id='opis'  value={profil.korisnickoIme} onChange={ (e) =>  setProfil((profil)=>({...profil,korisnickoIme:e.target.value})) }disabled={ch}></input>
              </Grid>

@@ -79,8 +79,8 @@ import { CardContent } from '@mui/material';
 const NadjiSittera = () => {
   const navigate = useNavigate();
   const classes = classStyles();
-const idVlasnika=localStorage.getItem('idVlasnika')
-const idSitera=localStorage.getItem('idSitera')
+// const idVlasnika=localStorage.getItem('idVlasnika')
+// const idSitera=localStorage.getItem('idSitera')
   return (
   
     <section id="about">
@@ -110,30 +110,14 @@ const idSitera=localStorage.getItem('idSitera')
               Vi brinete o njemu.
             </h4>
             {/* { proveraSiter ? <NavBarSiter/> : (proveraVlasnik ? <NavbarVlasnik/> : <Header/>)}  */}
-            {idVlasnika ? 
-       
-            <button
-              className={classes.dugme}
-              onClick={()=>{navigate(sitterRoute)}}
-            >
-              Nadji sittera
-            </button>
-            :
-            (idSitera ? 
-              <button
-              className={classes.dugme}
-              onClick={() => alert('Ulogovani ste kao siter!!!')}
-              >
-              Nadji sittera
-            </button>
-            :
+            
             <button
               className={classes.dugme}
               onClick={() => navigate(registerRoute)}
               >
               Nadji sittera
             </button>
-              )}
+             
           </div>
         </div>
         </div>

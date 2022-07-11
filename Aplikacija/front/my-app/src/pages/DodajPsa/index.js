@@ -27,7 +27,7 @@ const Sitter = (props) => {
   const navigate = useNavigate();
   const classes = classStyles();
   const [siteri, postaviSitere] = useState([]);
-  const [siteriKojiSePrikazuju, postaviSitereKojiSePrikazuju] = useState([]);
+  const [psiKojiSePrikazuju, postaviPseKojiSePrikazuju] = useState([]);
   const [stranica, postaviStranicu] = useState(1);
   const [ukupanBrojStranica, postaviUkupanBrojStranica] = useState(1);
   const [brojObjavaPoStrani, postaviBrojObjavaPoStrani] = useState(5);
@@ -45,20 +45,24 @@ const [refresh,setRefresh]=useState('')
 const [logovan,setLogovan]=useState('')
   const[handle1,setHandle1]=useState('')
   const token=localStorage.getItem('token')
-  useEffect(()=>
-  {
-    const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
-    {
-      headers:{ Authorization: `Bearer ${TOKEN}`
-  }}).then(res=>
-    {
-       setLogovan(res.data)
-       console.log(res.data.id)
-       setHandle1(!handle1)
-    })
-  },[])
+  // useEffect(()=>
+  // {
+  //   async function fetchData(){
+  //   const TOKEN=localStorage.getItem('token')
+  // await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+  //   {
+  //     headers:{ Authorization: `Bearer ${TOKEN}`
+  // }}).then(res=>
+  //   {
+  //      setLogovan(res.data)
+  //      console.log(res.data.id)
+  //      setHandle1(!handle1)
+  //   })
+  // }
+  // fetchData();
+  // },[])
   useEffect(() => {
+    
     const TOKEN=localStorage.getItem('token')
     fetch('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + doggy.id,{
       headers:{
@@ -78,7 +82,7 @@ const [logovan,setLogovan]=useState('')
           objave.push(results[i]);
         }
       }
-      postaviSitereKojiSePrikazuju(objave);
+      postaviPseKojiSePrikazuju(objave);
 
       if ((results.length / brojObjavaPoStrani) % 1 != 0) {
         //check if number have decimal places, example: 23 % 1 = 0, 23.5 % 1 = 0.5
@@ -109,7 +113,7 @@ const [logovan,setLogovan]=useState('')
         objave.push(siteri[i]);
       }
     }
-    postaviSitereKojiSePrikazuju(objave);
+    postaviPseKojiSePrikazuju(objave);
   }, [stranica]);
   const [dozvoli,setdozvoli ] = useState(true)
   const [milica,setMilica]=useState(false)
@@ -117,7 +121,7 @@ const [logovan,setLogovan]=useState('')
   {
     setRefresh(!refresh)
   }
-const dodajPsa=()=>
+const dodajPsa=async ()=>
 {
 
   const AJDI=doggy.id
@@ -133,7 +137,7 @@ if(data.ime==='' || data.rasa==='' || data.pol==='' || data.opis==='' || data.vi
   alert('Molimo Vas popunite pravilno formu!!!')
   return 
 }
-  Axios.post('https://localhost:5001/Pas/dodajPsa',
+  await Axios.post('https://localhost:5001/Pas/dodajPsa',
     {
       ime:data.ime,
       rasa:data.rasa,
@@ -294,7 +298,7 @@ const [open, setOpen] = React.useState(false);
             </div>           
             </div>
       <div className={classes.miniContainer}>
-        {siteriKojiSePrikazuju.map((siter, index) => {
+        {psiKojiSePrikazuju.map((siter, index) => {
           return (
             <Kartica
             id={siter.id}

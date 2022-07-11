@@ -14,6 +14,8 @@ import { Label } from '@mui/icons-material';
 export default function BasicCard(props) {
   const { vreme, komentar, ocena, vlasnikId,comment } = props;
 {console.log(comment.id)}
+const timeDate=new Date(vreme).toLocaleDateString()
+const timeTime=new Date(vreme).toLocaleTimeString(['hr-HR'],{hour:'2-digit',minute:'2-digit'});
   const [vlasnik, setVlasnici] = useState([]);
   useEffect(() => {
     const TOKEN=localStorage.getItem('token')
@@ -49,7 +51,7 @@ export default function BasicCard(props) {
           ></Typography>
 
           <Typography variant="body1">{komentar}</Typography>
-          <div className={classes.divVreme}>{vreme}</div>
+          <div className={classes.divVreme}>{'Dana: ' + timeDate + ' u ' + timeTime}</div>
         </CardContent>
       </Card>
     </div>

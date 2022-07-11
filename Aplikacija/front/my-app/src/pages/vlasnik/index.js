@@ -12,22 +12,11 @@ import Rating from '@mui/material/Rating';
 import SendIcon from '@mui/icons-material/Send';
 import StarIcon from '@mui/icons-material/Star';
 import NavBar from '../headerVlasnik';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-// import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-// import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Alert from '@mui/material/Alert';
-// import Stack from '@mui/material/Stack';
-
-
-   
-  
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
@@ -56,10 +45,10 @@ const Vlasnik=(props)=> {
 
   const location=useLocation();
   console.log(location.state)
-  const psici=()=>
+  const psici=async()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnik.id,
+   await Axios.get('https://localhost:5001/Pas/vratiPseZaVlasnika?idVlasnika=' + vlasnik.id,
     {
     headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -166,7 +155,7 @@ const funkcija_napomena=()=>
   // console.log(vlasnikId)
 }
 const vlasnikId=vlasnik.id;
-const posalji_zahtev=()=>
+const posalji_zahtev=async()=>
 {
   const TOKEN=localStorage.getItem('token')
 if(pocetak>kraj)
@@ -194,7 +183,7 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
   return
 }
 
-  Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
+ await Axios.post('https://localhost:5001/Usluga/dodajUslugu',podaci,{
     
     headers:{ Authorization: `Bearer ${TOKEN}`
   }
@@ -225,13 +214,17 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
   //   const siter=localStorage.removeItem('idSitera')
   // }
 
+  const zovifju=()=>
+ {
+    psici();
+ } 
     return (
       
     <div className={klase.bos}>
 <NavBar />
 
 <div className={klase.main}>
-   <Paper className={klase.usluga} onClick={()=>{psici();}} elevation={8} style={{backgroundColor:'honeydew',height:'700px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
+   <Paper className={klase.usluga}  onClick={()=>{psici();}}elevation={8} style={{backgroundColor:'honeydew',height:'700px',marginBottom:'40px',marginTop:'40px',borderRadius:'50px'}}>
        <IconButton color='primary'  onClick={()=>{navigate('/sitterRoute')}}>
        <ArrowBackIosNewIcon/>
        <Typography variant='h6'color='black' onClick={()=>{navigate('/sitterRoute');}}>Nazad</Typography>
@@ -250,7 +243,8 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
         value={vrsta}
         label="Age"
         onChange={(e)=>setSelect(e.target.value)}
-        onClick={()=>{usluge();psici();}}
+        onClick={()=>{usluge();}}
+        // psici();
       >
         <MenuItem   value={0}><i class="fa-solid fa-dog"><h5>Šetanje psa po gradu</h5></i></MenuItem>
         <MenuItem value={1}><i class="fa-solid fa-house"><h5>Čuvanje psa u vašoj kući</h5></i></MenuItem>
@@ -275,7 +269,7 @@ if(vrsta==='' || napomena==='' || pocetak==='' || kraj==='' ||  pasId==='' || ad
         value={pasId}
         label="Age"
         onChange={(e)=>setPasId(e.target.value)}
-       onClick={dogs1}
+       onClick={()=>{psici();dogs1();}}
       >
         {psi && psi.map(x=>
           (

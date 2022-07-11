@@ -34,8 +34,9 @@ const [logovan,setLogovan]=useState('')
 const[handle,setHandle1]=useState('')
 useEffect(()=>
 {
+  async function fetchData(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
+ await Axios.get('https://localhost:5001/Auth/vratiTrenutnogKorisnika',
   {
     headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(res=>
@@ -43,12 +44,14 @@ useEffect(()=>
      setLogovan(res.data)
      console.log(res.data.id)
      setHandle1(!handle)
-  })
+  })}
+  fetchData();
 },[])
 useEffect(()=>
 {
+  async function fetchData(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
+ await Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
@@ -57,15 +60,16 @@ useEffect(()=>
       console.log(res.data.slika)
       setSlika(res.data.slika)
     }
-  )
+  )}
+  fetchData();
 },[handle])
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   
-  const picture = ()=>
+  const picture = async()=>
   {
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
+    await Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
     {
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -80,8 +84,9 @@ useEffect(()=>
   const[namino,setNamino]=useState('')
 useEffect(()=>
   {
+    async function fetchData(){
     const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
+   await Axios.get('https://localhost:5001/Vlasnik/vratiVlasnikaPoId?id=' + logovan.id,
     {
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -90,14 +95,15 @@ useEffect(()=>
         console.log(res.data)
         setNamino(res.data)
       }
-    )
+    )}
+    fetchData();
   },[handle])
   
   const [file, setFile] = useState()
 function handleChange(event) {
   setFile(event.target.files[0])
 }
-  function handleSubmit(event) {
+  const handleSubmit=async(event)=> {
   
     
     const TOKEN=localStorage.getItem('token')
@@ -112,12 +118,13 @@ function handleChange(event) {
         
       },
     };
-    Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + loged.id, formData, config).then((response) => {
+    await Axios.post('https://localhost:5001/Vlasnik/dodajSlikuVlasniku?idVlasnik=' + loged.id, formData, config).then((response) => {
     //    base64ImageString = Buffer.from(response.data, 'binary').toString('base64')
     // srcValue = "data:image/png;base64,"+base64ImageString
     console.log(response);    
       setFile(response.data)
-      
+      picture();
+      setKlik(false)
     });
   }
   const[klik,setKlik]=useState(false)
@@ -129,7 +136,8 @@ function handleChange(event) {
       window.location.reload(false)
       return
     }
-    setKlik(!klik)
+    setKlik(true)
+    setExpanded(!expanded);
 
 
   }
@@ -164,7 +172,7 @@ function handleChange(event) {
         <Typography style={{marginBottom:'20px'}}variant='h6'>Odaberite sliku</Typography>
     {/* <Button  style={{backgroundColor:'rgb(93, 224, 100)',borderRadius:'10px',color:'black'}} onClick={()=>{handleClick();}}>Ubacite novu sliku</Button> */}
     <input className='inputic' style={{display:'flex',textAlignLast:'center'}}type="file" onClick={handleClick} onChange={handleChange} />
-    <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
+    {/* <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
     <ExpandMore
 expand={expanded}
 hidden={!klik}
@@ -176,10 +184,11 @@ aria-label="show more"
   <ExpandMoreIcon/>
     </ExpandMore>
   Prikazi dugme za potvrdu
-    </IconButton>
-<Collapse in={expanded} timeout="auto" unmountOnExit>
-  <CardContent>
+    </IconButton> */}
+{/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
+  <CardContent hidden={!klik}>
         <Button
+        
           style={{
             backgroundColor: 'rgb(93, 224, 100)',
             color: 'black',
@@ -190,12 +199,12 @@ aria-label="show more"
           }}
           variant="contained"
           color="success"
-          onClick={()=>{picture();}}
+          onClick={()=>{handleSubmit();}}
         >
           Potvrdi
         </Button>
         </CardContent>
-  </Collapse>
+  {/* </Collapse> */}
       </CardActions>
     </Card>
   );

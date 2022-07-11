@@ -28,9 +28,9 @@ const CardDialog = props => {
   const { idPsa, ime, rasa, pol, visina, tezina, prosecnaOcena, opis, idSittera, vlasnikId, id, napomena} = props;
   
   useEffect(() => {
-
+async function vrati(){
     const TOKEN=localStorage.getItem('token')
-   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
+   await Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
    {
     headers:{ Authorization: `Bearer ${TOKEN}`}
    }).then(
@@ -39,13 +39,14 @@ const CardDialog = props => {
        
        setRec(res.data)
      }
-   )
+   )}
+   vrati();
   }, []);
 
-  const obavljena=(props)=>
+  const obavljena=async (props)=>
     {
       const TOKEN=localStorage.getItem('token')
-        Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3',{},
+       await Axios.put('https://localhost:5001/Usluga/azurirajStatusUsluge?idUsluge=' + props + '&status=3',{},
         {
     headers:{ Authorization: `Bearer ${TOKEN}`}
         }).then(
@@ -62,7 +63,7 @@ const CardDialog = props => {
   const[hajd,setHajd]=useState(true)
 
   
-  const oceni=(vlasnikId,pasId,komentar,ocena)=>
+  const oceni=async(vlasnikId,pasId,komentar,ocena)=>
   {
     const TOKEN=localStorage.getItem('token')
     if(komentar==='' || ocena <= 0 || ocena >5 || ocena==='')
@@ -70,7 +71,7 @@ const CardDialog = props => {
       alert('Molimo Vas lepo popunite formu!!!')
       return
     }
-    Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuPsu',
+   await Axios.post('https://localhost:5001/Recenzija/dodajRecenzijuPsu',
     {
       siterId:idSittera,
       vlasnikId:vlasnikId,
@@ -123,7 +124,7 @@ const CardDialog = props => {
         style={{ color: 'white', backgroundColor: 'rgb(93, 224, 100)', borderRadius: '20px' , marginLeft:'20px'}}
         onClick={handleClickOpen('paper')}
       >
-        Prikazi informacije o psu 
+        Promeni status usluge
       </Button>
       <Dialog
         open={open}
@@ -194,7 +195,7 @@ const CardDialog = props => {
           InputProps={{ inputProps: { min: 0, max: 5} }}
           onChange={ (e) =>  setOcena((e.target.value))}
         />
-        <Button style={{color: 'white', backgroundColor: 'rgb(93, 224, 100)' }} onClick={()=>{oceni(vlasnikId,idPsa,komentar,ocena)}}>Pošalji ocenu siteru</Button>
+        <Button style={{color: 'white', backgroundColor: 'rgb(93, 224, 100)' }} onClick={()=>{oceni(vlasnikId,idPsa,komentar,ocena)}}>Potvrdi</Button>
       </div>
           </DialogContentText>
         </DialogContent>

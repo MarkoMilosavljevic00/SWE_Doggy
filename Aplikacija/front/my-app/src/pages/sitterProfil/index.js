@@ -32,9 +32,9 @@ const {user}=props;
 const token=localStorage.getItem('token')
 let niz=[]
 useEffect(()=>
-{
+{async function vrati(){
    const TOKEN=localStorage.getItem('token')
-    Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + user.id,
+   await Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + user.id,
    {
     headers:{ Authorization: `Bearer ${TOKEN}`
 }}).then(
@@ -45,7 +45,8 @@ useEffect(()=>
           setData(res.data)
           
        }
-    )
+    )}
+    vrati();
 },[])
 
 const [data,setData]=useState(
@@ -68,11 +69,11 @@ const [data,setData]=useState(
      const newData={...data}
      setData(newData)
   }
-const azuriraj=()=>
+const azuriraj=async()=>
 {  {console.log('2')}
    {console.log(profil)}
    const TOKEN=localStorage.getItem('token')
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:profil.id,
    ime:profil.ime,
@@ -97,7 +98,7 @@ const azuriraj=()=>
       }
       )
    }
-   const izmeniime=()=>{
+   const izmeniime=async()=>{
 if(user.id==='')
    {
       alert('Greska!!!')
@@ -113,7 +114,7 @@ if(user.id==='')
       return
    }
    const TOKEN=localStorage.getItem('token')
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    ime:profil.ime,
@@ -131,7 +132,7 @@ if(user.id==='')
       }
       )
    }
-const izmeniprezime=()=>{
+const izmeniprezime=async()=>{
 const TOKEN=localStorage.getItem('token')
 if(user.id==='')
    {
@@ -147,7 +148,7 @@ if(profil.prezime==='')
              alert('Duzina prezimena ne sme biti duze od 30 karaktera!')
              return
           }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    prezime:profil.prezime,
@@ -166,7 +167,7 @@ if(profil.prezime==='')
       }
       )
    }
-   const izmenikorisnickoime=()=>
+   const izmenikorisnickoime=async()=>
 {  
    const TOKEN=localStorage.getItem('token')
    if(user.id==='')
@@ -178,7 +179,7 @@ if(profil.prezime==='')
      alert('Polje korisnicko ime ne sme biti prazno!!!')
      return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    korisnickoIme:profil.korisnickoIme,
@@ -243,7 +244,7 @@ if(profil.prezime==='')
 //         }
 //       })
 //    }
-   const izmenisifru=()=>
+   const izmenisifru=async()=>
 { 
    const TOKEN=localStorage.getItem('token')
    if(user.id==='')
@@ -260,7 +261,7 @@ if(profil.prezime==='')
      alert('Polje sifra ne sme imati vise od 20 karaktera!!!')
      return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+  await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    sifra:profil.sifra,
@@ -278,7 +279,7 @@ if(profil.prezime==='')
       }
       )
    }
-   const izmenibrojtelefona=()=>
+   const izmenibrojtelefona=async()=>
    {  
    const TOKEN=localStorage.getItem('token')
    if(user.id==='')
@@ -290,7 +291,7 @@ if(profil.prezime==='')
      alert('Polje broj telefona ne sme biti prazno!!!')
      return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+  await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    brojTelefona:profil.brojTelefona,
@@ -308,7 +309,7 @@ if(profil.prezime==='')
       }
       )
    }
-   const izmenigrad=()=>
+   const izmenigrad=async()=>
 { 
    const TOKEN=localStorage.getItem('token')
    if(user.id==='')
@@ -320,7 +321,7 @@ if(profil.prezime==='')
      alert('Polje grad ne sme biti prazno!!!')
      return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+  await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    grad:profil.grad,
@@ -338,7 +339,7 @@ if(profil.prezime==='')
       }
       )
    }
-   const izmeniadresu=()=>
+   const izmeniadresu=async()=>
 {  
    // {console.log('2')}
    // {console.log(profil)}
@@ -352,7 +353,7 @@ if(profil.prezime==='')
      alert('Polje adresa ne sme biti prazno!!!')
      return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+  await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    adresa:profil.adresa,
@@ -371,7 +372,7 @@ if(profil.prezime==='')
       }
       )
    }
-   const izmenicenuposatu=()=>{
+   const izmenicenuposatu=async()=>{
 const TOKEN=localStorage.getItem('token')
 if(user.id==='')
    {
@@ -388,7 +389,7 @@ if(profil.cenaPoSatu==='')
    alert('Polje cena po satu ne sme biti prazno!!!')
    return
 }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    cenaPoSatu:profil.cenaPoSatu,
@@ -406,7 +407,7 @@ if(profil.cenaPoSatu==='')
       }
       )
    }
-   const izmenibio=()=>
+   const izmenibio=async()=>
    { 
    const TOKEN=localStorage.getItem('token')
    if(user.id==='')
@@ -419,7 +420,7 @@ if(profil.cenaPoSatu==='')
       alert('Polje biografija ne sme biti prazno!!!')
       return
    }
-   Axios.put('https://localhost:5001/Siter/azurirajSitera',
+   await Axios.put('https://localhost:5001/Siter/azurirajSitera',
 {
    id:user.id,
    bio:profil.bio
@@ -547,7 +548,7 @@ if(profil.cenaPoSatu==='')
           multiline
           rows={4}
           value={profil.bio}
-          style={{width:'450px',marginTop:'20px'}}
+          style={{display:'flex',marginTop:'20px'}}
           onChange={ (e) =>  setProfil((profil)=>({...profil,bio:e.target.value})) }
         />
              </div>

@@ -59,8 +59,9 @@ console.log(korisnik.id + 'jajkas')
 const[ime,setIme]=useState('')
 useEffect(()=>
 {
+  async function vrati(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,{
+  await Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,{
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
     res=>
@@ -68,13 +69,15 @@ useEffect(()=>
       console.log(res.data.slika)
       setIme(res.data.slika)
     }
-  )
+  )}
+  vrati();
 },[])
 const [imenoto,setImenoto]=useState('')
 useEffect(()=>
 {
+  async function vrati(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,
+  await Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,
   {
   headers:{ Authorization: `Bearer ${TOKEN}`}}).then(
     res=>
@@ -82,12 +85,13 @@ useEffect(()=>
       console.log(res.data)
       setImenoto(res.data)
     }
-  )
+  )}
+  vrati();
 },[])
-const name = ()=>
+const name = async()=>
 {
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,
+  await Axios.get('https://localhost:5001/Siter/vratiSiteraPoId?id=' + korisnik.id,
   {
     headers:{ Authorization: `Bearer ${TOKEN}`}
   }).then(
@@ -109,7 +113,7 @@ const [ja,setJa]=useState('')
 let ja1=''
 let srcValue = ''
 let base64ImageString=''
-function handleSubmit(event) {
+const handleSubmit=async(event) =>{
   
   const TOKEN=localStorage.getItem('token')
   // const url = 'http://localhost:3000/uploadFile';
@@ -123,11 +127,13 @@ function handleSubmit(event) {
  'Authorization': `Bearer ${TOKEN}`
     },
   };
-  Axios.post('https://localhost:5001/Siter/dodajSlikuSiteru?idSiter=' + korisnik.id, formData, config).then((response) => {
+  await Axios.post('https://localhost:5001/Siter/dodajSlikuSiteru?idSiter=' + korisnik.id, formData, config).then((response) => {
    
   console.log(response);
     
     setFile(response.data)
+    name();
+    setKlik(false)
     
   });
 
@@ -153,6 +159,7 @@ const handleClick=()=>
     return
   }
   setKlik(!klik)
+  setExpanded(!expanded);
 }
 const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -176,7 +183,7 @@ const current = new Date();
       
         <input  style={{display:'flex',textAlignLast:'center'}}type="file"onClick={()=>{handleClick();}} onChange={handleChange} />
       
-        <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
+        {/* <IconButton hidden={!klik} onClick={() => { handleExpandClick();handleSubmit(); } }>
         <ExpandMore
           expand={expanded}
 hidden={!klik}
@@ -188,7 +195,7 @@ hidden={!klik}
         </ExpandMore>
         Prikazi dugme za potvrdu
         </IconButton >
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit> */}
           <CardContent>
 
             <Button
@@ -197,13 +204,13 @@ hidden={!klik}
               variant="contained"
               color="success"
               type="submit"
-              onClick={name}
+              onClick={()=>{handleSubmit();}}
             >
               Potvrdi
             </Button>
 
           </CardContent>
-        </Collapse>
+        {/* </Collapse> */}
 
 
       </CardActions>

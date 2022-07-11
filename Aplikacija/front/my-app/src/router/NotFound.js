@@ -27,39 +27,42 @@ const NotFound = () => (
             fontWeight='bold'
             
           >
-            404: The page you are looking for isn’t here
+            404: Stranica koju trazite se ne nalazi ovde
           </Typography>
           <Typography
             align="center"
             color=" orange"
-            variant="subtitle2"
+            variant="title"
+            style={{marginBottom:'20px'}}
           >
-            You either tried some shady route or you came here by mistake.
-            Whichever it is, try using the navigation
+            Molimo Vas koristite navigaciju
+            {/* You either tried some shady route or you came here by mistake.
+            Whichever it is, try using the navigation */}
           </Typography>
           <Box sx={{ textAlign: 'center' }}>
             <img
               alt="Under development"
-              src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=612x612&w=0&h=n3NzIx5MWfdouq0iyYiegzPrOfR6J4B-luYlIsAM-2E="
+              src="https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png"
               style={{
                 marginTop: 0,
                 display: 'inline-block',
                 maxWidth: '100%'
               }}
+              // https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=612x612&w=0&h=n3NzIx5MWfdouq0iyYiegzPrOfR6J4B-luYlIsAM-2E=
             />
           </Box>
           <Link
             to='/'                                                                                                                                              
           >
             <Button
-            style={{backgroundColor:'red',color:'white'}}
+            style={{backgroundColor:'orange',color:'white',marginTop:'20px'}}
               component="a"
               startIcon={(<ArrowBackIcon fontSize="small" />)}
               
               variant="contained"
               
             >
-              Go back to Home
+              Vrati se na pocetnu
             </Button>
           </Link>
         </Box>

@@ -18,9 +18,9 @@ const CardDialog = props => {
   const [rec,setRec]=useState('');
   const { idPsa, ime, rasa, pol, visina, tezina, prosecnaOcena, opis } = props;
   useEffect(() => {
-
+async function vrati(){
     const TOKEN=localStorage.getItem('token')
-   Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
+   await Axios.get('https://localhost:5001/Recenzija/vratiRecenzijeZaPsa?id=' + idPsa,
    {
     headers:{ Authorization: `Bearer ${TOKEN}`}
    }).then(
@@ -29,7 +29,8 @@ const CardDialog = props => {
        
        setRec(res.data)
      }
-   )
+   )}
+   vrati();
   }, []);
 
   const handleClickOpen = scrollType => () => {

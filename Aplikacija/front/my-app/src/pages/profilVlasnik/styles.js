@@ -27,8 +27,8 @@ const classStyles = makeStyles({
     justifyContent: 'space-evenly',
     flexWrap:'wrap',
     flex: 1,
-    backgroundColor: 'initial',
-    minHeight:'585px'
+    backgroundColor: 'rgb(234, 252, 220)'
+   
   },
 
   paper: {

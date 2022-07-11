@@ -34,7 +34,7 @@ const[expanded,setExpanded]=useState('')
 const handleExpandClick = () => {
   setExpanded(!expanded);
 };
-function handleSubmit(event) {
+const handleSubmit=async(event)=> {
   const TOKEN=localStorage.getItem('token')
   // const url = 'http://localhost:3000/uploadFile';
   const formData = new FormData();
@@ -47,7 +47,7 @@ function handleSubmit(event) {
       'Authorization': `Bearer ${TOKEN}`
     },
   };
-  Axios.post('https://localhost:5001/Pas/dodajSlikuPsu?idPas=' + id, formData, config).then((response) => {
+  await Axios.post('https://localhost:5001/Pas/dodajSlikuPsu?idPas=' + id, formData, config).then((response) => {
   console.log(response);
     setFile(response.data)
     window.location.reload(false)
@@ -63,8 +63,9 @@ const [pic,setPic]=useState('')
 
 useEffect(()=>
 {
+  async function fetchData(){
   const TOKEN=localStorage.getItem('token')
-  Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
+  await Axios.get('https://localhost:5001/Pas/vratiPsaPoId?idPas=' + id,{
     
       headers:{ Authorization: `Bearer ${TOKEN}`}
     }).then(
@@ -73,7 +74,8 @@ useEffect(()=>
       console.log(res.data.slika)
       setPic(res.data.slika)
     }
-  )
+  )}
+  fetchData();
 })
     const classes = classStyles();
     const[hide,setHide]=useState(false)
